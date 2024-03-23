@@ -52,6 +52,7 @@
 
     qbittorrent
     yt-dlp
+    xorg.xrandr
   ];
 
   services.arrpc.enable = true;

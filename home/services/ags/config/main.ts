@@ -1,6 +1,6 @@
 const hyprland = await Service.import("hyprland")
 import { notificationPopup } from './notificationsPop.js';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { format } from 'date-fns'
 
 const mpris = await Service.import('mpris')
 const audio = await Service.import('audio')

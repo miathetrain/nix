@@ -1,14 +1,14 @@
-const main = '/tmp/ags/main.js';
+const entry = App.configDir + '/main.ts'
+const outdir = '/tmp/ags/js'
 
 try {
     await Utils.execAsync([
-        'bun', 'build', `${App.configDir}/main.ts`,
-        '--outfile', main,
+        'bun', 'build', entry,
+        '--outdir', outdir,
         '--external', 'resource://*',
         '--external', 'gi://*',
-        '--external', 'file://*',
-    ]);
-    await import(`file://${main}`);
+    ])
+    await import(`file://${outdir}/main.js`)
 } catch (error) {
     console.error(error);
     App.quit();
