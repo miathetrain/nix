@@ -40,6 +40,7 @@
     installPhase = ''
       mkdir -p $out
       cp -r assets $out
+      cp -r css $out
       cp -f main.js $out/config.js
     '';
   };

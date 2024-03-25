@@ -41,7 +41,7 @@ Utils.monitorFile(
 
 const Launcher = Widget.Icon({
   class_name: "launcher",
-  icon: '/home/mia/.config/ags/assets/nixos.svg',
+  icon: './assets/nixos.svg',
   size: 20,
 })
 

@@ -20,9 +20,10 @@ in {
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
         "hyprlock"
+        "ags-wrap"
         "swayosd-server"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "wlsunset -t 5200 -S 9:00 -s 19:30"
+        # "wlsunset -t 5200 -S 9:00 -s 19:30"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "hyprctl dispatcher focusmonitor 1"
