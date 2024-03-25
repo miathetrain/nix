@@ -13,41 +13,19 @@
   home.packages = with pkgs; [
     vesktop
     krita
-    obinskit
-
-    # misc
-    pciutils
-    nixos-icons
-    colord
-    ffmpegthumbnailer
-    imagemagick
-    xfce.tumbler
-    xdotool
-    cliphist
-    rizin
-    xcolor
-    nodejs
-    nodePackages.pnpm
-    jq
-    socat
-    catimg
-    bun
-    libnotify
-
-    # Temp
-    sassc
 
     gnome-text-editor
     gnome.file-roller
     gnome.nautilus
     gthumb
     mpv
+    tagger
+    qt5.qtwayland
 
     # Minecraft
     openjdk17
     tmux
 
-    wineWowPackages.stable
     btop
 
     qbittorrent

@@ -17,7 +17,7 @@
   environment.systemPackages = with pkgs; [
     lutris
     heroic
-    itch
+    # itch
     steamtinkerlaunch
     prismlauncher
     protonup-qt

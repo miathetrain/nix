@@ -71,7 +71,7 @@ in {
         layout = "dwindle";
         resize_on_border = true;
         no_cursor_warps = true;
-        allow_tearing = true;
+        allow_tearing = false;
       };
       decoration = {
         rounding = 7;

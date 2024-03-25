@@ -28,7 +28,7 @@
       ];
     userSettings = {
       "workbench.iconTheme" = "catppuccin-perfect-mocha";
-      "workbench.colorTheme" = "Tsuki";
+      # "workbench.colorTheme" = "Tsuki";
       "editor.fontFamily" = "SpaceMono Nerd Font Mono, Catppuccin Perfect Mocha, 'monospace', monospace";
       "editor.fontSize" = 14;
       "window.zoomLevel" = 1.15;
@@ -38,7 +38,6 @@
       "window.titleBarStyle" = "custom";
       "terminal.integrated.defaultProfile.linux" = "fish";
       "terminal.integrated.cursorBlinking" = true;
-      "terminal.integrated.enableBell" = false;
       "editor.formatOnPaste" = true;
       "editor.formatOnSave" = true;
       "editor.formatOnType" = false;

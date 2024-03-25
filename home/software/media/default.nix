@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./obs.nix
-    ./spicetify.nix
+    # ./spicetify.nix
   ];
 
   home.packages = with pkgs; [

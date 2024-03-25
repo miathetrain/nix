@@ -4,6 +4,7 @@
   perSystem = {pkgs, ...}: {
     packages = {
       arrpc = pkgs.callPackage ./arrpc {};
+      asztal = pkgs.callPackage ./ags {};
     };
   };
 }

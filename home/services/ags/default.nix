@@ -1,55 +1,37 @@
 {
   inputs,
   pkgs,
-  lib,
-  config,
+  asztal,
   ...
-}: let
-  requiredDeps = with pkgs; [
-    config.wayland.windowManager.hyprland.package
-    bash
-    coreutils
-    dart-sass
-    gawk
-    imagemagick
-    procps
-    ripgrep
-    util-linux
-
-    bun
-    sassc
-    inotify-tools
-    swww
-  ];
-
-  guiDeps = with pkgs; [
-    wlogout
-  ];
-
-  dependencies = requiredDeps ++ guiDeps;
-
-  cfg = config.programs.ags;
-in {
+}: {
   imports = [
     inputs.ags.homeManagerModules.default
   ];
 
-  home.file.".config/ags".source = ./config;
+  home.packages = with pkgs; [
+    asztal
+    bun
+    dart-sass
+    fd
+    brightnessctl
+    swww
+    inputs.matugen.packages.${system}.default
+    slurp
+    wf-recorder
+    wl-clipboard
+    wayshot
+    swappy
+    hyprpicker
+    pavucontrol
+    networkmanager
+    gtk3
+  ];
 
-  programs.ags.enable = true;
-
-  systemd.user.services.ags = {
-    Unit = {
-      Description = "Aylur's Gtk Shell";
-      PartOf = [
-        "graphical-session.target"
-      ];
-    };
-    Service = {
-      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
-      ExecStart = "${cfg.package}/bin/ags";
-      Restart = "on-failure";
-    };
-    Install.WantedBy = ["graphical-session.target"];
+  programs.ags = {
+    enable = true;
+    configDir = ../config;
+    # extraPackages = with pkgs; [
+    #   accountsservice
+    # ];
   };
 }
