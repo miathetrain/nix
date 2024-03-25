@@ -6,7 +6,7 @@
   accountsservice,
   writeShellScript,
 }: let
-  name = "asztal";
+  name = "ags-wrap";
 
   ags = inputs.ags.packages.${system}.default.override {
     extraPackages = [accountsservice];
