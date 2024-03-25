@@ -20,12 +20,12 @@
 
   desktop = writeShellScript name ''
     export PATH=$PATH:${addBins dependencies}
-    ${ags}/bin/ags -b ${name} -c ${config}/config.js $@
+    ${ags}/bin/ags -c ${config}/config.js $@
   '';
 
   config = stdenv.mkDerivation {
     inherit name;
-    src = ./config;
+    src = ./.;
 
     buildPhase = ''
       ${esbuild}/bin/esbuild \
@@ -34,6 +34,7 @@
         --format=esm \
         --external:resource://\* \
         --external:gi://\* \
+
     '';
 
     installPhase = ''

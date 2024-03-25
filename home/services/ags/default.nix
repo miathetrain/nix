@@ -10,26 +10,15 @@
 
   home.packages = with pkgs; [
     inputs.self.packages.${pkgs.system}.ags-wrap
-    bun
-    dart-sass
-    fd
-    brightnessctl
-    swww
-    inputs.matugen.packages.${system}.default
-    slurp
-    wf-recorder
-    wl-clipboard
-    wayshot
-    swappy
-    hyprpicker
-    pavucontrol
-    networkmanager
-    gtk3
+    nodejs
+    esbuild
+
+    sassc
   ];
 
   programs.ags = {
     enable = true;
-    configDir = ../config;
+    configDir = ../ags;
     # extraPackages = with pkgs; [
     #   accountsservice
     # ];
