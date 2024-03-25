@@ -1,10 +1,14 @@
 {
   systems = ["x86_64-linux"];
 
-  perSystem = {pkgs, ...}: {
+  perSystem = {
+    pkgs,
+    inputs',
+    ...
+  }: {
     packages = {
       arrpc = pkgs.callPackage ./arrpc {};
-      ags-wrap = pkgs.callPackage ./ags-wrap {};
+      ags-wrap = pkgs.callPackage ./ags-wrap {inherit inputs';};
     };
   };
 }

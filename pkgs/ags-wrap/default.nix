@@ -1,14 +1,15 @@
 {
-  inputs,
+  inputs',
   stdenv,
   esbuild,
   system,
   accountsservice,
   writeShellScript,
+  ...
 }: let
   name = "ags-wrap";
 
-  ags = inputs.ags.packages.${system}.default.override {
+  ags = inputs'.ags.packages.default.override {
     extraPackages = [accountsservice];
   };
 

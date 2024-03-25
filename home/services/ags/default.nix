@@ -9,7 +9,7 @@
   ];
 
   home.packages = with pkgs; [
-    ags-wrap
+    inputs.self.packages.${pkgs.system}.ags-wrap
     bun
     dart-sass
     fd
