@@ -9,9 +9,3 @@
 in {
   home.packages = [killactive];
 }
-# classname=$(hyprctl activewindow -j | jq -r ".class")
-#     if [ "$classname" == "kodi" ]
-#     then
-#      kill --signal SIGHUP kodi-x11
-#     fi
-

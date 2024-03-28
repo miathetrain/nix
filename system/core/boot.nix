@@ -8,7 +8,7 @@
     };
 
     # use latest kernel
-    kernelPackages = pkgs.linuxPackages_testing;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     consoleLogLevel = 3;
     kernelParams = [

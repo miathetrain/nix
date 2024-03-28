@@ -6,12 +6,22 @@
   imports = [
     inputs.aagl.nixosModules.default
     inputs.nixpkgs-xr.nixosModules.nixpkgs-xr
+    inputs.lemonake.nixosModules.wivrn
   ];
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  programs = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+
+    alvr = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    adb.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -21,11 +31,28 @@
     steamtinkerlaunch
     prismlauncher
     protonup-qt
-    alvr
     ryujinx
+
+    ## VR
+    sidequest
     wlx-overlay-s
     opencomposite
+    xrgears
   ];
+
+  services = {
+    udev.packages = [
+      pkgs.android-udev-rules
+    ];
+
+    wivrn = {
+      enable = true;
+      package = pkgs.callPackage ./wivrn.nix {};
+      openFirewall = true;
+      highPriority = true;
+      defaultRuntime = true;
+    };
+  };
 
   programs.gamemode.enable = true;
 

@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  asztal,
   ...
 }: {
   imports = [
@@ -10,9 +9,6 @@
 
   home.packages = with pkgs; [
     inputs.self.packages.${pkgs.system}.ags-wrap
-    nodejs
-    esbuild
-
     sassc
   ];
 

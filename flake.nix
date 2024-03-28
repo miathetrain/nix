@@ -106,6 +106,10 @@
 
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
+    dimmer.url = "github:koenw/dimmer";
+
+    lemonake.url = "github:PassiveLemon/lemonake";
+
     xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
   };
 }

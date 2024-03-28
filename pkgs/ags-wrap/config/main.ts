@@ -33,12 +33,6 @@ Utils.monitorFile(
   },
 )
 
-// const time = Variable('', {
-//  poll: [1000, function () {
-//   return Date().toString();
-//  }],
-// });
-
 const Launcher = Widget.Icon({
   class_name: "launcher",
   icon: './assets/nixos.svg',
