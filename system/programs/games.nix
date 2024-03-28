@@ -47,7 +47,7 @@
 
     wivrn = {
       enable = true;
-      package = pkgs.callPackage ./wivrn.nix {};
+      package = inputs.self.packages.${pkgs.system}.wivrn;
       openFirewall = true;
       highPriority = true;
       defaultRuntime = true;

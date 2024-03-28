@@ -9,6 +9,7 @@
     packages = {
       arrpc = pkgs.callPackage ./arrpc {};
       ags-wrap = pkgs.callPackage ./ags-wrap {inherit inputs';};
+      wivrn = pkgs.callPackage ./wivrn {};
     };
   };
 }
