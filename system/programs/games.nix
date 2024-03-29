@@ -1,12 +1,13 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
     inputs.aagl.nixosModules.default
     inputs.nixpkgs-xr.nixosModules.nixpkgs-xr
-    inputs.lemonake.nixosModules.wivrn
+    # inputs.lemonake.nixosModules.wivrn
   ];
 
   programs = {
@@ -34,25 +35,21 @@
     ryujinx
 
     ## VR
-    sidequest
-    wlx-overlay-s
-    opencomposite
-    xrgears
+    # sidequest
+    # wlx-overlay-s
+    # opencomposite
+    # xrgears
   ];
 
-  services = {
-    udev.packages = [
-      pkgs.android-udev-rules
-    ];
-
-    wivrn = {
-      enable = true;
-      package = inputs.self.packages.${pkgs.system}.wivrn;
-      openFirewall = true;
-      highPriority = true;
-      defaultRuntime = true;
-    };
-  };
+  # services = {
+  #   wivrn = {
+  #     enable = true;
+  #     package = inputs.self.packages.${pkgs.system}.wivrn;
+  #     openFirewall = true;
+  #     highPriority = true;
+  #     defaultRuntime = true;
+  #   };
+  # };
 
   programs.gamemode.enable = true;
 

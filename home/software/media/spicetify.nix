@@ -24,6 +24,7 @@
       groupSession
       shuffle # shuffle+ (special characters are sanitized out of ext names)
       autoSkipVideo
+      adblock
     ];
   };
 }

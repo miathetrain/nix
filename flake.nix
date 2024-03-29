@@ -1,7 +1,13 @@
 {
   description = "Mia's NixOS Config";
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = inputs @ {
+    flake-parts,
+    nixpkgs,
+    ...
+  }:
+    flake-parts.lib.mkFlake {
+      inherit inputs;
+    } {
       systems = ["x86_64-linux"];
 
       imports = [./home/profiles ./hosts ./pkgs];
@@ -9,8 +15,14 @@
       perSystem = {
         config,
         pkgs,
+        system,
         ...
       }: {
+        _module.args.pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
         devShells.default = pkgs.mkShell {
           packages = [pkgs.alejandra pkgs.git config.packages.repl];
           name = "nixland";

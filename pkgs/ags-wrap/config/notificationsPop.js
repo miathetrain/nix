@@ -1,5 +1,5 @@
 const notifications = await Service.import('notifications');
-notifications.popupTimeout = 6000;
+notifications.popupTimeout = 12000;
 
 const popups = notifications.bind('popups');
 

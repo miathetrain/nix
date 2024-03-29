@@ -7,6 +7,7 @@
       "video"
       "input"
       "corectrl"
+      "adbusers"
     ];
   };
 }

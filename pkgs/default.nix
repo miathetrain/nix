@@ -2,8 +2,11 @@
   systems = ["x86_64-linux"];
 
   perSystem = {
-    pkgs,
+    config,
+    self',
     inputs',
+    pkgs,
+    system,
     ...
   }: {
     packages = {
