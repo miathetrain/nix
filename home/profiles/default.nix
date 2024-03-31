@@ -11,6 +11,11 @@
       ../.
       ./dreamhouse
     ];
+
+    "mia@ken" = [
+      ../.
+      ./ken
+    ];
   };
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
@@ -23,6 +28,11 @@ in {
     homeConfiguration = {
       "mia_dreamhouse" = homeManagerConfiguration {
         modules = homeImports."mia@dreamhouse";
+        inherit pkgs extraSpecialArgs;
+      };
+
+      "mia_ken" = homeManagerConfiguration {
+        modules = homeImports."mia@ken";
         inherit pkgs extraSpecialArgs;
       };
     };
