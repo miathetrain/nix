@@ -25,5 +25,10 @@
     notify-send "Screenshot" "Screenshot Taked: $filename" -i "$file_path"
   '';
 in {
-  home.packages = [screenshot-full];
+  home.packages = with pkgs; [
+    screenshot-full
+
+    jq
+    libnotify
+  ];
 }

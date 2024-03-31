@@ -156,7 +156,8 @@ in {
         "$MODSHIFT, Q, exit"
         "$MOD, F, fullscreen"
         "$MOD, Space, togglefloating"
-        "$MOD, P, pseudo"
+        # "$MOD, P, pseudo"
+        "$MOD, P, pin"
         "$MOD, S, togglesplit"
         "$MOD, O, toggleopaque"
 
@@ -189,7 +190,6 @@ in {
 
       bindr = [
         "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock"
-        # "$MOD, SUPER_L, exec, pkill .anyrun-wrapped || run-as-service anyrun"
       ];
 
       bindm = ["$MOD, mouse:272, movewindow" "$MOD, mouse:273, resizewindow"];
@@ -217,12 +217,16 @@ in {
         "float,class:^(steam)$,title:^(Friends List)$"
         "float,class:^(kitty-float)$"
         "float,class:^(gthumb)$"
+        "float,class:^(org.gnome.TextEditor)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
 
+        "pin, class:^(Kodi)$,floating:1"
+
         "idleinhibit focus, class:^(mpv|.+exe)$"
         "idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
+        "idleinhibit always, class:^(Kodi)$"
 
         "dimaround, class:^(xdg-desktop-portal-gtk)$"
         "dimaround, class:^(polkit-gnome-authentication-agent-1)$"

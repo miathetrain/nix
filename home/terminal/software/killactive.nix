@@ -1,11 +1,14 @@
 {pkgs, ...}: let
   killactive = pkgs.writeShellScriptBin "killactive" ''
-    if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ] || [ "$(hyprctl activewindow -j | jq -r ".class")" = "kodi" ]; then
+    if [ "$(hyprctl activewindow -j | jq -r ".class")" = "steam" ] || [ "$(hyprctl activewindow -j | jq -r ".class")" = "Kodi" ]; then
       xdotool getactivewindow windowunmap
     else
       hyprctl dispatch killactive ""
     fi
   '';
 in {
-  home.packages = [killactive];
+  home.packages = with pkgs; [
+    killactive
+    xdotool
+  ];
 }

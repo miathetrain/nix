@@ -29,6 +29,8 @@
     lutris
     heroic
     # itch
+    gamescope
+    mangohud
     steamtinkerlaunch
     prismlauncher
     protonup-qt
