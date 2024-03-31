@@ -37,5 +37,28 @@
           inputs.agenix.nixosModules.default
         ];
     };
+
+    ken = nixosSystem {
+      inherit specialArgs;
+      modules =
+        desktop
+        ++ [
+          ./ken
+          # "${mod}/programs/gnome.nix"
+          "${mod}/programs/hyprland.nix"
+          # "${mod}/programs/games.nix"
+          "${mod}/services/gnome-services.nix"
+          #          "${mod}/services/location.nix"
+          {
+            home-manager = {
+              users.mia.imports =
+                homeImports."mia@ken";
+              extraSpecialArgs = specialArgs;
+            };
+          }
+
+          inputs.agenix.nixosModules.default
+        ];
+    };
   };
 }
