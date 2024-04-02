@@ -9,20 +9,39 @@ in {
     general = {
       disable_loading_bar = true;
       hide_cursor = false;
-      no_fade_in = true;
+      # no_fade_in = false;
+      grace = 10;
+      ignore_empty_input = true;
     };
+
+    # backgrounds = [
+    #   {
+    #     monitor = "";
+    #     path = "";
+    #     color = "rgba(25, 20, 20, 0.95)";
+    #   }
+    # ];
 
     backgrounds = [
       {
         monitor = "";
-        path = "";
-        color = "rgba(25, 20, 20, 0.95)";
+        path = "screenshot"; # only png supported for now
+        color = "rgba(25, 20, 20, 1.0)";
+
+        # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
+        blur_passes = 1; # 0 disables blurring
+        blur_size = 7;
+        noise = 0.0117;
+        contrast = 0.8916;
+        brightness = 0.8172;
+        vibrancy = 0.1696;
+        vibrancy_darkness = 0.0;
       }
     ];
 
     input-fields = [
       {
-        monitor = "DP-1";
+        monitor = "";
 
         size = {
           width = 300;
@@ -36,7 +55,7 @@ in {
         font_color = "rgb(cdd6f4)";
 
         fade_on_empty = false;
-        placeholder_text = "<span font_family='Lexend' foreground='##cdd6f4'>Password...</span>"; ## "<span font_family='Lexend' foreground='#cdd6f4'>Password...</span>"
+        placeholder_text = "<span font_family='Lexend' foreground='##cdd6f4'>Password...</span>";
 
         dots_spacing = 0.3;
         dots_center = true;
