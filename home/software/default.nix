@@ -37,6 +37,7 @@
     inputs.dimmer.packages.${pkgs.system}.default
 
     ddcutil
+    xdg-utils
   ];
 
   # services = {
