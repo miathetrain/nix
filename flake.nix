@@ -122,6 +122,8 @@
 
     lemonake.url = "github:PassiveLemon/lemonake";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
   };
 }

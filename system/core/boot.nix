@@ -1,6 +1,5 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   boot = {
-    # bootspec.enable = true;
 
     initrd = {
       systemd.enable = true;
@@ -8,7 +7,7 @@
     };
 
     # use latest kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     consoleLogLevel = 3;
     kernelParams = [

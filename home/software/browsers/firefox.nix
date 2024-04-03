@@ -78,9 +78,9 @@ in {
         "dom.security.https_only_mode" = true;
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
-        "layout.css.devPixelsPerPx" = 1.12;
+        # "layout.css.devPixelsPerPx" = 1.12;
         "privacy.donottrackheader.enabled" = true;
-        "privacy.globalprivacycontrol.enabled" = true;
+        # "privacy.globalprivacycontrol.enabled" = true;
         "signon.rememberSignons" = false;
       };
       # settings = {
@@ -266,9 +266,10 @@ in {
 
       #   "intl.accept_languages" = "es-AR, es, en-US, en";
       # };
-      userChrome = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
-        "${SilentFox}/userChrome.css"
-      ]);
+
+      # userChrome = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
+      #   "${SilentFox}/userChrome.css"
+      # ]);
     };
   };
 }

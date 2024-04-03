@@ -37,8 +37,7 @@
     inputs.dimmer.packages.${pkgs.system}.default
 
     ddcutil
-
-    wineWowPackages.staging
+    xdg-utils
   ];
 
   # services = {

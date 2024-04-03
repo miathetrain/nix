@@ -30,7 +30,7 @@
       "workbench.iconTheme" = "catppuccin-perfect-mocha";
       # "workbench.colorTheme" = "Tsuki";
       "editor.fontFamily" = "SpaceMono Nerd Font Mono, Catppuccin Perfect Mocha, 'monospace', monospace";
-      "editor.fontSize" = 14;
+      "editor.fontSize" = 12;
       "window.zoomLevel" = 1.15;
       "editor.fontLigatures" = true;
       "files.trimTrailingWhitespace" = true;

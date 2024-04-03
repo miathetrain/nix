@@ -14,12 +14,10 @@ in {
       env = [
         "QT_QPA_PLATFORM,wayland"
         "QT_QPA_PLATFORMTHEME,qt5ct"
-        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
       ];
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
-        "hyprlock"
+        "hyprlock --immediate"
         "ags-wrap"
         "swayosd-server"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -31,13 +29,28 @@ in {
         # "[workspace 3 silent] vesktop"
         # "[workspace 5 silent] steam"
       ];
-      xwayland = {force_zero_scaling = true;};
+      # xwayland = {force_zero_scaling = true;};
+
+      device = {
+        name = "bcm5974";
+        accel_profile = "adaptive";
+        natural_scroll = true;
+        sensitivity = 0.35;
+        disable_while_typing = false;
+      };
+
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_create_new = true;
+      };
+
       input = {
         kb_layout = "us";
         follow_mouse = 1;
-        force_no_accel = 1;
+        # force_no_accel = 1;
         accel_profile = "flat";
       };
+
       misc = {
         disable_autoreload = true;
         focus_on_activate = true;
@@ -53,6 +66,8 @@ in {
           "DP-1,2560x1440@144,1920x0,1"
           "HDMI-A-1,1920x1080@75,0x0,1"
           "DP-2,1920x1080@60,0x1080,1,transform,2"
+
+          "eDP-1,2560x1600,0x0,2"
           ",preferred,auto,auto"
         ];
         workspace = [
