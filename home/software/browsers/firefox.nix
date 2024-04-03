@@ -80,7 +80,7 @@ in {
         "extensions.formautofill.creditCards.enabled" = false;
         # "layout.css.devPixelsPerPx" = 1.12;
         "privacy.donottrackheader.enabled" = true;
-        "privacy.globalprivacycontrol.enabled" = true;
+        # "privacy.globalprivacycontrol.enabled" = true;
         "signon.rememberSignons" = false;
       };
       # settings = {
@@ -266,9 +266,10 @@ in {
 
       #   "intl.accept_languages" = "es-AR, es, en-US, en";
       # };
-      userChrome = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
-        "${SilentFox}/userChrome.css"
-      ]);
+
+      # userChrome = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
+      #   "${SilentFox}/userChrome.css"
+      # ]);
     };
   };
 }
