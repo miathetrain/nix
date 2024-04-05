@@ -14,6 +14,7 @@ in {
       env = [
         "QT_QPA_PLATFORM,wayland"
         "QT_QPA_PLATFORMTHEME,qt5ct"
+        "MOZ_ENABLE_WAYLAND,1"
       ];
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
@@ -29,7 +30,7 @@ in {
         # "[workspace 3 silent] vesktop"
         # "[workspace 5 silent] steam"
       ];
-      # xwayland = {force_zero_scaling = true;};
+      #      xwayland = {force_zero_scaling = true;};
 
       device = {
         name = "bcm5974";
@@ -56,8 +57,8 @@ in {
         focus_on_activate = true;
         animate_mouse_windowdragging = false;
         enable_swallow = true;
-        vrr = 1;
-        no_direct_scanout = false;
+        vrr = 2;
+        #no_direct_scanout = false;
         vfr = true;
         disable_splash_rendering = true;
       };
@@ -67,7 +68,7 @@ in {
           "HDMI-A-1,1920x1080@75,0x0,1"
           "DP-2,1920x1080@60,0x1080,1,transform,2"
 
-          "eDP-1,2560x1600,0x0,2"
+          "eDP-1,2560x1600,0x0,1.25"
           ",preferred,auto,auto"
         ];
         workspace = [
@@ -80,14 +81,14 @@ in {
           "7,monitor:DP-2,default:true"
         ];
         gaps_in = 6;
-        gaps_out = 6;
+        gaps_out = 12;
         border_size = 3;
         "col.active_border" = "rgba(1e1e2eff) rgba(313244ff) 10deg";
         "col.inactive_border" = "rgba(1e1e2eff)";
         layout = "dwindle";
         resize_on_border = true;
         no_cursor_warps = true;
-        allow_tearing = false;
+        allow_tearing = true;
       };
       decoration = {
         rounding = 7;
@@ -155,10 +156,9 @@ in {
         "$MOD, Return, exec, run-as-service kitty"
         "$MODSHIFT, Return, exec, run-as-service kitty --class kitty-float"
         "$MOD, E, exec, run-as-service nautilus --new-window"
+        "$MOD,N,exec,$NOTIFY 'Current window class:' $(hyprctl activewindow -j | jq -r '.class')"
 
-        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
-        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
-        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        "$MOD,F10,pass,^(com\.obsproject\.Studio)$"
 
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
@@ -203,11 +203,21 @@ in {
         "$MOD, mouse_up, workspace, e+1"
       ];
 
+      bindel = [
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+      ];
+
+      bindl = [
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+      ];
+
       bindr = [
         "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock"
       ];
 
       bindm = ["$MOD, mouse:272, movewindow" "$MOD, mouse:273, resizewindow"];
+
       windowrulev2 = [
         "opacity 0.98 0.98,class:^(firefox)$"
         "opacity 0.90 0.90,class:^(steam)$"
@@ -233,6 +243,7 @@ in {
         "float,class:^(kitty-float)$"
         "float,class:^(gthumb)$"
         "float,class:^(org.gnome.TextEditor)$"
+        "float,class:^(xdg-desktop-portal-gtk)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
@@ -275,7 +286,8 @@ in {
     };
 
     plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
   };
 }

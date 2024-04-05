@@ -84,6 +84,11 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    hyprfocus = {
+      url = "github:pyt0xic/hyprfocus";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -109,7 +114,7 @@
     matugen.url = "github:InioX/matugen";
 
     sss = {
-      url = "github:SergioRibera/sss/ddcea6d83e7bbcdef47f124c903456495d4c2aad";
+      url = "github:SergioRibera/sss";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

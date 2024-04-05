@@ -35,7 +35,7 @@ Utils.monitorFile(
 
 const Launcher = Widget.Icon({
   class_name: "launcher",
-  icon: 'assets/nixos.svg',
+  icon: `${App.configDir}/assets/nixos.svg`,
   size: 20,
 })
 
@@ -58,13 +58,13 @@ const ClientTitle = Widget.Label({
   class_name: "client-title",
   tooltip_text: hyprland.active.client.bind("title"),
   label: hyprland.active.client.bind("title").as(title => {
-    return title.length <= 40 ? title : title.substring(0, 40) + "..."
+    return title.length <= 25 ? title : title.substring(0, 20) + "..."
   })
 })
 
 const time = Variable('', {
   poll: [1000, function () {
-    return format(new Date(), "MMM do, HH:mm");
+    return format(new Date(), "HH:mm - MMM do");
   }],
 });
 
@@ -80,7 +80,8 @@ function Media() {
   const label = Utils.watch("", mpris, "player-changed", () => {
     if (mpris.players[0]) {
       const { track_artists, track_title } = mpris.players[0]
-      return `${track_title} ` // return `${track_artists.join(', ')} ─ ${track_title}`
+      const title = `${track_title} `
+      return title.length <= 25 ? title : title.substring(0, 20) + "..." // return `${track_artists.join(', ')} ─ ${track_title}`
     } else {
       return 'Nothing is playing'
     }
@@ -250,10 +251,13 @@ const Bar = (monitor: number) => Widget.Window({
 });
 
 App.config({
+  icons: "./assets",
   style: css,
   windows: [Bar(0),
     notificationPopup],
 });
+
+App.addIcons(`${App.configDir}/assets`);
 
 export { };
 

@@ -25,12 +25,30 @@
           version = "0.21.31";
           sha256 = "sha256-oAHYEcAu/EmyxwypkEq7ctFro+GC3csItfYEPLnVazY=";
         }
+        {
+          name = "tsuki";
+          publisher = "re1san";
+          version = "0.6.0";
+          sha256 = "sha256-AP3RnO3v0OfO3d3bHRy5sjHEjwLGUxI/sEdLtGOxE2c=";
+        }
+        {
+          name = "copilot-chat";
+          publisher = "GitHub";
+          version = "0.13.2024020701";
+          sha256 = "sha256-wy/ieBFGrcLVu0zJh5n7no5SCRce9DhWpo9l+p+P3iI=";
+        }
+        {
+          name = "unocss";
+          publisher = "antfu";
+          version = "0.58.5";
+          sha256 = "sha256-mztzTqaD1pNHETIdfiHMDO79zAm8zzdL51v9VI0pYIM=";
+        }
       ];
     userSettings = {
       "workbench.iconTheme" = "catppuccin-perfect-mocha";
       # "workbench.colorTheme" = "Tsuki";
       "editor.fontFamily" = "SpaceMono Nerd Font Mono, Catppuccin Perfect Mocha, 'monospace', monospace";
-      "editor.fontSize" = 12;
+      "editor.fontSize" = 14;
       "window.zoomLevel" = 1.15;
       "editor.fontLigatures" = true;
       "files.trimTrailingWhitespace" = true;
@@ -68,9 +86,6 @@
       "editor.tabSize" = 1;
       "editor.wordWrap" = "on";
       "workbench.editor.tabActionLocation" = "left";
-      "[typescriptreact]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
       "[typescript]" = {
         "editor.defaultFormatter" = "vscode.typescript-language-features";
       };

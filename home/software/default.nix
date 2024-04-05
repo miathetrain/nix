@@ -55,4 +55,6 @@
 
   services.arrpc.enable = true;
   services.arrpc.package = inputs.self.packages.${pkgs.system}.arrpc;
+
+  services.easyeffects.enable = true;
 }
