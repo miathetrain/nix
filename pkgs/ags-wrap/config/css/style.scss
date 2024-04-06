@@ -80,11 +80,7 @@ window.bar {
   }
 }
 
-window#notifications {
-  all: unset;
-}
-
-window#notifications box.notifications {
+window.notification-popups box.notifications {
   padding: .5em;
 }
 
@@ -181,4 +177,20 @@ window#infobar box.infobar {
 
 .infobar.critical {
   border: 1px solid lightcoral;
+}
+
+// ClockBar
+
+window.clockbar {
+  background-color: $base;
+}
+
+.clockbar {
+  background-color: $base;
+  min-width: 1000px;
+  min-height: 700px;
+  border-radius: 11px;
+  padding: 1em;
+  margin: .5em;
+  border: 1px solid $crust;
 }

@@ -1,5 +1,10 @@
 const notifications = await Service.import("notifications")
 
+export const notification_list = Widget.Box({
+    vertical: true,
+    children: notifications.popups.map(Notification),
+});
+
 /** @param {import('resource:///com/github/Aylur/ags/service/notifications.js').Notification} n */
 function NotificationIcon({ app_entry, app_icon, image }) {
     if (image) {
@@ -89,6 +94,71 @@ function Notification(n) {
     )
 }
 
+function smallNotification(n) {
+    const icon = Widget.Box({
+        vpack: "start",
+        class_name: "icon",
+        child: NotificationIcon(n),
+    })
+
+    const title = Widget.Label({
+        class_name: "title",
+        xalign: 0,
+        justification: "left",
+        hexpand: true,
+        max_width_chars: 24,
+        truncate: "end",
+        wrap: true,
+        label: n.summary,
+        use_markup: true,
+    })
+
+    const body = Widget.Label({
+        class_name: "body",
+        hexpand: true,
+        use_markup: true,
+        xalign: 0,
+        justification: "left",
+        label: n.body,
+        wrap: true,
+    })
+
+    const actions = Widget.Box({
+        class_name: "actions",
+        children: n.actions.map(({ id, label }) => Widget.Button({
+            class_name: "action-button",
+            on_clicked: () => {
+                n.invoke(id)
+                n.dismiss()
+            },
+            hexpand: true,
+            child: Widget.Label(label),
+        })),
+    })
+
+    return Widget.EventBox(
+        {
+            attribute: { id: n.id },
+            on_primary_click: n.dismiss,
+        },
+        Widget.Box(
+            {
+                class_name: `notification ${n.urgency}`,
+                vertical: true,
+            },
+            Widget.Box([
+                icon,
+                Widget.Box(
+                    { vertical: true },
+                    title,
+                    body,
+                ),
+            ]),
+            actions,
+        ),
+    )
+}
+
 export function NotificationPopups(monitor = 0) {
     const list = Widget.Box({
         vertical: true,
@@ -97,8 +167,10 @@ export function NotificationPopups(monitor = 0) {
 
     function onNotified(_, /** @type {number} */ id) {
         const n = notifications.getNotification(id)
-        if (n)
-            list.children = [Notification(n), ...list.children]
+        if (n) {
+            list.children = [Notification(n), ...list.children],
+                notification_list.children = [smallNotification(n), ...notification_list.children]
+        }
     }
 
     function onDismissed(_, /** @type {number} */ id) {

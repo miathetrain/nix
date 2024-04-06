@@ -1,11 +1,14 @@
 const hyprland = await Service.import("hyprland")
-import { NotificationPopups } from "./notificationPopups.js"
+import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs"
+import { NotificationPopups, notification_list } from "./notificationPopups.js"
 import { format } from 'date-fns'
 
 const mpris = await Service.import('mpris')
 const audio = await Service.import('audio')
 const notifications = await Service.import('notifications');
 const notif = notifications.bind("popups");
+
+var showClockBar = false;
 
 // main scss file
 const scss = `${App.configDir}/css/style.scss`
@@ -75,6 +78,9 @@ const time = Variable('', {
 const Time = Widget.EventBox({
   class_name: "date",
   hpack: "center",
+  on_primary_click: () => {
+    clockBar.visible = !clockBar.visible;
+  },
   child: Widget.Label({
     label: time.bind()
   })
@@ -254,24 +260,61 @@ const Bar = (monitor: number) => Widget.Window({
   }),
 });
 
-// const InfoBar = Widget.Window({
-//   name: 'infobar',
-//   anchor: ['top'],
-//   layer: "overlay",
-//   child: Widget.Box({
-//     class_name: 'infobar',
-//     css: 'padding: 1px;',
-//     vertical: true,
-//     children: notif.as(gay => gay.map(Notification)),
-//   }),
-// });
+
+const clockBar = Widget.Window({
+  name: "clockbar",
+  className: "clockbar",
+  anchor: ['top'],
+  layer: "overlay",
+  margins: [10, 0],
+
+  child: Widget.CenterBox({
+    class_name: "clockbar",
+    vertical: true,
+
+    start_widget: Widget.Label({
+      label: "Here's Everything to Know.",
+      vpack: "start",
+      valign: Align.CENTER,
+
+    }),
+
+    center_widget: Widget.CenterBox({
+      start_widget: Widget.ListBox({
+        setup(self) {
+          self.add(notification_list)
+        },
+      }),
+
+      center_widget: Widget.Separator({ vertical: true }),
+
+      end_widget: Widget.Calendar({
+        showDayNames: true,
+        showDetails: false,
+        showHeading: false,
+        showWeekNumbers: false,
+        detail: (self, y, m, d) => {
+          return `<span color="white">${y}. ${m}. ${d}.</span>`
+        },
+        onDaySelected: ({ date: [y, m, d] }) => {
+          print(`${y}. ${m}. ${d}.`)
+        },
+      })
+    }),
+
+    end_widget: Widget.Label({
+      label: "The End!",
+      vpack: "end",
+    })
+  })
+})
 
 App.config({
   icons: "./assets",
   style: css,
   windows: [
     Bar(0),
-    // InfoBar,
+    clockBar,
     NotificationPopups()
   ],
 });
