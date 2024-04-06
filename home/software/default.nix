@@ -15,29 +15,14 @@
   home.packages = with pkgs; [
     vesktop
     krita
-
-    gnome-text-editor
-    gnome.file-roller
-    gnome.nautilus
-    gthumb
     mpv
-    tagger
-    qt5.qtwayland
+    qbittorrent
+    yt-dlp
 
     # Minecraft
     openjdk17
     tmux
-
-    btop
-
-    qbittorrent
-    yt-dlp
-    xorg.xrandr
-
-    inputs.dimmer.packages.${pkgs.system}.default
-
-    ddcutil
-    xdg-utils
+    # xorg.xrandr
   ];
 
   # services = {

@@ -160,3 +160,25 @@ window#notifications box.notifications {
     }
 
 }
+
+// infobar
+window#infobar {
+  all: unset;
+}
+
+window#infobar box.infobar {
+  padding: .5em;
+}
+
+.infobar {
+  min-width: 350px;
+  border-radius: 11px;
+  padding: 1em;
+  margin: .5em;
+  border: 1px solid $crust;
+  background-color: $base;
+}
+
+.infobar.critical {
+  border: 1px solid lightcoral;
+}

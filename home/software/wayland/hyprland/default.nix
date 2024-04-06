@@ -7,12 +7,24 @@
 
   home = {
     packages = with pkgs; [
-      seatd
+      # seatd
       jaq
-      xorg.xprop
-      inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-      xwaylandvideobridge
+      # xorg.xprop
       swayosd
+      imagemagick
+      xdg-utils
+      qt5.qtwayland
+      gnome.file-roller
+
+      gnome-text-editor
+      gnome.nautilus
+      gthumb
+      btop
+
+      ##Brightness
+      inputs.dimmer.packages.${pkgs.system}.default
+      ddcutil
+      light
     ];
     file = {
       ".config/hypr/scripts/colorpicker" = {

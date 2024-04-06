@@ -143,18 +143,14 @@ in {
 
       bind = [
         "$MOD, Escape, exec, wlogout -p layer-shell"
-        "$MOD, V, exec, wf-recorder -f $VIDEODIR/$(date +%Y-%m-%d_%H-%M-%S).mp4"
-        "$MOD, V, exec, $NOTIFY 'Recording started'"
-        "$MODSHIFT, V, exec, killall -s SIGINT wf-recorder"
-        "$MODSHIFT, V, exec, $NOTIFY 'Recording stopped'"
 
         "Alt, Print, exec, screenshot-full"
         ", Print, exec, screenshot-area"
-        "$MODSHIFT, X, exec, $COLORPICKER"
+        "$MOD, X, exec, $COLORPICKER"
 
         "$MOD, D, exec, pkill .anyrun-wrapped || run-as-service anyrun"
         "$MOD, Return, exec, run-as-service kitty"
-        "$MODSHIFT, Return, exec, run-as-service kitty --class kitty-float"
+        "$MODSHIFT, Return, exec, run-as-service 'kitty --class kitty-float'"
         "$MOD, E, exec, run-as-service nautilus --new-window"
         "$MOD,N,exec,$NOTIFY 'Current window class:' $(hyprctl activewindow -j | jq -r '.class')"
 
@@ -240,6 +236,7 @@ in {
         "float,class:^(org.gnome.Nautilus)$"
         "float,class:^(yad)$"
         "float,class:^(steam)$,title:^(Friends List)$"
+        "float,class:^(steam)$,title:^(Steam Settings)$"
         "float,class:^(kitty-float)$"
         "float,class:^(gthumb)$"
         "float,class:^(org.gnome.TextEditor)$"
