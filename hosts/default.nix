@@ -28,8 +28,7 @@
           #          "${mod}/services/location.nix"
           {
             home-manager = {
-              users.mia.imports =
-                homeImports."mia@dreamhouse";
+              users.mia.imports = homeImports."mia@dreamhouse";
               extraSpecialArgs = specialArgs;
             };
           }
@@ -51,8 +50,7 @@
           #          "${mod}/services/location.nix"
           {
             home-manager = {
-              users.mia.imports =
-                homeImports."mia@ken";
+              users.mia.imports = homeImports."mia@ken";
               extraSpecialArgs = specialArgs;
             };
           }

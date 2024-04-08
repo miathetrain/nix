@@ -15,6 +15,7 @@
       xdg-utils
       qt5.qtwayland
       gnome.file-roller
+      gvfs
 
       gnome-text-editor
       gnome.nautilus
@@ -31,6 +32,10 @@
         source = ./scripts/colorpicker;
         executable = true;
       };
+    };
+
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
     };
   };
 

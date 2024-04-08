@@ -1,14 +1,12 @@
 const hyprland = await Service.import("hyprland")
+
 import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs"
-import { NotificationPopups, notification_list } from "./notificationPopups.js"
+import { NotificationPopups, notification_list, hasNotifications } from "./notificationPopups.js"
 import { format } from 'date-fns'
 
 const mpris = await Service.import('mpris')
 const audio = await Service.import('audio')
 const notifications = await Service.import('notifications');
-const notif = notifications.bind("popups");
-
-var showClockBar = false;
 
 // main scss file
 const scss = `${App.configDir}/css/style.scss`
@@ -18,25 +16,6 @@ const css = `/tmp/my-style.css`
 
 // make sure sassc is installed on your system
 Utils.exec(`sassc ${scss} ${css}`)
-
-Utils.monitorFile(
-  // directory that contains the scss files
-  `${App.configDir}/css`,
-
-  // reload function
-  function () {
-    // main scss file
-    const scss = `${App.configDir}/css/style.scss`
-
-    // target css file
-    const css = `/tmp/my-style.css`
-
-    // compile, reset, apply
-    Utils.exec(`sassc ${scss} ${css}`)
-    App.resetCss()
-    App.applyCss(css)
-  },
-)
 
 const Launcher = Widget.Icon({
   class_name: "launcher",
@@ -79,7 +58,16 @@ const Time = Widget.EventBox({
   class_name: "date",
   hpack: "center",
   on_primary_click: () => {
-    clockBar.visible = !clockBar.visible;
+    if (clockBar.visible) {
+      // clockBar.visible = false;
+      App.closeWindow("clockbar");
+
+    }
+    else {
+      clockBar.visible = true;
+      App.openWindow("clockbar")
+    }
+    // clockBar.visible = !clockBar.visible;
   },
   child: Widget.Label({
     label: time.bind()
@@ -245,7 +233,7 @@ const Right = Widget.Box({
     })]
 })
 
-const Bar = (monitor: number) => Widget.Window({
+export const Bar = (monitor: number) => Widget.Window({
   monitor,
   name: `bar${monitor}`,
   className: "bar",
@@ -261,51 +249,106 @@ const Bar = (monitor: number) => Widget.Window({
 });
 
 
-const clockBar = Widget.Window({
+export const clockBar = Widget.Window({
   name: "clockbar",
   className: "clockbar",
+  visible: false,
   anchor: ['top'],
-  layer: "overlay",
+  keymode: "on-demand",
+  layer: "top",
   margins: [10, 0],
 
-  child: Widget.CenterBox({
+  child: Widget.Box({
     class_name: "clockbar",
     vertical: true,
+    spacing: 20,
 
-    start_widget: Widget.Label({
+    children: [Widget.Label({
       label: "Here's Everything to Know.",
       vpack: "start",
-      valign: Align.CENTER,
-
     }),
 
-    center_widget: Widget.CenterBox({
-      start_widget: Widget.ListBox({
-        setup(self) {
-          self.add(notification_list)
-        },
-      }),
+    Widget.Box({
+      spacing: 20,
 
-      center_widget: Widget.Separator({ vertical: true }),
+      children: [
+        Widget.Box({
+          vertical: true,
+          hpack: "fill",
+          hexpand: true,
 
-      end_widget: Widget.Calendar({
-        showDayNames: true,
-        showDetails: false,
-        showHeading: false,
-        showWeekNumbers: false,
-        detail: (self, y, m, d) => {
-          return `<span color="white">${y}. ${m}. ${d}.</span>`
-        },
-        onDaySelected: ({ date: [y, m, d] }) => {
-          print(`${y}. ${m}. ${d}.`)
-        },
-      })
+          children: [
+            Widget.Scrollable({
+              hscroll: 'never',
+              vscroll: 'automatic',
+              visible: hasNotifications.bind(),
+              child: notification_list,
+              vexpand: true,
+              vpack: "fill",
+            }),
+
+            Widget.CenterBox({
+              vertical: true,
+              vexpand: true,
+              vpack: "fill",
+              visible: hasNotifications.bind().as(value => value ? false : true),
+
+              center_widget: Widget.Box({
+                class_name: "empty-notifications",
+                vertical: true,
+                children: [
+                  Widget.Label({
+                    class_name: "empty-notifications-icon",
+                    label: ""
+                  }),
+
+                  Widget.Label({
+                    class_name: "empty-notifications",
+                    label: "No Noti's"
+                  })
+                ],
+              })
+            }),
+
+          ],
+        }),
+
+        Widget.Separator({ vertical: true }),
+
+        Widget.Box({
+          class_name: "right-side",
+          spacing: 30,
+          vertical: true,
+
+          children: [
+            Widget.Label({
+              label: "To This Day!",
+            }),
+
+            Widget.Calendar({
+              class_name: "calendar",
+              showDayNames: true,
+              showDetails: false,
+              showHeading: true,
+              showWeekNumbers: false,
+              onDaySelected: ({ date: [y, m, d] }) => {
+                print(`${y}. ${m}. ${d}.`)
+              },
+            }),
+
+            Widget.Label("Insert-Random-Widget")
+
+          ]
+        })
+
+      ],
     }),
 
-    end_widget: Widget.Label({
+    Widget.Label({
       label: "The End!",
       vpack: "end",
     })
+    ],
   })
 })
 
@@ -318,8 +361,6 @@ App.config({
     NotificationPopups()
   ],
 });
-
-App.addIcons(`${App.configDir}/assets`);
 
 export { };
 
