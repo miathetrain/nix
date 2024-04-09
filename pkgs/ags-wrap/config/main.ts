@@ -1,4 +1,5 @@
 const hyprland = await Service.import("hyprland")
+const systemtray = await Service.import('systemtray')
 
 import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs"
 import { NotificationPopups, notification_list, hasNotifications } from "./notificationPopups.js"
@@ -40,6 +41,14 @@ const Workspaces = Widget.Box({
   })),
 });
 
+/** @param {import('types/service/systemtray').TrayItem} item */
+const SysTrayItem = item => Widget.Button({
+  child: Widget.Icon().bind('icon', item, 'icon'),
+  tooltipMarkup: item.bind('tooltip_markup'),
+  onPrimaryClick: (_, event) => item.activate(event),
+  onSecondaryClick: (_, event) => item.openMenu(event),
+});
+
 const ClientTitle = Widget.Label({
   class_name: "client-title",
   tooltip_text: hyprland.active.client.bind("title"),
@@ -72,6 +81,10 @@ const Time = Widget.EventBox({
   child: Widget.Label({
     label: time.bind()
   })
+})
+
+const sysTray = Widget.Box({
+  children: systemtray.bind('items').as(i => i.map(SysTrayItem))
 })
 
 function Media() {
@@ -228,9 +241,7 @@ const Right = Widget.Box({
   hpack: "end",
   children: [
     Volume(),
-    Widget.Label({
-      label: time.bind()
-    })]
+    sysTray]
 })
 
 export const Bar = (monitor: number) => Widget.Window({

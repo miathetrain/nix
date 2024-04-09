@@ -246,6 +246,7 @@ in {
         "float,class:^(gthumb)$"
         "float,class:^(org.gnome.TextEditor)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
+        "float,class:^(lutris)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
