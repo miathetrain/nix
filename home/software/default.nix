@@ -18,6 +18,7 @@
     mpv
     qbittorrent
     yt-dlp
+    discover-overlay
 
     # Minecraft
     openjdk17
