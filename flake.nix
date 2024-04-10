@@ -1,6 +1,7 @@
 {
   description = "Mia's NixOS Config";
   outputs = inputs @ {
+    self,
     flake-parts,
     nixpkgs,
     ...
@@ -10,7 +11,7 @@
     } {
       systems = ["x86_64-linux"];
 
-      imports = [./home/profiles ./hosts ./pkgs];
+      imports = [./home/profiles ./hosts];
 
       perSystem = {
         config,
@@ -22,6 +23,8 @@
           inherit system;
           config.allowUnfree = true;
         };
+
+        packages = import ./pkgs {inherit pkgs;};
 
         devShells.default = pkgs.mkShell {
           packages = [pkgs.alejandra pkgs.git config.packages.repl];

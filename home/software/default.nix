@@ -18,7 +18,7 @@
     mpv
     qbittorrent
     yt-dlp
-    discover-overlay
+    inputs.self.packages.${pkgs.system}.discover-overlay
 
     # Minecraft
     openjdk17

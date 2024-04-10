@@ -14,6 +14,7 @@
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
+
   in {
     dreamhouse = nixosSystem {
       inherit specialArgs;
