@@ -6,4 +6,5 @@
   ags-wrap = pkgs.callPackage ./ags-wrap {inherit inputs;};
   wivrn = pkgs.callPackage ./wivrn {};
   discover-overlay = pkgs.python3Packages.callPackage ./discover-overlay {};
+  pulseshitter = pkgs.callPackage ./pulseshitter {};
 }

@@ -19,6 +19,9 @@
     qbittorrent
     yt-dlp
     inputs.self.packages.${pkgs.system}.discover-overlay
+    inputs.self.packages.${pkgs.system}.pulseshitter
+
+    nix-init
 
     # Minecraft
     openjdk17
