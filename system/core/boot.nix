@@ -1,13 +1,17 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   boot = {
-
     initrd = {
       systemd.enable = true;
       supportedFilesystems = ["ntfs"];
     };
 
     # use latest kernel
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
 
     consoleLogLevel = 3;
     kernelParams = [
@@ -21,10 +25,16 @@
       systemd-boot.enable = true;
       efi = {
         canTouchEfiVariables = true;
-        # efiSysMountPoint = "/boot";
       };
     };
 
     tmp.cleanOnBoot = true;
+  };
+
+  environment.systemPackages = [pkgs.scx];
+
+  chaotic.scx = {
+    enable = true;
+    scheduler = "scx_lavd";
   };
 }

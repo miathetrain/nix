@@ -9,14 +9,11 @@
 
   home.packages = with pkgs; [
     inputs.self.packages.${pkgs.system}.ags-wrap
-    sassc
+    # dart-sass
   ];
 
   programs.ags = {
     enable = true;
     # configDir = ../ags;
-    extraPackages = with pkgs; [
-      accountsservice
-    ];
   };
 }

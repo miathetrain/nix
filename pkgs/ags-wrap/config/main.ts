@@ -16,7 +16,7 @@ const scss = `${App.configDir}/css/style.scss`
 const css = `/tmp/my-style.css`
 
 // make sure sassc is installed on your system
-Utils.exec(`sassc ${scss} ${css}`)
+Utils.exec(`dart-sass ${scss} ${css}`)
 
 const Launcher = Widget.Icon({
   class_name: "launcher",

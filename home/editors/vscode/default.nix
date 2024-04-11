@@ -33,12 +33,6 @@
           sha256 = "sha256-oAHYEcAu/EmyxwypkEq7ctFro+GC3csItfYEPLnVazY=";
         }
         {
-          name = "discord-vscode";
-          publisher = "icrawl";
-          version = "5.8.0";
-          sha256 = "sha256-IU/looiu6tluAp8u6MeSNCd7B8SSMZ6CEZ64mMsTNmU=";
-        }
-        {
           name = "better-folding";
           publisher = "MohammadBaqer";
           version = "0.5.1";

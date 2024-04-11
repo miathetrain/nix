@@ -1,7 +1,13 @@
-{lib, ...}:
+{
+  lib,
+  inputs,
+  ...
+}:
 # default configuration shared by all hosts
 {
   imports = [
+    inputs.chaotic.nixosModules.default
+
     ./security.nix
     ./users.nix
     ../nix

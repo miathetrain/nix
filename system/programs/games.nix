@@ -43,6 +43,8 @@
     # xrgears
   ];
 
+  chaotic.mesa-git.enable = true;
+
   # services = {
   #   wivrn = {
   #     enable = true;
@@ -52,8 +54,6 @@
   #     defaultRuntime = true;
   #   };
   # };
-
-  programs.gamemode.enable = true;
 
   programs.anime-borb-launcher.enable = true;
   programs.honkers-railway-launcher.enable = true;

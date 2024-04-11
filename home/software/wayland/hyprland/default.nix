@@ -7,9 +7,7 @@
 
   home = {
     packages = with pkgs; [
-      # seatd
       jaq
-      # xorg.xprop
       swayosd
       imagemagick
       xdg-utils
@@ -36,6 +34,8 @@
 
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      QT_QPA_PLATFORM = "wayland";
+      XDG_SESSION_TYPE = "wayland";
     };
   };
 

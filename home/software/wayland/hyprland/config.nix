@@ -56,8 +56,8 @@ in {
         vrr = 1;
         key_press_enables_dpms = true;
         disable_autoreload = true;
-        enable_swallow = true;
-        swallow_regex = "kitty";
+        # enable_swallow = true;
+        # swallow_regex = "kitty";
         focus_on_activate = true;
         no_direct_scanout = false;
         new_window_takes_over_fullscreen = 1;
@@ -247,6 +247,7 @@ in {
         "float,class:^(org.gnome.TextEditor)$"
         "float,class:^(xdg-desktop-portal-gtk)$"
         "float,class:^(lutris)$"
+        "float,class:^(itch)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"

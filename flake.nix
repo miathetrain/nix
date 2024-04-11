@@ -4,6 +4,7 @@
     self,
     flake-parts,
     nixpkgs,
+    chaotic,
     ...
   }:
     flake-parts.lib.mkFlake {
@@ -11,7 +12,10 @@
     } {
       systems = ["x86_64-linux"];
 
-      imports = [./home/profiles ./hosts];
+      imports = [
+        ./home/profiles
+        ./hosts
+      ];
 
       perSystem = {
         config,
@@ -24,7 +28,9 @@
           config.allowUnfree = true;
         };
 
-        packages = import ./pkgs {inherit pkgs;};
+        packages = import ./pkgs {
+          inherit inputs pkgs;
+        };
 
         devShells.default = pkgs.mkShell {
           packages = [pkgs.alejandra pkgs.git config.packages.repl];
@@ -38,6 +44,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
