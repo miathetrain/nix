@@ -3,8 +3,13 @@
   rustPlatform,
   fetchFromGitHub,
   pkg-config,
+  pulseaudio,
+  cmake,
   stdenv,
   darwin,
+  libopus,
+  pkgs,
+  makeWrapper,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "pulseshitter";
@@ -21,11 +26,17 @@ rustPlatform.buildRustPackage rec {
 
   nativeBuildInputs = [
     pkg-config
+    cmake
+    libopus
   ];
 
-  buildInputs = lib.optionals stdenv.isDarwin [
-    darwin.apple_sdk.frameworks.Security
+  buildInputs = [
+    libopus
+    pulseaudio
+    makeWrapper
   ];
+
+  RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
 
   meta = with lib; {
     description = "An overengineered workaround to Discord not supporting audio when screensharing on Linux";
