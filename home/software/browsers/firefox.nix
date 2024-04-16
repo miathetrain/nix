@@ -41,14 +41,16 @@ in {
         browserpass
       ];
       search.force = true;
-      userChrome = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
-        "${minimalFox}/userChrome.css"
-        "./add.css"
-      ]);
+      userChrome =
+        builtins.concatStringsSep "\n"
+        (builtins.map builtins.readFile [
+          "${minimalFox}/userChrome.css"
+        ]);
 
       userContent = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
         "${minimalFox}/userContent.css"
       ]);
+
       search.engines = {
         "Home Manager NixOS" = {
           urls = [

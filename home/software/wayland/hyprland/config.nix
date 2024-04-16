@@ -12,7 +12,6 @@ in {
     settings = {
       "$MOD" = "SUPER";
       env = [
-        "QT_QPA_PLATFORM,wayland"
         "QT_QPA_PLATFORMTHEME,qt5ct"
         "MOZ_ENABLE_WAYLAND,1"
       ];
@@ -159,6 +158,7 @@ in {
         "$MOD,N,exec,$NOTIFY 'Current window class:' $(hyprctl activewindow -j | jq -r '.class')"
 
         "$MOD,F10,pass,^(com\.obsproject\.Studio)$"
+        "$MOD,G,pass,^(com\.obsproject\.Studio)$"
 
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
@@ -248,6 +248,7 @@ in {
         "float,class:^(xdg-desktop-portal-gtk)$"
         "float,class:^(lutris)$"
         "float,class:^(itch)$"
+        "float,class:^(mpv)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"

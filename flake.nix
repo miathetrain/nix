@@ -59,6 +59,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    envision = {
+      url = "gitlab:scrumplex/envision/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    scrumpkgs = {
+      url = "github:Scrumplex/pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";

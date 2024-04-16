@@ -9,7 +9,7 @@
     ./gtk.nix
     ./media
 
-    # inputs.lemonake.homeManagerModules.steamvr
+    inputs.lemonake.homeManagerModules.steamvr
   ];
 
   home.packages = with pkgs; [
@@ -104,6 +104,7 @@
         runHook postInstall
       '';
     }))
+    kdenlive
     krita
     mpv
     qbittorrent
@@ -119,19 +120,17 @@
 
     # xorg.xrandr
   ];
-
-  # services = {
-  #   steamvr = {
-  #     runtimeOverride = {
-  #       enable = true;
-  #       path = "${inputs.nixpkgs-xr.packages.${pkgs.system}.opencomposite}/lib/opencomposite";
-  #     };
-  #     activeRuntimeOverride = {
-  #       enable = true;
-  #       path = "${inputs.self.packages.${pkgs.system}.wivrn}/share/openxr/1/openxr_wivrn.json";
-  #     };
-  #   };
-  # };
+  ## VR_OVERRIDE="/nix/store/04yxrkvliphspvhyviazw1xxzmqsi01b-opencomposite-1bfdf67358add5f573efedbec1fa65d18b790e0e/lib/opencomposite/" XR_RUNTIME_JSON="/nix/store/lddzczqpmyw51r6dr3k7zz6rk4589bab-wivrn-0.13/share/openxr/1/openxr_wivrn.json" PRESSURE_VESSEL_FILESYSTEMS_RW=$XDG_RUNTIME_DIR/wivrn_comp_ipc %command%
+  services.steamvr = {
+    runtimeOverride = {
+      enable = false;
+      path = "${pkgs.opencomposite}/lib/opencomposite";
+    };
+    activeRuntimeOverride = {
+      enable = false;
+      path = "${inputs.lemonake.packages.${pkgs.system}.wivrn}/share/openxr/1/openxr_wivrn.json"; # WiVRn is not merged yet
+    };
+  };
 
   services.arrpc.enable = true;
   services.arrpc.package = inputs.self.packages.${pkgs.system}.arrpc;

@@ -1,7 +1,7 @@
 {
   qt = {
-    enable = false;
-    platformTheme = "gtk2";
-    style = "gtk2";
+    # enable = false;
+    # platformTheme = "gtk2";
+    # style = "gtk2";
   };
 }

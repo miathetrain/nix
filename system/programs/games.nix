@@ -3,18 +3,21 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  amdgpu-kernel-module = pkgs.callPackage ./amdgpu.nix {
+    kernel = config.boot.kernelPackages.kernel;
+  };
+in {
   imports = [
     inputs.aagl.nixosModules.default
     inputs.nixpkgs-xr.nixosModules.nixpkgs-xr
-    # inputs.lemonake.nixosModules.wivrn
+    inputs.lemonake.nixosModules.wivrn
   ];
 
   programs = {
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
 
     alvr = {
@@ -40,18 +43,29 @@
     # sidequest
     # wlx-overlay-s
     # opencomposite
-    # xrgears
+    xrgears
+
+    inputs.envision.packages.${pkgs.system}.envision
   ];
 
   chaotic.mesa-git.enable = true;
 
-  # services = {
-  #   wivrn = {
-  #     enable = true;
-  #     package = inputs.self.packages.${pkgs.system}.wivrn;
-  #     openFirewall = true;
-  #     highPriority = true;
-  #     defaultRuntime = true;
+  boot.extraModulePackages = [
+    (amdgpu-kernel-module.overrideAttrs (prev: {
+      patches = (prev.patches or []) ++ [inputs.scrumpkgs.kernelPatches.cap_sys_nice_begone.patch];
+    }))
+  ];
+
+  # services.wivrn = {
+  #   enable = true;
+  #   package = inputs.lemonake.packages.${pkgs.system}.wivrn; # Until WiVRn gets merged.
+  #   openFirewall = true;
+  #   highPriority = true;
+  #   defaultRuntime = true;
+  #   monadoEnvironment = {
+  #     XRT_COMPOSITOR_LOG = "debug";
+  #     XRT_PRINT_OPTIONS = "on";
+  #     IPC_EXIT_ON_DISCONNECT = "off";
   #   };
   # };
 
