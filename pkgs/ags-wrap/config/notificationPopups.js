@@ -227,6 +227,10 @@ function smallNotification(n) {
 }
 
 export function NotificationPopups(monitor = 0) {
+    notifications.forceTimeout = true;
+
+
+
     const list = Widget.Box({
         vertical: true,
         children: notifications.popups.map(Notification),
@@ -246,12 +250,11 @@ export function NotificationPopups(monitor = 0) {
     }
 
     function onClosed(_, /** @type {number} */ id) {
-        list.children.find(n => n.attribute.id === id)?.destroy()
-        notification_list.children.find(n => n.attribute.id === id)?.destroy()
+        // notification_list.children.find(n => n.attribute.id === id)?.destroy()s
     }
 
     list.hook(notifications, onNotified, "notified")
-        .hook(notifications, onDismissed, "dismissed")
+    list.hook(notifications, onDismissed, "dismissed")
 
     notification_list.hook(notifications, onClosed, "closed")
 
@@ -259,6 +262,7 @@ export function NotificationPopups(monitor = 0) {
         monitor,
         name: `notifications${monitor}`,
         class_name: "notification-popups",
+        layer: "overlay",
         anchor: ["top", "right"],
         child: Widget.Box({
             css: "min-width: 2px; min-height: 2px;",

@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  config,
   lib,
   ...
 }: let
@@ -41,7 +42,7 @@ in {
 
     ## VR
     # sidequest
-    # wlx-overlay-s
+    wlx-overlay-s
     # opencomposite
     xrgears
 

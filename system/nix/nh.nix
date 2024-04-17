@@ -1,13 +1,10 @@
 {inputs, ...}: {
-  imports = [
-    inputs.nh.nixosModules.default
-  ];
-
   # nh default flake
   environment.variables.FLAKE = "/home/mia/Documents/nix";
 
-  nh = {
+  programs.nh = {
     enable = true;
+    package = inputs.nh.packages.x86_64-linux.default;
     # weekly cleanup
     clean = {
       enable = true;

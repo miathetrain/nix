@@ -18,8 +18,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "kaitlynkittyy";
         repo = "Vesktop";
-        rev = "b68e4d12684bf11d64ca95685d26d974eecba67e";
-        hash = "sha256-weRtJMa9auhAGhpjHkF131i8gPBWnkmUNPfTdMWFyd8=";
+        rev = "1d5000e619ad44ceb6b27240d38a68fe1c5f039a";
+        hash = "sha256-mpMb+jvm9xQRyO+mdHEYU7z31MpxI3xK6KzjIbRpt3Y=";
       };
 
       pnpmDeps = assert lib.versionAtLeast nodePackages.pnpm.version "8.10.0";
@@ -31,8 +31,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "kaitlynkittyy";
             repo = "Vesktop";
-            rev = "b68e4d12684bf11d64ca95685d26d974eecba67e";
-            hash = "sha256-weRtJMa9auhAGhpjHkF131i8gPBWnkmUNPfTdMWFyd8=";
+            rev = "1d5000e619ad44ceb6b27240d38a68fe1c5f039a";
+            hash = "sha256-mpMb+jvm9xQRyO+mdHEYU7z31MpxI3xK6KzjIbRpt3Y=";
           };
 
           nativeBuildInputs = [
@@ -109,18 +109,14 @@
     mpv
     qbittorrent
     yt-dlp
-    inputs.self.packages.${pkgs.system}.discover-overlay
-    inputs.self.packages.${pkgs.system}.pulseshitter
-
-    nix-init
 
     # Minecraft
     openjdk17
     tmux
 
-    # xorg.xrandr
+    xorg.xrandr
   ];
-  ## VR_OVERRIDE="/nix/store/04yxrkvliphspvhyviazw1xxzmqsi01b-opencomposite-1bfdf67358add5f573efedbec1fa65d18b790e0e/lib/opencomposite/" XR_RUNTIME_JSON="/nix/store/lddzczqpmyw51r6dr3k7zz6rk4589bab-wivrn-0.13/share/openxr/1/openxr_wivrn.json" PRESSURE_VESSEL_FILESYSTEMS_RW=$XDG_RUNTIME_DIR/wivrn_comp_ipc %command%
+
   services.steamvr = {
     runtimeOverride = {
       enable = false;

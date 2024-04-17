@@ -11,10 +11,10 @@ let
 
     ./programs
 
-    ./services
     ./services/greetd.nix
     ./services/pipewire.nix
     ./services/ananicy.nix
+    ./services/gnome-services.nix
   ];
 in {
   inherit desktop;
