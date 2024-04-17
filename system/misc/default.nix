@@ -1,18 +1,15 @@
 {
   imports = [
+    ./fish.nix
     ./fonts.nix
     ./home-manager.nix
+    ./hyprland.nix
     ./xdg.nix
+    ./games.nix
   ];
 
-  programs = {
-    # make HM-managed GTK stuff work
-    dconf.enable = true;
-    seahorse.enable = true;
-  };
-
+  # Flatpak
   services.flatpak.enable = true;
-  security.polkit.enable = true;
-
+  # Core CTRL
   programs.corectrl.enable = true;
 }

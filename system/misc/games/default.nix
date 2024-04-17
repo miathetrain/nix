@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  amdgpu-kernel-module = pkgs.callPackage ./amdgpu.nix {
+  amdgpu-kernel-module = pkgs.callPackage ./amdgpu-patch.nix {
     kernel = config.boot.kernelPackages.kernel;
   };
 in {

@@ -9,9 +9,9 @@
     inputs.chaotic.nixosModules.default
 
     ./security.nix
+    ./boot.nix
     ./users.nix
     ../nix
-    ../programs/fish.nix
   ];
 
   # don't touch this
