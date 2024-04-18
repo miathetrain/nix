@@ -31,6 +31,8 @@
     ];
   };
 
+  environment.systemPackages = [pkgs.neofetch];
+
   networking.hostName = "dreamhouse";
 
   services = {

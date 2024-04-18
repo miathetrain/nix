@@ -14,7 +14,6 @@
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
-
   in {
     dreamhouse = nixosSystem {
       inherit specialArgs;
@@ -22,19 +21,12 @@
         desktop
         ++ [
           ./dreamhouse
-          # "${mod}/programs/gnome.nix"
-          "${mod}/programs/hyprland.nix"
-          "${mod}/programs/games.nix"
-          "${mod}/services/gnome-services.nix"
-          #          "${mod}/services/location.nix"
           {
             home-manager = {
               users.mia.imports = homeImports."mia@dreamhouse";
               extraSpecialArgs = specialArgs;
             };
           }
-
-          inputs.agenix.nixosModules.default
         ];
     };
 
@@ -45,18 +37,16 @@
         ++ [
           ./ken
           # "${mod}/programs/gnome.nix"
-          "${mod}/programs/hyprland.nix"
+          # "${mod}/programs/hyprland.nix"
           # "${mod}/programs/games.nix"
-          "${mod}/services/gnome-services.nix"
-          #          "${mod}/services/location.nix"
+          # "${mod}/services/gnome-services.nix"
+          # "${mod}/services/location.nix"
           {
             home-manager = {
               users.mia.imports = homeImports."mia@ken";
               extraSpecialArgs = specialArgs;
             };
           }
-
-          inputs.agenix.nixosModules.default
         ];
     };
   };

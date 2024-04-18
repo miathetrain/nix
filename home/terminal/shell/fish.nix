@@ -12,7 +12,7 @@
     shellAliases = {
       g = "git";
       "..." = "cd ../..";
-      ls = "exa";
+      ls = "eza --icons --group-directories-first";
     };
 
     plugins = [
@@ -22,7 +22,7 @@
           owner = "rstacruz";
           repo = "fish-autols";
           rev = "6d704c0e33522335539bf6844ce9f7009b2ee6a2";
-          sha256 = "";
+          sha256 = "sha256-tqAsc9J8xv0DMt5fTYaBO7tUQAG7Fnct/Rlq/Jx+/yU=";
         };
       }
     ];

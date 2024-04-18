@@ -5,7 +5,16 @@
     enable = true;
   };
 
-  services.avahi.enable = true;
+  # network discovery, mDNS
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      domain = true;
+      userServices = true;
+    };
+  };
 
   # Don't wait for network startup
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;

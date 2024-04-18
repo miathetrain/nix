@@ -57,18 +57,18 @@ in {
     }))
   ];
 
-  # services.wivrn = {
-  #   enable = true;
-  #   package = inputs.lemonake.packages.${pkgs.system}.wivrn; # Until WiVRn gets merged.
-  #   openFirewall = true;
-  #   highPriority = true;
-  #   defaultRuntime = true;
-  #   monadoEnvironment = {
-  #     XRT_COMPOSITOR_LOG = "debug";
-  #     XRT_PRINT_OPTIONS = "on";
-  #     IPC_EXIT_ON_DISCONNECT = "off";
-  #   };
-  # };
+  services.wivrn = {
+    enable = true;
+    package = inputs.lemonake.packages.${pkgs.system}.wivrn; # Until WiVRn gets merged.
+    openFirewall = true;
+    highPriority = true;
+    defaultRuntime = true;
+    monadoEnvironment = {
+      XRT_COMPOSITOR_LOG = "debug";
+      XRT_PRINT_OPTIONS = "on";
+      IPC_EXIT_ON_DISCONNECT = "off";
+    };
+  };
 
   programs.anime-borb-launcher.enable = true;
   programs.honkers-railway-launcher.enable = true;

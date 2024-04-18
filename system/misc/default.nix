@@ -5,7 +5,7 @@
     ./home-manager.nix
     ./hyprland.nix
     ./xdg.nix
-    ./games.nix
+    ./games
   ];
 
   # Flatpak

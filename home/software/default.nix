@@ -14,12 +14,12 @@
 
   home.packages = with pkgs; [
     (vesktop.overrideAttrs (prev: {
-      version = "2.0";
+      version = "git";
       src = pkgs.fetchFromGitHub {
-        owner = "kaitlynkittyy";
+        owner = "Vencord";
         repo = "Vesktop";
-        rev = "1d5000e619ad44ceb6b27240d38a68fe1c5f039a";
-        hash = "sha256-mpMb+jvm9xQRyO+mdHEYU7z31MpxI3xK6KzjIbRpt3Y=";
+        rev = "8eaa5206b98ce7029b6879cc2ce361c2ae5f6239";
+        hash = "sha256-k/k5mZpfIrThVwgzB4OgL6txfnWMQ2e7uAXO763PnLM=";
       };
 
       pnpmDeps = assert lib.versionAtLeast nodePackages.pnpm.version "8.10.0";
@@ -27,12 +27,12 @@
           pname = "${prev.pname}-pnpm-deps";
           inherit (prev) patches ELECTRON_SKIP_BINARY_DOWNLOAD;
 
-          version = "2.0";
+          version = "git";
           src = pkgs.fetchFromGitHub {
-            owner = "kaitlynkittyy";
+            owner = "Vencord";
             repo = "Vesktop";
-            rev = "1d5000e619ad44ceb6b27240d38a68fe1c5f039a";
-            hash = "sha256-mpMb+jvm9xQRyO+mdHEYU7z31MpxI3xK6KzjIbRpt3Y=";
+            rev = "8eaa5206b98ce7029b6879cc2ce361c2ae5f6239";
+            hash = "sha256-k/k5mZpfIrThVwgzB4OgL6txfnWMQ2e7uAXO763PnLM=";
           };
 
           nativeBuildInputs = [
@@ -71,7 +71,7 @@
           dontBuild = true;
           dontFixup = true;
           outputHashMode = "recursive";
-          outputHash = "sha256-U+74O3TrwmqKDi68sr/uHv5pimPAJyR/gF6tlPMCy5A=";
+          outputHash = "sha256-XgIkfPgtuII8hbt2fRNeNZpxhVaxhacw2UvC9tFA1HU=";
         };
 
       installPhase = let

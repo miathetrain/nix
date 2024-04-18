@@ -1,8 +1,5 @@
-{
-  imports = [
-    ./ananicy.nix
-    ./gnome-services.nix
-    ./greetd.nix
-    ./pipewire.nix
-  ];
+_: {
+  services = {
+    dbus.implementation = "broker";
+  };
 }
