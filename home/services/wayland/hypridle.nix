@@ -13,7 +13,7 @@
 
     listeners = [
       {
-        timeout = 150;
+        timeout = 200;
         onTimeout = "notify-send 'Sleeping'";
         onResume = "notify-send 'Waking up'";
       }

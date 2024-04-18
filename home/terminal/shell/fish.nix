@@ -13,6 +13,7 @@
       g = "git";
       "..." = "cd ../..";
       ls = "eza --icons --group-directories-first";
+      icat = "kitty icat";
     };
 
     plugins = [

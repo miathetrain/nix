@@ -12,24 +12,26 @@ in {
     settings = {
       "$MOD" = "SUPER";
       env = [
-        "QT_QPA_PLATFORMTHEME,qt5ct"
+        "GTK2_RC_FILES,/home/mia/.config/gtk-2.0/gtkrc"
+        "QT_QPA_PLATFORMTHEME,gtk2"
+        "QT_STYLE_OVERRIDE,gtk2"
         "MOZ_ENABLE_WAYLAND,1"
       ];
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
-        "hyprlock --immediate"
         "ags-wrap"
         "swayosd-server"
-        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "wlsunset -t 5200 -S 6:00 -s 22:30"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "hyprctl dispatcher focusmonitor 1"
-        "[workspace 1 silent] firefox"
-        "[workspace 3 silent] vesktop"
+        "systemctl --user start swww-random-img.service"
+        "sleep 2 && [workspace 1 silent] firefox"
+        "sleep 2 && [workspace 3 silent] vesktop"
+        "sleep 2 && hyprlock --immediate"
         # "[workspace 5 silent] steam"
       ];
-      #      xwayland = {force_zero_scaling = true;};
 
       device = {
         name = "bcm5974";
@@ -55,8 +57,8 @@ in {
         vrr = 1;
         key_press_enables_dpms = true;
         disable_autoreload = true;
-        # enable_swallow = true;
-        # swallow_regex = "kitty";
+        enable_swallow = true;
+        swallow_regex = "kitty";
         focus_on_activate = true;
         no_direct_scanout = false;
         new_window_takes_over_fullscreen = 1;
@@ -139,10 +141,59 @@ in {
         allow_small_split = true;
       };
 
+      plugin = {
+        hyprtrails = {
+          color = "rgba(ffaa00ff)";
+        };
+
+        hyprexpo = {
+          columns = 2;
+          gap_size = 25;
+          bg_col = "rgb(111111)";
+          workspace_method = "center m+1"; # [center/first] [workspace] e.g. first 1 or center m+1
+
+          enable_gesture = true; # laptop touchpad, 4 fingers
+          gesture_distance = 300; # how far is the "max"
+          gesture_positive = true; # positive = swipe down. Negative = swipe up.
+        };
+
+        hyprfocus = {
+          enabled = true;
+
+          keyboard_focus_animation = "shrink";
+          mouse_focus_animation = "flash";
+
+          bezier = [
+            "bezIn, 0.5,0.0,1.0,0.5"
+            "bezOut, 0.0,0.5,0.5,1.0"
+          ];
+
+          flash = {
+            flash_opacity = 0.7;
+
+            in_bezier = "bezIn";
+            in_speed = 0.5;
+
+            out_bezier = "bezOut";
+            out_speed = 3;
+          };
+
+          shrink = {
+            shrink_percentage = 0.8;
+
+            in_bezier = "bezIn";
+            in_speed = 0.5;
+
+            out_bezier = "bezOut";
+            out_speed = 3;
+          };
+        };
+      };
+
       "$VIDEODIR" = "$HOME/Videos";
       "$NOTIFY" = "notify-send -h string:x-canonical-private-synchronouse:hypr-cfg -u low";
       "$COLORPICKER" = "${homeDir}/.config/hypr/scripts/colorpicker";
-      "$LAYERS" = "^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell|osd[0-9]|dunst)$";
+      "$LAYERS" = "^(bar|system-menu|anyrun|gtk-layer-shell|osd[0-9])$";
 
       bind = [
         "$MOD, Escape, exec, wlogout -p layer-shell"
@@ -172,7 +223,7 @@ in {
         "$MOD, F, fullscreen"
         "$MODSHIFT, F, fakefullscreen"
         "$MOD, Space, togglefloating"
-        # "$MOD, P, pseudo"
+        "$MOD, R, hyprexpo:expo, toggle"
         "$MOD, P, pin"
         "$MOD, S, togglesplit"
         "$MOD, O, toggleopaque"
@@ -249,6 +300,7 @@ in {
         "float,class:^(lutris)$"
         "float,class:^(itch)$"
         "float,class:^(mpv)$"
+        "float,class:^(net.davidotek.pupgui2)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
@@ -291,8 +343,9 @@ in {
     };
 
     plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
   };
 }

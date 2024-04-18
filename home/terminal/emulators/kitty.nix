@@ -10,12 +10,14 @@
     theme = "Catppuccin-Mocha";
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
-      "ctrl+v" = "paste_from_selection";
+      "ctrl+v" = "paste_from_clipboard";
+      "ctrl+shift+v" = "paste_from_selection";
       "ctrl+t" = "new_window";
       "ctrl+w" = "close_window";
       "ctrl+alt+a" = "previous_window";
       "ctrl+alt+d" = "next_window";
       "alt+r" = "start_resizing_window";
+      "ctrl+u" = "kitten unicode_input";
     };
 
     settings = {
