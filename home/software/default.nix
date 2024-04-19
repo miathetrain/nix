@@ -109,6 +109,7 @@
     mpv
     qbittorrent
     yt-dlp
+    nextcloud-client
 
     # Minecraft
     openjdk17

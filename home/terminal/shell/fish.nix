@@ -14,6 +14,7 @@
       "..." = "cd ../..";
       ls = "eza --icons --group-directories-first";
       icat = "kitty icat";
+      ssh = "kitten ssh";
     };
 
     plugins = [

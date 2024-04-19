@@ -221,7 +221,7 @@ in {
 
         "$MODSHIFT, Q, exit"
         "$MOD, F, fullscreen"
-        "$MODSHIFT, F, fakefullscreen"
+        "$MODSHIFT, F, fullscreen, 1"
         "$MOD, Space, togglefloating"
         "$MOD, R, hyprexpo:expo, toggle"
         "$MOD, P, pin"

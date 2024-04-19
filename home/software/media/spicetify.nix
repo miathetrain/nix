@@ -11,7 +11,8 @@
     spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
   in {
     enable = true;
-    theme = spicePkgs.themes.DefaultDynamic;
+    theme = spicePkgs.themes.text;
+    colorScheme = "CatppuccinMocha";
 
     enabledCustomApps = with spicePkgs.apps; [
       new-releases
@@ -23,8 +24,7 @@
       fullAppDisplayMod
       groupSession
       shuffle # shuffle+ (special characters are sanitized out of ext names)
-      autoSkipVideo
-      adblock
+      playlistIcons
     ];
   };
 }

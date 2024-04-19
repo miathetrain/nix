@@ -9,18 +9,9 @@ in {
     general = {
       disable_loading_bar = true;
       hide_cursor = false;
-      # no_fade_in = false;
-      grace = 10;
+      grace = 15;
       ignore_empty_input = true;
     };
-
-    # backgrounds = [
-    #   {
-    #     monitor = "";
-    #     path = "";
-    #     color = "rgba(25, 20, 20, 0.95)";
-    #   }
-    # ];
 
     backgrounds = [
       {
@@ -29,7 +20,7 @@ in {
         color = "rgba(25, 20, 20, 1.0)";
 
         # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
-        blur_passes = 1; # 0 disables blurring
+        blur_passes = 1;
         blur_size = 7;
         noise = 0.0117;
         contrast = 0.8916;
@@ -41,20 +32,20 @@ in {
 
     input-fields = [
       {
-        monitor = "";
+        monitor = "DP-1";
 
         size = {
           width = 300;
           height = 50;
         };
 
-        outline_thickness = 2;
+        outline_thickness = 1;
 
-        outer_color = "rgb(1e1e2e)";
-        inner_color = "rgb(313244)";
+        outer_color = "rgb(181825)";
+        inner_color = "rgb(1e1e2e)";
         font_color = "rgb(cdd6f4)";
 
-        fade_on_empty = false;
+        fade_on_empty = true;
         placeholder_text = "<span font_family='Lexend' foreground='##cdd6f4'>Password...</span>";
 
         dots_spacing = 0.3;
@@ -67,7 +58,7 @@ in {
         monitor = "";
         text = "$TIME";
         inherit font_family;
-        font_size = 50;
+        font_size = 100;
         color = "rgb(cdd6f4)";
 
         position = {
@@ -76,6 +67,38 @@ in {
         };
 
         valign = "center";
+        halign = "center";
+      }
+
+      {
+        monitor = "";
+        text = "$TIME";
+        inherit font_family;
+        font_size = 100;
+        color = "rgb(cdd6f4)";
+
+        position = {
+          x = 0;
+          y = 80;
+        };
+
+        valign = "center";
+        halign = "center";
+      }
+
+      {
+        monitor = "";
+        text = "cmd[update:1000] echo \"$(playerctl metadata title)\"";
+        inherit font_family;
+        font_size = 25;
+        color = "rgb(a6adc8)";
+
+        position = {
+          x = 0;
+          y = 80;
+        };
+
+        valign = "bottom";
         halign = "center";
       }
     ];
