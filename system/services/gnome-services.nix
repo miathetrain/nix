@@ -1,4 +1,12 @@
 {pkgs, ...}: {
+  programs = {
+    # make HM-managed GTK stuff work
+    dconf.enable = true;
+    seahorse.enable = true;
+  };
+
+  security.polkit.enable = true;
+
   services = {
     # needed for GNOME services outside of GNOME Desktop
     dbus.packages = with pkgs; [

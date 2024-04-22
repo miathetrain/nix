@@ -1,9 +1,13 @@
 const hyprland = await Service.import("hyprland")
-import { notificationPopup } from './notificationsPop.js';
+const systemtray = await Service.import('systemtray')
+
+import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs"
+import { NotificationPopups, notification_list, hasNotifications } from "./notificationPopups.js"
 import { format } from 'date-fns'
 
 const mpris = await Service.import('mpris')
 const audio = await Service.import('audio')
+const notifications = await Service.import('notifications');
 
 // main scss file
 const scss = `${App.configDir}/css/style.scss`
@@ -12,30 +16,12 @@ const scss = `${App.configDir}/css/style.scss`
 const css = `/tmp/my-style.css`
 
 // make sure sassc is installed on your system
-Utils.exec(`sassc ${scss} ${css}`)
-
-Utils.monitorFile(
-  // directory that contains the scss files
-  `${App.configDir}/css`,
-
-  // reload function
-  function () {
-    // main scss file
-    const scss = `${App.configDir}/css/style.scss`
-
-    // target css file
-    const css = `/tmp/my-style.css`
-
-    // compile, reset, apply
-    Utils.exec(`sassc ${scss} ${css}`)
-    App.resetCss()
-    App.applyCss(css)
-  },
-)
+Utils.exec(`dart-sass ${scss} ${css}`)
 
 const Launcher = Widget.Icon({
   class_name: "launcher",
-  icon: 'assets/nixos.svg',
+  icon: `${App.configDir}/assets/nixos.svg`,
+  tooltip_text: "Quick Search",
   size: 20,
 })
 
@@ -46,6 +32,7 @@ const Workspaces = Widget.Box({
     class_name: "workspace",
     vpack: "center",
     hpack: "center",
+    tooltip_text: `Workspace: ${i}`,
     label: `${i}`,
     setup: self => self.hook(hyprland, () => {
       self.toggleClassName("active", hyprland.active.workspace.id === i)
@@ -54,35 +41,60 @@ const Workspaces = Widget.Box({
   })),
 });
 
+/** @param {import('types/service/systemtray').TrayItem} item */
+const SysTrayItem = item => Widget.Button({
+  child: Widget.Icon().bind('icon', item, 'icon'),
+  tooltipMarkup: item.bind('tooltip_markup'),
+  onPrimaryClick: (_, event) => item.activate(event),
+  onSecondaryClick: (_, event) => item.openMenu(event),
+});
+
 const ClientTitle = Widget.Label({
   class_name: "client-title",
   tooltip_text: hyprland.active.client.bind("title"),
   label: hyprland.active.client.bind("title").as(title => {
-    return title.length <= 40 ? title : title.substring(0, 40) + "..."
+    return title.length <= 25 ? title : title.substring(0, 20) + "..."
   })
 })
 
 const time = Variable('', {
   poll: [1000, function () {
-    return format(new Date(), "MMM do, HH:mm");
+    return format(new Date(), "HH:mm - MMM do");
   }],
 });
 
 const Time = Widget.EventBox({
   class_name: "date",
   hpack: "center",
+  on_primary_click: () => {
+    if (clockBar.visible) {
+      // clockBar.visible = false;
+      App.closeWindow("clockbar");
+
+    }
+    else {
+      clockBar.visible = true;
+      App.openWindow("clockbar")
+    }
+    // clockBar.visible = !clockBar.visible;
+  },
   child: Widget.Label({
     label: time.bind()
   })
+})
+
+const sysTray = Widget.Box({
+  children: systemtray.bind('items').as(i => i.map(SysTrayItem))
 })
 
 function Media() {
   const label = Utils.watch("", mpris, "player-changed", () => {
     if (mpris.players[0]) {
       const { track_artists, track_title } = mpris.players[0]
-      return `${track_title} ` // return `${track_artists.join(', ')} ─ ${track_title}`
+      const title = `${track_title} `
+      return title.length <= 25 ? title : title.substring(0, 20) + "..." // return `${track_artists.join(', ')} ─ ${track_title}`
     } else {
-      return 'Nothing is playing'
+      return ''
     }
   })
 
@@ -91,7 +103,7 @@ function Media() {
       const { track_artists, track_title } = mpris.players[0]
       return `${track_title} ─ ${track_artists.join(', ')}` // return `${track_artists.join(', ')} ─ ${track_title}`
     } else {
-      return 'Nothing is playing'
+      return ''
     }
   })
 
@@ -154,7 +166,7 @@ function Media() {
 
   const widget = Widget.EventBox({
     on_hover: (event) => {
-      if ("" + label != "Nothing is playing") {
+      if ("" + label != "") {
         revealer.reveal_child = true;
         Utils.timeout(3000, () => {
           revealer.reveal_child = false;
@@ -229,12 +241,10 @@ const Right = Widget.Box({
   hpack: "end",
   children: [
     Volume(),
-    Widget.Label({
-      label: time.bind()
-    })]
+    sysTray]
 })
 
-const Bar = (monitor: number) => Widget.Window({
+export const Bar = (monitor: number) => Widget.Window({
   monitor,
   name: `bar${monitor}`,
   className: "bar",
@@ -249,10 +259,118 @@ const Bar = (monitor: number) => Widget.Window({
   }),
 });
 
+
+export const clockBar = Widget.Window({
+  name: "clockbar",
+  className: "clockbar",
+  visible: false,
+  anchor: ['top'],
+  keymode: "on-demand",
+  layer: "top",
+  margins: [10, 0],
+
+  child: Widget.Box({
+    class_name: "clockbar",
+    vertical: true,
+    spacing: 20,
+
+    children: [Widget.Label({
+      label: "Here's Everything to Know.",
+      vpack: "start",
+    }),
+
+    Widget.Box({
+      spacing: 20,
+
+      children: [
+        Widget.Box({
+          vertical: true,
+          hpack: "fill",
+          hexpand: true,
+
+          children: [
+            Widget.Scrollable({
+              hscroll: 'never',
+              vscroll: 'automatic',
+              visible: hasNotifications.bind(),
+              child: notification_list,
+              vexpand: true,
+              vpack: "fill",
+            }),
+
+            Widget.CenterBox({
+              vertical: true,
+              vexpand: true,
+              vpack: "fill",
+              visible: hasNotifications.bind().as(value => value ? false : true),
+
+              center_widget: Widget.Box({
+                class_name: "empty-notifications",
+                vertical: true,
+                children: [
+                  Widget.Label({
+                    class_name: "empty-notifications-icon",
+                    label: ""
+                  }),
+
+                  Widget.Label({
+                    class_name: "empty-notifications",
+                    label: "No Noti's"
+                  })
+                ],
+              })
+            }),
+
+          ],
+        }),
+
+        Widget.Separator({ vertical: true }),
+
+        Widget.Box({
+          class_name: "right-side",
+          spacing: 30,
+          vertical: true,
+
+          children: [
+            Widget.Label({
+              label: "To This Day!",
+            }),
+
+            Widget.Calendar({
+              class_name: "calendar",
+              showDayNames: true,
+              showDetails: false,
+              showHeading: true,
+              showWeekNumbers: false,
+              onDaySelected: ({ date: [y, m, d] }) => {
+                print(`${y}. ${m}. ${d}.`)
+              },
+            }),
+
+            Widget.Label("Insert-Random-Widget")
+
+          ]
+        })
+
+      ],
+    }),
+
+    Widget.Label({
+      label: "The End!",
+      vpack: "end",
+    })
+    ],
+  })
+})
+
 App.config({
+  icons: "./assets",
   style: css,
-  windows: [Bar(0),
-    notificationPopup],
+  windows: [
+    Bar(0),
+    clockBar,
+    NotificationPopups()
+  ],
 });
 
 export { };

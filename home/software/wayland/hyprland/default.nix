@@ -7,18 +7,34 @@
 
   home = {
     packages = with pkgs; [
-      seatd
       jaq
-      xorg.xprop
-      inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-      xwaylandvideobridge
       swayosd
+      imagemagick
+      xdg-utils
+      qt5.qtwayland
+      gnome.file-roller
+      gvfs
+
+      gnome-text-editor
+      gnome.nautilus
+      gthumb
+      btop
+
+      ##Brightness
+      inputs.dimmer.packages.${pkgs.system}.default
+      ddcutil
+      light
     ];
     file = {
       ".config/hypr/scripts/colorpicker" = {
         source = ./scripts/colorpicker;
         executable = true;
       };
+    };
+
+    sessionVariables = {
+      QT_QPA_PLATFORM = "wayland";
+      XDG_SESSION_TYPE = "wayland";
     };
   };
 

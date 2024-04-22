@@ -1,8 +1,10 @@
 {
   description = "Mia's NixOS Config";
   outputs = inputs @ {
+    self,
     flake-parts,
     nixpkgs,
+    chaotic,
     ...
   }:
     flake-parts.lib.mkFlake {
@@ -10,7 +12,10 @@
     } {
       systems = ["x86_64-linux"];
 
-      imports = [./home/profiles ./hosts ./pkgs];
+      imports = [
+        ./home/profiles
+        ./hosts
+      ];
 
       perSystem = {
         config,
@@ -21,6 +26,10 @@
         _module.args.pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+        };
+
+        packages = import ./pkgs {
+          inherit inputs pkgs;
         };
 
         devShells.default = pkgs.mkShell {
@@ -35,13 +44,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    dimmer.url = "github:koenw/dimmer";
+    lemonake.url = "github:PassiveLemon/lemonake";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    fu.url = "github:numtide/flake-utils";
+    hypridle.url = "github:hyprwm/hypridle";
+    hyprland.url = "github:hyprwm/Hyprland";
+    matugen.url = "github:InioX/matugen";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-
-    fu.url = "github:numtide/flake-utils";
 
     helix = {
       url = "github:helix-editor/helix";
@@ -49,10 +66,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix = {
-      url = "github:ryantm/agenix";
+    envision = {
+      url = "gitlab:scrumplex/envision/nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "hm";
+    };
+
+    scrumpkgs = {
+      url = "github:Scrumplex/pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
 
     ags = {
@@ -75,12 +97,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hypridle.url = "github:hyprwm/hypridle";
-
-    hyprland.url = "github:hyprwm/Hyprland";
-
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    hyprfocus = {
+      url = "github:pyt0xic/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -90,11 +113,6 @@
     };
 
     hyprlock.url = "github:hyprwm/hyprlock";
-
-    nh = {
-      url = "github:viperML/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nix-index-db = {
       url = "github:Mic92/nix-index-database";
@@ -106,24 +124,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    matugen.url = "github:InioX/matugen";
-
     sss = {
-      url = "github:SergioRibera/sss/ddcea6d83e7bbcdef47f124c903456495d4c2aad";
+      url = "github:SergioRibera/sss";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
-
-    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
-
-    dimmer.url = "github:koenw/dimmer";
-
-    lemonake.url = "github:PassiveLemon/lemonake";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
   };
 }

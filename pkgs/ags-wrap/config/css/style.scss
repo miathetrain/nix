@@ -1,4 +1,3 @@
-// Colors
 $rosewater: #f5e0dc;
 $flamingo: #f2cdcd;
 $pink: #f5c2e7;
@@ -27,65 +26,59 @@ $mantle: #181825;
 $crust: #11111b;
 
 window.bar {
- background-color: $base;
- color: $text;
+  background-color: $base;
+  color: $text;
 }
 
 .launcher {
- padding-left: 5pt;
- padding-top: 4pt;
- padding-bottom: 4pt;
+  padding-left: 5pt;
+  padding-top: 4pt;
+  padding-bottom: 4pt;
 }
 
 .workspaces {
+  padding-left: 15px;
+  padding-bottom: 3px;
+  padding-top: 3px;
 
- padding-left: 15px;
- padding-bottom: 3px;
- padding-top: 3px;
+  label {
+    font-size: 0;
+    min-width: 7pt;
+    min-height: 7pt;
+    border-radius: 6pt;
+    box-shadow: inset 0 0 0 20pt $surface0;
+    margin: 0 2.5pt;
+    transition: min-width 0.5s ease-out;
 
- label {
-  font-size: 0;
-  min-width: 7pt;
-  min-height: 7pt;
-  border-radius: 6pt;
-  box-shadow: inset 0 0 0 20pt $surface0;
-  margin: 0 2.5pt;
-  transition: min-width .5s ease-out;
+    &.occupied {
+      box-shadow: inset 0 0 0 20pt $text;
+    }
 
-  &.occupied {
-    box-shadow: inset 0 0 0 20pt $text;
+    &.active {
+      background-color: $pink;
+      box-shadow: inset 0 0 0 20pt $pink;
+      min-width: 25pt;
+      min-height: 12pt;
+    }
   }
-
-  &.active {
-   background-color: $pink;
-   box-shadow: inset 0 0 0 20pt $pink;
-   min-width: 25pt;
-   min-height: 12pt;
-  }
- }
 }
 
 .client-title {
- padding: 0 10pt 0 10pt;
- font-size: 11pt;
+  padding: 0 10pt 0 10pt;
+  font-size: 11pt;
 }
 
 .date {
-
   label {
     padding-left: 125pt;
     padding-right: 10pt;
-    font-size: 14pt;
+    font-size: 13pt;
     font-weight: bold;
   }
 }
 
-window#notifications {
-  all: unset;
-}
-
-window#notifications box.notifications {
-  padding: .5em;
+window.notification-popups box.notifications {
+  padding: 0.5em;
 }
 
 .icon {
@@ -111,7 +104,7 @@ window#notifications box.notifications {
   min-width: 350px;
   border-radius: 11px;
   padding: 1em;
-  margin: .5em;
+  margin: 0.5em;
   border: 1px solid $crust;
   background-color: $base;
 }
@@ -130,8 +123,8 @@ window#notifications box.notifications {
 }
 
 .actions .action-button {
-  margin: 0 .4em;
-  margin-top: .8em;
+  margin: 0 0.4em;
+  margin-top: 0.8em;
 }
 
 .actions .action-button:first-child {
@@ -143,20 +136,180 @@ window#notifications box.notifications {
 }
 
 .media-icon {
-    font-size: 20px;
-    padding-right: 10px;
+  font-size: 20px;
+  padding-right: 10px;
 }
 
 .media-name {
-  font-style: italic
+  font-style: italic;
 }
 
 .media-buttons {
+  label {
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
 
-    label {
-      font-size: 14px;
-      padding-left: 5px;
-      padding-right: 5px;
-    }
+window.clockbar {
+  background-color: $base;
+}
 
+.clockbar {
+  background-color: $base;
+  min-width: 1000px;
+  min-height: 700px;
+  border-radius: 11px;
+  padding: 1em;
+  margin: 0.5em;
+  border: 1px solid $crust;
+}
+
+.right-side {
+  padding: 20px;
+}
+
+.small-icon {
+  min-width: 48px;
+  min-height: 48px;
+  margin-right: 1em;
+}
+
+.small-icon image {
+  font-size: 58px;
+  /* to center the icon */
+  margin: 5px;
+  color: $text;
+}
+
+.small-icon box {
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 7px;
+}
+
+// gay
+
+.big-small-icon {
+  min-width: 100px;
+  min-height: 100px;
+  margin-right: 1em;
+}
+
+.big-small-icon image {
+  font-size: 58px;
+  /* to center the icon */
+  margin: 5px;
+  color: $text;
+}
+
+.big-small-icon box {
+  min-width: 400px;
+  min-height: 200px;
+  border-radius: 7px;
+  background-color: $surface1;
+}
+
+.small-box {
+  background-color: transparent;
+}
+
+.small-notification {
+  min-width: 350px;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 0.5em;
+  // border: 1px solid $mantle;
+  background-color: $mantle;
+}
+
+.small-notification.critical {
+  border: 1px solid lightcoral;
+}
+
+.small-title {
+  color: $text;
+  font-size: 1.4em;
+}
+
+.small-body {
+  color: $text;
+}
+
+.small-actions .action-button {
+  margin: 0 0.4em;
+  margin-top: 0.8em;
+}
+
+.small-actions .action-button:first-child {
+  margin-left: 0;
+}
+
+.small-actions .action-button:last-child {
+  margin-right: 0;
+}
+
+.empty-notifications-icon {
+  font-size: 3em;
+}
+
+.empty-notifications {
+  font-size: 1em;
+}
+
+calendar {
+  color: white;
+  border: 1px solid #1c1f1f;
+  padding: 2px;
+}
+
+calendar:selected {
+  border-radius: 6px;
+}
+
+calendar.header {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+calendar.grid {
+  padding: 50px;
+}
+
+calendar.header:backdrop {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+calendar.button {
+  color: rgba(238, 238, 236, 0.45);
+}
+
+calendar.button:hover {
+  color: #eeeeec;
+}
+
+calendar.button:backdrop {
+  color: rgba(148, 151, 150, 0.45);
+}
+
+calendar.button:disabled {
+  color: rgba(148, 151, 150, 0.45);
+}
+
+calendar:indeterminate,
+calendar:indeterminate:backdrop {
+  color: rgba(white, 0.25);
+}
+
+calendar.highlight,
+calendar.highlight:backdrop {
+  font-size: smaller;
+  color: #44627e;
+}
+
+calendar:backdrop {
+  color: #d5d5d5;
+  border-color: #1f2222;
 }

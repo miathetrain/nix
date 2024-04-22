@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   killactive = pkgs.writeShellScriptBin "killactive" ''
-    if [ "$(hyprctl activewindow -j | jq -r ".class")" = "steam" ] || [ "$(hyprctl activewindow -j | jq -r ".class")" = "Kodi" ]; then
-      xdotool getactivewindow windowunmap
+    if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Kodi" ]; then
+      pkill kodi-x11
     else
       hyprctl dispatch killactive ""
     fi

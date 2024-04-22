@@ -1,17 +1,14 @@
 let
   desktop = [
-    ./core/boot.nix
-    ./core/default.nix
-
-    ./hardware/opengl.nix
-    ./hardware/opentablet.nix
-    ./hardware/bluetooth.nix
-
-    ./network/default.nix
-
-    ./programs
+    ./core
+    ./hardware
+    ./network
+    ./misc
+    ./services
 
     ./services
+    ./services/ananicy.nix
+    ./services/gnome-services.nix
     ./services/greetd.nix
     ./services/pipewire.nix
   ];

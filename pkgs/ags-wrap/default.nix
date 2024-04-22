@@ -1,19 +1,25 @@
 {
-  inputs',
+  inputs,
+  pkgs,
   stdenv,
   esbuild,
   system,
   accountsservice,
   writeShellScript,
+  gtk3,
+  dart-sass,
   ...
 }: let
   name = "ags-wrap";
 
-  ags = inputs'.ags.packages.default.override {
+  ags = inputs.ags.packages.${system}.default.override {
     extraPackages = [accountsservice];
   };
 
   dependencies = [
+    gtk3
+    dart-sass
+    inputs.hyprland.packages.${system}.default
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);

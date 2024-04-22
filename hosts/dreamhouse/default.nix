@@ -10,7 +10,7 @@
 
   boot = {
     # load modules on boot
-    kernelModules = ["amdgpu" "i2c-dev" "ddcci_backlight"];
+    kernelModules = ["amdgpu" "i2c-dev" "ddcci" "ddcci_backlight"];
     kernelParams = [
       "clearcpuid=514"
       "amd_pstate=active"
@@ -30,6 +30,8 @@
       )
     ];
   };
+
+  environment.systemPackages = [pkgs.neofetch];
 
   networking.hostName = "dreamhouse";
 

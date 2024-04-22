@@ -1,11 +1,17 @@
-{lib, ...}:
+{
+  lib,
+  inputs,
+  ...
+}:
 # default configuration shared by all hosts
 {
   imports = [
+    inputs.chaotic.nixosModules.default
+
     ./security.nix
+    ./boot.nix
     ./users.nix
     ../nix
-    ../programs/fish.nix
   ];
 
   # don't touch this
