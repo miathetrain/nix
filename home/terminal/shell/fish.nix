@@ -7,6 +7,8 @@
       set fish_greeting # Disable greeting
       fish_config theme choose CatppuccinMocha
       neofetch
+
+      direnv hook fish | source
     '';
 
     shellAliases = {

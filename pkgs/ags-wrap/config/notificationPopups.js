@@ -227,7 +227,11 @@ function smallNotification(n) {
 }
 
 export function NotificationPopups(monitor = 0) {
-    notifications.forceTimeout = true;
+    // notifications.forceTimeout = true;
+    notifications.popupTimeout = 3000;
+    notifications.forceTimeout = false;
+    notifications.cacheActions = false;
+    notifications.clearDelay = 100;
 
 
 
@@ -254,7 +258,7 @@ export function NotificationPopups(monitor = 0) {
     }
 
     list.hook(notifications, onNotified, "notified")
-    list.hook(notifications, onDismissed, "dismissed")
+        .hook(notifications, onDismissed, "dismissed")
 
     notification_list.hook(notifications, onClosed, "closed")
 

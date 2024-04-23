@@ -116,6 +116,13 @@
     tmux
 
     xorg.xrandr
+    direnv
+    rustc
+    cargo
+    rustfmt
+
+    wireguard-tools
+    neofetch
   ];
 
   services.steamvr = {

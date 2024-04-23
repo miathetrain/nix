@@ -23,7 +23,6 @@
       ##Brightness
       inputs.dimmer.packages.${pkgs.system}.default
       ddcutil
-      light
     ];
     file = {
       ".config/hypr/scripts/colorpicker" = {

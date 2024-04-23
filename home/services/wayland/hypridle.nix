@@ -14,8 +14,14 @@
     listeners = [
       {
         timeout = 180;
-        onTimeout = ""; ## Brightness Dim.
-        onResume = ""; ## Brightness restore.
+        onTimeout = "dimmer"; ## Brightness Dim.
+        onResume = "pkill dimmer; dimmer -r"; ## Brightness restore.
+      }
+
+      {
+        timeout = 180;
+        onTimeout = "notify-send 'Sleeping' 'Display sleeping for idle'";
+        onResume = "";
       }
 
       {
@@ -25,7 +31,7 @@
       }
 
       {
-        timeout = 400;
+        timeout = 320;
         onTimeout = "${pkgs.systemd}/bin/loginctl lock-session";
       }
 

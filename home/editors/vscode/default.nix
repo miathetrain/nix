@@ -104,6 +104,10 @@
           "editor.formatOnType" = false;
         };
 
+        "[rust]" = {
+          "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+        };
+
         "typescript.suggest.paths" = false;
         "javascript.suggest.paths" = false;
 

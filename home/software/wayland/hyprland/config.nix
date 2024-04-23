@@ -28,7 +28,7 @@ in {
         "hyprctl dispatcher focusmonitor 1"
         "systemctl --user start swww-random-img.service"
         "sleep 2 && [workspace 1 silent] firefox"
-        "sleep 2 && [workspace 3 silent] vesktop"
+        # "sleep 2 && [workspace 3 silent] vesktop"
         "sleep 2 && hyprlock --immediate"
         # "[workspace 5 silent] steam"
       ];
@@ -88,7 +88,7 @@ in {
           "3,monitor:DP-1"
           "4,monitor:DP-1"
           "5,monitor:DP-1"
-          "6,monitor:HDMI-A-1,default:true"
+          "6,monitor:HDMI-A-1,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           "7,monitor:DP-2,default:true"
         ];
       };
@@ -143,7 +143,7 @@ in {
 
       plugin = {
         hyprtrails = {
-          color = "rgba(ffaa00ff)";
+          color = "rgba(aa336aff)";
         };
 
         hyprexpo = {
@@ -169,7 +169,7 @@ in {
           ];
 
           flash = {
-            flash_opacity = 0.7;
+            flash_opacity = 0.3;
 
             in_bezier = "bezIn";
             in_speed = 0.5;
@@ -301,6 +301,7 @@ in {
         "float,class:^(itch)$"
         "float,class:^(mpv)$"
         "float,class:^(net.davidotek.pupgui2)$"
+        "float,class:^(com.nextcloud.desktopclient.nextcloud)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"

@@ -1,8 +1,27 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   variant = config.theme.name;
 
   font_family = "Lexend";
+
+  music-uptime = pkgs.writeShellScriptBin "music-uptime" ''
+    playerctl=$(playerctl -a status 2>/dev/null)
+    if grep "Playing" <<< "$playerctl" >/dev/null; then
+        playerctl -p "spotify,*" metadata --format "󰎆  {{title}} - {{artist}}" 2>/dev/null ||
+        playerctl metadata --format "󰎆  {{title}} - {{artist}}"
+    else
+        echo -n "󱎫  "
+        uptime | sed -E 's/^[^,]*up *//; s/, *[[:digit:]]* users?.*//; s/days/giorni/; s/day/giorno/; s/min/min./; s/([[:digit:]]+):0?([[:digit:]]+)/\1 Hours, \2 mins./;'
+    fi
+  '';
 in {
+  home.packages = [
+    music-uptime
+  ];
+
   programs.hyprlock = {
     enable = true;
 
@@ -20,13 +39,8 @@ in {
         color = "rgba(25, 20, 20, 1.0)";
 
         # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
-        blur_passes = 1;
-        blur_size = 7;
-        noise = 0.0117;
-        contrast = 0.8916;
-        brightness = 0.8172;
-        vibrancy = 0.1696;
-        vibrancy_darkness = 0.0;
+        blur_passes = 3;
+        blur_size = 1;
       }
     ];
 
@@ -39,10 +53,15 @@ in {
           height = 50;
         };
 
-        outline_thickness = 1;
+        position = {
+          x = 0;
+          y = -100;
+        };
+
+        outline_thickness = 4;
 
         outer_color = "rgb(181825)";
-        inner_color = "rgb(1e1e2e)";
+        inner_color = "rgb(313244)";
         font_color = "rgb(cdd6f4)";
 
         fade_on_empty = true;
@@ -56,14 +75,14 @@ in {
     labels = [
       {
         monitor = "";
-        text = "$TIME";
+        text = "<span font_weight='bold'>$TIME</span>";
         inherit font_family;
         font_size = 100;
         color = "rgb(cdd6f4)";
 
         position = {
           x = 0;
-          y = 80;
+          y = 120;
         };
 
         valign = "center";
@@ -72,14 +91,14 @@ in {
 
       {
         monitor = "";
-        text = "$TIME";
+        text = "cmd[update:1000] echo \"<span><i>$(date \"+%D\")</i></span>\"";
         inherit font_family;
-        font_size = 100;
+        font_size = 20;
         color = "rgb(cdd6f4)";
 
         position = {
           x = 0;
-          y = 80;
+          y = -20;
         };
 
         valign = "center";
@@ -87,19 +106,43 @@ in {
       }
 
       {
-        monitor = "";
-        text = "cmd[update:1000] echo \"$(playerctl metadata title)\"";
+        monitor = "DP-1";
+        text = "cmd[update:500] echo \"<span><i>$(music-uptime)</i></span>\"";
         inherit font_family;
         font_size = 25;
         color = "rgb(a6adc8)";
 
         position = {
           x = 0;
-          y = 80;
+          y = 50;
         };
 
         valign = "bottom";
         halign = "center";
+      }
+    ];
+
+    images = [
+      {
+        monitor = "DP-1";
+        path = "/home/mia/.face";
+        size = 180;
+        # rounding = -1;
+        border_size = 5;
+        border_color = "rgb(11111b)";
+        rotate = 0.0;
+        # reload_time = 1;
+        # reload_cmd = "";
+
+        position = {
+          x = 0;
+          y = -320;
+        };
+
+        valign = "top";
+        halign = "center";
+
+        shadow_passes = 1;
       }
     ];
   };

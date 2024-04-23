@@ -46,7 +46,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
-    dimmer.url = "github:koenw/dimmer";
+    dimmer.url = "github:miathetrain/dimmer";
     lemonake.url = "github:PassiveLemon/lemonake";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
@@ -58,6 +58,11 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     helix = {

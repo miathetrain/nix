@@ -7,7 +7,6 @@
       "video"
       "input"
       "corectrl"
-      "adbusers"
       "i2c"
     ];
   };
