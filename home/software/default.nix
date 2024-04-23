@@ -123,6 +123,8 @@
 
     wireguard-tools
     neofetch
+
+    inputs.self.packages.${pkgs.system}.obinskit
   ];
 
   services.steamvr = {
