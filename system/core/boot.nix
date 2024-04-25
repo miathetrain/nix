@@ -22,7 +22,9 @@
 
     loader = {
       # systemd-boot on UEFI
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+      };
       efi = {
         canTouchEfiVariables = true;
       };
@@ -35,6 +37,6 @@
 
   chaotic.scx = {
     enable = true;
-    scheduler = "scx_rustland";
+    scheduler = "scx_rusty";
   };
 }

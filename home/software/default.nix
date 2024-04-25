@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -18,8 +19,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "Vencord";
         repo = "Vesktop";
-        rev = "8eaa5206b98ce7029b6879cc2ce361c2ae5f6239";
-        hash = "sha256-k/k5mZpfIrThVwgzB4OgL6txfnWMQ2e7uAXO763PnLM=";
+        rev = "2733727a40a4cf542277dedcf89e87e7740f962d";
+        hash = "sha256-EF36HbbhTuAdwBEKqYgBBu7JoP1LJneU78bROHoKqDw=";
       };
 
       pnpmDeps = assert lib.versionAtLeast nodePackages.pnpm.version "8.10.0";
@@ -31,8 +32,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "Vencord";
             repo = "Vesktop";
-            rev = "8eaa5206b98ce7029b6879cc2ce361c2ae5f6239";
-            hash = "sha256-k/k5mZpfIrThVwgzB4OgL6txfnWMQ2e7uAXO763PnLM=";
+            rev = "2733727a40a4cf542277dedcf89e87e7740f962d";
+            hash = "sha256-EF36HbbhTuAdwBEKqYgBBu7JoP1LJneU78bROHoKqDw=";
           };
 
           nativeBuildInputs = [
@@ -71,7 +72,8 @@
           dontBuild = true;
           dontFixup = true;
           outputHashMode = "recursive";
-          outputHash = "sha256-XgIkfPgtuII8hbt2fRNeNZpxhVaxhacw2UvC9tFA1HU=";
+          outputHashAlgo = "sha256";
+          outputHash = "sha256-6ezEBeYmK5va3gCh00YnJzZ77V/Ql7A3l/+csohkz68=";
         };
 
       installPhase = let
@@ -123,8 +125,6 @@
 
     wireguard-tools
     neofetch
-
-    inputs.self.packages.${pkgs.system}.obinskit
   ];
 
   services.steamvr = {

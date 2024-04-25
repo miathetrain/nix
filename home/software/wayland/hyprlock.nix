@@ -26,8 +26,8 @@ in {
     enable = true;
 
     general = {
-      disable_loading_bar = true;
-      hide_cursor = false;
+      disable_loading_bar = false;
+      hide_cursor = true;
       grace = 15;
       ignore_empty_input = true;
     };

@@ -89,7 +89,7 @@ in {
           "4,monitor:DP-1"
           "5,monitor:DP-1"
           "6,monitor:HDMI-A-1,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
-          "7,monitor:DP-2,default:true"
+          "7,monitor:DP-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
         ];
       };
 
@@ -302,6 +302,9 @@ in {
         "float,class:^(mpv)$"
         "float,class:^(net.davidotek.pupgui2)$"
         "float,class:^(com.nextcloud.desktopclient.nextcloud)$"
+
+        "noborder,class:^(steam)$"
+        "rounding 0,class:^(steam)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"

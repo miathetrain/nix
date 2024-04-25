@@ -5,7 +5,7 @@
   libxkbcommon,
   systemd,
   xorg,
-  electron_13,
+  electron,
   makeWrapper,
   makeDesktopItem,
 }: let
@@ -17,7 +17,7 @@
     genericName = "Obinskit keyboard configurator";
     categories = ["Utility"];
   };
-  electron = electron_13;
+  # electron = electron_13;
 in
   stdenv.mkDerivation rec {
     pname = "obinskit";
