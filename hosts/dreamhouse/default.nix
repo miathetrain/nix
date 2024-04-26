@@ -14,7 +14,7 @@
 
   boot = {
     # load modules on boot
-    kernelModules = ["amdgpu" "i2c-dev" "ddcci_backlight"]; ##  "ddcci" "ddcci_backlight"
+    kernelModules = ["amdgpu" "i2c-dev" "ddcci_backlight"];
     kernelParams = [
       "clearcpuid=514"
       "amd_pstate=active"
@@ -35,18 +35,11 @@
     ];
   };
 
-  # services.udev.extraRules = ''
-  #   KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-  # '';
-
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="ddcci9", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="ddcci7", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="ddcci6", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
-
-  programs.light.enable = true;
-
   hardware.i2c.enable = true;
 
   systemd.services.ddcci = {
@@ -60,15 +53,17 @@
     '';
   };
 
-  environment.systemPackages = [pkgs.sbctl];
-
   networking.hostName = "dreamhouse";
+
+  environment.systemPackages = [pkgs.sbctl];
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
 
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
+    enrollKeys = false;
+    configurationLimit = null;
   };
 
   services = {

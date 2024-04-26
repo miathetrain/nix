@@ -53,7 +53,6 @@
     fu.url = "github:numtide/flake-utils";
     hypridle.url = "github:hyprwm/hypridle";
     hyprland.url = "github:hyprwm/Hyprland";
-    matugen.url = "github:InioX/matugen";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -110,11 +109,6 @@
     hyprfocus = {
       url = "github:pyt0xic/hyprfocus";
       inputs.hyprland.follows = "hyprland";
-    };
-
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprlock.url = "github:hyprwm/hyprlock";

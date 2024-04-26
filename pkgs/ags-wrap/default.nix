@@ -7,6 +7,7 @@
   accountsservice,
   writeShellScript,
   gtk3,
+  
   dart-sass,
   ...
 }: let
@@ -19,6 +20,7 @@
   dependencies = [
     gtk3
     dart-sass
+
     inputs.hyprland.packages.${system}.default
   ];
 

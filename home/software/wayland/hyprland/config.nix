@@ -19,15 +19,15 @@ in {
       ];
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
-        "ags-wrap"
+        # "ags-wrap"
         "swayosd-server"
         "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "wlsunset -t 5200 -S 6:00 -s 22:30"
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
+        # "wlsunset -t 5200 -S 6:00 -s 22:30"
+        # "wl-paste --type text --watch cliphist store"
+        # "wl-paste --type image --watch cliphist store"
         "hyprctl dispatcher focusmonitor 1"
         "systemctl --user start swww-random-img.service"
-        "sleep 2 && [workspace 1 silent] firefox"
+        # "sleep 2 && [workspace 1 silent] firefox"
         # "sleep 2 && [workspace 3 silent] vesktop"
         "sleep 2 && hyprlock --immediate"
         # "[workspace 5 silent] steam"
@@ -302,6 +302,8 @@ in {
         "float,class:^(mpv)$"
         "float,class:^(net.davidotek.pupgui2)$"
         "float,class:^(com.nextcloud.desktopclient.nextcloud)$"
+        "float,class:^(Ryujinx)$"
+
 
         "noborder,class:^(steam)$"
         "rounding 0,class:^(steam)$"
@@ -312,7 +314,7 @@ in {
         "pin, class:^(Kodi)$,floating:1"
 
         "idleinhibit focus, class:^(mpv|.+exe)$"
-        "idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
+        "idleinhibit always, class:^(firefox)$, title:^(.*YouTube.*)$"
         "idleinhibit always, class:^(Kodi)$"
 
         "dimaround, class:^(xdg-desktop-portal-gtk)$"
@@ -347,9 +349,9 @@ in {
     };
 
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
   };
 }

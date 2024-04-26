@@ -11,7 +11,11 @@
     alsa-utils
 
     # Media Players
-    kodi
+    (kodi.withPackages
+      (kodiPkgs:
+        with kodiPkgs; [
+          youtube
+        ]))
     stremio
   ];
 }

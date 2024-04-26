@@ -131,10 +131,20 @@ function smallNotification(n) {
         use_markup: true,
     })
 
+    const time_string = Variable('', { // 5:30 vs 6:15
+        poll: [1000, function () {
+            const now = GLib.DateTime.new_now_local();
+            const then = GLib.DateTime.new_from_unix_local(n.time);
+            const hour_diff = Math.round(now.get_hour() - then.get_hour()) * 60;
+            const minutes_diff = Math.round(now.get_minute() - then.get_minute());
+            return hour_diff + " Hours, " + minutes_diff + " minutes ago"
+        }],
+    });
+
     const time = Widget.Label({
         class_name: "small-time",
         justification: "left",
-        label: GLib.DateTime.new_from_unix_local(n.time).get_minute() + ' minutes ago.'
+        label: time_string.bind(),
     })
 
     const dismiss = Widget.EventBox({
@@ -144,7 +154,6 @@ function smallNotification(n) {
         child: Widget.Label({
             label: " ",
             tooltip_text: "Dismiss Notification"
-
         }),
 
         "on-primary-click": () => {
@@ -228,10 +237,9 @@ function smallNotification(n) {
 
 export function NotificationPopups(monitor = 0) {
     // notifications.forceTimeout = true;
-    notifications.popupTimeout = 3000;
-    notifications.forceTimeout = false;
-    notifications.cacheActions = false;
-    notifications.clearDelay = 100;
+    notifications.popupTimeout = 10000;
+    notifications.forceTimeout = true;
+    // notifications.clearDelay = 100;
 
 
 

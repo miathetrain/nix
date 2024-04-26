@@ -107,6 +107,7 @@ window.notification-popups box.notifications {
   margin: 0.5em;
   border: 1px solid $crust;
   background-color: $base;
+  transition: min-width 0.5s ease-out;
 }
 
 .notification.critical {
@@ -189,8 +190,6 @@ window.clockbar {
   border-radius: 7px;
 }
 
-// gay
-
 .big-small-icon {
   min-width: 100px;
   min-height: 100px;
@@ -220,7 +219,7 @@ window.clockbar {
   border-radius: 8px;
   padding: 1em;
   margin: 0.5em;
-  // border: 1px solid $mantle;
+  border: 1px solid $mantle;
   background-color: $mantle;
 }
 

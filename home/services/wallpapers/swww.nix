@@ -21,7 +21,7 @@
 
       Service = {
         ExecStart = ''
-          ${pkgs.bash}/bin/bash -c '${pkgs.findutils}/bin/find "/home/mia/.config/wallpapers/" -type f | ${pkgs.coreutils}/bin/shuf -n 1 | while read OUTPUT; do notify-send -a "wallpaper" "Wallpaper" "wallpaper has been updated." -i "$OUTPUT"; ${pkgs.swww}/bin/swww img -t random $OUTPUT; ln -s "$OUTPUT" "/home/mia/.cache/background"; done'
+          ${pkgs.bash}/bin/bash -c '${pkgs.findutils}/bin/find "/home/mia/.config/wallpapers/" -type f | ${pkgs.coreutils}/bin/shuf -n 1 | while read OUTPUT; do notify-send -a "wallpaper" "Wallpaper" "wallpaper has been updated." -i "$OUTPUT"; ${pkgs.swww}/bin/swww img -t random $OUTPUT; ln -f -s "$OUTPUT" "/home/mia/.cache/background"; done'
         '';
         Restart = "on-failure";
         RestartSec = 10;

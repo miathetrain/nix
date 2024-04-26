@@ -49,7 +49,14 @@ in {
     inputs.envision.packages.${pkgs.system}.envision
   ];
 
-  chaotic.mesa-git.enable = true;
+  chaotic.mesa-git = {
+    enable = true;
+    fallbackSpecialisation = false;
+  };
+
+  chaotic.steam.extraCompatPackages = with pkgs; [
+    proton-ge-custom
+  ];
 
   boot.extraModulePackages = [
     (amdgpu-kernel-module.overrideAttrs (prev: {

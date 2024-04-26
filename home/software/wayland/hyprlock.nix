@@ -35,7 +35,7 @@ in {
     backgrounds = [
       {
         monitor = "";
-        path = "screenshot"; # only png supported for now
+        path = "/home/mia/.cache/background"; # only png supported for now
         color = "rgba(25, 20, 20, 1.0)";
 
         # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
