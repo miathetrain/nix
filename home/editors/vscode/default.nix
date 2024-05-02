@@ -30,6 +30,7 @@
       canakyuz.csharp-extension-pack
       mohammadbaqer.better-folding
       thang-nm.catppuccin-perfect-icons
+      rust-lang.rust-analyzer
     ];
     userSettings = lib.mkMerge [
       {
@@ -104,6 +105,8 @@
         "javascript.suggest.paths" = false;
 
         "files.autoSave" = "afterDelay";
+
+        "git.autofetch" = true;
       }
       (lib.mkIf (osConfig.networking.hostName == "dreamhouse") {
         "editor.fontSize" = 14;

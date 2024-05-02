@@ -124,7 +124,7 @@
     rustfmt
 
     wireguard-tools
-    neofetch
+    fastfetch
     yad
     wtype
 

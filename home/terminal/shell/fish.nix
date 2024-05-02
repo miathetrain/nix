@@ -6,7 +6,7 @@
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
       fish_config theme choose CatppuccinMocha
-      neofetch
+      fastfetch
 
       direnv hook fish | source
     '';
