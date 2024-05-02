@@ -330,11 +330,6 @@ const stats_box = Widget.Box({
         + 'background-color: #45475a;' // set its bg color
         + 'color: #eba0ac;', // set its fg color
       startAt: 0.75,
-
-      setup: (self) => self.poll(1000, () => execAsync("echo 15%").then((output) => {
-        stats_box.children[0].tooltip_text = "CPU Stuff: " + output;
-      })),
-      value: cpu_usage.bind(),
       tooltip_text: memory_free.bind().as(value => 'Memory: ' + (Math.round(value * 100) / 100) + 'GB'),
       value: memory_usage.bind().as(value => Math.round(value * 100) / 100),
     }),
