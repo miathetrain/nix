@@ -33,7 +33,7 @@
         };
 
         devShells.default = pkgs.mkShell {
-          packages = [pkgs.alejandra pkgs.git config.packages.repl];
+          packages = [pkgs.alejandra pkgs.git];
           name = "nixland";
           DIRENV_LOG_FORMAT = "";
         };
@@ -53,6 +53,7 @@
     fu.url = "github:numtide/flake-utils";
     hypridle.url = "github:hyprwm/hypridle";
     hyprland.url = "github:hyprwm/Hyprland";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -107,7 +108,7 @@
     };
 
     hyprfocus = {
-      url = "github:pyt0xic/hyprfocus";
+      url = "github:miathetrain/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
 

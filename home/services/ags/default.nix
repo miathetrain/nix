@@ -22,7 +22,43 @@
     # compute CPU utilization (%)
     cpu_util=$((100*( cpu_active_cur-cpu_active_prev ) / (cpu_total_cur-cpu_total_prev) ))
 
-    printf " Current CPU Utilization : %s\n" "$cpu_util"
+    printf "%s" "$cpu_util"
+
+    exit 0
+  '';
+
+  memory-usage = pkgs.writeShellScriptBin "memory-usage" ''
+    mem_total=$(awk '/MemTotal/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
+    mem_ava=$(awk '/MemAvailable/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
+    mem_util=$(echo "$mem_total $mem_ava" | awk '{print ($1 - $2) / $1}')
+
+    printf "%s" "$mem_util"
+
+    exit 0
+  '';
+
+  memory-free = pkgs.writeShellScriptBin "memory-free" ''
+    mem_total=$(awk '/MemTotal/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
+    mem_ava=$(awk '/MemAvailable/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
+    mem_util=$(echo "$mem_total $mem_ava" | awk '{print ($1 - $2)}')
+
+    printf "%s" "$mem_util"
+
+    exit 0
+  '';
+
+  gpu-usage = pkgs.writeShellScriptBin "gpu-usage" ''
+    usage=$(amdgpu_top -n 1 --json | jq -c -r "(.devices[] | .gpu_activity | .GFX | .value )")
+
+    printf "%s" "$usage"
+
+    exit 0
+  '';
+
+  gpu-memory = pkgs.writeShellScriptBin "gpu-memory" ''
+    usage=$(amdgpu_top -n 1 --json | jq -c -r "(.devices[] | .gpu_activity | .Memory | .value )")
+
+    printf "%s" "$usage"
 
     exit 0
   '';
@@ -32,9 +68,15 @@ in {
   ];
 
   home.packages = with pkgs; [
-    toybox ##usleep
+    toybox
+    busybox ##usleep
     inputs.self.packages.${pkgs.system}.ags-wrap
     cpu-usage
+    memory-usage
+    memory-free
+    gpu-usage
+    gpu-memory
+    amdgpu_top
   ];
 
   programs.ags = {

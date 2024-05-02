@@ -125,6 +125,10 @@
 
     wireguard-tools
     neofetch
+    yad
+    wtype
+
+    wineWowPackages.staging
   ];
 
   services.steamvr = {

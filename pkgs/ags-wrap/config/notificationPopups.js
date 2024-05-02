@@ -7,9 +7,7 @@ export const hasNotifications = Variable(false);
 
 export const notification_list = Widget.Box({
     vertical: true,
-    children:
-        notifications.notifications.map(Notification)
-    ,
+    children: notifications.notifications.map(smallNotification),
 });
 
 /** @param {import('resource:///com/github/Aylur/ags/service/notifications.js').Notification} n */
@@ -74,7 +72,7 @@ function Notification(n) {
             class_name: "action-button",
             on_clicked: () => {
                 n.invoke(id)
-                n.dismiss()
+                // n.dismiss()
             },
             hexpand: true,
             child: Widget.Label(label),
@@ -104,6 +102,7 @@ function Notification(n) {
     )
 }
 
+/** @param {import('resource:///com/github/Aylur/ags/service/notifications.js').Notification} n */
 function smallNotification(n) {
     if (hasNotifications.value == false)
         hasNotifications.setValue(true)
@@ -135,9 +134,13 @@ function smallNotification(n) {
         poll: [1000, function () {
             const now = GLib.DateTime.new_now_local();
             const then = GLib.DateTime.new_from_unix_local(n.time);
-            const hour_diff = Math.round(now.get_hour() - then.get_hour()) * 60;
+            const hour_diff = Math.round(now.get_hour() - then.get_hour());
             const minutes_diff = Math.round(now.get_minute() - then.get_minute());
-            return hour_diff + " Hours, " + minutes_diff + " minutes ago"
+
+            const s1 = hour_diff > 0 ? hour_diff + " Hour(s)" : "";
+            const s2 = minutes_diff > 0 ? minutes_diff + " Minute(s)" : "";
+            const s3 = ((hour_diff > 0 || minutes_diff > 0) ? "  " : "") + s1 + s2 + ((hour_diff > 0 || minutes_diff > 0) ? " ago." : "");
+            return s3;
         }],
     });
 
@@ -178,9 +181,9 @@ function smallNotification(n) {
             class_name: "small-action-button",
             on_clicked: () => {
                 n.invoke(id)
-                n.dismiss()
+                // n.dismiss()
             },
-            hexpand: true,
+            hexpand: false,
             child: Widget.Label(label),
         })),
     })
@@ -188,58 +191,99 @@ function smallNotification(n) {
     switch (n.app_name) {
         case "wallpaper":
         case "screenshot":
-            return Widget.EventBox({
+            return Widget.Box({
                 attribute: { id: n.id },
-                class_name: "small-box",
-                child: Widget.Box({
-                    class_name: `small-notification ${n.urgency}`,
-                    vertical: true,
-                    spacing: 5,
-                    children: [
-                        Widget.Box([
-                            Widget.Box(
-                                { vertical: true },
-                                Widget.Box({
-                                    spacing: 20,
-                                }, title, time, dismiss),
-                                body
+                class_name: `small-notification ${n.urgency}`,
+                vertical: true,
+                spacing: 14,
+                children: [
+                    Widget.Box({
+                        vertical: true,
+                        children: [
+                            Widget.Box({
+                                spacing: 5,
+                                children: [title, time, dismiss]
+                            }),
+                            body
+                        ],
+                    }),
+                    big_icon,
+                    Widget.Box({
+                        class_name: "small-actions",
+                        children: [
+                            Widget.Button({
+                                class_name: "small-action-button",
+                                on_clicked: () => {
 
-                            ),
-                        ]),
-
-                        big_icon
-                    ]
-                })
+                                    //
+                                },
+                                hexpand: false,
+                                child: Widget.Label("Copy to Clipboard"),
+                            })],
+                    })
+                ]
             })
+            break;
+        case "discord":
+            return Widget.Box({
+                attribute: { id: n.id },
+                class_name: `small-notification ${n.urgency}`,
+                children: [
+                    icon,
+                    Widget.Box({
+                        vertical: true,
+                        spacing: 5,
+                        children: [
+                            Widget.Box({
+                                spacing: 10,
+                                children: [title, time, dismiss]
+                            }),
+                            body,
+                            Widget.Box({
+                                class_name: "small-actions",
+                                children: [
+                                    Widget.Button({
+                                        class_name: "small-action-button",
+                                        on_clicked: () => {
+
+                                            // switch to discord
+                                        },
+                                        hexpand: false,
+                                        child: Widget.Label("View"),
+                                    })],
+                            })
+                        ],
+                    })
+                ],
+            })
+            break;
         default:
-            return Widget.EventBox({
+            return Widget.Box({
                 attribute: { id: n.id },
-                class_name: "small-box",
-                child: Widget.Box({
-                    class_name: `small-notification ${n.urgency}`,
-                    vertical: true,
-                    children: [
-                        Widget.Box([
-                            icon,
-                            Widget.Box(
-                                { vertical: true },
-                                Widget.Box({
-                                    spacing: 20,
-                                }, title, time, dismiss),
-                                body,
-                            ),
-                        ])
-                    ]
-                })
+                class_name: `small-notification ${n.urgency}`,
+                children: [
+                    icon,
+                    Widget.Box({
+                        vertical: true,
+                        spacing: 5,
+                        children: [
+                            Widget.Box({
+                                spacing: 10,
+                                children: [title, time, dismiss]
+                            }),
+                            body,
+                            actions
+                        ],
+                    })
+                ],
             })
+            break;
     }
 }
 
 export function NotificationPopups(monitor = 0) {
-    // notifications.forceTimeout = true;
     notifications.popupTimeout = 10000;
     notifications.forceTimeout = true;
-    // notifications.clearDelay = 100;
 
 
 
@@ -252,22 +296,33 @@ export function NotificationPopups(monitor = 0) {
         const n = notifications.getNotification(id)
         if (n) {
             list.children = [Notification(n), ...list.children]
-            // @ts-ignore
+        }
+    }
+
+    function onNotifiedList(_, /** @type {number} */ id) {
+        const n = notifications.getNotification(id)
+        if (n) {
             notification_list.children = [smallNotification(n), ...notification_list.children]
         }
     }
 
     function onDismissed(_, /** @type {number} */ id) {
-        list.children.find(n => n.attribute.id === id)?.destroy()
+        // list.children.find(n => n.attribute.id === id)?.destroy() // make noti invisible instead of destroying it.
     }
 
     function onClosed(_, /** @type {number} */ id) {
-        // notification_list.children.find(n => n.attribute.id === id)?.destroy()s
+        notification_list.children.find(n => n.attribute.id === id)?.destroy()
+        if (notification_list.children[0] == null) {
+            hasNotifications.setValue(false)
+        }
+
+
     }
 
-    list.hook(notifications, onNotified, "notified")
-        .hook(notifications, onDismissed, "dismissed")
+    // list.hook(notifications, onNotified, "notified")
+    // .hook(notifications, onDismissed, "dismissed")
 
+    notification_list.hook(notifications, onNotifiedList, "notified")
     notification_list.hook(notifications, onClosed, "closed")
 
     return Widget.Window({
@@ -280,7 +335,7 @@ export function NotificationPopups(monitor = 0) {
             css: "min-width: 2px; min-height: 2px;",
             class_name: "notifications",
             vertical: true,
-            child: list,
+            children: notifications.bind('popups').as(popups => popups.map(Notification)),
         }),
     })
 }

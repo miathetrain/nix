@@ -5,18 +5,18 @@
 }:
 buildNpmPackage rec {
   pname = "arrpc";
-  version = "3.3.2";
+  version = "git";
 
   src = fetchFromGitHub {
-    owner = "cannibalmaid";
+    owner = "Barbie-Dreamhouse";
     repo = "arrpc";
     # Release commits are not tagged
     # release: 3.3.0
-    rev = "ab90c75f11a921e884932c89d3c8808478905d1a";
-    hash = "sha256-cscjRLRv0u2iIPldtQqpA1zgmP/3WjOEl7+F02SgQco=";
+    rev = "32a0424d1961c9ac5b8fbd3ff2799e23e2990698";
+    hash = "sha256-T4NEE4fKVEWCQeuhdT3MwZaJZk+stB70644EhQONniM=";
   };
 
-  npmDepsHash = "sha256-BqX/+f5CCdaDAfazIPj6AKtecVEG+wnPGpegusExGR0=";
+  npmDepsHash = "sha256-YlSUGncpY0MyTiCfZcPsfcNx3fR+SCtkOFWbjOPLUzk=";
 
   dontNpmBuild = true;
 
