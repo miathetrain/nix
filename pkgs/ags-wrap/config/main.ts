@@ -26,7 +26,7 @@ const Launcher = Widget.Icon({
   class_name: "launcher",
   icon: `${App.configDir}/assets/nixos.svg`,
   tooltip_text: "Quick Search",
-  size: 20,
+  size: 10, // 20
 })
 
 const Workspaces = Widget.Box({
@@ -339,7 +339,7 @@ const stats_box = Widget.Box({ // grep 'cpu ' /proc/stat | awk '{cpu_usage=($2+$
       // rounded: true,
       // inverted: false,
       startAt: 0.75,
-      
+
       setup: (self) => self.poll(1000, () => execAsync("echo 15%").then((output) => {
         stats_box.children[0].tooltip_text = "CPU Stuff: " + output;
       })),

@@ -36,7 +36,7 @@
   environment.systemPackages = [pkgs.scx];
 
   chaotic.scx = {
-    enable = true;
+    enable = lib.mkDefault true;
     scheduler = "scx_rusty";
   };
 }

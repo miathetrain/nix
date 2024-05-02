@@ -117,6 +117,11 @@
         "editor.fontSize" = 14;
         "window.zoomLevel" = 1.15;
       })
+
+      (lib.mkIf (osConfig.networking.hostName == "ken") {
+        "editor.fontSize" = 14;
+        "window.zoomLevel" = 1.1;
+      })
     ];
   };
 }
