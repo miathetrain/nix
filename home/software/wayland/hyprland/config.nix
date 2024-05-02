@@ -78,7 +78,7 @@ in {
           "HDMI-A-1,1920x1080@75,0x0,1"
           "DP-2,1920x1080@60,0x1080,1,transform,2"
 
-          "eDP-1,2560x1600,0x0,1.25"
+          "eDP-1,2560x1600,0x0,1.6"
           ",preferred,auto,auto"
         ];
 
@@ -350,9 +350,9 @@ in {
     };
 
     plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
   };
 }

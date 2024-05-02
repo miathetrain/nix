@@ -5,11 +5,12 @@
     ./home-manager.nix
     ./hyprland.nix
     ./xdg.nix
-    ./games
+
+    #./games
   ];
 
   # Flatpak
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
   # Core CTRL
-  programs.corectrl.enable = true;
+  # programs.corectrl.enable = true;
 }

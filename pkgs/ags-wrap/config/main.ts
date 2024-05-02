@@ -22,7 +22,7 @@ const Launcher = Widget.Icon({
   class_name: "launcher",
   icon: `${App.configDir}/assets/nixos.svg`,
   tooltip_text: "Quick Search",
-  size: 20,
+  size: 10, // 20
 })
 
 const Workspaces = Widget.Box({
