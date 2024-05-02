@@ -25,7 +25,7 @@ in {
         # "wlsunset -t 5200 -S 6:00 -s 22:30"
         # "wl-paste --type text --watch cliphist store"
         # "wl-paste --type image --watch cliphist store"
-        "hyprctl dispatcher focusmonitor 1"
+        "hyprctl dispatcher focusmonitor 3"
         "systemctl --user start swww-random-img.service"
         # "sleep 2 && [workspace 1 silent] firefox"
         # "sleep 2 && [workspace 3 silent] vesktop"
@@ -112,12 +112,13 @@ in {
           "easeOutCirc, 0, 0.55, 0.45, 1"
           "easeOutCubic, 0.33, 1, 0.68, 1"
           "easeinoutsine, 0.37, 0, 0.63, 1"
+          "easeOutBounce, 0.27, 1.25, 0.64, 1"
         ];
 
         animation = [
-          "windowsIn, 1, 1.7, easeOutCubic, slide" # window open
-          "windowsOut, 1, 1.7, easeOutCubic, slide" # window close
-          "windowsMove, 1, 2.5, easeinoutsine, slide" # everything in between, moving, dragging, resizing
+          "windowsIn, 1, 1.7, easeOutBounce, slide" # window open
+          "windowsOut, 1, 1.7, easeOutBounce, slide" # window close
+          "windowsMove, 1, 2.5, easeOutBounce, slide" # everything in between, moving, dragging, resizing
 
           # fading
           "fadeIn, 1, 3, easeOutCubic" # fade in (open) -> layers and windows
@@ -126,8 +127,8 @@ in {
           "fadeShadow, 1, 5, easeOutCirc" # fade on changing activewindow for shadows
           "fadeDim, 1, 6, fluent_decel" # the easing of the dimming of inactive windows
           "border, 1, 2.7, easeOutCirc" # for animating the border's color switch speed
-          "workspaces, 1, 2, fluent_decel, slide" # styles: slide, slidevert, fade, slidefade, slidefadevert
-          "specialWorkspace, 1, 3, fluent_decel, slidevert"
+          "workspaces, 1, 5, easeOutBounce, slide" # styles: slide, slidevert, fade, slidefade, slidefadevert
+          "specialWorkspace, 1, 3, easeOutBounce, slidevert"
         ];
       };
 
@@ -141,54 +142,54 @@ in {
         allow_small_split = true;
       };
 
-      plugin = {
-        hyprtrails = {
-          color = "rgba(aa336aff)";
-        };
+      # plugin = {
+      #   hyprtrails = {
+      #     color = "rgba(aa336aff)";
+      #   };
 
-        hyprexpo = {
-          columns = 2;
-          gap_size = 25;
-          bg_col = "rgb(111111)";
-          workspace_method = "center m+1"; # [center/first] [workspace] e.g. first 1 or center m+1
+      #   hyprexpo = {
+      #     columns = 2;
+      #     gap_size = 25;
+      #     bg_col = "rgb(111111)";
+      #     workspace_method = "center m+1"; # [center/first] [workspace] e.g. first 1 or center m+1
 
-          enable_gesture = true; # laptop touchpad, 4 fingers
-          gesture_distance = 300; # how far is the "max"
-          gesture_positive = true; # positive = swipe down. Negative = swipe up.
-        };
+      #     enable_gesture = true; # laptop touchpad, 4 fingers
+      #     gesture_distance = 300; # how far is the "max"
+      #     gesture_positive = true; # positive = swipe down. Negative = swipe up.
+      #   };
 
-        hyprfocus = {
-          enabled = true;
+      #   hyprfocus = {
+      #     enabled = true;
 
-          keyboard_focus_animation = "shrink";
-          mouse_focus_animation = "flash";
+      #     keyboard_focus_animation = "shrink";
+      #     mouse_focus_animation = "flash";
 
-          bezier = [
-            "bezIn, 0.5,0.0,1.0,0.5"
-            "bezOut, 0.0,0.5,0.5,1.0"
-          ];
+      #     bezier = [
+      #       "bezIn, 0.5,0.0,1.0,0.5"
+      #       "bezOut, 0.0,0.5,0.5,1.0"
+      #     ];
 
-          flash = {
-            flash_opacity = 0.3;
+      #     flash = {
+      #       flash_opacity = 0.3;
 
-            in_bezier = "bezIn";
-            in_speed = 0.5;
+      #       in_bezier = "bezIn";
+      #       in_speed = 0.5;
 
-            out_bezier = "bezOut";
-            out_speed = 3;
-          };
+      #       out_bezier = "bezOut";
+      #       out_speed = 3;
+      #     };
 
-          shrink = {
-            shrink_percentage = 0.8;
+      #     shrink = {
+      #       shrink_percentage = 0.8;
 
-            in_bezier = "bezIn";
-            in_speed = 0.5;
+      #       in_bezier = "bezIn";
+      #       in_speed = 0.5;
 
-            out_bezier = "bezOut";
-            out_speed = 3;
-          };
-        };
-      };
+      #       out_bezier = "bezOut";
+      #       out_speed = 3;
+      #     };
+      #   };
+      # };
 
       "$VIDEODIR" = "$HOME/Videos";
       "$NOTIFY" = "notify-send -h string:x-canonical-private-synchronouse:hypr-cfg -u low";
@@ -201,6 +202,7 @@ in {
         "Alt, Print, exec, screenshot-full"
         ", Print, exec, screenshot-area"
         "$MOD, X, exec, $COLORPICKER"
+        "$MOD, M, exec, $(wl-paste | wtype -d 12 -)"
 
         "$MOD, D, exec, pkill .anyrun-wrapped || run-as-service anyrun"
         "$MOD, Return, exec, run-as-service kitty"
@@ -223,7 +225,7 @@ in {
         "$MOD, F, fullscreen"
         "$MODSHIFT, F, fullscreen, 1"
         "$MOD, Space, togglefloating"
-        "$MOD, R, hyprexpo:expo, toggle"
+        # "$MOD, R, hyprexpo:expo, toggle"
         "$MOD, P, pin"
         "$MOD, S, togglesplit"
         "$MOD, O, toggleopaque"

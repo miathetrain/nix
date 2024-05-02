@@ -24,6 +24,7 @@
       # systemd-boot on UEFI
       systemd-boot = {
         enable = true;
+        consoleMode = "auto";
       };
       efi = {
         canTouchEfiVariables = true;

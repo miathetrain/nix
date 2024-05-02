@@ -26,7 +26,7 @@
       window_padding_width = 20;
       strip_trailing_spaces = "smart";
       confirm_os_window_close = 0;
-      background_opacity = "0.9";
+      background_opacity = "0.95";
 
       "mouse_map left click ungrabbed mouse_handle_click" = "selection link prompt";
     };

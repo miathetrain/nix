@@ -15,6 +15,7 @@
       (kodiPkgs:
         with kodiPkgs; [
           youtube
+          inputstream-adaptive
         ]))
     stremio
   ];

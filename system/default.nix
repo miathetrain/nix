@@ -9,7 +9,7 @@ let
     ./services
     ./services/ananicy.nix
     ./services/gnome-services.nix
-    ./services/greetd.nix
+    # ./services/greetd.nix
     ./services/pipewire.nix
   ];
 in {

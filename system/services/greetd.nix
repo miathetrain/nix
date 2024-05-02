@@ -10,7 +10,7 @@
       user = "mia";
     };
   in {
-    enable = true;
+    enable = lib.mkDefault false;
     settings = {
       terminal.vt = 1;
       default_session = session;

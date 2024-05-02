@@ -1,15 +1,11 @@
 const hyprland = await Service.import("hyprland")
 const systemtray = await Service.import('systemtray')
 
-import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs"
 import { NotificationPopups, notification_list, hasNotifications } from "./notificationPopups.js"
 import { format } from 'date-fns'
-import { Int32 } from "types/@girs/freetype2-2.0/freetype2-2.0.cjs"
-import { execAsync } from "resource:///com/github/Aylur/ags/utils.js"
 
 const mpris = await Service.import('mpris')
 const audio = await Service.import('audio')
-const notifications = await Service.import('notifications');
 const network = await Service.import('network')
 const bluetooth = await Service.import('bluetooth')
 
@@ -60,6 +56,7 @@ const Workspaces = Widget.Box({
 
 /** @param {import('types/service/systemtray').TrayItem} item */
 const SysTrayItem = item => Widget.Button({
+  class_name: "systray",
   child: Widget.Icon().bind('icon', item, 'icon'),
   tooltipMarkup: item.bind('tooltip_markup'),
   onPrimaryClick: (_, event) => item.activate(event),
@@ -100,19 +97,14 @@ const Time = Widget.EventBox({
   })
 })
 
-const WifiIndicator = () => Widget.Box({
-  children: [
-    Widget.Icon({
-      icon: network.wifi.bind('icon_name'),
-    }),
-    Widget.Label({
-      label: network.wifi.bind('ssid')
-        .as(ssid => ssid || 'Unknown'),
-    }),
-  ],
+const WifiIndicator = () => Widget.Icon({
+  class_name: "icons",
+  icon: network.wifi.bind('icon_name'),
+  tooltip_text: network.wifi.bind('ssid').as(ssid => ssid || 'Unknown')
 })
 
 const WiredIndicator = () => Widget.Icon({
+  class_name: "icons",
   icon: network.wired.bind('icon_name'),
 })
 
@@ -267,6 +259,7 @@ function Volume() {
   }
 
   const icon = Widget.Icon({
+    class_name: "icons",
     icon: Utils.watch(getIcon(), audio.speaker, getIcon)
   })
 
@@ -276,58 +269,47 @@ function Volume() {
     on_change: ({ value }) => audio.speaker.volume = value,
     setup: self => self.hook(audio.speaker, () => {
       self.value = audio.speaker.volume || 0
+      self.tooltip_text = Math.round(audio.speaker.volume) + "%"
     }),
   })
 
   return Widget.Box({
     class_name: 'volume',
-    css: 'min-width: 180px',
+    css: 'min-width: 140px',
     children: [icon, slider],
   })
 }
 
-function divide(total: number, free: number) {
-  return free / total;
-}
+const divide = ([total, free]: string[]) => Number.parseInt(free) / Number.parseInt(total)
 
-function returnCPUSplit(output: string): number {
-  const out = output.split('\n').find(line => line.includes('Cpu(s)'))?.split(/\s+/)[1].replace(',', '.')
-  if (out == undefined)
-    return 0
-  return parseInt(out)
-}
-
-function returnMemSplit(output: string): number[] {
-  const out = output.split('\n').find(line => line.includes('Mem:'))?.split(/\s+/).splice(1, 2)
-  if (out == undefined)
-    return [0, 0]
-  return [parseInt(out[0]), parseInt(out[1])]
-}
-
-const ram = Variable(0, {
-  poll: [2000, 'free', out => divide(returnMemSplit(out)[0], returnMemSplit(out)[1])],
+const cpu = Variable(0, {
+  poll: [1000, 'cpu-usage', out => divide(["100", out])],
 })
 
-const cpu_usage = Variable(0, {
-  poll: [1000, function () {
-    const echo = Utils.exec("grep 'cpu ' /proc/stat | awk '{ cpu_usage=(($2 + $4) * 100 / ($2 + $4 + $5) / 100 * 5) } END { print cpu_usage}'");
-    return parseInt(echo);
-  }],
-});
+const memory_usage = Variable(0.0, {
+  poll: [1000, 'memory-usage']
+})
 
-const cpu_usage_str = Variable('', {
-  poll: [1000, function () {
-    const echo = Utils.exec("grep 'cpu ' /proc/stat | awk '{ cpu_usage=(($2 + $4) * 100 / ($2 + $4 + $5) / 100 * 5) } END { print cpu_usage}'");
-    return echo;
-  }],
-});
+const memory_free = Variable(0, {
+  poll: [1000, 'memory-free']
+})
 
-const stats_box = Widget.Box({ // grep 'cpu ' /proc/stat | awk '{cpu_usage=($2+$4)*100/($2+$4+$5)} END {print cpu_usage / 100}'
+const gpu_usage = Variable(0, {
+  poll: [1000, 'gpu-usage']
+})
+
+const gpu_memory = Variable(0, {
+  poll: [1000, 'gpu-memory']
+})
+
+
+
+const stats_box = Widget.Box({
   spacing: 10,
   css: 'background-color: #313244;'
     + 'border-radius: 20pt;'
-    + 'min-width: 50pt;'
-    + 'padding: 1pt;'
+    + 'min-width: 70pt;'
+    + 'padding: 3pt;'
     + 'border: solid #1e1e2e 5px;',
   children: [
     Widget.CircularProgress({
@@ -335,15 +317,10 @@ const stats_box = Widget.Box({ // grep 'cpu ' /proc/stat | awk '{cpu_usage=($2+$
         + 'min-height: 15px;'
         + 'font-size: 4px;' // to set its thickness set font-size on it
         + 'background-color: #45475a;' // set its bg color
-        + 'color: #f5c2e7;', // set its fg color
-      // rounded: true,
-      // inverted: false,
+        + 'color: #f38ba8;', // set its fg color
       startAt: 0.75,
-
-      setup: (self) => self.poll(1000, () => execAsync("echo 15%").then((output) => {
-        stats_box.children[0].tooltip_text = "CPU Stuff: " + output;
-      })),
-      value: cpu_usage.bind(),
+      tooltip_text: cpu.bind().as(value => 'CPU Usage: ' + value.toString().replace("0.0", "").replace("0.", "") + '%'),
+      value: cpu.bind(),
     }),
 
     Widget.CircularProgress({
@@ -351,14 +328,55 @@ const stats_box = Widget.Box({ // grep 'cpu ' /proc/stat | awk '{cpu_usage=($2+$
         + 'min-height: 15px;'
         + 'font-size: 4px;' // to set its thickness set font-size on it
         + 'background-color: #45475a;' // set its bg color
-        + 'color: #f5c2e7;', // set its fg color
-      // rounded: true,
-      // inverted: true,
+        + 'color: #eba0ac;', // set its fg color
       startAt: 0.75,
-      tooltip_text: "Memory: " + ram.bind().as(value => value.toString()),
-      value: ram.bind(),
+
+      setup: (self) => self.poll(1000, () => execAsync("echo 15%").then((output) => {
+        stats_box.children[0].tooltip_text = "CPU Stuff: " + output;
+      })),
+      value: cpu_usage.bind(),
+      tooltip_text: memory_free.bind().as(value => 'Memory: ' + (Math.round(value * 100) / 100) + 'GB'),
+      value: memory_usage.bind().as(value => Math.round(value * 100) / 100),
+    }),
+
+    Widget.CircularProgress({
+      css: 'min-width: 15px;'  // its size is min(min-height, min-width)
+        + 'min-height: 15px;'
+        + 'font-size: 4px;' // to set its thickness set font-size on it
+        + 'background-color: #45475a;' // set its bg color
+        + 'color: #89b4fa;', // set its fg color
+      startAt: 0.75,
+      tooltip_text: gpu_usage.bind().as(value => 'GPU Usage: ' + value.toString() + '%'),
+      value: gpu_usage.bind().as(value => value / 100),
+    }),
+
+    Widget.CircularProgress({
+      css: 'min-width: 15px;'  // its size is min(min-height, min-width)
+        + 'min-height: 15px;'
+        + 'font-size: 4px;' // to set its thickness set font-size on it
+        + 'background-color: #45475a;' // set its bg color
+        + 'color: #74c7ec;', // set its fg color
+      startAt: 0.75,
+      tooltip_text: gpu_memory.bind().as(value => 'GPU Memory: ' + value.toString() + '%'),
+      value: gpu_memory.bind().as(value => value / 100),
     }),
   ],
+})
+
+const profile_pic = Widget.Box({
+  class_name: "profile-pic",
+  hexpand: false,
+  hpack: "center",
+  vexpand: false,
+  vpack: "center",
+  child: Widget.Box({
+    class_name: "profile-pic",
+    css: `background-image: url("/home/mia/.face");`
+      + "background-size: cover;"
+      + "background-repeat: no-repeat;"
+      + "background-position: center;",
+
+  })
 })
 
 const Left = Widget.Box({
@@ -377,7 +395,8 @@ const Right = Widget.Box({
     connectedList,
     NetworkIndicator(),
     Volume(),
-    sysTray]
+    sysTray,
+    profile_pic]
 })
 
 export const Bar = (monitor: number) => Widget.Window({
@@ -428,6 +447,20 @@ export const clockBar = Widget.Window({
           hexpand: true,
 
           children: [
+            Widget.CenterBox({
+              hpack: "fill",
+              hexpand: true,
+              start_widget: Widget.Label({
+                hpack: "start",
+                label: "Notifications",
+                class_name: "notification-title"
+              }),
+              end_widget: Widget.Label({
+                hpack: "end",
+                label: "",
+                class_name: "notification-clear"
+              })
+            }),
             Widget.Scrollable({
               hscroll: 'never',
               vscroll: 'automatic',

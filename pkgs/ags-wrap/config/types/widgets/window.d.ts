@@ -44,6 +44,7 @@ export declare function newWindow<Child extends Gtk.Widget = Gtk.Widget, Attr = 
 export interface Window<Child, Attr> extends Widget<Attr> {
 }
 export declare class Window<Child extends Gtk.Widget, Attr> extends Gtk.Window {
+    notification_list: any;
     constructor({ anchor, exclusive, exclusivity, focusable, keymode, layer, margins, monitor, gdkmonitor, popup, visible, ...params }?: WindowProps<Child, Attr>, child?: Child);
     get child(): Child;
     set child(child: Child);

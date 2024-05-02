@@ -214,6 +214,41 @@ window.clockbar {
   background-color: transparent;
 }
 
+.notification-title {
+  font-size: 1.4em;
+}
+
+.notification-clear {
+  font-size: 1.6em;
+}
+
+.systray {
+  background-color: transparent;
+}
+
+.icons {
+  font-size: 1.4em;
+}
+
+.profile-pic {
+  min-width: 25px;
+  min-height: 25px;
+  // margin-right: 1em;
+}
+
+.profile-pic image {
+  font-size: 25px;
+  /* to center the icon */
+  // margin: 5px;
+  color: $text;
+}
+
+.profile-pic box {
+  min-width: 25px;
+  min-height: 25px;
+  border-radius: 7px;
+}
+
 .small-notification {
   min-width: 350px;
   border-radius: 8px;
@@ -247,6 +282,12 @@ window.clockbar {
 
 .small-actions .action-button:last-child {
   margin-right: 0;
+}
+
+.small-time {
+  font-style: italic;
+  color: $text;
+  font-size: 0.8em;
 }
 
 .empty-notifications-icon {

@@ -3,42 +3,34 @@
   config,
   lib,
   osConfig,
+  inputs,
   ...
 }: {
+  home.packages = with pkgs; [pkgs.alejandra];
+
   programs.vscode = {
     enable = true;
     enableExtensionUpdateCheck = true;
     enableUpdateCheck = false;
-    extensions = with pkgs.vscode-extensions;
-      [
-        bbenoist.nix
+    package = pkgs.vscodium;
+    extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
+      bbenoist.nix
 
-        formulahendry.auto-close-tag
-        christian-kohler.path-intellisense
-        naumovs.color-highlight
-        usernamehw.errorlens
-        eamodio.gitlens
+      formulahendry.auto-close-tag
+      christian-kohler.path-intellisense
+      naumovs.color-highlight
+      usernamehw.errorlens
+      eamodio.gitlens
 
-        esbenp.prettier-vscode
-        kamadorueda.alejandra
-        bradlc.vscode-tailwindcss
+      esbenp.prettier-vscode
+      kamadorueda.alejandra
+      bradlc.vscode-tailwindcss
 
-        catppuccin.catppuccin-vsc
-      ]
-      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "catppuccin-perfect-icons";
-          publisher = "thang-nm";
-          version = "0.21.32";
-          sha256 = "sha256-oAHYEcAu/EmyxwypkEq7ctFro+GC3csItfYEPLnVazY=";
-        }
-        {
-          name = "better-folding";
-          publisher = "MohammadBaqer";
-          version = "0.5.1";
-          sha256 = "sha256-vEZi+rBT8dxhi+sIPSXWpUiWmE29deWzKj7uN7T+4is=";
-        }
-      ];
+      catppuccin.catppuccin-vsc
+      canakyuz.csharp-extension-pack
+      mohammadbaqer.better-folding
+      thang-nm.catppuccin-perfect-icons
+    ];
     userSettings = lib.mkMerge [
       {
         "workbench.iconTheme" = "catppuccin-perfect-mocha";
