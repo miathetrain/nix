@@ -18,10 +18,10 @@
 
       width.fraction = 0.3;
       y.absolute = 20;
-      hidePluginInfo = false;
+      hidePluginInfo = true;
       closeOnClick = true;
       maxEntries = 10;
-      showResultsImmediately = true;
+      # showResultsImmediately = true;
     };
 
     extraCss = builtins.readFile (./. + "/style.css");
@@ -29,7 +29,6 @@
     extraConfigFiles."applications.ron".text = ''
       Config(
         desktop_actions: true,
-        max_entries: 5,
         terminal: Some("kitty"),
       )
     '';
