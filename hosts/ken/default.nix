@@ -17,13 +17,15 @@
       "acpi_backlight=native"
       "video.use_native_backlight=1"
     ];
+    loader.efi.canTouchEfiVariables = lib.mkForce false;
   };
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   powerManagement.cpuFreqGovernor = "powersave";
-  powerManagement.scsiLinkPolicy = "med_power_with_dipm";
+  #powerManagement.scsiLinkPolicy = "med_power_with_dipm";
   services.thermald.enable = true;
+
 
   services.tlp = {
     enable = true;

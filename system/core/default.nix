@@ -16,11 +16,16 @@ with lib; {
   system.stateVersion = mkDefault "23.11";
 
   time.timeZone = mkDefault "America/Detroit";
+  location.provider = "geoclue2";
 
   services = {
     # for SSD/NVME
     fstrim.enable = true;
   };
+
+  programs.light.enable = true;
+
+  services.clight.enable = true;
 
   # compresses half the ram for use as swap
   zramSwap.enable = true;

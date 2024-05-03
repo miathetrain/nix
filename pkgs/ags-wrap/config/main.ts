@@ -8,6 +8,7 @@ const mpris = await Service.import('mpris')
 const audio = await Service.import('audio')
 const network = await Service.import('network')
 const bluetooth = await Service.import('bluetooth')
+const battery = await Service.import('battery')
 
 // main scss file
 const scss = `${App.configDir}/css/style.scss`
@@ -22,7 +23,6 @@ const Launcher = Widget.Icon({
   class_name: "launcher",
   icon: `${App.configDir}/assets/nixos.svg`,
   tooltip_text: "Quick Search",
-  size: 10, // 20
 })
 
 const Workspaces = Widget.Box({
@@ -82,7 +82,6 @@ const Time = Widget.EventBox({
   hpack: "center",
   on_primary_click: () => {
     if (clockBar.visible) {
-      // clockBar.visible = false;
       App.closeWindow("clockbar");
 
     }
@@ -90,7 +89,6 @@ const Time = Widget.EventBox({
       clockBar.visible = true;
       App.openWindow("clockbar")
     }
-    // clockBar.visible = !clockBar.visible;
   },
   child: Widget.Label({
     label: time.bind()
@@ -302,6 +300,19 @@ const gpu_memory = Variable(0, {
   poll: [1000, 'gpu-memory']
 })
 
+const batteryProgress = Widget.CircularProgress({
+  visible: battery.bind('available'),
+  value: battery.bind('percent').as(p => p > 0 ? p / 100 : 0),
+  class_name: battery.bind('charging').as(ch => ch ? 'charging' : ''),
+  css: 'min-width: 15px;'  // its size is min(min-height, min-width)
+    + 'min-height: 15px;'
+    + 'font-size: 4px;' // to set its thickness set font-size on it
+    + 'background-color: #45475a;' // set its bg color
+    + 'color: #f38ba8;', // set its fg color
+  startAt: 0.75,
+  tooltip_text: battery.bind('percent').as(p => p.toString())
+})
+
 
 
 const stats_box = Widget.Box({
@@ -355,6 +366,8 @@ const stats_box = Widget.Box({
       tooltip_text: gpu_memory.bind().as(value => 'GPU Memory: ' + value.toString() + '%'),
       value: gpu_memory.bind().as(value => value / 100),
     }),
+
+    batteryProgress
   ],
 })
 
