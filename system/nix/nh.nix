@@ -1,9 +1,7 @@
 {inputs, ...}: {
-  # nh default flake
-  environment.variables.FLAKE = "/home/mia/Documents/nix";
-
   programs.nh = {
     enable = true;
+    flake = "/home/mia/Documents/nix";
     # weekly cleanup
     clean = {
       enable = true;

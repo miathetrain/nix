@@ -11,26 +11,15 @@ in {
   wayland.windowManager.hyprland = {
     settings = {
       "$MOD" = "SUPER";
-      env = [
-        "GTK2_RC_FILES,/home/mia/.config/gtk-2.0/gtkrc"
-        "QT_QPA_PLATFORMTHEME,gtk2"
-        "QT_STYLE_OVERRIDE,gtk2"
-        "MOZ_ENABLE_WAYLAND,1"
-      ];
+
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
-        # "ags-wrap"
         "swayosd-server"
+        "wlsunset"
         "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        # "wlsunset -t 5200 -S 6:00 -s 22:30"
-        # "wl-paste --type text --watch cliphist store"
-        # "wl-paste --type image --watch cliphist store"
         "hyprctl dispatcher focusmonitor 3"
         "systemctl --user start swww-random-img.service"
-        # "sleep 2 && [workspace 1 silent] firefox"
-        # "sleep 2 && [workspace 3 silent] vesktop"
         "sleep 2 && hyprlock --immediate"
-        # "[workspace 5 silent] steam"
       ];
 
       device = {
@@ -350,9 +339,9 @@ in {
     };
 
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
   };
 }

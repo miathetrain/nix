@@ -9,11 +9,10 @@
     packages = with pkgs; [
       jaq
       swayosd
-      imagemagick
+      # imagemagick
       xdg-utils
       qt5.qtwayland
       gnome.file-roller
-      gvfs
 
       gnome-text-editor
       gnome.nautilus
@@ -22,7 +21,6 @@
 
       ##Brightness
       inputs.dimmer.packages.${pkgs.system}.default
-      ddcutil
     ];
     file = {
       ".config/hypr/scripts/colorpicker" = {
@@ -34,6 +32,8 @@
     sessionVariables = {
       QT_QPA_PLATFORM = "wayland";
       XDG_SESSION_TYPE = "wayland";
+      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
     };
   };
 

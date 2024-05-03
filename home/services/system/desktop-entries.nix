@@ -1,13 +1,13 @@
 {
   xdg.desktopEntries = {
     "org.gnome.Nautilus" = {
-      name = "";
+      name = "org.gnome.Nautilus";
       exec = "";
       noDisplay = true;
     };
 
     "fish" = {
-      name = "";
+      name = "fish";
       exec = "";
       noDisplay = true;
     };

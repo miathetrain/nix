@@ -7,6 +7,8 @@ in {
     ./software
     ./shell/starship.nix
     ./shell/fish.nix
+
+    inputs.nix-index-db.hmModules.nix-index
   ];
 
   home.sessionVariables = {

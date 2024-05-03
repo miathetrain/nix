@@ -4,7 +4,9 @@
   config,
   lib,
   ...
-}: let
+}:
+with lib; let
+  cfg = config.services.gaming;
   amdgpu-kernel-module = pkgs.callPackage ./amdgpu-patch.nix {
     kernel = config.boot.kernelPackages.kernel;
   };
@@ -15,68 +17,93 @@ in {
     inputs.lemonake.nixosModules.wivrn
   ];
 
-  programs = {
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  options = {
+    services.gaming.enable = mkOption {
+      type = lib.types.bool;
+      default = false;
+      example = true;
+      description = "Enable all gaming related options";
     };
 
-    alvr = {
-      enable = true;
-      openFirewall = true;
-    };
-
-    adb.enable = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    lutris
-    heroic
-    # itch
-    gamescope
-    mangohud
-    steamtinkerlaunch
-    prismlauncher
-    protonup-qt
-    ryujinx
-
-    ## VR
-    # sidequest
-    wlx-overlay-s
-    # opencomposite
-    xrgears
-
-    inputs.envision.packages.${pkgs.system}.envision
-  ];
-
-  chaotic.mesa-git = {
-    enable = true;
-    fallbackSpecialisation = false;
-  };
-
-  chaotic.steam.extraCompatPackages = with pkgs; [
-    proton-ge-custom
-  ];
-
-  boot.extraModulePackages = [
-    (amdgpu-kernel-module.overrideAttrs (prev: {
-      patches = (prev.patches or []) ++ [inputs.scrumpkgs.kernelPatches.cap_sys_nice_begone.patch];
-    }))
-  ];
-
-  services.wivrn = {
-    enable = true;
-    package = inputs.lemonake.packages.${pkgs.system}.wivrn; # Until WiVRn gets merged.
-    openFirewall = true;
-    highPriority = true;
-    defaultRuntime = true;
-    monadoEnvironment = {
-      XRT_COMPOSITOR_LOG = "debug";
-      XRT_PRINT_OPTIONS = "on";
-      IPC_EXIT_ON_DISCONNECT = "off";
+    services.gaming.vr.enable = mkOption {
+      type = lib.types.bool;
+      default = false;
+      example = true;
+      description = "Enable all VR gaming related options";
     };
   };
 
-  programs.anime-borb-launcher.enable = true;
-  programs.honkers-railway-launcher.enable = true;
+  config = {
+    programs = lib.mkIf cfg.enable {
+      steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        localNetworkGameTransfers.openFirewall = true;
+      };
+
+      alvr = mkIf cfg.vr.enable {
+        ## Requires both VR and normal enable.
+        enable = true;
+        openFirewall = true;
+      };
+
+      anime-borb-launcher.enable = true;
+      honkers-railway-launcher.enable = true;
+    };
+
+    environment.systemPackages = with pkgs;
+      mkMerge [
+        (mkIf (cfg.enable) [
+          lutris
+          heroic
+          gamescope
+          mangohud
+          steamtinkerlaunch
+          prismlauncher
+          protonup-qt
+          ryujinx
+        ])
+
+        (mkIf (cfg.vr.enable) [
+          xrgears
+          inputs.envision.packages.${pkgs.system}.envision
+        ])
+      ];
+
+    chaotic = mkIf cfg.enable {
+      mesa-git = {
+        enable = true;
+        fallbackSpecialisation = false;
+      };
+
+      steam.extraCompatPackages = with pkgs; [
+        proton-ge-custom
+      ];
+    };
+
+    boot = mkIf cfg.vr.enable {
+      kernelParams = [
+        "clearcpuid=514" # Fixes Hogwarts Legacy
+      ];
+
+      extraModulePackages = [
+        (amdgpu-kernel-module.overrideAttrs (prev: {
+          patches = (prev.patches or []) ++ [inputs.scrumpkgs.kernelPatches.cap_sys_nice_begone.patch];
+        }))
+      ];
+    };
+
+    # services.wivrn = {
+    #   enable = true;
+    #   package = inputs.lemonake.packages.${pkgs.system}.wivrn; # Until WiVRn gets merged.
+    #   openFirewall = true;
+    #   highPriority = true;
+    #   defaultRuntime = true;
+    #   monadoEnvironment = {
+    #     XRT_COMPOSITOR_LOG = "debug";
+    #     XRT_PRINT_OPTIONS = "on";
+    #     IPC_EXIT_ON_DISCONNECT = "off";
+    #   };
+    # };
+  };
 }

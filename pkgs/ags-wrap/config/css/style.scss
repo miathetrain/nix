@@ -105,7 +105,7 @@ window.notification-popups box.notifications {
   border-radius: 11px;
   padding: 1em;
   margin: 0.5em;
-  border: 1px solid $crust;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background-color: $base;
   transition: min-width 0.5s ease-out;
 }
@@ -164,7 +164,7 @@ window.clockbar {
   border-radius: 11px;
   padding: 1em;
   margin: 0.5em;
-  border: 1px solid $crust;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .right-side {
@@ -254,7 +254,7 @@ window.clockbar {
   border-radius: 8px;
   padding: 1em;
   margin: 0.5em;
-  border: 1px solid $mantle;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background-color: $mantle;
 }
 

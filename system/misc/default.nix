@@ -1,16 +1,16 @@
 {
   imports = [
-    ./fish.nix
     ./fonts.nix
     ./home-manager.nix
     ./hyprland.nix
     ./xdg.nix
 
-    #./games
+    ./games
   ];
 
+  # Fish
+  programs.fish.enable = true;
+
   # Flatpak
-  # services.flatpak.enable = true;
-  # Core CTRL
-  # programs.corectrl.enable = true;
+  services.flatpak.enable = true;
 }

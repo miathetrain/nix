@@ -17,12 +17,6 @@
   # Disable the NixOS Manual
   documentation.nixos.enable = false;
 
-  # Report changes when changing shit
-  system.activationScripts.report-changes = ''
-    PATH=$PATH:${lib.makeBinPath [pkgs.nvd pkgs.nix]}
-    nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
-  '';
-
   nix = {
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
@@ -30,9 +24,15 @@
     # set the path for channels compat
     nixPath = lib.mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
 
+    optimise.automatic = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 15d";
+    };
+
     settings = {
       warn-dirty = false;
-      auto-optimise-store = true;
       builders-use-substitutes = true;
       experimental-features = ["nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";

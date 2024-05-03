@@ -14,21 +14,21 @@
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
-        shell
-        translate
       ];
 
       width.fraction = 0.3;
-      y.absolute = 15;
-      hidePluginInfo = true;
+      y.absolute = 20;
+      hidePluginInfo = false;
       closeOnClick = true;
+      maxEntries = 10;
+      showResultsImmediately = true;
     };
 
     extraCss = builtins.readFile (./. + "/style.css");
 
     extraConfigFiles."applications.ron".text = ''
       Config(
-        desktop_actions: false,
+        desktop_actions: true,
         max_entries: 5,
         terminal: Some("kitty"),
       )

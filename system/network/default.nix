@@ -1,19 +1,6 @@
-{lib, ...}:
-# networking configuration
-{
+{lib, ...}: {
   networking.networkmanager = {
     enable = true;
-  };
-
-  # network discovery, mDNS
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish = {
-      enable = true;
-      domain = true;
-      userServices = true;
-    };
   };
 
   services.sshd.enable = true;

@@ -54,6 +54,7 @@
     hypridle.url = "github:hyprwm/hypridle";
     hyprland.url = "github:hyprwm/Hyprland";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    hyprlock.url = "github:hyprwm/hyprlock";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -112,8 +113,6 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    hyprlock.url = "github:hyprwm/hyprlock";
-
     nix-index-db = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -129,7 +128,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
-    aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

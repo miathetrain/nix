@@ -3,8 +3,7 @@
   inputs,
   ...
 }:
-# default configuration shared by all hosts
-{
+with lib; {
   imports = [
     inputs.chaotic.nixosModules.default
 
@@ -14,10 +13,14 @@
     ../nix
   ];
 
-  # don't touch this
-  system.stateVersion = lib.mkDefault "23.11";
+  system.stateVersion = mkDefault "23.11";
 
-  time.timeZone = lib.mkDefault "America/Detroit";
+  time.timeZone = mkDefault "America/Detroit";
+
+  services = {
+    # for SSD/NVME
+    fstrim.enable = true;
+  };
 
   # compresses half the ram for use as swap
   zramSwap.enable = true;

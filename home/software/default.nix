@@ -127,6 +127,7 @@
     fastfetch
     yad
     wtype
+    cachix
 
     wineWowPackages.staging
   ];

@@ -6,7 +6,6 @@
       "wheel"
       "video"
       "input"
-      "corectrl"
       "i2c"
     ];
   };

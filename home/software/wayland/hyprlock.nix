@@ -1,12 +1,11 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   variant = config.theme.name;
-
   font_family = "Lexend";
-
   music-uptime = pkgs.writeShellScriptBin "music-uptime" ''
     playerctl=$(playerctl -a status 2>/dev/null)
     if grep "Playing" <<< "$playerctl" >/dev/null; then
@@ -18,6 +17,10 @@
     fi
   '';
 in {
+  imports = [
+    inputs.hyprlock.homeManagerModules.default
+  ];
+
   home.packages = [
     music-uptime
   ];
@@ -43,10 +46,12 @@ in {
         blur_size = 1;
       }
     ];
-
     input-fields = [
       {
-        monitor = "DP-1";
+        monitor = [
+          "DP-1"
+          "eDP-1"
+        ];
 
         size = {
           width = 300;
@@ -106,7 +111,10 @@ in {
       }
 
       {
-        monitor = "DP-1";
+        monitor = [
+          "DP-1"
+          "eDP-1"
+        ];
         text = "cmd[update:500] echo \"<span><i>$(music-uptime)</i></span>\"";
         inherit font_family;
         font_size = 25;
@@ -124,7 +132,10 @@ in {
 
     images = [
       {
-        monitor = "DP-1";
+        monitor = [
+          "DP-1"
+          "eDP-1"
+        ];
         path = "/home/mia/.face";
         size = 180;
         # rounding = -1;

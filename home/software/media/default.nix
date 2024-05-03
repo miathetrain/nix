@@ -7,16 +7,13 @@
   home.packages = with pkgs; [
     # audio control
     pavucontrol
-    pamixer
-    alsa-utils
 
-    # Media Players
+    # Kodi
     (kodi.withPackages
       (kodiPkgs:
         with kodiPkgs; [
           youtube
           inputstream-adaptive
         ]))
-    stremio
   ];
 }

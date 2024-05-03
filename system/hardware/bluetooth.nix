@@ -1,6 +1,5 @@
 {pkgs, ...}: {
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
 
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
@@ -9,9 +8,14 @@
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
 
-  hardware.bluetooth.settings = {
-    General = {
-      Experimental = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
     };
   };
 }

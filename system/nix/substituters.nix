@@ -1,5 +1,6 @@
 {
   nix.settings = {
+
     trusted-substituters = [
       # high priority since it's almost always used
       "https://cache.nixos.org?priority=10"
@@ -10,6 +11,20 @@
       "https://nix-community.cachix.org"
       "https://ezkea.cachix.org"
       "https://t2linux.cachix.org"
+      "https://miathetrain.cachix.org"
+    ];
+
+    substituters = [
+      # high priority since it's almost always used
+      "https://cache.nixos.org?priority=10"
+      "https://anyrun.cachix.org"
+      "https://fufexan.cachix.org"
+      "https://helix.cachix.org"
+      "https://hyprland.cachix.org"
+      "https://nix-community.cachix.org"
+      "https://ezkea.cachix.org"
+      "https://t2linux.cachix.org"
+      "https://miathetrain.cachix.org"
     ];
 
     trusted-public-keys = [
@@ -21,6 +36,7 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
       "t2linux.cachix.org-1:P733c5Gt1qTcxsm+Bae0renWnT8OLs0u9+yfaK2Bejw="
+      "miathetrain.cachix.org-1:YnISmBIljKxDFkswh1GbvQFx3gN+7jfGFcgEPz635W8="
     ];
   };
 }

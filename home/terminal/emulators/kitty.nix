@@ -2,9 +2,9 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "CascadiaCode";
-      package = pkgs.nerdfonts.override {fonts = ["CascadiaCode"];};
-      size = 12.5;
+      name = "SpaceMono";
+      package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
+      size = 12;
     };
 
     theme = "Catppuccin-Mocha";

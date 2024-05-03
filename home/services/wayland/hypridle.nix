@@ -2,8 +2,13 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.hypridle.homeManagerModules.default
+  ];
+
   # screen idle
   services.hypridle = {
     enable = true;

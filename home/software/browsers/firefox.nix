@@ -48,8 +48,11 @@ in {
         ]);
 
       userContent = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
-        "${minimalFox}/userContent.css"
-      ]);
+          "${minimalFox}/userContent.css"
+        ]
+        ++ [
+          "./add.css"
+        ]);
 
       search.engines = {
         "Home Manager NixOS" = {
@@ -90,6 +93,29 @@ in {
           icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
           definedAliases = ["@np"];
         };
+        "Nix Options" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/options";
+              params = [
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = ["@no"];
+        };
         "NixOS Wiki" = {
           urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
           iconUpdateURL = "https://nixos.wiki/favicon.png";
@@ -109,7 +135,6 @@ in {
         "browser.fullscreen.autohide" = false;
         # "layout.css.devPixelsPerPx" = 1.12;
         "privacy.donottrackheader.enabled" = true;
-        # "privacy.globalprivacycontrol.enabled" = true;
         "signon.rememberSignons" = false;
       };
     };
