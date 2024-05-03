@@ -6,10 +6,10 @@
       noDisplay = true;
     };
 
-    "fish" = {
-      name = "fish";
-      exec = "";
-      noDisplay = true;
-    };
+    # "fish" = {
+    #   name = "fish";
+    #   exec = "fish";
+    #   noDisplay = true;
+    # };
   };
 }

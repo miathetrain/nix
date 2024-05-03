@@ -148,7 +148,13 @@ function Media() {
   const tooltip = Utils.watch("", mpris, "player-changed", () => {
     if (mpris.players[0]) {
       const { track_artists, track_title } = mpris.players[0]
-      return `${track_title} ─ ${track_artists.join(', ')}` // return `${track_artists.join(', ')} ─ ${track_title}`
+      var artists = ""
+      if (track_artists.join(', ') == 'Unknown artist') {
+        artists = ""
+      } else {
+        artists = "─ " + track_artists.join(', ');
+      }
+      return `${track_title} ${artists}` // return `${track_artists.join(', ')} ─ ${track_title}`
     } else {
       return ''
     }

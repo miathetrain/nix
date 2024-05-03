@@ -263,8 +263,8 @@ in {
 
       windowrulev2 = [
         "opacity 0.98 0.98,class:^(firefox)$"
-        "opacity 0.90 0.90,class:^(steam)$"
-        "opacity 0.90 0.90,class:^(steamwebhelper)$"
+        "opacity 0.98 0.98,class:^(steam)$"
+        "opacity 0.98 0.98,class:^(steamwebhelper)$"
         "opacity 0.90 0.90,class:^(Spotify)$"
 
         "float,class:^(pavucontrol)$"
@@ -304,7 +304,7 @@ in {
         "pin, class:^(Kodi)$,floating:1"
 
         "idleinhibit focus, class:^(mpv|.+exe)$"
-        "idleinhibit always, class:^(firefox)$, title:^(.*YouTube.*)$"
+        "idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
         "idleinhibit always, class:^(Kodi)$"
 
         "dimaround, class:^(xdg-desktop-portal-gtk)$"
@@ -312,8 +312,6 @@ in {
 
         "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
         "workspace special silent, title:^(Firefox — Sharing Indicator)$"
-
-        "immediate,class:^(steam_app_)(.*)$"
       ];
       layerrule = let
         toRegex = list: let

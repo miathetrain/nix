@@ -35,13 +35,17 @@
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 
     iconTheme = {
-      name = "flat-remix";
+      name = "Flat-Remix-Green-Dark";
       package = pkgs.flat-remix-icon-theme;
     };
 
     theme = {
-      name = "rose-pine"; # rose-pine
-      package = pkgs.rose-pine-gtk-theme; # pkgs.rose-pine-gtk-theme
+      name = "Catppuccin-Mocha-Standard-Pink-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = ["pink"];
+        size = "standard";
+        variant = "mocha";
+      };
     };
 
     gtk3.extraConfig = {
