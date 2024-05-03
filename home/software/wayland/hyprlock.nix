@@ -46,12 +46,36 @@ in {
         blur_size = 1;
       }
     ];
+
     input-fields = [
       {
-        monitor = [
-          "DP-1"
-          "eDP-1"
-        ];
+        monitor = "DP-1";
+
+        size = {
+          width = 300;
+          height = 50;
+        };
+
+        position = {
+          x = 0;
+          y = -100;
+        };
+
+        outline_thickness = 4;
+
+        outer_color = "rgb(181825)";
+        inner_color = "rgb(313244)";
+        font_color = "rgb(cdd6f4)";
+
+        fade_on_empty = true;
+        placeholder_text = "<span font_family='Lexend' foreground='##cdd6f4'>Password...</span>";
+
+        dots_spacing = 0.3;
+        dots_center = true;
+      }
+
+      {
+        monitor = "eDP-1";
 
         size = {
           width = 300;
@@ -111,10 +135,25 @@ in {
       }
 
       {
-        monitor = [
-          "DP-1"
-          "eDP-1"
-        ];
+        monitor = "DP-1";
+
+        text = "cmd[update:500] echo \"<span><i>$(music-uptime)</i></span>\"";
+        inherit font_family;
+        font_size = 25;
+        color = "rgb(a6adc8)";
+
+        position = {
+          x = 0;
+          y = 50;
+        };
+
+        valign = "bottom";
+        halign = "center";
+      }
+
+      {
+        monitor = "eDP-1";
+
         text = "cmd[update:500] echo \"<span><i>$(music-uptime)</i></span>\"";
         inherit font_family;
         font_size = 25;
@@ -132,18 +171,33 @@ in {
 
     images = [
       {
-        monitor = [
-          "DP-1"
-          "eDP-1"
-        ];
+        monitor = "DP-1";
+
         path = "/home/mia/.face";
         size = 180;
-        # rounding = -1;
         border_size = 5;
         border_color = "rgb(11111b)";
         rotate = 0.0;
-        # reload_time = 1;
-        # reload_cmd = "";
+
+        position = {
+          x = 0;
+          y = -320;
+        };
+
+        valign = "top";
+        halign = "center";
+
+        shadow_passes = 1;
+      }
+
+      {
+        monitor = "eDP-1";
+
+        path = "/home/mia/.face";
+        size = 180;
+        border_size = 5;
+        border_color = "rgb(11111b)";
+        rotate = 0.0;
 
         position = {
           x = 0;

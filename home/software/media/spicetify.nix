@@ -10,7 +10,7 @@
     spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
   in {
     enable = true;
-    theme = spicePkgs.themes.dribbish;
+    theme = spicePkgs.themes.Dribbblish;
     colorScheme = "rosepine";
 
     enabledCustomApps = with spicePkgs.apps; [

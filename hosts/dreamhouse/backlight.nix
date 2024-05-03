@@ -1,4 +1,9 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   boot = {
     kernelModules = ["i2c-dev" "ddcci_backlight"];
 

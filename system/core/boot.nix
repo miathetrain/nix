@@ -2,10 +2,11 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }:
 with lib; {
-  options.services.boot.secureboot.enable = mkOption {
+  options.services.secureboot.enable = mkOption {
     type = lib.types.bool;
     default = false;
     example = true;
@@ -25,11 +26,6 @@ with lib; {
       # use latest kernel
       kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
 
-      chaotic.scx = lib.mkIf (config.boot.kernelPackages == pkgs.linuxPackages_cachyos) {
-        enable = true;
-        scheduler = "scx_rustland";
-      };
-
       consoleLogLevel = 3;
       kernelParams = [
         "quiet"
@@ -40,7 +36,7 @@ with lib; {
       loader = {
         # systemd-boot on UEFI
         systemd-boot = {
-          enable = mkIf (!config.services.boot.secureboot.enable);
+          enable = !config.services.secureboot.enable;
           consoleMode = "auto";
         };
         efi = {
@@ -48,7 +44,7 @@ with lib; {
         };
       };
 
-      lanzaboote = mkIf config.services.boot.secureboot.enable {
+      lanzaboote = mkIf config.services.secureboot.enable {
         enable = true;
         pkiBundle = "/etc/secureboot";
         enrollKeys = false;
@@ -58,6 +54,11 @@ with lib; {
       tmp.cleanOnBoot = true;
     };
 
-    environment.systemPackages = lib.mkIf (config.boot.kernelPackages == pkgs.linuxPackages_cachyos) [pkgs.scx];
+    chaotic.scx = {
+      enable = true;
+      scheduler = "scx_rustland";
+    };
+
+    environment.systemPackages = [pkgs.scx];
   };
 }

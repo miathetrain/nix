@@ -21,7 +21,7 @@
   in
     getFrom
     "https://github.com/harishnkr/Bibata-Original-Cursors/archive/refs/heads/main.zip"
-    ""
+    "sha256-Q/v6IWt8yJYjHXH4kW//XCevKmgOpzy/fZuF9tVR4p4="
     "Bibata-Original-Rose-Pine";
 
   gtk = {
@@ -35,13 +35,13 @@
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 
     iconTheme = {
-      name = "rose-pine-icon-theme";
-      package = pkgs.rose-pine-icon-theme;
+      name = "flat-remix";
+      package = pkgs.flat-remix-icon-theme;
     };
 
     theme = {
-      name = "rose-pine-gtk-theme";
-      package = pkgs.rose-pine-gtk-theme;
+      name = "rose-pine"; # rose-pine
+      package = pkgs.rose-pine-gtk-theme; # pkgs.rose-pine-gtk-theme
     };
 
     gtk3.extraConfig = {

@@ -20,5 +20,5 @@
   networking.hostName = "dreamhouse";
 
   services.gaming.enable = true;
-  services.boot.secureboot = true;
+  services.secureboot.enable = true;
 }
