@@ -15,14 +15,14 @@
         ln -s ${pkgs.fetchzip {
           inherit url;
           inherit hash;
-        }}/Bibata-Original-Rose-Pine $out/share/icons/${name}
+        }} $out/share/icons/${name}
       '';
     };
   in
     getFrom
-    "https://github.com/harishnkr/Bibata-Original-Cursors/archive/refs/heads/main.zip"
-    "sha256-Q/v6IWt8yJYjHXH4kW//XCevKmgOpzy/fZuF9tVR4p4="
-    "Bibata-Original-Rose-Pine";
+    "https://github.com/supermariofps/hatsune-miku-windows-linux-cursors/files/14914322/miku-cursor-linux-1.2.4.zip"
+    "sha256-D3vd/F9mo9vXH1qzpnLP8NM0J1kVqPEdmDZoSqN1hMk="
+    "miku-cursor-linux";
 
   gtk = {
     enable = true;

@@ -71,22 +71,17 @@ in {
       ];
 
     chaotic = mkIf cfg.enable {
-      mesa-git = {
-        enable = true;
-        fallbackSpecialisation = false;
-      };
-
       steam.extraCompatPackages = with pkgs; [
         proton-ge-custom
       ];
     };
 
-    boot = mkIf cfg.vr.enable {
+    boot = mkIf cfg.enable {
       kernelParams = [
         "clearcpuid=514" # Fixes Hogwarts Legacy
       ];
 
-      extraModulePackages = [
+      extraModulePackages = mkIf cfg.vr.enable [
         (amdgpu-kernel-module.overrideAttrs (prev: {
           patches = (prev.patches or []) ++ [inputs.scrumpkgs.kernelPatches.cap_sys_nice_begone.patch];
         }))

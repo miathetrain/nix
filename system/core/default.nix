@@ -24,8 +24,12 @@ with lib; {
   };
 
   programs.light.enable = true;
-
   services.clight.enable = true;
+
+  chaotic.mesa-git = {
+    enable = true;
+    fallbackSpecialisation = false;
+  };
 
   # compresses half the ram for use as swap
   zramSwap.enable = true;
