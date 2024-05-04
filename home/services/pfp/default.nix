@@ -1,3 +1,3 @@
 {
-  home.file.".face" = ./face.jpg;
+  home.file.".face".source = ./face.jpg;
 }
