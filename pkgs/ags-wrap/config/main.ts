@@ -306,7 +306,7 @@ const gpu_memory = Variable(0, {
   poll: [1000, 'gpu-memory']
 })
 
-const hostName = 
+const hostName = Utils.exec('hostname')
 
 const batteryProgress = Widget.CircularProgress({
   visible: battery.bind('available'),
@@ -316,9 +316,9 @@ const batteryProgress = Widget.CircularProgress({
     + 'min-height: 15px;'
     + 'font-size: 4px;' // to set its thickness set font-size on it
     + 'background-color: #45475a;' // set its bg color
-    + 'color: #f38ba8;', // set its fg color
+    + 'color: green;', // set its fg color
   startAt: 0.75,
-  tooltip_text: battery.bind('percent').as(p => p.toString())
+  tooltip_text: battery.bind('percent').as(p => Math.round(p).toString())
 })
 
 
@@ -360,6 +360,7 @@ const stats_box = Widget.Box({
         + 'background-color: #45475a;' // set its bg color
         + 'color: #89b4fa;', // set its fg color
       startAt: 0.75,
+      visible: (hostName == "dreamhouse"),
       tooltip_text: gpu_usage.bind().as(value => 'GPU Usage: ' + value.toString() + '%'),
       value: gpu_usage.bind().as(value => value / 100),
     }),
@@ -371,6 +372,7 @@ const stats_box = Widget.Box({
         + 'background-color: #45475a;' // set its bg color
         + 'color: #74c7ec;', // set its fg color
       startAt: 0.75,
+      visible: (hostName == "dreamhouse"),
       tooltip_text: gpu_memory.bind().as(value => 'GPU Memory: ' + value.toString() + '%'),
       value: gpu_memory.bind().as(value => value / 100),
     }),

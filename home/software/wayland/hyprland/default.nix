@@ -37,8 +37,6 @@
     };
   };
 
-  services.xserver.xkb.extraLayouts."apple".symbolsFile = ./apple;
-
   # enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;

@@ -41,7 +41,7 @@
       keep-derivations = true;
       keep-outputs = true;
 
-      trusted-users = ["root" "@wheel"];
+      trusted-users = ["root" "@wheel" "mia" "nixremote"];
     };
   };
 }

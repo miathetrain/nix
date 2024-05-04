@@ -20,7 +20,7 @@
     loader.efi.canTouchEfiVariables = lib.mkForce false;
   };
 
-  systemd.sleep.extraConfig= "SuspendState=freeze";
+  systemd.sleep.extraConfig = "SuspendState=freeze";
 
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
@@ -44,9 +44,9 @@
   ];
   nix.distributedBuilds = true;
   # optional, useful when the builder has a faster internet connection than yours
-  nix.extraOptions = ''
-    builders-use-substitutes = true
-  '';
+  # nix.extraOptions = ''
+  #   builders-use-substitutes = true
+  # '';
 
   services.tlp = {
     enable = true;
@@ -85,7 +85,11 @@
   #   HandleLidSwitch=hybrid-sleep
   # '';
 
-  services.xserver.xkb.extraLayouts."apple".symbolsFile = ./apple;
+  services.xserver.xkb.extraLayouts."apple" = {
+    description = "Swap Apple ctrl n cmd";
+    languages = ["eng"];
+    symbolsFile = ./apple;
+  };
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
 
