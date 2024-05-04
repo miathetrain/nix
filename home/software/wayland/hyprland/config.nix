@@ -38,6 +38,7 @@ in {
       input = {
         kb_layout = "us";
         accel_profile = "flat";
+        kb_options = "apple:cmd_n_ctrl";
       };
 
       misc = {
@@ -193,11 +194,11 @@ in {
         "$MOD, X, exec, $COLORPICKER"
         "$MOD, M, exec, $(wl-paste | wtype -d 12 -)"
 
-        "$MOD, D, exec, pkill .anyrun-wrapped || run-as-service anyrun"
-        "$MOD, Return, exec, run-as-service kitty"
-        "$MODSHIFT, Return, exec, run-as-service 'kitty --class kitty-float'"
-        "$MOD, E, exec, run-as-service nautilus --new-window"
-        "$MOD,N,exec,$NOTIFY 'Current window class:' $(hyprctl activewindow -j | jq -r '.class')"
+        "$MOD, D, exec, pkill .anyrun-wrapped || anyrun"
+        "$MOD, Return, exec, kitty"
+        "$MODSHIFT, Return, exec, kitty --class kitty-float"
+        "$MOD, E, exec, nautilus --new-window"
+        "$MOD,N,exec,$NOTIFY 'Window class' $(hyprctl activewindow -j | jq -r '.class')"
 
         "$MOD,F10,pass,^(com\.obsproject\.Studio)$"
         "$MOD,G,pass,^(com\.obsproject\.Studio)$"
@@ -249,6 +250,9 @@ in {
       bindel = [
         ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
         ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+        ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise"
+        ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower"
+        ", XF86LaunchB, exec,  pkill .anyrun-wrapped || anyrun"
       ];
 
       bindl = [
