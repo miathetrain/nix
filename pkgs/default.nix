@@ -4,5 +4,6 @@
 }: {
   arrpc = pkgs.callPackage ./arrpc {};
   ags-wrap = pkgs.callPackage ./ags-wrap {inherit inputs;};
-  obinskit = pkgs.callPackage ./obinskit {};
+  sgdboop = pkgs.callPackage ./sgdboop {};
+  t2fanrd = pkgs.callPackage ./t2fanrd {};
 }

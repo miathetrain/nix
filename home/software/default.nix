@@ -32,6 +32,11 @@
     fastfetch
     yad
     wtype
+
+    resources
+
+    inputs.self.packages.${pkgs.system}.t2fanrd
+    inputs.self.packages.${pkgs.system}.sgdboop
   ];
 
   # services.steamvr = {

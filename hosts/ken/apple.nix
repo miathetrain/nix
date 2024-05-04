@@ -9,6 +9,17 @@ with lib; {
     inputs.nixos-hardware.nixosModules.apple-macbook-air-6
   ];
 
+  # hardware.firmware = [
+  #   (stdenvNoCC.mkDerivation (final: {
+  #     name = "brcm-firmware";
+  #     src = ./firmware;
+  #     installPhase = ''
+  #       mkdir -p $out/lib/firmware/
+  #       cp -r ${final.src}/brcm "$out/lib/firmware/"
+  #     '';
+  #   }))
+  # ];
+
   hardware.apple-t2.enableAppleSetOsLoader = true;
   systemd.services.tiny-dfr.enable = mkForce false;
 
