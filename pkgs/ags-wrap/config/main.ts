@@ -306,6 +306,8 @@ const gpu_memory = Variable(0, {
   poll: [1000, 'gpu-memory']
 })
 
+const hostName = 
+
 const batteryProgress = Widget.CircularProgress({
   visible: battery.bind('available'),
   value: battery.bind('percent').as(p => p > 0 ? p / 100 : 0),

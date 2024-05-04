@@ -20,12 +20,33 @@
     loader.efi.canTouchEfiVariables = lib.mkForce false;
   };
 
+  systemd.sleep.extraConfig= "SuspendState=freeze";
+
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   powerManagement.cpuFreqGovernor = "powersave";
   #powerManagement.scsiLinkPolicy = "med_power_with_dipm";
   services.thermald.enable = true;
 
+  nix.buildMachines = [
+    {
+      hostName = "10.0.0.67";
+      system = "x86_64-linux";
+      protocol = "ssh-ng";
+      # if the builder supports building for multiple architectures,
+      # replace the previous line by, e.g.
+      # systems = ["x86_64-linux" "aarch64-linux"];
+      maxJobs = 1;
+      speedFactor = 2;
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+      mandatoryFeatures = [];
+    }
+  ];
+  nix.distributedBuilds = true;
+  # optional, useful when the builder has a faster internet connection than yours
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
 
   services.tlp = {
     enable = true;
@@ -58,11 +79,13 @@
     };
   };
 
-  services.logind.extraConfig = ''
-    # don’t shutdown when power button is short-pressed
-    HandlePowerKey=hybrid-sleep
-    HandleLidSwitch=hybrid-sleep
-  '';
+  # services.logind.extraConfig = ''
+  #   # don’t shutdown when power button is short-pressed
+  #   HandlePowerKey=hybrid-sleep
+  #   HandleLidSwitch=hybrid-sleep
+  # '';
+
+  services.xserver.xkb.extraLayouts."apple".symbolsFile = ./apple;
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
 

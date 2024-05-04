@@ -24,7 +24,6 @@ with lib; {
   };
 
   programs.light.enable = true;
-  services.clight.enable = true;
 
   chaotic.mesa-git = {
     enable = true;

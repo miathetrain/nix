@@ -5,12 +5,12 @@
   ...
 }:
 with lib; {
-  config = mkIf (config.networking.hostName == "dreamhouse") {
+  config = {
     #Graphics Drivers
-    boot.initrd.kernelModules = ["amdgpu"];
-    services.xserver.videoDrivers = ["amdgpu"];
+    boot.initrd.kernelModules = mkIf (config.networking.hostName == "dreamhouse") ["amdgpu"];
+    services.xserver.videoDrivers = mkIf (config.networking.hostName == "dreamhouse") ["amdgpu"];
 
-    systemd.tmpfiles.rules = [
+    systemd.tmpfiles.rules = mkIf (config.networking.hostName == "dreamhouse") [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
 
@@ -23,6 +23,7 @@ with lib; {
         vaapiVdpau
         # libvdpau-va-gl
         rocmPackages.clr.icd
+        intel-media-driver # MacBook
       ];
     };
   };
