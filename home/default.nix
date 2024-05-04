@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./terminal
+    ./profiles/global.nix
   ];
 
   home = {
