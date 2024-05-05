@@ -25,18 +25,15 @@
       }: {
         _module.args.pkgs = import nixpkgs {
           inherit system;
+          overlays = import ./overlays {inherit inputs;};
           config.allowUnfree = true;
         };
 
-        packages = import ./pkgs {
-          inherit inputs pkgs;
-        };
+        # packages = import ./pkgs {
+        #   inherit inputs;
+        # };
 
-        devShells.default = pkgs.mkShell {
-          packages = [pkgs.alejandra pkgs.git];
-          name = "nixland";
-          DIRENV_LOG_FORMAT = "";
-        };
+        packages = import ./pkgs {inherit inputs;};
 
         formatter = pkgs.alejandra;
       };

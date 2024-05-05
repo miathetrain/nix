@@ -35,8 +35,9 @@
 
     resources
 
-    inputs.self.packages.${pkgs.system}.t2fanrd
-    inputs.self.packages.${pkgs.system}.sgdboop
+    # t2fanrd
+    # inputs.self.packages.${pkgs.system}.sgdboop
+    sgdboop
   ];
 
   # services.steamvr = {
@@ -51,7 +52,7 @@
   # };
 
   services.arrpc.enable = true;
-  services.arrpc.package = inputs.self.packages.${pkgs.system}.arrpc;
+  services.arrpc.package = pkgs.arrpc;
 
   services.easyeffects.enable = true;
 }

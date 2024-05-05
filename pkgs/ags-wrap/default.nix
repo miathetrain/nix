@@ -7,7 +7,6 @@
   accountsservice,
   writeShellScript,
   gtk3,
-  
   dart-sass,
   ...
 }: let
