@@ -7,6 +7,7 @@
 
   programs.helix = {
     enable = true;
+    defaultEditor = true;
     package = inputs.helix.packages.${pkgs.system}.default.overrideAttrs (self: {
       makeWrapperArgs = with pkgs;
         self.makeWrapperArgs
@@ -56,6 +57,10 @@
           white = "#D4BE98";
         };
       };
+    };
+
+    languages = {
+      
     };
 
     settings = {

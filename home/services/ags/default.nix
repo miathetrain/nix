@@ -70,7 +70,7 @@ in {
   home.packages = with pkgs; [
     toybox
     busybox ##usleep
-    # inputs.self.packages.${pkgs.system}.ags-wrap
+    ags-wrap
     cpu-usage
     memory-usage
     memory-free
@@ -85,17 +85,17 @@ in {
 
   services.xembed-sni-proxy.enable = true;
 
-  # systemd.user.services = {
-  #   ags = {
-  #     Unit = {
-  #       Description = "ags service";
-  #     };
+  systemd.user.services = {
+    ags = {
+      Unit = {
+        Description = "ags service";
+      };
 
-  #     Install.WantedBy = ["hyprland-session.target"];
+      Install.WantedBy = ["hyprland-session.target"];
 
-  #     Service = {
-  #       ExecStart = ''${inputs.self.packages.${pkgs.system}.ags-wrap}/bin/ags-wrap'';
-  #     };
-  #   };
-  # };
+      Service = {
+        ExecStart = ''${pkgs.ags-wrap}/bin/ags-wrap'';
+      };
+    };
+  };
 }

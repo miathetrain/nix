@@ -14,7 +14,6 @@
       qt5.qtwayland
       gnome.file-roller
 
-      gnome-text-editor
       gnome.nautilus
       gthumb
       btop

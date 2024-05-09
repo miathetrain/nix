@@ -21,11 +21,11 @@
         config,
         pkgs,
         system,
+        self',
         ...
       }: {
         _module.args.pkgs = import nixpkgs {
           inherit system;
-          overlays = import ./overlays {inherit inputs;};
           config.allowUnfree = true;
         };
 
@@ -33,9 +33,9 @@
         #   inherit inputs;
         # };
 
-        packages = import ./pkgs {inherit inputs;};
+        # packages.default = self'.packages.activate;
 
-        formatter = pkgs.alejandra;
+        # formatter = pkgs.alejandra;
       };
     };
 
@@ -48,10 +48,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
     fu.url = "github:numtide/flake-utils";
-    hypridle.url = "github:hyprwm/hypridle";
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     hyprlock.url = "github:hyprwm/hyprlock";
+    sgdboop.url = "github:puffnfresh/nixpkgs/pkgs/sgdboop";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

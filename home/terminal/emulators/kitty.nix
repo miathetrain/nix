@@ -2,9 +2,9 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "SpaceMono";
+      name = "SpaceMono Nerd Font Mono";
       package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
-      size = 12;
+      size = 13;
     };
 
     theme = "Catppuccin-Mocha";
@@ -22,11 +22,11 @@
 
     settings = {
       enable_audio_bell = false;
-      repaint_delay = 8;
       window_padding_width = 20;
       strip_trailing_spaces = "smart";
       confirm_os_window_close = 0;
       background_opacity = "0.95";
+      notify_on_cmd_finish = "unfocused";
 
       "mouse_map left click ungrabbed mouse_handle_click" = "selection link prompt";
     };

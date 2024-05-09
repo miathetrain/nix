@@ -30,14 +30,13 @@
 
     wireguard-tools
     fastfetch
-    yad
     wtype
 
     resources
 
-    # t2fanrd
-    # inputs.self.packages.${pkgs.system}.sgdboop
-    sgdboop
+    t2fanrd
+
+    cinny-desktop
   ];
 
   # services.steamvr = {

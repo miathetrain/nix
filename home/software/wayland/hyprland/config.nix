@@ -60,7 +60,7 @@ in {
         border_size = 3;
         "col.active_border" = "rgba(1e1e2eff) rgba(313244ff) 10deg";
         "col.inactive_border" = "rgba(1e1e2eff)";
-        layout = "master";
+        layout = "dwindle";
         resize_on_border = true;
 
         monitor = [

@@ -12,11 +12,11 @@ buildNpmPackage rec {
     repo = "arrpc";
     # Release commits are not tagged
     # release: 3.3.0
-    rev = "32a0424d1961c9ac5b8fbd3ff2799e23e2990698";
-    hash = "sha256-T4NEE4fKVEWCQeuhdT3MwZaJZk+stB70644EhQONniM=";
+    rev = "49439860f0ce1b6f230f9de42d89cc20ec839dc4";
+    hash = "sha256-J+2Rh/wLppU4AVPEXxkzri09OAgm7Ih1XCBFfgXE4J0=";
   };
 
-  npmDepsHash = "sha256-YlSUGncpY0MyTiCfZcPsfcNx3fR+SCtkOFWbjOPLUzk=";
+  npmDepsHash = "sha256-S9cIyTXqCp8++Yj3VjBbcStOjzjgd0Cq7KL7NNzZFpY=";
 
   dontNpmBuild = true;
 
