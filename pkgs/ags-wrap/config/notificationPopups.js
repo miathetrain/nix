@@ -1,5 +1,4 @@
 import GLib from 'types/@girs/glib-2.0/glib-2.0';
-import GSound from 'types/@girs/gsound-1.0/gsound-1.0.cjs';
 import { Align } from 'types/@girs/gtk-3.0/gtk-3.0.cjs';
 
 const notifications = await Service.import("notifications")
@@ -226,6 +225,7 @@ function smallNotification(n) {
             })
             break;
         case "discord":
+            Utils.exec('canberra-gtk-play -i message')
             return Widget.Box({
                 attribute: { id: n.id },
                 class_name: `small-notification ${n.urgency}`,
@@ -259,6 +259,7 @@ function smallNotification(n) {
             })
             break;
         default:
+            Utils.exec('canberra-gtk-play -i bell')
             return Widget.Box({
                 attribute: { id: n.id },
                 class_name: `small-notification ${n.urgency}`,
@@ -297,13 +298,6 @@ export function NotificationPopups(monitor = 0) {
         const n = notifications.getNotification(id)
         if (n) {
             list.children = [Notification(n), ...list.children]
-            let hello = new GSound.Context();
-            hello.init(null);
-            hello.play_simple({
-                "event.id": "phone-incoming-call",
-                "event.description": "hello world"
-            }, null);
-            GLib.usleep(2000000);
         }
     }
 
