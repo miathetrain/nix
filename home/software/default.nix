@@ -37,6 +37,9 @@
     t2fanrd
 
     cinny-desktop
+
+    libcanberra-gtk3
+    deepin.deepin-sound-theme
   ];
 
   # services.steamvr = {

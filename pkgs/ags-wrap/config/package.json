@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@girs/gsound-1.0": "^1.0.0-3.3.0",
     "date-fns": "^3.6.0"
   }
 }

@@ -189,8 +189,8 @@ in {
       bind = [
         "$MOD, Escape, exec, wlogout -p layer-shell"
 
-        "Alt, Print, exec, screenshot-full"
-        ", Print, exec, screenshot-area"
+        "Alt, Print, exec, screenshot-full && canberra-gtk-play -i screen-capture"
+        ", Print, exec, screenshot-area && canberra-gtk-play -i screen-capture"
         "$MOD, X, exec, $COLORPICKER"
         "$MOD, M, exec, $(wl-paste | wtype -d 12 -)"
 
@@ -203,13 +203,13 @@ in {
         "$MOD,F10,pass,^(com\.obsproject\.Studio)$"
         "$MOD,G,pass,^(com\.obsproject\.Studio)$"
 
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioNext, exec, playerctl next"
-        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioPlay, exec, playerctl play-pause && canberra-gtk-play -i dialog-information"
+        ", XF86AudioNext, exec, playerctl next && canberra-gtk-play -i dialog-information"
+        ", XF86AudioPrev, exec, playerctl previous && canberra-gtk-play -i dialog-information"
 
-        "$MOD, L, exec, loginctl lock-session"
+        "$MOD, L, exec, loginctl lock-session && canberra-gtk-play -i dialog-information"
 
-        "$MOD, Q, exec, killactive"
+        "$MOD, Q, exec, killactive && canberra-gtk-play -i dialog-information"
 
         "$MODSHIFT, Q, exit"
         "$MOD, F, fullscreen"
@@ -248,19 +248,19 @@ in {
       ];
 
       bindel = [
-        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
-        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
-        ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise"
-        ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower"
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise && canberra-gtk-play -i audio-volume-change"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower && canberra-gtk-play -i audio-volume-change"
+        ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise && canberra-gtk-play -i audio-volume-change"
+        ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower && canberra-gtk-play -i audio-volume-change"
         ", XF86LaunchB, exec,  pkill .anyrun-wrapped || anyrun"
       ];
 
       bindl = [
-        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle && canberra-gtk-play -i audio-volume-change"
       ];
 
       bindr = [
-        "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock"
+        "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock && canberra-gtk-play -i audio-volume-change"
       ];
 
       bindm = ["$MOD, mouse:272, movewindow" "$MOD, mouse:273, resizewindow"];
