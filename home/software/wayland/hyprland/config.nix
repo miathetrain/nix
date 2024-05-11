@@ -22,6 +22,10 @@ in {
         "sleep 2 && hyprlock --immediate"
       ];
 
+      debug = {
+        disable_logs = false;
+      };
+
       device = {
         name = "bcm5974";
         accel_profile = "adaptive";
@@ -132,54 +136,54 @@ in {
         allow_small_split = true;
       };
 
-      # plugin = {
-      #   hyprtrails = {
-      #     color = "rgba(aa336aff)";
-      #   };
+      plugin = {
+        hyprtrails = {
+          color = "rgba(aa336aff)";
+        };
 
-      #   hyprexpo = {
-      #     columns = 2;
-      #     gap_size = 25;
-      #     bg_col = "rgb(111111)";
-      #     workspace_method = "center m+1"; # [center/first] [workspace] e.g. first 1 or center m+1
+        # hyprexpo = {
+        #   columns = 2;
+        #   gap_size = 25;
+        #   bg_col = "rgb(111111)";
+        #   workspace_method = "center m+1"; # [center/first] [workspace] e.g. first 1 or center m+1
 
-      #     enable_gesture = true; # laptop touchpad, 4 fingers
-      #     gesture_distance = 300; # how far is the "max"
-      #     gesture_positive = true; # positive = swipe down. Negative = swipe up.
-      #   };
+        #   enable_gesture = true; # laptop touchpad, 4 fingers
+        #   gesture_distance = 300; # how far is the "max"
+        #   gesture_positive = true; # positive = swipe down. Negative = swipe up.
+        # };
 
-      #   hyprfocus = {
-      #     enabled = true;
-
-      #     keyboard_focus_animation = "shrink";
-      #     mouse_focus_animation = "flash";
-
-      #     bezier = [
-      #       "bezIn, 0.5,0.0,1.0,0.5"
-      #       "bezOut, 0.0,0.5,0.5,1.0"
-      #     ];
-
-      #     flash = {
-      #       flash_opacity = 0.3;
-
-      #       in_bezier = "bezIn";
-      #       in_speed = 0.5;
-
-      #       out_bezier = "bezOut";
-      #       out_speed = 3;
-      #     };
-
-      #     shrink = {
-      #       shrink_percentage = 0.8;
-
-      #       in_bezier = "bezIn";
-      #       in_speed = 0.5;
-
-      #       out_bezier = "bezOut";
-      #       out_speed = 3;
-      #     };
-      #   };
-      # };
+        hyprfocus = {
+          enabled = true;
+          animate_floating = true;
+          animate_workspacechange = true;
+          focus_animation = "shrink";
+          # Beziers for focus animations
+          bezier = [
+            "bezIn, 0.5,0.0,1.0,0.5"
+            "bezOut, 0.0,0.5,0.5,1.0"
+            "overshot, 0.05, 0.9, 0.1, 1.05"
+            "smoothOut, 0.36, 0, 0.66, -0.56"
+            "smoothIn, 0.25, 1, 0.5, 1"
+            "realsmooth, 0.28,0.29,.69,1.08"
+          ];
+          # Flash settings
+          flash = {
+            flash_opacity = 0.95;
+            in_bezier = "realsmooth";
+            in_speed = 0.5;
+            out_bezier = "realsmooth";
+            out_speed = 3;
+          };
+          # Shrink settings
+          shrink = {
+            shrink_percentage = 0.95;
+            in_bezier = "realsmooth";
+            in_speed = 1;
+            out_bezier = "realsmooth";
+            out_speed = 2;
+          };
+        };
+      };
 
       "$VIDEODIR" = "$HOME/Videos";
       "$NOTIFY" = "notify-send -h string:x-canonical-private-synchronouse:hypr-cfg -u low";
@@ -298,9 +302,9 @@ in {
         "float,class:^(net.davidotek.pupgui2)$"
         "float,class:^(com.nextcloud.desktopclient.nextcloud)$"
         "float,class:^(Ryujinx)$"
+        # "float,class:^(steam)$, title:^((?!Steam).)*$"
 
-        "noborder,class:^(steam)$"
-        "rounding 0,class:^(steam)$"
+        # "noborder,class:^(steam)$"
 
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
@@ -313,6 +317,7 @@ in {
 
         "dimaround, class:^(xdg-desktop-portal-gtk)$"
         "dimaround, class:^(polkit-gnome-authentication-agent-1)$"
+        # "dimaround,class:^(steam)$, title:^((?!Steam).)*$"
 
         "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
         "workspace special silent, title:^(Firefox — Sharing Indicator)$"
@@ -341,9 +346,9 @@ in {
     };
 
     plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
     ];
   };
 }
