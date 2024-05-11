@@ -25,19 +25,13 @@ const Launcher = Widget.Icon({
   tooltip_text: "Quick Search",
 })
 
+const dispatch = ws => hyprland.messageAsync(`dispatch workspace ${ws}`);
+
 const Workspaces = Widget.Box({
   class_name: "workspaces",
   children: Array.from({ length: 5 }, (_, i) => i + 1).map(i => Widget.EventBox({
     "on-primary-click": (event) => {
-      Utils.notify({
-        summary: "Notification Popup Example",
-        iconName: "info-symbolic",
-        body: "Lorem ipsum dolor sit amet, qui minim labore adipisicing "
-          + "minim sint cillum sint consectetur cupidatat.",
-        actions: {
-          "Cool": () => print("pressed Cool"),
-        },
-      })
+      dispatch(i);
     },
     child: Widget.Label({
       attribute: i,
@@ -66,9 +60,7 @@ const SysTrayItem = item => Widget.Button({
 const ClientTitle = Widget.Label({
   class_name: "client-title",
   tooltip_text: hyprland.active.client.bind("title"),
-  label: hyprland.active.client.bind("title").as(title => {
-    return title.length <= 25 ? title : title.substring(0, 20) + "..."
-  })
+  label: hyprland.active.client.bind("title")
 })
 
 const time = Variable('', {
@@ -139,7 +131,7 @@ function Media() {
     if (mpris.players[0]) {
       const { track_artists, track_title } = mpris.players[0]
       const title = `${track_title} `
-      return title.length <= 25 ? title : title.substring(0, 20) + "..." // return `${track_artists.join(', ')} ─ ${track_title}`
+      return title.length <= 40 ? title : title.substring(0, 40) + "..." // return `${track_artists.join(', ')} ─ ${track_title}`
     } else {
       return ''
     }
@@ -262,9 +254,12 @@ function Volume() {
     return `audio-volume-${icons[icon]}-symbolic`
   }
 
+  const vol = audio.speaker.volume * 100;
+
   const icon = Widget.Icon({
     class_name: "icons",
-    icon: Utils.watch(getIcon(), audio.speaker, getIcon)
+    icon: Utils.watch(getIcon(), audio.speaker, getIcon),
+    tooltip_text: `Volume ${Math.floor(vol)}%`
   })
 
   const slider = Widget.Slider({
@@ -273,7 +268,7 @@ function Volume() {
     on_change: ({ value }) => audio.speaker.volume = value,
     setup: self => self.hook(audio.speaker, () => {
       self.value = audio.speaker.volume || 0
-      self.tooltip_text = Math.round(audio.speaker.volume) + "%"
+      self.tooltip_text = Math.floor(audio.speaker.volume * 100) + "%"
     }),
   })
 
@@ -387,6 +382,7 @@ const profile_pic = Widget.Box({
   hpack: "center",
   vexpand: false,
   vpack: "center",
+  tooltip_text: "Profile",
   child: Widget.Box({
     class_name: "profile-pic",
     css: `background-image: url("/home/mia/.face");`
