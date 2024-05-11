@@ -15,6 +15,7 @@ in {
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
         "swayosd-server"
+        "poweralertd -i 'line power'"
         "wlsunset"
         "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprctl dispatcher focusmonitor 3"
@@ -41,8 +42,10 @@ in {
 
       input = {
         kb_layout = "us";
+        kb_model = "apple"; ## apple
+        kb_variant = "mac";
+        kb_options = "['ctrl:swap_lwin_lctl', 'ctrl:swap_rwin_rctl']";
         accel_profile = "flat";
-        kb_options = "apple:cmd_n_ctrl";
       };
 
       misc = {
@@ -207,9 +210,9 @@ in {
         "$MOD,F10,pass,^(com\.obsproject\.Studio)$"
         "$MOD,G,pass,^(com\.obsproject\.Studio)$"
 
-        ", XF86AudioPlay, exec, playerctl play-pause && canberra-gtk-play -i dialog-information"
-        ", XF86AudioNext, exec, playerctl next && canberra-gtk-play -i dialog-information"
-        ", XF86AudioPrev, exec, playerctl previous && canberra-gtk-play -i dialog-information"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
 
         "$MOD, L, exec, loginctl lock-session && canberra-gtk-play -i dialog-information"
 
@@ -239,6 +242,10 @@ in {
         "$MOD, L, movefocus, r"
         "$MOD, H, movefocus, l"
 
+        ", XF86LaunchA, exec, screenshot-full && canberra-gtk-play -i screen-capture"
+        "$MOD, XF86LaunchA, exec, screenshot-full && canberra-gtk-play -i screen-capture"
+        ", XF86LaunchB, exec,  pkill .anyrun-wrapped || anyrun"
+
         "${builtins.concatStringsSep "\n" (builtins.genList (x: let
             ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
           in ''
@@ -256,7 +263,6 @@ in {
         ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower && canberra-gtk-play -i audio-volume-change"
         ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise && canberra-gtk-play -i audio-volume-change"
         ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower && canberra-gtk-play -i audio-volume-change"
-        ", XF86LaunchB, exec,  pkill .anyrun-wrapped || anyrun"
       ];
 
       bindl = [

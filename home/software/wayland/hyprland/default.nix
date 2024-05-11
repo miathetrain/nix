@@ -18,6 +18,8 @@
       gthumb
       btop
 
+      poweralertd
+
       ##Brightness
       inputs.dimmer.packages.${pkgs.system}.default
     ];

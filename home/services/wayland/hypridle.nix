@@ -11,7 +11,7 @@
     settings = {
       beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
       afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-      lockCmd = "pidof hyprlock || ${lib.getExe config.programs.hyprlock.package}";
+      lockCmd = "pidof hyprlock || hyprlock";
 
       listeners = [
         {

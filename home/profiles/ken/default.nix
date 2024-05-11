@@ -4,4 +4,6 @@
   ...
 }: {
   imports = [];
+
+  home.packages = with pkgs; [];
 }

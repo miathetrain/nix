@@ -5,7 +5,7 @@ let
     ./misc
 
     ./services
-    ./services/ananicy.nix
+    # ./services/ananicy.nix
     ./services/gnome-services.nix
     ./services/greetd.nix
     ./services/pipewire.nix
@@ -13,7 +13,7 @@ let
     # Hardware
     ./hardware/bluetooth.nix
     ./hardware/graphics.nix
-    ./hardware/opentablet.nix
+    # ./hardware/opentablet.nix
   ];
 in {
   inherit desktop;

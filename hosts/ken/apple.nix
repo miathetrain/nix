@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   lib,
   ...
 }:
@@ -20,7 +21,8 @@ with lib; {
   #   }))
   # ];
 
-  hardware.apple-t2.enableAppleSetOsLoader = true;
+  services.power-profiles-daemon.enable = true;
+
   systemd.services.tiny-dfr.enable = mkForce false;
 
   services.upower.enable = true;
