@@ -1,6 +1,7 @@
 {
   self,
   inputs,
+  lix-module,
   ...
 }: let
   # get these into the module system

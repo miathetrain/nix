@@ -4,6 +4,7 @@
     self,
     flake-parts,
     nixpkgs,
+    lix-module,
     chaotic,
     ...
   }:
@@ -52,6 +53,17 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     hyprlock.url = "github:hyprwm/hyprlock";
     sgdboop.url = "github:puffnfresh/nixpkgs/pkgs/sgdboop";
+
+    lix = {
+      url = "git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
+      flake = false;
+    };
+
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.lix.follows = "lix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

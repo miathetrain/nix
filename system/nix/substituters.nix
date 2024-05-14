@@ -12,6 +12,7 @@
       "https://t2linux.cachix.org"
       "https://miathetrain.cachix.org"
       "https://hydra.soopy.moe"
+      "https://cache.lix.systems"
     ];
 
     trusted-public-keys = [
@@ -25,6 +26,7 @@
       "t2linux.cachix.org-1:P733c5Gt1qTcxsm+Bae0renWnT8OLs0u9+yfaK2Bejw="
       "miathetrain.cachix.org-1:YnISmBIljKxDFkswh1GbvQFx3gN+7jfGFcgEPz635W8="
       "hydra.soopy.moe:IZ/bZ1XO3IfGtq66g+C85fxU/61tgXLaJ2MlcGGXU8Q="
+      "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
     ];
   };
 }

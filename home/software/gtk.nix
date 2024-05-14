@@ -8,21 +8,19 @@
     getFrom = url: hash: name: {
       gtk.enable = true;
       x11.enable = true;
+
       name = name;
-      size = 48; ## 48
+      size = 24; ## 48
       package = pkgs.runCommand "moveUp" {} ''
         mkdir -p $out/share/icons
-        ln -s ${pkgs.fetchzip {
-          inherit url;
-          inherit hash;
-        }} $out/share/icons/${name}
+        ln -s ${toString ./Mokou} $out/share/icons/${name}
       '';
     };
   in
     getFrom
-    "https://github.com/supermariofps/hatsune-miku-windows-linux-cursors/files/14914322/miku-cursor-linux-1.2.4.zip"
-    "sha256-D3vd/F9mo9vXH1qzpnLP8NM0J1kVqPEdmDZoSqN1hMk="
-    "miku-cursor-linux";
+    "https://ocs-dl.fra1.cdn.digitaloceanspaces.com/data/files/1685787261/Mokou.zip"
+    ""
+    "Mokou";
 
   gtk = {
     enable = true;
