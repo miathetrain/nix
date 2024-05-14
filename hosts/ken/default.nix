@@ -27,8 +27,6 @@
   #powerManagement.scsiLinkPolicy = "med_power_with_dipm";
   services.thermald.enable = true;
 
-  
-
   nix.buildMachines = [
     {
       hostName = "10.0.0.67";

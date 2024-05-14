@@ -17,4 +17,5 @@
   arrpc = self.callPackage ./arrpc {};
   ags-wrap = self.callPackage ./ags-wrap {inherit inputs;};
   sgdboop = self.callPackage ./sgdboop {};
+  hyprshade = self.callPackage ./hyprshade {};
 }

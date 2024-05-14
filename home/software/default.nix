@@ -40,6 +40,8 @@
 
     libcanberra-gtk3
     sound-theme-freedesktop
+
+    qt5ct
   ];
 
   # services.steamvr = {

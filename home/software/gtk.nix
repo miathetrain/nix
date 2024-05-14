@@ -18,7 +18,7 @@
     };
   in
     getFrom
-    "https://ocs-dl.fra1.cdn.digitaloceanspaces.com/data/files/1685787261/Mokou.zip"
+    ""
     ""
     "Mokou";
 
@@ -27,7 +27,7 @@
     font = {
       name = "Lexend";
       package = pkgs.lexend;
-      size = 9;
+      size = 10;
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
@@ -61,5 +61,10 @@
     '';
 
     gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "qtct";
   };
 }

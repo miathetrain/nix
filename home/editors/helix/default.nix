@@ -60,7 +60,6 @@
     };
 
     languages = {
-      
     };
 
     settings = {

@@ -2,7 +2,6 @@
   self,
   inputs,
   homeImports,
-  lix-module,
   ...
 }: {
   flake.nixosConfigurations = let
@@ -19,9 +18,7 @@
     dreamhouse = nixosSystem {
       inherit specialArgs;
       modules =
-        [
-          inputs.lix-module.nixosModules.default
-        ]
+        [inputs.lix-module.nixosModules.default]
         ++ desktop
         ++ [
           ./dreamhouse
@@ -37,7 +34,8 @@
     ken = nixosSystem {
       inherit specialArgs;
       modules =
-        desktop
+        [inputs.lix-module.nixosModules.default]
+        ++ desktop
         ++ [
           ./ken
           {

@@ -20,7 +20,7 @@ in {
         "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprctl dispatcher focusmonitor 3"
         "systemctl --user start swww-random-img.service"
-        "sleep 2 && hyprlock --immediate"
+        "sleep 1 && hyprlock --immediate"
       ];
 
       debug = {
@@ -323,7 +323,6 @@ in {
 
         "dimaround, class:^(xdg-desktop-portal-gtk)$"
         "dimaround, class:^(polkit-gnome-authentication-agent-1)$"
-        # "dimaround,class:^(steam)$, title:^((?!Steam).)*$"
 
         "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
         "workspace special silent, title:^(Firefox — Sharing Indicator)$"

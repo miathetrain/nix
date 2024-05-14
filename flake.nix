@@ -4,8 +4,6 @@
     self,
     flake-parts,
     nixpkgs,
-    lix-module,
-    chaotic,
     ...
   }:
     flake-parts.lib.mkFlake {
@@ -30,13 +28,7 @@
           config.allowUnfree = true;
         };
 
-        # packages = import ./pkgs {
-        #   inherit inputs;
-        # };
-
-        # packages.default = self'.packages.activate;
-
-        # formatter = pkgs.alejandra;
+        formatter = pkgs.alejandra;
       };
     };
 

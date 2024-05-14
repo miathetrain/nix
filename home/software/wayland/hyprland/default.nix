@@ -19,6 +19,7 @@
       btop
 
       poweralertd
+      hyprshade
 
       ##Brightness
       inputs.dimmer.packages.${pkgs.system}.default
@@ -35,6 +36,7 @@
       XDG_SESSION_TYPE = "wayland";
       NIXOS_OZONE_WL = "1";
       MOZ_ENABLE_WAYLAND = "1";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
     };
   };
 

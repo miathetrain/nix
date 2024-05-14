@@ -33,7 +33,7 @@ in {
         ignore_empty_input = true;
       };
 
-      backgrounds = [
+      background = [
         {
           monitor = "";
           path = "/home/mia/.cache/background"; # only png supported for now
@@ -45,19 +45,13 @@ in {
         }
       ];
 
-      input-fields = [
+      input-field = [
         {
           monitor = "DP-1";
 
-          size = {
-            width = 300;
-            height = 50;
-          };
+          size = "300, 50";
 
-          position = {
-            x = 0;
-            y = -100;
-          };
+          position = "0, -100";
 
           outline_thickness = 4;
 
@@ -75,15 +69,9 @@ in {
         {
           monitor = "eDP-1";
 
-          size = {
-            width = 300;
-            height = 50;
-          };
+          size = "300, 50";
 
-          position = {
-            x = 0;
-            y = -100;
-          };
+          position = "0, -100";
 
           outline_thickness = 4;
 
@@ -99,7 +87,7 @@ in {
         }
       ];
 
-      labels = [
+      label = [
         {
           monitor = "";
           text = "<span font_weight='bold'>$TIME</span>";
@@ -107,10 +95,7 @@ in {
           font_size = 100;
           color = "rgb(cdd6f4)";
 
-          position = {
-            x = 0;
-            y = 120;
-          };
+          position = "0, 120";
 
           valign = "center";
           halign = "center";
@@ -123,10 +108,7 @@ in {
           font_size = 20;
           color = "rgb(cdd6f4)";
 
-          position = {
-            x = 0;
-            y = -20;
-          };
+          position = "0, -20";
 
           valign = "center";
           halign = "center";
@@ -140,10 +122,7 @@ in {
           font_size = 25;
           color = "rgb(a6adc8)";
 
-          position = {
-            x = 0;
-            y = 50;
-          };
+          position = "0, 50";
 
           valign = "bottom";
           halign = "center";
@@ -157,17 +136,14 @@ in {
           font_size = 25;
           color = "rgb(a6adc8)";
 
-          position = {
-            x = 0;
-            y = 50;
-          };
+          position = "0, 50";
 
           valign = "bottom";
           halign = "center";
         }
       ];
 
-      images = [
+      image = [
         {
           monitor = "DP-1";
 
@@ -177,10 +153,7 @@ in {
           border_color = "rgb(11111b)";
           rotate = 0.0;
 
-          position = {
-            x = 0;
-            y = -320;
-          };
+          position = "0, -320";
 
           valign = "top";
           halign = "center";
@@ -197,10 +170,7 @@ in {
           border_color = "rgb(11111b)";
           rotate = 0.0;
 
-          position = {
-            x = 0;
-            y = -320;
-          };
+          position = "0, -320";
 
           valign = "top";
           halign = "center";
