@@ -25,7 +25,6 @@
       }: {
         _module.args.pkgs = import nixpkgs {
           inherit system;
-          config.allowUnfree = true;
         };
 
         formatter = pkgs.alejandra;
@@ -33,7 +32,7 @@
     };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:miathetrain/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
     dimmer.url = "github:miathetrain/dimmer";
@@ -110,7 +109,7 @@
     };
 
     hyprfocus = {
-      url = "github:miathetrain/hyprfocus";
+      url = "github:pyt0xic/hyprfocus";
       inputs.hyprland.follows = "hyprland";
     };
 

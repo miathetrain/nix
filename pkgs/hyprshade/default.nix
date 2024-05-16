@@ -6,6 +6,7 @@
   more-itertools,
   click,
 }:
+
 buildPythonPackage rec {
   pname = "hyprshade";
   version = "3.2.1";

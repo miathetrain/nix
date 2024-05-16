@@ -10,9 +10,25 @@
 
   programs.vscode = {
     enable = true;
-    enableExtensionUpdateCheck = true;
+    enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
+    mutableExtensionsDir = false;
     package = pkgs.vscodium;
+    userTasks = {
+      version = "2.0.0";
+      tasks = [
+        {
+          "label" = "Nix Switch";
+          "type" = "shell";
+          "command" = "nh os switch -- --show-trace";
+          "group" = {
+            "kind" = "build";
+            "isDefault" = true;
+          };
+        }
+      ];
+    };
+
     extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
       bbenoist.nix
 
@@ -53,10 +69,11 @@
         "terminal.integrated.cursorBlinking" = true;
 
         "editor.fontFamily" = "SpaceMono Nerd Font Mono, Catppuccin Perfect Mocha";
+        "editor.useTabStops" = false;
         "editor.fontLigatures" = true;
         "editor.formatOnPaste" = true;
         "editor.formatOnSave" = true;
-        "editor.formatOnType" = false;
+        "editor.formatOnType" = true;
         "editor.minimap.enabled" = true;
         "editor.minimap.renderCharacters" = true;
         "editor.overviewRulerBorder" = false;

@@ -10,7 +10,4 @@
 
   # Fish
   programs.fish.enable = true;
-
-  # Flatpak
-  services.flatpak.enable = true;
 }

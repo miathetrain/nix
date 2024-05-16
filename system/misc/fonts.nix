@@ -7,7 +7,6 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
-      roboto
 
       # nerdfonts
       (nerdfonts.override {fonts = ["SpaceMono" "CascadiaCode"];})

@@ -56,11 +56,8 @@ in {
         (mkIf (cfg.enable) [
           lutris
           heroic
-          gamescope
-          mangohud
           steamtinkerlaunch
           prismlauncher
-          protonup-qt
           ryujinx
         ])
 

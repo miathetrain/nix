@@ -13,11 +13,9 @@
     };
 
     cursorTheme = {
-      name = "Mokou";
-      package = pkgs.runCommand "moveUp" {} ''
-      mkdir -p $out/share/icons
-      ln -s ${toString ./Mokou} $out/share/icons/Mokou
-      '';
+      name = "BreezeX-RosePine-Linux";
+      package = pkgs.rose-pine-cursor;
+      size = 24;
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
@@ -55,6 +53,6 @@
 
   qt = {
     enable = true;
-    platformTheme = "qtct";
+    platformTheme.name = "qtct";
   };
 }

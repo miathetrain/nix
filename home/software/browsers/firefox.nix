@@ -3,20 +3,6 @@
   inputs,
   ...
 }: let
-  SilentFox = pkgs.fetchFromGitHub {
-    owner = "linuxmobile";
-    repo = "SilentFox";
-    rev = "45ad3cb7c26c79831786a11387e21788edd84fe6";
-    sha256 = "sha256-9Bj0M0CAch4CenM9TFXUkGa6nHwC6y24azCXcUFtU6M=";
-  };
-
-  gwfox = pkgs.fetchFromGitHub {
-    owner = "akkva";
-    repo = "gwfox";
-    rev = "5b84948a0d7d366dd4080ecbbf1b298ea77802a2";
-    sha256 = "sha256-gp+orrXZh2ykc7MklwIm2pRicDXmwaiYw0WW30IJcrw=";
-  };
-
   minimalFox = pkgs.fetchFromGitHub {
     owner = "WilliamAnimate";
     repo = "MinimalFox";
@@ -45,14 +31,14 @@ in {
         builtins.concatStringsSep "\n"
         (builtins.map builtins.readFile [
           "${minimalFox}/userChrome.css"
+          ./add.css
         ]);
 
-      userContent = builtins.concatStringsSep "\n" (builtins.map builtins.readFile [
+      userContent = builtins.concatStringsSep "\n" (
+        builtins.map builtins.readFile [
           "${minimalFox}/userContent.css"
         ]
-        ++ [
-          "./add.css"
-        ]);
+      );
 
       search.engines = {
         "Home Manager NixOS" = {
@@ -117,7 +103,7 @@ in {
           definedAliases = ["@no"];
         };
         "NixOS Wiki" = {
-          urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+          urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
           iconUpdateURL = "https://nixos.wiki/favicon.png";
           updateInterval = 24 * 60 * 60 * 1000; # every day
           definedAliases = ["@wiki"];
@@ -128,7 +114,15 @@ in {
         "Google".metaData.alias = "@g";
       };
       settings = {
+        "browser.startup.homepage" = "https://nixos.org";
+        "browser.newtabpage.pinned" = [
+          {
+            title = "NixOS";
+            url = "https://nixos.org";
+          }
+        ];
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "browser.tabs.closeWindowWithLastTab" = false;
         "dom.security.https_only_mode" = true;
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;

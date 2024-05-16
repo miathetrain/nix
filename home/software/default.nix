@@ -28,8 +28,6 @@
     cargo
     rustfmt
 
-    wireguard-tools
-    fastfetch
     wtype
 
     resources
@@ -44,8 +42,10 @@
     qt5ct
 
     element-desktop
+    sgdboop
+    adwsteamgtk
   ];
-  
+
   services.arrpc.enable = true;
   services.arrpc.package = pkgs.arrpc;
 
