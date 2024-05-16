@@ -9,8 +9,17 @@
 in {
   imports = [
     ./software
-    ./shell/starship.nix
-    ./shell/fish.nix
+    ./shell/fish/starship.nix
+    ./shell/fish/fish.nix
+    ./services/transient-services.nix
+
+    ./services/git.nix
+    ./services/gpg.nix
+    ./services/gopass.nix
+
+    ./shell/cmd/screenshot-area.nix
+    ./shell/cmd/screenshot-full.nix
+    ./shell/cmd/killactive.nix
 
     inputs.nix-index-db.hmModules.nix-index
   ];

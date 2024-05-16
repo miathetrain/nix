@@ -25,7 +25,7 @@
     # };
 
     settings = {
-      format = "[](mauve)\$os\$username\[](bg:red fg:mauve)\$directory\[](fg:red bg:peach)\$git_branch\$git_status\[](fg:peach bg:sapphire)\$c\$rust\$golang\$nodejs\$php\$java\$kotlin\$haskell\$python\[](fg:sapphire bg:blue)\$time\[](fg:blue)\$line_break$character ";
+      format = "[](mauve)\$os\$username\[](bg:red fg:mauve)\$directory\[](fg:red bg:peach)\$git_branch\$git_status\[](fg:peach bg:sapphire)\$c\$rust\$golang\$nodejs\$php\$java\$kotlin\$haskell\$python\[](fg:sapphire bg:blue)\$time\[](fg:blue)\$line_break$character";
 
       palette = "catppucin";
 

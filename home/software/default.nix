@@ -42,19 +42,10 @@
     sound-theme-freedesktop
 
     qt5ct
+
+    element-desktop
   ];
-
-  # services.steamvr = {
-  #   runtimeOverride = {
-  #     enable = false;
-  #     path = "${pkgs.opencomposite}/lib/opencomposite";
-  #   };
-  #   activeRuntimeOverride = {
-  #     enable = false;
-  #     path = "${inputs.lemonake.packages.${pkgs.system}.wivrn}/share/openxr/1/openxr_wivrn.json"; # WiVRn is not merged yet
-  #   };
-  # };
-
+  
   services.arrpc.enable = true;
   services.arrpc.package = pkgs.arrpc;
 

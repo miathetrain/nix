@@ -225,7 +225,6 @@ function smallNotification(n) {
             })
             break;
         case "discord":
-            Utils.exec('canberra-gtk-play -i message')
             return Widget.Box({
                 attribute: { id: n.id },
                 class_name: `small-notification ${n.urgency}`,
@@ -259,7 +258,6 @@ function smallNotification(n) {
             })
             break;
         default:
-            Utils.exec('canberra-gtk-play -i bell')
             return Widget.Box({
                 attribute: { id: n.id },
                 class_name: `small-notification ${n.urgency}`,

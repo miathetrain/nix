@@ -4,30 +4,20 @@
   config,
   ...
 }: {
-  home.pointerCursor = let
-    getFrom = url: hash: name: {
-      gtk.enable = true;
-      x11.enable = true;
-
-      name = name;
-      size = 24; ## 48
-      package = pkgs.runCommand "moveUp" {} ''
-        mkdir -p $out/share/icons
-        ln -s ${toString ./Mokou} $out/share/icons/${name}
-      '';
-    };
-  in
-    getFrom
-    ""
-    ""
-    "Mokou";
-
   gtk = {
     enable = true;
     font = {
       name = "Lexend";
       package = pkgs.lexend;
       size = 10;
+    };
+
+    cursorTheme = {
+      name = "Mokou";
+      package = pkgs.runCommand "moveUp" {} ''
+      mkdir -p $out/share/icons
+      ln -s ${toString ./Mokou} $out/share/icons/Mokou
+      '';
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";

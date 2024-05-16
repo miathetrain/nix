@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  pointer = config.home.pointerCursor;
+  pointer = config.gtk.cursorTheme;
   homeDir = config.home.homeDirectory;
 in {
   wayland.windowManager.hyprland = {
@@ -15,10 +15,10 @@ in {
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
         "swayosd-server"
-        "poweralertd -i 'line power'"
-        "wlsunset"
+        #        "poweralertd -i 'line power'"
+        #        "wlsunset"
         "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "hyprctl dispatcher focusmonitor 3"
+        #        "hyprctl dispatcher focusmonitor 3"
         "systemctl --user start swww-random-img.service"
         "sleep 1 && hyprlock --immediate"
       ];
@@ -42,10 +42,19 @@ in {
 
       input = {
         kb_layout = "us";
-        kb_model = "apple"; ## apple
-        kb_variant = "mac";
-        kb_options = "['ctrl:swap_lwin_lctl', 'ctrl:swap_rwin_rctl']";
+        # kb_model = "apple"; ## apple
+        # kb_variant = "mac";
+        # kb_options = "['ctrl:swap_lwin_lctl', 'ctrl:swap_rwin_rctl']";
         accel_profile = "flat";
+      };
+
+      cursor = {
+        no_warps = true;
+        enable_hyprcursor = false;
+      };
+
+      binds = {
+        workspace_back_and_forth = true;
       };
 
       misc = {
@@ -59,6 +68,7 @@ in {
         focus_on_activate = true;
         no_direct_scanout = false;
         new_window_takes_over_fullscreen = 1;
+        initial_workspace_tracking = 2;
       };
 
       general = {
@@ -71,7 +81,7 @@ in {
         resize_on_border = true;
 
         monitor = [
-          "DP-1,2560x1440@144,1920x0,1"
+          "DP-1,2560x1440@144,1920x0,1.25"
           "HDMI-A-1,1920x1080@75,0x0,1"
           "DP-2,1920x1080@60,0x1080,1,transform,2"
 

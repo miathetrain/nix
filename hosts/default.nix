@@ -18,8 +18,8 @@
     dreamhouse = nixosSystem {
       inherit specialArgs;
       modules =
-        [inputs.lix-module.nixosModules.default]
-        ++ desktop
+        # [inputs.lix-module.nixosModules.default]
+        desktop
         ++ [
           ./dreamhouse
           {

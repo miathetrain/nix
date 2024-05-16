@@ -29,66 +29,73 @@
       catppuccin.catppuccin-vsc
       canakyuz.csharp-extension-pack
       mohammadbaqer.better-folding
-      thang-nm.catppuccin-perfect-icons
+      catppuccin.catppuccin-vsc-icons
       rust-lang.rust-analyzer
     ];
     userSettings = lib.mkMerge [
       {
         "workbench.iconTheme" = "catppuccin-perfect-mocha";
         "workbench.colorTheme" = "Catppuccin Mocha";
-        "editor.fontFamily" = "SpaceMono Nerd Font Mono, Catppuccin Perfect Mocha, 'monospace', monospace";
-        "editor.fontLigatures" = true;
+        "workbench.editor.tabActionLocation" = "left";
+        "workbench.panel.defaultLocation" = "bottom";
+        "workbench.list.smoothScrolling" = true;
+        "workbench.startupEditor" = "newUntitledFile";
+        "workbench.sideBar.location" = "right";
+
+        "files.autoSave" = "afterDelay";
         "files.trimTrailingWhitespace" = true;
+        "files.associations" = {
+          "*.css" = "tailwindcss";
+        };
+
         "terminal.integrated.fontFamily" = "SpaceMono Nerd Font Mono";
-        "window.titleBarStyle" = "custom";
         "terminal.integrated.defaultProfile.linux" = "fish";
         "terminal.integrated.cursorBlinking" = true;
+
+        "editor.fontFamily" = "SpaceMono Nerd Font Mono, Catppuccin Perfect Mocha";
+        "editor.fontLigatures" = true;
         "editor.formatOnPaste" = true;
         "editor.formatOnSave" = true;
         "editor.formatOnType" = false;
-        "editor.minimap.enabled" = false;
-        "editor.minimap.renderCharacters" = false;
+        "editor.minimap.enabled" = true;
+        "editor.minimap.renderCharacters" = true;
         "editor.overviewRulerBorder" = false;
         "editor.renderLineHighlight" = "all";
         "editor.inlineSuggest.enabled" = true;
         "editor.smoothScrolling" = true;
         "editor.suggestSelection" = "first";
         "editor.guides.indentation" = true;
-        "editor.guides.bracketPairs" = true;
         "editor.bracketPairColorization.enabled" = true;
-        "window.restoreWindows" = "all";
-        "window.menuBarVisibility" = "toggle";
-        "workbench.panel.defaultLocation" = "bottom";
-        "workbench.list.smoothScrolling" = true;
-        "security.workspace.trust.enabled" = false;
-        "explorer.confirmDelete" = false;
-        "breadcrumbs.enabled" = true;
-        "telemetry.telemetryLevel" = "off";
-        "workbench.startupEditor" = "newUntitledFile";
+        "editor.bracketPairColorization.independentColorPoolPerBracketType" = false;
         "editor.cursorBlinking" = "expand";
-        "security.workspace.trust.untrustedFiles" = "open";
-        "security.workspace.trust.banner" = "never";
-        "security.workspace.trust.startupPrompt" = "never";
-        "editor.autoClosingBrackets" = "always";
-
-        "workbench.sideBar.location" = "right";
-        "editor.tabSize" = 1;
-        "editor.wordWrap" = "on";
+        "editor.tabSize" = 2;
         "editor.quickSuggestions" = {
           "strings" = "on";
         };
-        "workbench.editor.tabActionLocation" = "left";
-        "files.associations" = {
-          "*.css" = "tailwindcss";
-        };
-        "[typescript]" = {
-          "editor.defaultFormatter" = "vscode.typescript-language-features";
-        };
-        "[javascript]" = {
-          "editor.defaultFormatter" = "vscode.typescript-language-features";
-        };
 
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "window.restoreWindows" = "all";
+        "window.menuBarVisibility" = "toggle";
+        "window.titleBarStyle" = "custom";
+
+        "security.workspace.trust.enabled" = false;
+        "security.workspace.trust.untrustedFiles" = "open";
+        "security.workspace.trust.banner" = "never";
+        "security.workspace.trust.startupPrompt" = "never";
+
+        "explorer.confirmDelete" = false;
+        "explorer.confirmDragAndDrop" = false;
+
+        "breadcrumbs.enabled" = true;
+
+        "telemetry.telemetryLevel" = "off";
+
+        "git.autofetch" = true;
+
+        "auto-close-tag.activationOnLanguage" = [
+          "*"
+        ];
+
+        "catppuccin.accentColor" = "pink";
 
         "[nix]" = {
           "editor.defaultFormatter" = "kamadorueda.alejandra";
@@ -97,16 +104,13 @@
           "editor.formatOnType" = false;
         };
 
-        "[rust]" = {
-          "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+        "[typescript]" = {
+          "editor.defaultFormatter" = "vscode.typescript-language-features";
         };
 
-        "typescript.suggest.paths" = false;
-        "javascript.suggest.paths" = false;
-
-        "files.autoSave" = "afterDelay";
-
-        "git.autofetch" = true;
+        "[javascript]" = {
+          "editor.defaultFormatter" = "vscode.typescript-language-features";
+        };
       }
       (lib.mkIf (osConfig.networking.hostName == "dreamhouse") {
         "editor.fontSize" = 14;

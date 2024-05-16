@@ -20,6 +20,7 @@
 
       poweralertd
       hyprshade
+      overskride # Bluetooth
 
       ##Brightness
       inputs.dimmer.packages.${pkgs.system}.default
