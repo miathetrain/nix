@@ -25,6 +25,8 @@ with lib; {
 
   programs.light.enable = true;
 
+  home-manager.backupFileExtension = "backup";
+
   chaotic.mesa-git = {
     enable = true;
     fallbackSpecialisation = false;
