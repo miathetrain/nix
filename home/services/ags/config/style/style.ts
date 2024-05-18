@@ -10,4 +10,4 @@ Utils.exec(`dart-sass ${scss} ${css}`)
 App.resetCss() // reset if need
 
 App.applyCss(css)
-App.addIcons("./assets")
+App.addIcons(`${App.configDir}/style/assets`)

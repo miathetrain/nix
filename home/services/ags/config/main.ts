@@ -1,6 +1,6 @@
-import "/style/style"
+import "style/style"
 
-import Bar from "widgets/bar/Bar"
+import Bar from "widget/bar/Bar"
 
 App.config({
   closeWindowDelay: {

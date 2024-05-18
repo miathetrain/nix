@@ -220,7 +220,7 @@ function Media() {
           })
         }
       });
-  
+
     },
 
     child: Widget.Box({

@@ -1,4 +1,4 @@
-import Launcher from "./widget/Launcher"
+import Launcher from "./Launcher"
 
 const Left = Widget.Box({
   children: [Launcher()],
