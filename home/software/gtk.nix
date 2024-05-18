@@ -4,18 +4,19 @@
   config,
   ...
 }: {
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.rose-pine-cursor;
+    name = "BreezeX-RosePine-Linux";
+    size = 24;
+  };
+
   gtk = {
     enable = true;
     font = {
       name = "Lexend";
       package = pkgs.lexend;
       size = 10;
-    };
-
-    cursorTheme = {
-      name = "BreezeX-RosePine-Linux";
-      package = pkgs.rose-pine-cursor;
-      size = 24;
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
@@ -36,17 +37,17 @@
 
     gtk3.extraConfig = {
       gtk-xft-antialias = 1;
-      gtk-xft-hinting = 1;
-      gtk-xft-hintstyle = "hintslight";
-      gtk-xft-rgba = "rgb";
+      # gtk-xft-hinting = 1;
+      # gtk-xft-hintstyle = "hintslight";
+      # gtk-xft-rgba = "rgb";
       gtk-application-prefer-dark-theme = 1;
     };
-    gtk2.extraConfig = ''
-      gtk-xft-antialias=1
-      gtk-xft-hinting=1
-      gtk-xft-hintstyle="hintslight"
-      gtk-xft-rgba="rgb"
-    '';
+    # gtk2.extraConfig = ''
+    #   gtk-xft-antialias=1
+    #   gtk-xft-hinting=1
+    #   gtk-xft-hintstyle="hintslight"
+    #   gtk-xft-rgba="rgb"
+    # '';
 
     gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
   };
@@ -54,5 +55,9 @@
   qt = {
     enable = true;
     platformTheme.name = "qtct";
+    style = {
+      package = pkgs.utterly-nord-plasma;
+      name = "Utterly Nord Plasma";
+    };
   };
 }

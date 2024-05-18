@@ -62,25 +62,37 @@
 
     exit 0
   '';
+
+  ags-wrapped = pkgs.callPackage ./ags.nix {};
 in {
   imports = [
     inputs.ags.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
-    toybox
-    busybox ##usleep
-    ags-wrap
+    ags-wrapped
+
     cpu-usage
     memory-usage
     memory-free
     gpu-usage
     gpu-memory
+
     amdgpu_top
+    # toybox
+    # busybox ##usleep
+    # ags-wrap
+    # cpu-usage
+    # memory-usage
+    # memory-free
+    # gpu-usage
+    # gpu-memory
+    # amdgpu_top
   ];
 
   programs.ags = {
     enable = true;
+    configDir = ./config;
   };
 
   services.xembed-sni-proxy.enable = true;
@@ -94,7 +106,7 @@ in {
       Install.WantedBy = ["hyprland-session.target"];
 
       Service = {
-        ExecStart = ''${pkgs.ags-wrap}/bin/ags-wrap'';
+        ExecStart = ''${ags-wrapped}/bin/ags-wrap'';
       };
     };
   };

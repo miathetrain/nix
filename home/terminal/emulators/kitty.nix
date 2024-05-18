@@ -4,7 +4,7 @@
     font = {
       name = "SpaceMono Nerd Font Mono";
       package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
-      size = 13;
+      size = 11;
     };
 
     theme = "Catppuccin-Mocha";

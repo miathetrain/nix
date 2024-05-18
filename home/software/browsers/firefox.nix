@@ -127,7 +127,7 @@ in {
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
         "browser.fullscreen.autohide" = false;
-        "layout.css.devPixelsPerPx" = 1.15;
+        # "layout.css.devPixelsPerPx" = 1.15;
         "privacy.donottrackheader.enabled" = true;
         "signon.rememberSignons" = false;
       };
