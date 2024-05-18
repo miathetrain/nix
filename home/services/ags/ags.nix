@@ -4,6 +4,7 @@
   writeShellScript,
   system,
   esbuild,
+  dart-sass,
   ...
 }: let
   name = "ags-wrap";
@@ -11,8 +12,7 @@
   ags = inputs.ags.packages.${system}.default;
 
   dependencies = [
-    # gtk3
-    # dart-sass
+    dart-sass
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
