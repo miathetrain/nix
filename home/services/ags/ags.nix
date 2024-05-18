@@ -1,4 +1,9 @@
 {
+  stdenv,
+  inputs,
+  writeShellScript,
+  system,
+  esbuild,
   ...
 }: let
   name = "ags-wrap";
