@@ -1,7 +1,9 @@
 import Launcher from "./Launcher"
+import ClientTitle from "./ClientTitle"
+import Workspaces from "./Workspaces"
 
 const Left = Widget.Box({
-  children: [Launcher()],
+  children: [Launcher(), Workspaces(), ClientTitle() ],
 })
 
 const Center = Widget.Box({
