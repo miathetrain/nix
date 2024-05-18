@@ -49,7 +49,7 @@ in {
         {
           monitor = "DP-1";
 
-          size = "300, 50";
+          size = "270, 50";
 
           position = "0, -100";
 
@@ -69,7 +69,7 @@ in {
         {
           monitor = "eDP-1";
 
-          size = "300, 50";
+          size = "270, 50";
 
           position = "0, -100";
 
