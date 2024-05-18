@@ -48,7 +48,7 @@
     elif [ $1 == "gpumemory" ]; then
       total=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .VRAM | ."Total VRAM" | .value)')
       current=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .VRAM | ."Total VRAM Usage" | .value)')
-      math=$($current / $total)
+      math=$(($current / $total))
       echo $math
     fi
   '';
