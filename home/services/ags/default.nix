@@ -69,6 +69,8 @@ in {
   programs.ags.enable = true;
   services.xembed-sni-proxy.enable = true;
 
+  home.packages = dependencies;
+
   systemd.user.services = {
     ags = {
       Unit = {
