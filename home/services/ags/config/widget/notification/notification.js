@@ -2,13 +2,55 @@ import GLib from 'types/@girs/glib-2.0/glib-2.0';
 import { Align } from 'types/@girs/gtk-3.0/gtk-3.0.cjs';
 
 const notifications = await Service.import("notifications")
+const hyprland = await Service.import("hyprland")
 
 export const hasNotifications = Variable(false);
 
+export const list = Widget.Box({
+    vertical: true,
+})
+
 export const notification_list = Widget.Box({
     vertical: true,
-    children: notifications.notifications.map(smallNotification),
+    // children: notifications.notifications.map(smallNotification),
 });
+
+export function countNotifications() {
+    return notifications.notifications.length
+}
+
+export function clearNotifications() {
+    notifications.notifications.forEach(function (value) {
+        removeNotification(value)
+    })
+}
+
+// @ts-ignore
+export function removeNotification(not) {
+    // const clockList = notification_list.children.find(n => n.attribute.id === not.id)
+    // @ts-ignore
+    const notificationList = list.children.find(n => n.attribute.id === not.id)
+
+    // notification_list.children = [];
+
+    if (notificationList != null) {
+        // @ts-ignore
+        notificationList.transition = "slide_right"
+        // @ts-ignore
+        notificationList.transitionDuration = 1000
+        // @ts-ignore
+        notificationList.revealChild = false
+        Utils.timeout(1000, () => {
+            notificationList.destroy()
+        })
+    }
+
+    Utils.timeout(1000, () => {
+        notifications.clear()
+    })
+
+    // notification_list.children.find(n)?.destroy()
+}
 
 /** @param {import('resource:///com/github/Aylur/ags/service/notifications.js').Notification} n */
 function NotificationIcon({ app_entry, app_icon, image }) {
@@ -79,31 +121,39 @@ function Notification(n) {
         })),
     })
 
-    return Widget.EventBox(
-        {
-            attribute: { id: n.id },
-            on_primary_click: n.dismiss,
+    return Widget.Revealer({
+        revealChild: false,
+        transitionDuration: 500,
+        transition: 'slide_down',
+        attribute: { id: n.id, hint: n.hints['hint']?.get_string()[0] },
+        setup: (self) => {
+            Utils.timeout(500, () => {
+                self.reveal_child = true;
+            })
         },
-        Widget.Box(
-            {
-                class_name: `notification ${n.urgency}`,
-                vertical: true,
-            },
-            Widget.Box([
-                icon,
-                Widget.Box(
-                    { vertical: true },
-                    title,
-                    body,
-                ),
-            ]),
-            actions,
-        ),
-    )
+        child: Widget.EventBox({
+            on_primary_click: n.dismiss,
+            child: Widget.Box(
+                {
+                    class_name: `notification ${n.urgency}`,
+                    vertical: true,
+                },
+                Widget.Box([
+                    icon,
+                    Widget.Box(
+                        { vertical: true },
+                        title,
+                        body,
+                    ),
+                ]),
+                actions,
+            )
+        })
+    })
 }
 
 /** @param {import('resource:///com/github/Aylur/ags/service/notifications.js').Notification} n */
-function smallNotification(n) {
+export function smallNotification(n) {
     if (hasNotifications.value == false)
         hasNotifications.setValue(true)
 
@@ -189,93 +239,156 @@ function smallNotification(n) {
     })
 
     switch (n.app_name) {
+        case "Spotify":
+            return Widget.Revealer({
+                revealChild: false,
+                transitionDuration: 500,
+                transition: 'slide_down',
+                attribute: { id: n.id, hint: "spotify" },
+                setup: (self) => {
+                    Utils.timeout(500, () => {
+                        self.reveal_child = true;
+                    })
+                },
+                child: Widget.Box({
+                    class_name: `small-notification ${n.urgency}`,
+                    children: [
+                        icon,
+                        Widget.Box({
+                            vertical: true,
+                            spacing: 5,
+                            children: [
+                                Widget.Box({
+                                    spacing: 10,
+                                    children: [title, time, dismiss]
+                                }),
+                                body,
+                                actions
+                            ],
+                        })
+                    ],
+                })
+            })
+            break;
         case "wallpaper":
         case "screenshot":
-            return Widget.Box({
-                attribute: { id: n.id },
-                class_name: `small-notification ${n.urgency}`,
-                vertical: true,
-                spacing: 14,
-                children: [
-                    Widget.Box({
-                        vertical: true,
-                        children: [
-                            Widget.Box({
-                                spacing: 5,
-                                children: [title, time, dismiss]
-                            }),
-                            body
-                        ],
-                    }),
-                    big_icon,
-                    Widget.Box({
-                        class_name: "small-actions",
-                        children: [
-                            Widget.Button({
-                                class_name: "small-action-button",
-                                on_clicked: () => {
-
-                                    //
-                                },
-                                hexpand: false,
-                                child: Widget.Label("Copy to Clipboard"),
-                            })],
+            return Widget.Revealer({
+                revealChild: false,
+                transitionDuration: 500,
+                transition: 'slide_down',
+                attribute: { id: n.id, hint: n.hints['hint']?.get_string()[0] },
+                setup: (self) => {
+                    Utils.timeout(500, () => {
+                        self.reveal_child = true;
                     })
-                ]
+                },
+                child: Widget.Box({
+                    class_name: `small-notification ${n.urgency}`,
+                    vertical: true,
+                    spacing: 14,
+                    children: [
+                        Widget.Box({
+                            vertical: true,
+                            children: [
+                                Widget.Box({
+                                    spacing: 5,
+                                    children: [title, time, dismiss]
+                                }),
+                                body
+                            ],
+                        }),
+                        big_icon,
+                        Widget.Box({
+                            class_name: "small-actions",
+                            children: [
+                                Widget.Button({
+                                    class_name: "small-action-button",
+                                    on_clicked: () => {
+
+                                        //
+                                    },
+                                    hexpand: false,
+                                    child: Widget.Label("Copy to Clipboard"),
+                                })],
+                        })
+                    ]
+                })
             })
             break;
         case "discord":
-            return Widget.Box({
+            return Widget.Revealer({
+                revealChild: false,
+                transitionDuration: 500,
+                transition: 'slide_down',
                 attribute: { id: n.id },
-                class_name: `small-notification ${n.urgency}`,
-                children: [
-                    icon,
-                    Widget.Box({
-                        vertical: true,
-                        spacing: 5,
-                        children: [
-                            Widget.Box({
-                                spacing: 10,
-                                children: [title, time, dismiss]
-                            }),
-                            body,
-                            Widget.Box({
-                                class_name: "small-actions",
-                                children: [
-                                    Widget.Button({
-                                        class_name: "small-action-button",
-                                        on_clicked: () => {
-
-                                            // switch to discord
-                                        },
-                                        hexpand: false,
-                                        child: Widget.Label("View"),
-                                    })],
-                            })
-                        ],
+                setup: (self) => {
+                    Utils.timeout(500, () => {
+                        self.reveal_child = true;
                     })
-                ],
+                },
+                child: Widget.Box({
+                    attribute: { id: n.id },
+                    class_name: `small-notification ${n.urgency}`,
+                    children: [
+                        icon,
+                        Widget.Box({
+                            vertical: true,
+                            spacing: 5,
+                            children: [
+                                Widget.Box({
+                                    spacing: 10,
+                                    children: [title, time, dismiss]
+                                }),
+                                body,
+                                Widget.Box({
+                                    class_name: "small-actions",
+                                    children: [
+                                        Widget.Button({
+                                            class_name: "small-action-button",
+                                            on_clicked: () => {
+                                                hyprland.messageAsync(`dispatch workspace 3`)
+                                                // switch to discord
+                                            },
+                                            hexpand: false,
+                                            child: Widget.Label("View"),
+                                        })],
+                                })
+                            ],
+                        })
+                    ],
+                })
             })
             break;
         default:
-            return Widget.Box({
-                attribute: { id: n.id },
-                class_name: `small-notification ${n.urgency}`,
-                children: [
-                    icon,
-                    Widget.Box({
-                        vertical: true,
-                        spacing: 5,
-                        children: [
-                            Widget.Box({
-                                spacing: 10,
-                                children: [title, time, dismiss]
-                            }),
-                            body,
-                            actions
-                        ],
+            return Widget.Revealer({
+                revealChild: false,
+                transitionDuration: 500,
+                transition: 'slide_down',
+                attribute: { id: n.id, hint: n.hints['hint']?.get_string()[0] },
+                setup: (self) => {
+                    Utils.timeout(500, () => {
+                        self.reveal_child = true;
                     })
-                ],
+                },
+                child: Widget.Box({
+                    attribute: { id: n.id },
+                    class_name: `small-notification ${n.urgency}`,
+                    children: [
+                        icon,
+                        Widget.Box({
+                            vertical: true,
+                            spacing: 5,
+                            children: [
+                                Widget.Box({
+                                    spacing: 10,
+                                    children: [title, time, dismiss]
+                                }),
+                                body,
+                                actions
+                            ],
+                        })
+                    ],
+                })
             })
             break;
     }
@@ -285,44 +398,63 @@ export function NotificationPopups(monitor = 0) {
     notifications.popupTimeout = 10000;
     notifications.forceTimeout = true;
 
-
-
-    const list = Widget.Box({
-        vertical: true,
-        children: notifications.popups.map(Notification),
-    })
-
     function onNotified(_, /** @type {number} */ id) {
         const n = notifications.getNotification(id)
         if (n) {
-            list.children = [Notification(n), ...list.children]
-        }
-    }
+            const hint = n.hints['hint']?.get_string()[0]
 
-    function onNotifiedList(_, /** @type {number} */ id) {
-        const n = notifications.getNotification(id)
-        if (n) {
+            if (hint && hint != "") {
+                // @ts-ignore
+                list.children.find(n => n.attribute.hint === hint)?.destroy()
+                // @ts-ignore
+                notification_list.children.find(n => n.attribute.hint === hint)?.destroy()
+            }
+
+            if (n.app_name == "Spotify") {
+                log("Hint: " + hint + " App Name: " + n)
+                // @ts-ignore
+                list.children.find(n => n.attribute.hint === "spotify")?.destroy()
+                // @ts-ignore
+                notification_list.children.find(n => n.attribute.hint === "spotify")?.destroy()
+            }
+
+            list.children = [Notification(n), ...list.children]
             notification_list.children = [smallNotification(n), ...notification_list.children]
         }
     }
 
     function onDismissed(_, /** @type {number} */ id) {
-        // list.children.find(n => n.attribute.id === id)?.destroy() // make noti invisible instead of destroying it.
+        // @ts-ignore
+        const child = list.children.find(n => n.attribute.id === id)
+
+        if (child != null) {
+            // @ts-ignore
+            child.transition = "slide_right"
+            // @ts-ignore
+            child.transitionDuration = 1000
+            // @ts-ignore
+            child.revealChild = false
+            Utils.timeout(1000, () => {
+                child.destroy()
+            })
+        }
     }
 
     function onClosed(_, /** @type {number} */ id) {
+        // @ts-ignore
         notification_list.children.find(n => n.attribute.id === id)?.destroy()
+
+        // @ts-ignore
+        list.children.find(n => n.attribute.id === id)?.destroy()
         if (notification_list.children[0] == null) {
             hasNotifications.setValue(false)
         }
-
-
     }
 
     // list.hook(notifications, onNotified, "notified")
-    // .hook(notifications, onDismissed, "dismissed")
+    list.hook(notifications, onDismissed, "dismissed")
 
-    notification_list.hook(notifications, onNotifiedList, "notified")
+    notification_list.hook(notifications, onNotified, "notified")
     notification_list.hook(notifications, onClosed, "closed")
 
     return Widget.Window({
@@ -335,7 +467,7 @@ export function NotificationPopups(monitor = 0) {
             css: "min-width: 2px; min-height: 2px;",
             class_name: "notifications",
             vertical: true,
-            children: notifications.bind('popups').as(popups => popups.map(Notification)),
+            child: list,
         }),
     })
 }

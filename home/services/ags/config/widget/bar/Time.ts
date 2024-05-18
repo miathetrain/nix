@@ -1,16 +1,18 @@
 import { format } from 'date-fns'
 
+var visible = false;
+
 export default () => Widget.EventBox({
   class_name: "date",
-  hpack: "center",
   on_primary_click: () => {
-    // if (clockBar.visible) {
-    //   App.closeWindow("clockbar");
-    // }
-    // else {
-    //   clockBar.visible = true;
-    //   App.openWindow("clockbar")
-    // }
+    if (visible) {
+      visible = false;
+      App.closeWindow("clockbar");
+    }
+    else {
+      visible = true;
+      App.openWindow("clockbar")
+    }
   },
   child: Widget.Label({
     label: time.bind()

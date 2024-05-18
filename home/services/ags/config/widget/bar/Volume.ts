@@ -36,7 +36,7 @@ export default () => {
 
   return Widget.Box({
     class_name: 'volume',
-    css: 'min-width: 140px',
+    css: 'min-width: 130px',
     children: [icon, slider],
   })
 }

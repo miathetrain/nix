@@ -26,7 +26,7 @@
     sss --author "" --padding-x 5 --padding-y 5 --area "$selected_area" -o raw > "$file_path"
     cat "$file_path" | wl-copy -t image/png
 
-    notify-send -a "screenshot" "Screenshot" "Copied to clipboard." -i "$file_path"
+    notify-send -a "screenshot" "Screenshot" "Copied to clipboard." -h string:hint:screenshot -i "$file_path"
   '';
 in {
   home.packages = [screenshot-area pkgs.slurp];

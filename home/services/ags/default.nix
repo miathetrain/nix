@@ -23,7 +23,7 @@
       cpu_total_cur=$((user+system+nice+softirq+steal+idle+iowait))
 
       # compute CPU utilization (%)
-      cpu_util=$((100*( cpu_active_cur-cpu_active_prev ) / (cpu_total_cur-cpu_total_prev) ))
+      cpu_util=$((100*( $cpu_active_cur - $cpu_active_prev ) / ( $cpu_total_cur - $cpu_total_prev )))
 
       printf "%s" "$cpu_util"
 
@@ -46,9 +46,10 @@
       echo $s
 
     elif [ $1 == "gpumemory" ]; then
-      s=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .gpu_activity | .Memory | .value )')
-      echo $s
-
+      total=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .VRAM | ."Total VRAM" | .value)')
+      current=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .VRAM | ."Total VRAM Usage" | .value)')
+      math=$($current / $total)
+      echo $math
     fi
   '';
 

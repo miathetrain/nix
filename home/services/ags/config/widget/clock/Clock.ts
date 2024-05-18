@@ -1,8 +1,8 @@
-import { NotificationPopups, notification_list, hasNotifications } from "../notification/notification.js"
+import { notification_list, hasNotifications, countNotifications, clearNotifications } from "../notification/notification.js"
 
 export default () => Widget.Window({
   name: "clockbar",
-  className: "clockbar",
+  class_name: "transparent",
   visible: false,
   keymode: "exclusive",
   setup: self => self.keybind("Escape", () => {
@@ -38,13 +38,22 @@ export default () => Widget.Window({
               start_widget: Widget.Label({
                 hpack: "start",
                 label: "Notifications",
-                class_name: "notification-title"
+                class_name: "notification-title",
+                tooltip_text: "Notifications show below.",
               }),
-              end_widget: Widget.Label({
-                hpack: "end",
-                label: "",
-                class_name: "notification-clear"
+              end_widget: Widget.EventBox({
+                "on-primary-click": (event) => {
+                  clearNotifications()
+                },
+                child: Widget.Label({
+                  hpack: "end",
+                  label: " ",
+                  class_name: "notification-clear",
+                  tooltip_text: "Clear notifications. (" + countNotifications() + ")"
+                })
               })
+
+
             }),
             Widget.Scrollable({
               hscroll: 'never',
@@ -72,12 +81,11 @@ export default () => Widget.Window({
 
                   Widget.Label({
                     class_name: "empty-notifications",
-                    label: "No Noti's"
+                    label: "No Notifications"
                   })
                 ],
               })
             }),
-
           ],
         }),
 

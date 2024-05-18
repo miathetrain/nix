@@ -22,7 +22,7 @@
 
     sss --author "" --padding-x 0 --padding-y 0 --screen-id "$screen_id" -o raw >"$file_path"
     cat "$file_path" | wl-copy -t image/png
-    notify-send -a "screenshot" "Screenshot" "Copied to clipboard." -i "$file_path"
+    notify-send -a "screenshot" "Screenshot" "Copied to clipboard." -h string:hint:screenshot -i "$file_path"
   '';
 in {
   home.packages = with pkgs; [
