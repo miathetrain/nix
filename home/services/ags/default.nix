@@ -63,14 +63,20 @@
     exit 0
   '';
 
-  ags-wrapped = pkgs.callPackage ./ags.nix {};
+  pinfo = writeShellScriptBin "pinfo" ''
+    if [ $1 == "cpu" ]; then
+       echo "CPU"
+       fi
+  '';
+
+  ags-wrapped = pkgs.callPackage ./ags.nix {inherit inputs;};
 in {
   imports = [
     inputs.ags.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
-    ags-wrapped
+    pinfo
 
     cpu-usage
     memory-usage
