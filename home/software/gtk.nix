@@ -6,8 +6,11 @@
 }: {
   home.pointerCursor = {
     gtk.enable = true;
-    package = ../../files/cursor/GoogleDot-Violet;
     name = "GoogleDot-Violet";
+    package = pkgs.runCommand "cursor" {} ''
+      mkdir -p $out/share/icons
+      ln -s ${../../files/cursor/GoogleDot-Violet} $out/share/icons/${config.home.pointerCursor.name}
+    '';
     size = 24;
   };
 
