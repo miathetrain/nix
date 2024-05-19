@@ -42,8 +42,7 @@ in {
             "HDMI-A-1,1920x1080@75,0x0,1"
             "DP-2,1920x1080@60,0x1080,1,transform,2"
 
-            "eDP-1,2560x1600,0x0,1.6"
-            ",preferred,auto,auto"
+            "eDP-1,2560x1600,0x0,2"
           ];
 
           workspace = [
@@ -152,7 +151,7 @@ in {
           "$MOD, Escape, exec, wlogout -p layer-shell"
           "$MOD, L, exec, loginctl lock-session"
           "$MOD, Space, togglefloating"
-          "$MOD, R,  overview:toggle, all"
+          # "$MOD, R,  overview:toggle, all"
           "$MODSHIFT, R, hyprexpo:expo, toggle"
           "$MOD, P, pin"
           "$MOD, S, togglesplit"

@@ -1,19 +1,19 @@
 const battery = await Service.import('battery')
 
 const cpu = Variable(0, {
-  poll: [1000, 'pinfo cpu'],
+  poll: [3000, 'pinfo cpu'],
 })
 const memory_usage = Variable("", {
-  poll: [1000, 'pinfo memory']
+  poll: [3000, 'pinfo memory']
 })
 const memory_free = Variable(0.0, {
-  poll: [1000, 'pinfo freememory']
+  poll: [3000, 'pinfo freememory']
 })
 const gpu_usage = Variable(0, {
-  poll: [1000, 'pinfo gpu']
+  poll: [3000, 'pinfo gpu']
 })
 const gpu_memory = Variable(0, {
-  poll: [1000, 'pinfo gpumemory']
+  poll: [3000, 'pinfo gpumemory']
 })
 
 export default () => Widget.Box({
@@ -41,7 +41,9 @@ export default () => Widget.Box({
         + 'background-color: #45475a;' // set its bg color
         + 'color: #eba0ac;', // set its fg color
       startAt: 0.75,
-      tooltip_text: "Memory Usage: " + Math.round(memory_free.value) + "\nMemory Percentage: " + parseFloat(memory_usage.value) + "%",
+      setup: (self) => {
+        setInterval(() => { self.tooltip_text = "Memory Usage: " + memory_free.getValue() + "GBs" + "\nMemory Percentage: " + parseFloat(memory_usage.getValue()) + "%" }, 3000)
+      },
       value: memory_usage.bind().as(n => parseFloat(n)),
     }),
   ],
@@ -78,13 +80,14 @@ export default () => Widget.Box({
         class_name: battery.bind('charging').as(ch => ch ? 'charging' : ''),
         css: 'min-width: 14px;'  // its size is min(min-height, min-width)
           + 'min-height: 14px;'
-          + 'font-size: 3px;' // to set its thickness set font-size on it
+          + 'font-size: 3pt;' // to set its thickness set font-size on it
           + 'background-color: #45475a;' // set its bg color
           + 'color: green;', // set its fg color
         startAt: 0.75,
         setup: (self) => {
-          self.tooltip_text = "Available: " + battery.available + "\nPercent: " + battery.percent + "\nCharging: " + battery.charging + "\nCharged: " + battery.charged + "\nTime Remaining: " + battery.time_remaining + "\nEnergy: " + battery.energy + "\nCapacity: " + battery.energy_full + "\nDrain Rate: " + battery.energy_rate;
+          setInterval(() => { self.tooltip_text = "Available: " + battery.available + "\nPercent: " + battery.percent + "\nCharging: " + battery.charging + "\nCharged: " + battery.charged + "\nTime Remaining: " + (battery.time_remaining / 60) + " mins" + "\nEnergy: " + battery.energy + "\nCapacity: " + battery.energy_full + "\nDrain Rate: " + battery.energy_rate; }, 1000)
         },
+
       })]
     }
   },
