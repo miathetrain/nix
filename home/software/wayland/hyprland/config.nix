@@ -91,17 +91,16 @@ in {
         };
 
         misc = {
-          disable_hyprland_logo = true;
-          disable_splash_rendering = true;
-          vrr = 2;
+          #disable_hyprland_logo = true;
+          #disable_splash_rendering = true;
+          #vrr = 2;
           key_press_enables_dpms = true;
-          disable_autoreload = true;
+          #disable_autoreload = true;
           enable_swallow = true;
           swallow_regex = "kitty";
           focus_on_activate = true;
           # no_direct_scanout = false;
           new_window_takes_over_fullscreen = 2;
-          initial_workspace_tracking = 2;
         };
 
         decoration = {
@@ -242,13 +241,13 @@ in {
 
         plugin = {
           hyprtrails = {
-            color = "rgba(aa336aff)";
+            color = "rgba(aa336a80)";
           };
 
           hyprexpo = {
             columns = 2;
-            gap_size = 25;
-            bg_col = "rgb(111111)";
+            gap_size = 5;
+            bg_col = "rgba(aa336a80)";
             workspace_method = "center m+1"; # [center/first] [workspace] e.g. first 1 or center m+1
 
             enable_gesture = true; # laptop touchpad, 4 fingers

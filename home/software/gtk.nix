@@ -6,8 +6,8 @@
 }: {
   home.pointerCursor = {
     gtk.enable = true;
-    package = pkgs.rose-pine-cursor;
-    name = "BreezeX-RosePine-Linux";
+    package = ../../files/cursor/GoogleDot-Violet;
+    name = "GoogleDot-Violet";
     size = 24;
   };
 

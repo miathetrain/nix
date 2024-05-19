@@ -45,7 +45,8 @@
     sgdboop
     adwsteamgtk
 
-    wineWowPackages.waylandFull
+    wineWowPackages.staging
+    winetricks
   ];
 
   services.arrpc.enable = true;
