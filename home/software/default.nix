@@ -44,6 +44,8 @@
     element-desktop
     sgdboop
     adwsteamgtk
+
+    wineWowPackages.waylandFull
   ];
 
   services.arrpc.enable = true;

@@ -23,6 +23,8 @@ with lib; {
     fstrim.enable = true;
   };
 
+  services.flatpak.enable = true;
+
   programs.light.enable = true;
 
   home-manager.backupFileExtension = "backup";
