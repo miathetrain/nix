@@ -6,13 +6,16 @@
 }: {
   home.pointerCursor = {
     gtk.enable = true;
-    name = "GoogleDot-Violet";
-    package = pkgs.runCommand "cursor" {} ''
-      mkdir -p $out/share/icons
-      ln -s ${../../files/cursor/GoogleDot-Violet} $out/share/icons/${config.home.pointerCursor.name}
-    '';
+    name = "GoogleDot";
+    package = pkgs.google-cursor
+    # package = pkgs.runCommand "cursor" {} ''
+    #   mkdir -p $out/share/icons
+    #   ln -s ${../../files/cursor/GoogleDot-Violet} $out/share/icons/${config.home.pointerCursor.name}
+    # '';
     size = 24;
   };
+
+  home.file.".icons/GoogleDot-Violet".source = ../../files/cursor/GoogleDot-Violet;
 
   gtk = {
     enable = true;
