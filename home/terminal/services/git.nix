@@ -10,9 +10,6 @@
 
   programs.git = {
     enable = true;
-    userName = "Mia";
-    userEmail = "miathewiccancatgirl@gmail.com";
-
     ignores = ["*~" "*.swp" "*result*" ".direnv" "node_modules"];
   };
 }

@@ -40,14 +40,14 @@ export function removeNotification(not) {
         notificationList.transitionDuration = 1000
         // @ts-ignore
         notificationList.revealChild = false
-        Utils.timeout(1000, () => {
+        Utils.timeout(600, () => {
             notificationList.destroy()
         })
     }
 
-    Utils.timeout(1000, () => {
-        notifications.clear()
-    })
+    // Utils.timeout(600, () => {
+    //     notifications.clear()
+    // })
 
     // notification_list.children.find(n)?.destroy()
 }
@@ -121,35 +121,68 @@ function Notification(n) {
         })),
     })
 
-    return Widget.Revealer({
-        revealChild: false,
-        transitionDuration: 500,
-        transition: 'slide_down',
-        attribute: { id: n.id, hint: n.hints['hint']?.get_string()[0] },
-        setup: (self) => {
-            Utils.timeout(500, () => {
-                self.reveal_child = true;
-            })
-        },
-        child: Widget.EventBox({
-            on_primary_click: n.dismiss,
-            child: Widget.Box(
-                {
-                    class_name: `notification ${n.urgency}`,
-                    vertical: true,
+    switch (n.app_name) {
+        case "Spotify":
+            return Widget.Revealer({
+                revealChild: false,
+                transitionDuration: 500,
+                transition: 'slide_down',
+                attribute: { id: n.id, hint: "spotify" },
+                setup: (self) => {
+                    Utils.timeout(500, () => {
+                        self.reveal_child = true;
+                    })
                 },
-                Widget.Box([
-                    icon,
-                    Widget.Box(
-                        { vertical: true },
-                        title,
-                        body,
-                    ),
-                ]),
-                actions,
-            )
-        })
-    })
+                child: Widget.EventBox({
+                    on_primary_click: n.dismiss,
+                    child: Widget.Box(
+                        {
+                            class_name: `notification ${n.urgency}`,
+                            vertical: true,
+                        },
+                        Widget.Box([
+                            icon,
+                            Widget.Box(
+                                { vertical: true },
+                                title,
+                                body,
+                            ),
+                        ]),
+                        actions,
+                    )
+                })
+            })
+        default:
+            return Widget.Revealer({
+                revealChild: false,
+                transitionDuration: 500,
+                transition: 'slide_down',
+                attribute: { id: n.id, hint: n.hints['hint']?.get_string()[0] },
+                setup: (self) => {
+                    Utils.timeout(500, () => {
+                        self.reveal_child = true;
+                    })
+                },
+                child: Widget.EventBox({
+                    on_primary_click: n.dismiss,
+                    child: Widget.Box(
+                        {
+                            class_name: `notification ${n.urgency}`,
+                            vertical: true,
+                        },
+                        Widget.Box([
+                            icon,
+                            Widget.Box(
+                                { vertical: true },
+                                title,
+                                body,
+                            ),
+                        ]),
+                        actions,
+                    )
+                })
+            })
+    }
 }
 
 /** @param {import('resource:///com/github/Aylur/ags/service/notifications.js').Notification} n */
@@ -411,15 +444,15 @@ export function NotificationPopups(monitor = 0) {
             }
 
             if (n.app_name == "Spotify") {
-                log("Hint: " + hint + " App Name: " + n)
+                log("Hint: " + hint + " App Name: " + n.app_name)
                 // @ts-ignore
-                list.children.find(n => n.attribute.hint === "spotify")?.destroy()
+                list.children.find(n => n.attribute.hint == "spotify")?.destroy()
                 // @ts-ignore
-                notification_list.children.find(n => n.attribute.hint === "spotify")?.destroy()
+                notification_list.children.find(n => n.attribute.hint == "spotify")?.destroy()
             }
 
-            list.children = [Notification(n), ...list.children]
-            notification_list.children = [smallNotification(n), ...notification_list.children]
+            list.children = [...list.children, Notification(n)]
+            notification_list.children = [...notification_list.children, smallNotification(n)]
         }
     }
 

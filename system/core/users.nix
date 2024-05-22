@@ -6,7 +6,16 @@
       "wheel"
       "video"
       "input"
-      "i2c"
+    ];
+  };
+
+  users.users.wyntor = {
+    isNormalUser = true;
+    shell = pkgs.fish;
+    extraGroups = [
+      "wheel"
+      "video"
+      "input"
     ];
   };
 }

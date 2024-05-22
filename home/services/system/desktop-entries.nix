@@ -1,9 +1,16 @@
 {
   xdg.desktopEntries = {
+    "Envision" = {
+      name = "Envision";
+      exec = "envision %F";
+      icon = "org.gabmus.envision";
+    };
+
     "Helix" = {
       name = "Helix";
       exec = "kitty hx %F";
     };
+
     "org.gnome.Nautilus" = {
       name = "Files";
       exec = "nautilus --new-window %U";
@@ -23,9 +30,5 @@
     desktop = "";
     publicShare = "";
     templates = "";
-
-    extraConfig = {
-      XDG_GAMES_DIR = "/games";
-    };
   };
 }

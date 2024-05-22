@@ -18,8 +18,8 @@
     dreamhouse = nixosSystem {
       inherit specialArgs;
       modules =
-        # [inputs.lix-module.nixosModules.default]
-        desktop
+        [inputs.lix-module.nixosModules.default]
+        ++ desktop
         ++ [
           ./dreamhouse
           {
@@ -41,6 +41,22 @@
           {
             home-manager = {
               users.mia.imports = homeImports."mia@ken";
+              extraSpecialArgs = specialArgs;
+            };
+          }
+        ];
+    };
+
+    blossom = nixosSystem {
+      inherit specialArgs;
+      modules =
+        [inputs.lix-module.nixosModules.default]
+        ++ desktop
+        ++ [
+          ./blossom
+          {
+            home-manager = {
+              users.wyntor.imports = homeImports."wyntor@blossom";
               extraSpecialArgs = specialArgs;
             };
           }

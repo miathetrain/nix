@@ -56,7 +56,7 @@ with lib; {
 
     chaotic.scx = {
       enable = true;
-      scheduler = "scx_lavd";
+      scheduler = "scx_rusty";
     };
 
     environment.systemPackages = [pkgs.scx];

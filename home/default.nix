@@ -10,8 +10,6 @@
   ];
 
   home = {
-    username = "mia";
-    homeDirectory = "/home/mia";
     stateVersion = "23.11";
   };
 

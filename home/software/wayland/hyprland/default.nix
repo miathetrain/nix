@@ -38,8 +38,7 @@
       XDG_SESSION_TYPE = "wayland";
       NIXOS_OZONE_WL = "1";
       MOZ_ENABLE_WAYLAND = "1";
-      QT_QPA_PLATFORMTHEME = "qt5ct";
-      HYPRCURSOR_THEME = config.home.pointerCursor.name;
+      HYPRCURSOR_THEME = "GoogleDot-Violet";
       HYPRCURSOR_SIZE = 24;
     };
   };

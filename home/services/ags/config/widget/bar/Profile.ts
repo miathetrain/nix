@@ -7,7 +7,7 @@ export default () => Widget.Box({
   tooltip_text: "Profile",
   child: Widget.Box({
     class_name: "profile-pic",
-    css: `background-image: url("/home/mia/.face");`
+    css: `background-image: url("~/.face");`
       + "background-size: cover;"
       + "background-repeat: no-repeat;"
       + "background-position: center;",

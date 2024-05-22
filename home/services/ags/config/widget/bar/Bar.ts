@@ -11,10 +11,12 @@ import SysTray from "./SysTray"
 import Profile from "./Profile"
 
 const Left = Widget.Box({
+  spacing: 2,
   children: [Launcher(), Workspaces(), ClientTitle() ],
 })
 
 const Center = Widget.Box({
+  spacing: 15,
   children: [Time(), Media()]
 })
 

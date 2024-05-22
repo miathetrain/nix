@@ -83,6 +83,7 @@ in {
       Service = {
         Environment = "PATH=${lib.makeBinPath dependencies}";
         ExecStart = ''${config.programs.ags.package}/bin/ags -c ${toString ./config/config.js}'';
+        RestartSec="1min";
         Restart = "on-failure";
       };
     };

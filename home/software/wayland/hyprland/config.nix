@@ -23,11 +23,6 @@ in {
           "sleep 1 && hyprlock --immediate"
         ];
 
-        # env = [
-        #   "GDK_SCALE,2"
-        #   "XCURSOR_SIZE,32"
-        # ];
-
         general = {
           gaps_in = 4;
           gaps_out = 8;

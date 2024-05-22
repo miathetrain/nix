@@ -2,12 +2,13 @@
   inputs,
   pkgs,
   config,
+  lib,
   ...
 }: {
   home.pointerCursor = {
     gtk.enable = true;
-    name = "GoogleDot";
-    package = pkgs.google-cursor
+    name = "GoogleDot-Blue";
+    package = pkgs.google-cursor;
     # package = pkgs.runCommand "cursor" {} ''
     #   mkdir -p $out/share/icons
     #   ln -s ${../../files/cursor/GoogleDot-Violet} $out/share/icons/${config.home.pointerCursor.name}
@@ -60,10 +61,7 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "qtct";
-    style = {
-      package = pkgs.utterly-nord-plasma;
-      name = "Utterly Nord Plasma";
-    };
+    platformTheme = lib.mkForce "gnome";
+    style.name = "adwaita-dark";
   };
 }

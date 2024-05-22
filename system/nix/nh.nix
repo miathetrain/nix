@@ -1,7 +1,7 @@
-{inputs, ...}: {
+{inputs, config, ...}: {
   programs.nh = {
     enable = true;
-    flake = "/home/mia/Documents/nix";
+    # flake = "${config.home.homeDirectory}/Documents/nix";
     # weekly cleanup
     clean = {
       enable = true;

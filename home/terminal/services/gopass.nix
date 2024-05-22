@@ -3,7 +3,7 @@
 
   xdg.configFile."gopass/config".text = ''
     [mounts]
-    path = /home/mia/.local/share/gopass/stores/root
+    path = ~/.local/share/gopass/stores/root
 
     [generate]
     generator = memorable
