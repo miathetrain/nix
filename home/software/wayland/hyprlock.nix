@@ -36,7 +36,7 @@ in {
       background = [
         {
           monitor = "";
-          path = "~/.cache/background"; # only png supported for now
+          path = "${config.home.homeDirectory}/.cache/background"; # only png supported for now
           color = "rgba(25, 20, 20, 1.0)";
 
           # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
@@ -147,7 +147,7 @@ in {
         {
           monitor = "DP-1";
 
-          path = "~/.face";
+          path = "${config.home.homeDirectory}/.face";
           size = 180;
           border_size = 5;
           border_color = "rgb(11111b)";
@@ -164,7 +164,7 @@ in {
         {
           monitor = "eDP-1";
 
-          path = "~/.face";
+          path = "${config.home.homeDirectory}/.face";
           size = 180;
           border_size = 5;
           border_color = "rgb(11111b)";

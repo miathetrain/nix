@@ -9,6 +9,7 @@ with lib; {
     #Graphics Drivers
     boot.initrd.kernelModules = mkIf (config.networking.hostName == "dreamhouse") ["amdgpu"];
     services.xserver.videoDrivers = mkIf (config.networking.hostName == "dreamhouse") ["amdgpu"];
+    services.xserver.videoDrivers = mkIf (config.networking.hostName == "blossom") ["nvidia"];
 
     systemd.tmpfiles.rules = mkIf (config.networking.hostName == "dreamhouse") [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
@@ -17,6 +18,8 @@ with lib; {
     # graphics drivers / HW accel
     hardware.opengl = {
       enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
 
       extraPackages = with pkgs; [
         #libva
@@ -25,6 +28,10 @@ with lib; {
         rocmPackages.clr.icd
         intel-media-driver # MacBook
       ];
+    };
+
+    hardware.nvidia = mkIf (config.networking.hostName == "blossom") {
+      modesetting.enable = true;
     };
   };
 }
