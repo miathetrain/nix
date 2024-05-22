@@ -18,10 +18,10 @@
       gnome.nautilus
       gthumb
       btop
-
-      poweralertd
       hyprshade
       overskride # Bluetooth
+      tessen # Password manager
+      wofi
 
       ##Brightness
       inputs.dimmer.packages.${pkgs.system}.default

@@ -22,7 +22,9 @@ in {
           "systemctl --user start swww-random-img.service"
           "sleep 1 && hyprlock --immediate"
         ];
+      }
 
+      (lib.mkIf (osConfig.networking.hostName == "dreamhouse") {
         general = {
           gaps_in = 4;
           gaps_out = 8;
@@ -50,7 +52,35 @@ in {
             "7,monitor:DP-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
         };
+      })
 
+      (lib.mkIf (osConfig.networking.hostName == "blossom") {
+        general = {
+          gaps_in = 4;
+          gaps_out = 8;
+          border_size = 2;
+          "col.active_border" = "rgba(1e1e2eff) rgba(313244ff) 10deg";
+          "col.inactive_border" = "rgba(1e1e2eff)";
+          layout = "dwindle";
+          resize_on_border = true;
+
+          monitor = [
+            ",preferred,auto,1"
+          ];
+
+          # workspace = [
+          #   "1,monitor:DP-1,default:true"
+          #   "2,monitor:DP-1"
+          #   "3,monitor:DP-1"
+          #   "4,monitor:DP-1"
+          #   "5,monitor:DP-1"
+          #   "6,monitor:HDMI-A-1,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
+          #   "7,monitor:DP-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
+          # ];
+        };
+      })
+
+      {
         animation = {
           bezier = [
             "fluent_decel, 0, 0.2, 0.4, 1"
@@ -86,8 +116,8 @@ in {
         };
 
         misc = {
-          #disable_hyprland_logo = true;
-          #disable_splash_rendering = true;
+          disable_hyprland_logo = true;
+          disable_splash_rendering = true;
           #vrr = 2;
           key_press_enables_dpms = true;
           #disable_autoreload = true;
@@ -147,6 +177,7 @@ in {
           "$MOD, Space, togglefloating"
           # "$MOD, R,  overview:toggle, all"
           "$MODSHIFT, R, hyprexpo:expo, toggle"
+          "$MOD, T, exec, tessen -p gopass -d wofi"
           "$MOD, P, pin"
           "$MOD, S, togglesplit"
           "$MOD, Tab, cyclenext"
