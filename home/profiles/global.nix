@@ -23,6 +23,7 @@
     ../services/system/polkit-agent.nix
     ../services/system/screensht.nix
     ../services/system/mimetype.nix
+    ../services/system/direnv.nix
 
     # wayland specific
     ../services/wayland/hypridle.nix

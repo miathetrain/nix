@@ -3,7 +3,7 @@ const mpris = await Service.import('mpris')
 export default () => {
   const label = Utils.watch("", mpris, "player-changed", () => {
     if (mpris.players[0]) {
-      const { track_artists, track_title } = mpris.players[0]
+      const { track_title } = mpris.players[0]
       const title = `${track_title} `
       return title.length <= 40 ? title : title.substring(0, 40) + "..." // return `${track_artists.join(', ')} ─ ${track_title}`
     } else {

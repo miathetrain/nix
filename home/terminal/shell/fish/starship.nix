@@ -5,29 +5,12 @@
     enable = true;
     enableFishIntegration = true;
     enableTransience = true;
-    # settings = {
-    #   character = {
-    #     success_symbol = "[](bold green)";
-    #     error_symbol = "[](bold red)";
-    #   };
-
-    #   git_status = {
-    #     deleted = "✗";
-    #     modified = "✶";
-    #     staged = "✓";
-    #     stashed = "≡";
-    #   };
-
-    #   nix_shell = {
-    #     symbol = " ";
-    #     heuristic = true;
-    #   };
-    # };
-
     settings = {
-      format = "[](mauve)\$os\$username\[](bg:red fg:mauve)\$directory\[](fg:red bg:peach)\$git_branch\$git_status\[](fg:peach bg:sapphire)\$c\$rust\$golang\$nodejs\$php\$java\$kotlin\$haskell\$python\[](fg:sapphire bg:blue)\$time\[](fg:blue)\$line_break$character";
-
+      format = "[](mauve)\$os\$username\[](bg:red fg:mauve)\$directory\[](fg:red bg:peach)\$git_branch\[](fg:peach bg:sapphire)\$rust\$nodejs\$java\$kotlin\$nix_shell\$python\[](fg:sapphire bg:blue)\$time\[](fg:blue)\$line_break$character"; # \$c\$rust\$golang\$nodejs\$php\$java\$kotlin\$haskell\$python\
+      right_format = "[](blue)\$time\[](fg:blue)\$direnv";
+      command_timeout = 5000;
       palette = "catppucin";
+      add_newline = true;
 
       palettes.catppucin = {
         rosewater = "#f5e0dc";
@@ -77,7 +60,7 @@
       directory = {
         style = "fg:crust bg:red";
         format = "[ $path ]($style)";
-        truncation_length = 3;
+        truncation_length = 8;
         truncation_symbol = "…/";
       };
 
@@ -114,8 +97,12 @@
 
       character = {
         disabled = false;
-        success_symbol = "[](bold fg:green)";
-        error_symbol = "[](bold fg:red)";
+        success_symbol = " [󱞩](bold fg:green)";
+        error_symbol = " [󱞩](bold fg:red)";
+      };
+
+      direnv = {
+        disabled = false;
       };
 
       nodejs = {

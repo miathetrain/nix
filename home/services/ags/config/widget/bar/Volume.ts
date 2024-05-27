@@ -16,12 +16,12 @@ export default () => {
     return `audio-volume-${icons[icon]}-symbolic`
   }
 
-  const vol = audio.speaker.volume * 100;
-
   const icon = Widget.Icon({
     class_name: "icons",
     icon: Utils.watch(getIcon(), audio.speaker, getIcon),
-    tooltip_text: `Volume ${Math.floor(vol)}%`
+    setup: self => self.hook(audio.speaker, () => {
+      self.tooltip_text = Math.floor(audio.speaker.volume * 100) + "%"
+    }),
   })
 
   const slider = Widget.Slider({

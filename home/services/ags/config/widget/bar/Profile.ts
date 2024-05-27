@@ -1,5 +1,3 @@
-const hostname = Utils.exec('hostname')
-
 export default () => Widget.Box({
   class_name: "profile-pic",
   hexpand: false,
@@ -10,10 +8,10 @@ export default () => Widget.Box({
   setup: (self) => {
     self.child = Widget.Box({
       class_name: "profile-pic",
-      css: `background-image: url("/home/${hostname}/.face");`
-          + "background-size: cover;"
-          + "background-repeat: no-repeat;"
-          + "background-position: center;",
+      css: `background-image: url("/home/mia/.face");`
+        + "background-size: cover;"
+        + "background-repeat: no-repeat;"
+        + "background-position: center;",
     })
   }
 })

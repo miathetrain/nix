@@ -1,14 +1,14 @@
 const bluetooth = await Service.import('bluetooth')
 
 export default () => Widget.Box({
-  class_name: "icons",
+  class_name: "bluetooth",
   setup: self => self.hook(bluetooth, self => {
     self.children = bluetooth.connected_devices
       .map(({ icon_name, name, battery_percentage }) => Widget.Box({
-        tooltip_text: battery_percentage + "%",
+        tooltip_text: name + "\n" + battery_percentage + "%",
         children: [
           Widget.Icon(icon_name + '-symbolic'),
-          Widget.Label(name),
+          // Widget.Label(name),
         ]
       }));
 

@@ -59,7 +59,7 @@ in {
           steamtinkerlaunch
           prismlauncher
           ryujinx
-          bottles-unwrapped
+          xivlauncher
         ])
 
         (mkIf (cfg.vr.enable) [

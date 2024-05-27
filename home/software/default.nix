@@ -14,39 +14,40 @@
   ];
 
   home.packages = with pkgs; [
-    vesktop
-    kdenlive
-    krita
+    (vesktop.override {withSystemVencord = false;})
+    #kdenlive
+    #krita
     mpv
-    qbittorrent
-    yt-dlp
+    #qbittorrent
+    #yt-dlp
     nextcloud-client
 
-    xorg.xrandr
-    direnv
-    rustc
-    cargo
-    rustfmt
+    #xorg.xrandr
+    # direnv
+    #rustc
+    #cargo
+    #rustfmt
 
-    wtype
+    #wtype
 
-    resources
+    #resources
 
-    t2fanrd
+    #t2fanrd
 
-    cinny-desktop
+    #cinny-desktop
 
-    libcanberra-gtk3
-    sound-theme-freedesktop
+    #libcanberra-gtk3
+    #sound-theme-freedesktop
 
-    qt5ct
+    #qt5ct
 
     element-desktop
     sgdboop
-    adwsteamgtk
+    #adwsteamgtk
 
-    wineWowPackages.staging
-    winetricks
+    # wineWowPackages.staging
+    # winetricks
+    # wget
   ];
 
   services.arrpc.enable = true;
