@@ -5,7 +5,7 @@ export default () => {
     if (mpris.players[0]) {
       const { track_title } = mpris.players[0]
       const title = `${track_title} `
-      return title.length <= 40 ? title : title.substring(0, 40) + "..." // return `${track_artists.join(', ')} ─ ${track_title}`
+      return title.length <= 40 ? title : title.substring(0, 40) + "..."
     } else {
       return ''
     }
@@ -20,7 +20,7 @@ export default () => {
       } else {
         artists = "─ " + track_artists.join(', ');
       }
-      return `${track_title} ${artists}` // return `${track_artists.join(', ')} ─ ${track_title}`
+      return `${track_title} ${artists}`
     } else {
       return ''
     }
@@ -57,26 +57,29 @@ export default () => {
     transitionDuration: 1000,
     transition: 'slide_right',
     child: Widget.Box({
-
+      spacing: 5,
       children: [
-        Widget.EventBox({ // 
+        Widget.EventBox({
           class_name: "media-buttons",
           child: Widget.Label({
-            label: ""
+            label: "",
+            tooltip_text: "Previous"
           })
         }),
 
-        Widget.EventBox({ // 
+        Widget.EventBox({
           class_name: "media-buttons",
           child: Widget.Label({
-            label: playicon
+            label: playicon,
+            tooltip_text: "Play/Pause"
           })
         }),
 
-        Widget.EventBox({ // 
+        Widget.EventBox({
           class_name: "media-buttons",
           child: Widget.Label({
-            label: ""
+            label: "",
+            tooltip_text: "Next"
           })
         })
       ]
@@ -85,19 +88,17 @@ export default () => {
 
   const widget = Widget.EventBox({
     on_hover: (event) => {
-      label.as(s => {
-        if (s.length > 1) {
-          revealer.reveal_child = true;
-          Utils.timeout(3000, () => {
-            revealer.reveal_child = false;
-          })
-        }
-      });
-
+      if (mpris.players[0]) {
+        revealer.reveal_child = true;
+        Utils.timeout(3000, () => {
+          revealer.reveal_child = false;
+        })
+      }
     },
 
     child: Widget.Box({
       hpack: "end",
+      spacing: 8,
       children: [
         Widget.Label({
           class_name: "media-icon",

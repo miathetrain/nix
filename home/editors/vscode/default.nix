@@ -12,7 +12,7 @@
     enable = true;
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
-    mutableExtensionsDir = false;
+    mutableExtensionsDir = true;
     package = pkgs.vscodium;
     userTasks = {
       version = "2.0.0";
@@ -42,7 +42,7 @@
       kamadorueda.alejandra
       bradlc.vscode-tailwindcss
 
-      catppuccin.catppuccin-vsc
+      # catppuccin.catppuccin-vsc
       canakyuz.csharp-extension-pack
       mohammadbaqer.better-folding
       catppuccin.catppuccin-vsc-icons
@@ -50,7 +50,7 @@
     ];
     userSettings = lib.mkMerge [
       {
-        "workbench.iconTheme" = "catppuccin-perfect-mocha";
+        "workbench.iconTheme" = "catppuccin-mocha";
         "workbench.colorTheme" = "Catppuccin Mocha";
         "workbench.editor.tabActionLocation" = "left";
         "workbench.panel.defaultLocation" = "bottom";
@@ -131,7 +131,7 @@
       }
       (lib.mkIf (osConfig.networking.hostName == "dreamhouse") {
         "editor.fontSize" = 14;
-        "window.zoomLevel" = 1.15;
+        "window.zoomLevel" = 1;
       })
 
       (lib.mkIf (osConfig.networking.hostName == "ken") {

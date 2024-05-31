@@ -10,6 +10,6 @@ const SysTrayItem = item => Widget.Button({
 });
 
 export default () => Widget.Box({
-  class_name: "icons",
+  class_name: "systray",
   children: systemtray.bind('items').as(i => i.map(SysTrayItem))
 })

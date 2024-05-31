@@ -17,6 +17,8 @@
     ];
   };
 
+  boot.supportedFilesystems = ["ntfs"];
+
   networking.hostName = "dreamhouse";
 
   services.gaming.enable = true;

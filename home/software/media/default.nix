@@ -9,11 +9,12 @@
     pavucontrol
 
     # Kodi
-    (kodi.withPackages
-      (kodiPkgs:
-        with kodiPkgs; [
-          youtube
-          inputstream-adaptive
-        ]))
+    # (kodi.withPackages
+    #   (kodiPkgs:
+    #     with kodiPkgs; [
+    #       youtube
+    #       inputstream-adaptive
+    #     ]))
+    stremio
   ];
 }

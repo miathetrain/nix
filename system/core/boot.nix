@@ -23,7 +23,6 @@ with lib; {
         systemd.enable = true;
       };
 
-      # use latest kernel
       kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
 
       consoleLogLevel = 3;
@@ -34,7 +33,6 @@ with lib; {
       ];
 
       loader = {
-        # systemd-boot on UEFI
         systemd-boot = {
           enable = !config.services.secureboot.enable;
           consoleMode = "auto";
@@ -56,7 +54,7 @@ with lib; {
 
     chaotic.scx = {
       enable = true;
-      scheduler = "scx_rusty";
+      scheduler = "scx_rustland";
     };
 
     environment.systemPackages = [pkgs.scx];

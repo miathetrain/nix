@@ -113,7 +113,7 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-     hyprspace = {
+    hyprspace = {
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };

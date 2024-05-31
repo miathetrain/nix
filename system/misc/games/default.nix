@@ -60,6 +60,7 @@ in {
           prismlauncher
           ryujinx
           xivlauncher
+          wineWowPackages.staging
         ])
 
         (mkIf (cfg.vr.enable) [

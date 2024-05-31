@@ -9,45 +9,14 @@
     ./browsers/firefox.nix
     ./gtk.nix
     ./media
-
-    inputs.lemonake.homeManagerModules.steamvr
   ];
 
   home.packages = with pkgs; [
     (vesktop.override {withSystemVencord = false;})
-    #kdenlive
-    #krita
     mpv
-    #qbittorrent
-    #yt-dlp
     nextcloud-client
-
-    #xorg.xrandr
-    # direnv
-    #rustc
-    #cargo
-    #rustfmt
-
-    #wtype
-
-    #resources
-
-    #t2fanrd
-
-    #cinny-desktop
-
-    #libcanberra-gtk3
-    #sound-theme-freedesktop
-
-    #qt5ct
-
     element-desktop
     sgdboop
-    #adwsteamgtk
-
-    # wineWowPackages.staging
-    # winetricks
-    # wget
   ];
 
   services.arrpc.enable = true;
