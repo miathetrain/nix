@@ -89,7 +89,7 @@
     };
 
     anyrun = {
-      url = "github:Kirottu/anyrun";
+      url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

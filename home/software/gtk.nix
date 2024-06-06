@@ -61,7 +61,7 @@
 
   qt = {
     enable = true;
-    platformTheme = lib.mkForce "gnome";
-    style.name = "adwaita-dark";
+    # platformTheme = lib.mkForce "gnome";
+    # style.name = "adwaita-dark";
   };
 }

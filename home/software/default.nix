@@ -17,6 +17,9 @@
     nextcloud-client
     element-desktop
     sgdboop
+
+    ####
+    dwarfs fuse-overlayfs
   ];
 
   services.arrpc.enable = true;

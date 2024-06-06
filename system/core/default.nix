@@ -10,6 +10,7 @@ with lib; {
     ./security.nix
     ./boot.nix
     ./users.nix
+    ./packages.nix
     ../nix
   ];
 
@@ -23,16 +24,7 @@ with lib; {
     fstrim.enable = true;
   };
 
-  services.flatpak.enable = true;
-
-  programs.light.enable = true;
-
   home-manager.backupFileExtension = "backup";
-
-  chaotic.mesa-git = {
-    enable = true;
-    fallbackSpecialisation = false;
-  };
 
   # compresses half the ram for use as swap
   zramSwap.enable = true;

@@ -15,12 +15,18 @@ in {
         "$MOD" = "SUPER";
 
         exec-once = [
-          "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
-          "swayosd-server"
-          "hyprshade auto"
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
           "systemctl --user start swww-random-img.service"
+          "swayosd-server"
+          "hyprshade auto"
+          "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+
           "sleep 1 && hyprlock --immediate"
+
+          "[workspace 5 silent] firefox"
+          "[workspace 5 silent] steam"
+
+          "nextcloud --background"
         ];
 
         general = {
@@ -31,13 +37,20 @@ in {
           "col.inactive_border" = "rgba(1e1e2eff)";
           layout = "dwindle";
           resize_on_border = true;
+          extend_border_grab_area = 30;
+          allow_tearing = true;
 
+          # "DP-1,2560x1440@144,1920x0,1.25"
+          # "HDMI-A-1,1920x1080@75,0x0,1"
+          # "DP-2,1920x1080@60,0x1080,1,transform,2"
           monitor = [
-            "DP-1,2560x1440@144,1920x0,1.25"
-            "HDMI-A-1,1920x1080@75,0x0,1"
-            "DP-2,1920x1080@60,0x1080,1,transform,2"
+            "DP-1,highrr,auto,1.25,vrr,1"
+            "HDMI-A-1,highrr,auto-left,auto"
+            "DP-2,highres,auto-down,auto,transform,2"
 
-            "eDP-1,2560x1600,0x0,2"
+            "eDP-1,highres,auto,auto"
+
+            ",highrr,auto,auto"
           ];
 
           workspace = [
@@ -49,6 +62,10 @@ in {
             "6,monitor:HDMI-A-1,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
             "7,monitor:DP-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
+        };
+
+        animations = {
+          first_launch_animation = false;
         };
 
         animation = {
@@ -77,10 +94,6 @@ in {
           ];
         };
 
-        cursor = {
-          no_warps = true;
-        };
-
         binds = {
           workspace_back_and_forth = true;
         };
@@ -88,14 +101,20 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          #vrr = 2;
+          vrr = 1;
           key_press_enables_dpms = true;
-          #disable_autoreload = true;
+          disable_autoreload = true;
           enable_swallow = true;
           swallow_regex = "kitty";
           focus_on_activate = true;
-          # no_direct_scanout = false;
-          new_window_takes_over_fullscreen = 2;
+          no_direct_scanout = false;
+          # new_window_takes_over_fullscreen = 2;
+          initial_workspace_tracking = 0;
+        };
+
+        cursor = {
+          inactive_timeout = 15;
+          hide_on_key_press = true;
         };
 
         decoration = {
@@ -103,11 +122,11 @@ in {
           shadow_offset = "0 8";
           shadow_range = 50;
           "col.shadow" = "rgba(00000055)";
-          # blurls = ["lockscreen" "waybar" "popups"];
 
           blur = {
             size = 2;
             passes = 3;
+            xray = true;
           };
         };
 
@@ -116,13 +135,7 @@ in {
         };
 
         dwindle = {
-          no_gaps_when_only = false;
-          pseudotile = true;
-          preserve_split = true;
-        };
-
-        master = {
-          allow_small_split = true;
+          default_split_ratio = 0.9;
         };
 
         bind = [
@@ -139,17 +152,18 @@ in {
           "$MOD, mouse_up, workspace, e+1"
 
           "$MODSHIFT, Q, exit"
-          "$MOD, Q, exec, killactive && canberra-gtk-play -i dialog-information"
-          "$MOD, F, fullscreen"
+          "$MOD, Q, killactive"
+          "$MOD, F, fullscreen,2"
           "$MODSHIFT, F, fullscreen, 1"
           "$MOD, Escape, exec, wlogout -p layer-shell"
           "$MOD, L, exec, loginctl lock-session"
           "$MOD, Space, togglefloating"
           # "$MOD, R,  overview:toggle, all"
-          "$MODSHIFT, R, hyprexpo:expo, toggle"
+          # "$MODSHIFT, R, hyprexpo:expo, toggle"
           "$MOD, T, exec, tessen -p gopass -d wofi"
           "$MOD, P, pin"
           "$MOD, S, togglesplit"
+
           "$MOD, Tab, cyclenext"
           "$MOD, Tab, bringactivetotop"
           "$MOD, A, togglespecialworkspace"
@@ -159,6 +173,16 @@ in {
           "$MOD, L, movefocus, r"
           "$MOD, H, movefocus, l"
 
+          "$MOD, G, togglegroup"
+          "$MODSHIFT, G, changegroupactive, f"
+
+          # Minimize App
+          "$MOD, S, togglespecialworkspace, magic"
+          "$MOD, S, movetoworkspace, +0"
+          "$MOD, S, togglespecialworkspace, magic"
+          "$MOD, S, movetoworkspace, special:magic"
+          "$MOD, S, togglespecialworkspace, magic"
+
           "Alt, Print, exec, screenshot-full && canberra-gtk-play -i screen-capture"
           ", Print, exec, screenshot-area && canberra-gtk-play -i screen-capture"
           ", XF86LaunchA, exec, screenshot-full && canberra-gtk-play -i screen-capture"
@@ -166,7 +190,7 @@ in {
           "$MOD, X, exec, $COLORPICKER"
           "$MOD, M, exec, $(sleep 1 && wl-paste | wtype -d 12 -)"
           "$MOD, Return, exec, kitty"
-          "$MODSHIFT, Return, exec, kitty --class kitty-float"
+          "$MODSHIFT, Return, exec, [float] kitty "
           "$MOD, D, exec, pkill .anyrun-wrapped || anyrun"
           ", XF86LaunchB, exec,  pkill .anyrun-wrapped || anyrun"
           "$MOD, E, exec, nautilus --new-window"
@@ -201,30 +225,31 @@ in {
           "opacity 0.98 0.98,class:^(steamwebhelper)$"
           "opacity 0.95 0.95,title:^(Spotify Premium)$"
 
-          # "float,class:^(file_progress)$"
-          # "float,class:^(confirm)$"
-          # "float,class:^(dialog)$"
-          # "float,class:^(download)$"
-          # "float,class:^(notification)$"
-          # "float,class:^(error)$"
-          # "float,class:^(confirmreset)$"
-          # "float,title:^(Open File)$"
-          # "float,title:^(branchdialog)$"
-          # "float,title:^(Confirm to replace files)$"
-          # "float,title:^(File Operation Progress)$"
+          "float,class:^(file_progress)$"
+          "float,class:^(confirm)$"
+          "float,class:^(dialog)$"
+          "float,class:^(download)$"
+          "float,class:^(notification)$"
+          "float,class:^(error)$"
+          "float,class:^(confirmreset)$"
+          "float,title:^(Open File)$"
+          "float,title:^(branchdialog)$"
+          "float,title:^(Confirm to replace files)$"
+          "float,title:^(File Operation Progress)$"
 
           "float,class:^(org.gnome.Nautilus)$"
           "float,class:^(yad)$"
           "float,class:^(kitty-float)$"
           "float,class:^(gthumb)$"
           "float,class:^(xdg-desktop-portal-gtk)$"
-          "float,class:^(lutris)$"
-          "float,class:^(itch)$"
           "float,class:^(mpv)$"
           "float,class:^(com.nextcloud.desktopclient.nextcloud)$"
           "float,class:^(Ryujinx)$"
           "float,class:^(org.gnome.NautilusPreviewer)$"
           "float,class:^(pavucontrol)$"
+          "float,class:^(steam)$"
+
+          "tile,class:^(steam)$,title:^(Steam)$"
 
           "size 1298 797,class:^(mpv)$" # I don't think mpv cares what I say.
           "size 1298 797,class:^(gthumb)$"
@@ -233,6 +258,14 @@ in {
           "pin, title:^(Picture-in-Picture)$"
 
           "pin, class:^(Kodi)$,floating:1"
+
+          "stayfocused, class:^(com.nextcloud.desktopclient.nextcloud)$"
+          "move 100%-w-20 100%-w-20, class:^(com.nextcloud.desktopclient.nextcloud)$"
+
+          "bordercolor rgba(aa336a80) rgba(aa336a80),floating:1"
+
+          # "immediate, class:^(.*steam_app.*)$"
+          "immediate, class:^(steam_app_252950)$"
         ];
 
         plugin = {
@@ -284,9 +317,9 @@ in {
     ];
 
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
       # inputs.hyprspace.packages.${pkgs.system}.Hyprspace
     ];
   };
