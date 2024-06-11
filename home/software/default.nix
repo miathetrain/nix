@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    ./anyrun
     ./browsers/firefox.nix
     ./gtk.nix
     ./media
@@ -19,11 +18,15 @@
     sgdboop
 
     ####
-    dwarfs fuse-overlayfs
+    dwarfs
+    fuse-overlayfs
+
+    godot_4
+    aseprite
   ];
 
   services.arrpc.enable = true;
   services.arrpc.package = pkgs.arrpc;
 
-  services.easyeffects.enable = true;
+  services.easyeffects.enable = false;
 }

@@ -22,6 +22,36 @@
       exec = "fish";
       noDisplay = true;
     };
+
+    "kitty" = {
+      name = "kitty";
+      exec = "kitty";
+      noDisplay = true;
+    };
+
+    "mpv" = {
+      name = "kitty";
+      exec = "kitty";
+      noDisplay = true;
+    };
+
+    "helix" = {
+      name = "kitty";
+      exec = "kitty";
+      noDisplay = true;
+    };
+
+    "sgdboop" = {
+      name = "kitty";
+      exec = "kitty";
+      noDisplay = true;
+    };
+
+    "btop" = {
+      name = "kitty";
+      exec = "kitty";
+      noDisplay = true;
+    };
   };
 
   xdg.userDirs = {

@@ -10,18 +10,14 @@
     packages = with pkgs; [
       jaq
       swayosd
-      # imagemagick
       xdg-utils
-      qt5.qtwayland
       gnome.file-roller
 
       gnome.nautilus
       gthumb
       btop
       hyprshade
-      overskride # Bluetooth
       tessen # Password manager
-      wofi
 
       ##Brightness
       inputs.dimmer.packages.${pkgs.system}.default

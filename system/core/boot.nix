@@ -23,6 +23,8 @@ with lib; {
         systemd.enable = true;
       };
 
+      kernel.sysctl = {"net.ipv4.tcp_mtu_probing" = 1;}; # TODO: Move to Gaming.
+
       kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
 
       consoleLogLevel = 3;

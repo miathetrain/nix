@@ -17,6 +17,9 @@
   # Disable the NixOS Manual
   documentation.nixos.enable = false;
 
+  # Remove xterm
+  services.xserver.excludePackages = with pkgs; [xterm];
+
   nix = {
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     registry = lib.mapAttrs (_: v: {flake = v;}) inputs;

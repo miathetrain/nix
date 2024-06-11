@@ -1,3 +1,4 @@
+import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs"
 import { notification_list, hasNotifications, countNotifications, clearNotifications } from "../notification/notification.js"
 
 export default () => Widget.Window({
@@ -14,116 +15,116 @@ export default () => Widget.Window({
 
   child: Widget.Box({
     class_name: "clockbar",
-    vertical: true,
     spacing: 20,
 
-    children: [Widget.Label({
-      label: "Here's Everything to Know.",
-      vpack: "start",
-    }),
+    children: [
+      Widget.Box({
+        vertical: true,
+        spacing: 20,
 
-    Widget.Box({
-      spacing: 20,
+        children: [
 
-      children: [
-        Widget.Box({
-          vertical: true,
-          hpack: "fill",
-          hexpand: true,
 
-          children: [
-            Widget.CenterBox({
-              hpack: "fill",
-              hexpand: true,
-              start_widget: Widget.Label({
+          Widget.Box({
+            hpack: "baseline",
+            hexpand: true,
+
+            children: [
+              Widget.Box({
                 hpack: "start",
-                label: "Notifications",
-                class_name: "notification-title",
-                tooltip_text: "Notifications show below.",
+                halign: Align.START,
+                spacing: 20,
+                children: [
+
+                  Widget.Label({ label: "Do Not Disturb" }),
+
+                  Widget.Switch({
+                    onActivate: ({ active }) => print(active),
+                  }),
+                ]
               }),
-              end_widget: Widget.EventBox({
-                "on-primary-click": (event) => {
-                  clearNotifications()
-                },
-                child: Widget.Label({
+
+              Widget.Box({
+                hpack: "end",
+                halign: Align.END,
+                child: Widget.EventBox({
                   hpack: "end",
-                  label: " ",
-                  class_name: "notification-clear",
-                  tooltip_text: "Clear notifications. (" + countNotifications() + ")"
+
+                  "on-primary-click": (event) => {
+                    clearNotifications()
+                  },
+                  child: Widget.Label({
+                    label: " ",
+                    class_name: "notification-clear",
+                    tooltip_text: "Clear notifications. (" + countNotifications() + ")"
+                  })
                 })
               })
+            ]
+          }),
 
+          Widget.Scrollable({
+            hscroll: 'never',
+            vscroll: 'automatic',
+            visible: hasNotifications.bind(),
+            child: notification_list,
+            vexpand: true,
+            vpack: "fill",
+          }),
 
-            }),
-            Widget.Scrollable({
-              hscroll: 'never',
-              vscroll: 'automatic',
-              visible: hasNotifications.bind(),
-              child: notification_list,
-              vexpand: true,
-              vpack: "fill",
-            }),
+          Widget.CenterBox({
+            vertical: true,
+            vexpand: true,
+            vpack: "fill",
+            visible: hasNotifications.bind().as(value => value ? false : true),
 
-            Widget.CenterBox({
+            center_widget: Widget.Box({
+              class_name: "empty-notifications",
               vertical: true,
-              vexpand: true,
-              vpack: "fill",
-              visible: hasNotifications.bind().as(value => value ? false : true),
+              children: [
+                Widget.Label({
+                  class_name: "empty-notifications-icon",
+                  label: ""
+                }),
 
-              center_widget: Widget.Box({
-                class_name: "empty-notifications",
-                vertical: true,
-                children: [
-                  Widget.Label({
-                    class_name: "empty-notifications-icon",
-                    label: ""
-                  }),
+                Widget.Label({
+                  class_name: "empty-notifications",
+                  label: "No Notifications"
+                })
+              ],
+            })
+          }),
+        ],
+      }),
 
-                  Widget.Label({
-                    class_name: "empty-notifications",
-                    label: "No Notifications"
-                  })
-                ],
-              })
-            }),
-          ],
-        }),
+      Widget.Separator({ vertical: true }),
 
-        Widget.Separator({ vertical: true }),
+      Widget.Box({
+        class_name: "right-side",
+        spacing: 30,
+        vertical: true,
 
-        Widget.Box({
-          class_name: "right-side",
-          spacing: 30,
-          vertical: true,
+        children: [
+          Widget.Label({
+            label: "To This Day!",
+          }),
 
-          children: [
-            Widget.Label({
-              label: "To This Day!",
-            }),
+          Widget.Calendar({
+            class_name: "calendar",
+            showDayNames: true,
+            showDetails: false,
+            showHeading: true,
+            showWeekNumbers: false,
+            onDaySelected: ({ date: [y, m, d] }) => {
+              print(`${y}. ${m}. ${d}.`)
+            },
+          }),
 
-            Widget.Calendar({
-              class_name: "calendar",
-              showDayNames: true,
-              showDetails: false,
-              showHeading: true,
-              showWeekNumbers: false,
-              onDaySelected: ({ date: [y, m, d] }) => {
-                print(`${y}. ${m}. ${d}.`)
-              },
-            }),
+          Widget.Label("Insert-Random-Widget")
 
-            Widget.Label("Insert-Random-Widget")
+        ]
+      })
 
-          ]
-        })
-
-      ],
-    }),
-
-    Widget.Label({
-      label: "The End!",
-      vpack: "end",
-    })
-    ],
+    ]
   })
 })

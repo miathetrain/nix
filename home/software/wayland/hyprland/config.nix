@@ -16,7 +16,6 @@ in {
 
         exec-once = [
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-          "systemctl --user start swww-random-img.service"
           "swayosd-server"
           "hyprshade auto"
           "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
@@ -27,6 +26,10 @@ in {
           "[workspace 5 silent] steam"
 
           "nextcloud --background"
+        ];
+
+        exec = [
+          "systemctl --user start swww-random-img.service"
         ];
 
         general = {
@@ -173,8 +176,8 @@ in {
           "$MOD, L, movefocus, r"
           "$MOD, H, movefocus, l"
 
-          "$MOD, G, togglegroup"
-          "$MODSHIFT, G, changegroupactive, f"
+          "$MOD, J, togglegroup"
+          "$MODSHIFT, J, changegroupactive, f"
 
           # Minimize App
           "$MOD, S, togglespecialworkspace, magic"
@@ -183,23 +186,23 @@ in {
           "$MOD, S, movetoworkspace, special:magic"
           "$MOD, S, togglespecialworkspace, magic"
 
-          "Alt, Print, exec, screenshot-full && canberra-gtk-play -i screen-capture"
-          ", Print, exec, screenshot-area && canberra-gtk-play -i screen-capture"
+          "$MOD, P, exec, screenshot-full && canberra-gtk-play -i screen-capture"
+          "$MODSHIFT, P, exec, screenshot-area && canberra-gtk-play -i screen-capture"
           ", XF86LaunchA, exec, screenshot-full && canberra-gtk-play -i screen-capture"
           "$MOD, XF86LaunchA, exec, screenshot-full && canberra-gtk-play -i screen-capture"
           "$MOD, X, exec, $COLORPICKER"
-          "$MOD, M, exec, $(sleep 1 && wl-paste | wtype -d 12 -)"
           "$MOD, Return, exec, kitty"
           "$MODSHIFT, Return, exec, [float] kitty "
-          "$MOD, D, exec, pkill .anyrun-wrapped || anyrun"
-          ", XF86LaunchB, exec,  pkill .anyrun-wrapped || anyrun"
+          "$MOD, D, exec, pkill wofi || wofi"
+          ", XF86LaunchB, exec,  pkill wofi || wofi"
           "$MOD, E, exec, nautilus --new-window"
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
 
-          "$MOD,F10,pass,^(com\.obsproject\.Studio)$"
           "$MOD,G,pass,^(com\.obsproject\.Studio)$"
+          "$MOD,G,exec,notify-send 'Clip Saved'"
+          "$MODSHIFT,G,pass,^(com\.obsproject\.Studio)$"
         ];
 
         bindel = [
@@ -249,6 +252,7 @@ in {
           "float,class:^(pavucontrol)$"
           "float,class:^(steam)$"
 
+          "tile,class:^(steam)$,title:^(Steam)$"
           "tile,class:^(steam)$,title:^(Steam)$"
 
           "size 1298 797,class:^(mpv)$" # I don't think mpv cares what I say.

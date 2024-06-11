@@ -39,6 +39,8 @@ in {
         enable = true;
         remotePlay.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
+        # protontricks.enable = true;
+        gamescopeSession.enable = true;
       };
 
       alvr = mkIf cfg.vr.enable {
@@ -51,6 +53,9 @@ in {
       honkers-railway-launcher.enable = true;
     };
 
+    hardware.steam-hardware.enable = cfg.enable;
+
+
     environment.systemPackages = with pkgs;
       mkMerge [
         (mkIf (cfg.enable) [
@@ -61,6 +66,7 @@ in {
           ryujinx
           xivlauncher
           wineWowPackages.staging
+          lunar-client
         ])
 
         (mkIf (cfg.vr.enable) [

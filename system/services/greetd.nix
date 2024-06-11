@@ -8,10 +8,7 @@
   services.greetd = let
     session = {
       command = "Hyprland";
-      user =
-        if (config.networking.hostName == "dreamhouse")
-        then "mia"
-        else "wyntor";
+      user = "mia";
     };
   in {
     enable = lib.mkDefault true;

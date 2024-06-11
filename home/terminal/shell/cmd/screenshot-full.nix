@@ -20,7 +20,7 @@
     filename="$(date +%F-%H-%M-%S)-Screenshot.png"
     file_path="$screenshot_dir/$filename"
 
-    sss --author "" --padding-x 0 --padding-y 0 --screen-id "$screen_id" -o raw >"$file_path"
+    sss --author "" --padding-x 0 --padding-y 0 --radius 0 --screen-id "$screen_id" -o raw >"$file_path"
     cat "$file_path" | wl-copy -t image/png
     notify-send -a "screenshot" "Screenshot" "Copied to clipboard." -h string:hint:screenshot -i "$file_path"
   '';
