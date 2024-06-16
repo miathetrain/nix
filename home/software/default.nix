@@ -15,7 +15,7 @@
     mpv
     nextcloud-client
     element-desktop
-    sgdboop
+    # sgdboop
 
     ####
     dwarfs
@@ -23,6 +23,13 @@
 
     godot_4
     aseprite
+
+    (nexusmods-app.overrideAttrs (finalAttrs: previousAttrs: {
+      version = "0.5.1";
+      src = /home/mia/Documents/NexusMods.App;
+
+      nugetDeps = ./deps.nix;
+    }))
   ];
 
   services.arrpc.enable = true;

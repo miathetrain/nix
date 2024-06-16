@@ -1,5 +1,13 @@
 {pkgs, ...}: {
   fonts = {
+    enableDefaultPackages = true;
+
+    fontconfig = {
+      defaultFonts = {
+        sansSerif = ["UbuntuSans Nerd Font"];
+        monospace = ["UbuntuSansMono Nerd Font"];
+      };
+    };
     packages = with pkgs; [
       # icon fonts
       material-symbols
@@ -9,7 +17,7 @@
       noto-fonts-emoji
 
       # nerdfonts
-      (nerdfonts.override {fonts = ["SpaceMono" "CascadiaCode"];})
+      (nerdfonts.override {fonts = ["UbuntuSans"];})
     ];
   };
 }
