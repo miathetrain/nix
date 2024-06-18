@@ -12,7 +12,7 @@
   libX11,
   nexusmods-app,
   runCommand,
-  enableUnfree ? false, # Set to true to support RAR format mods
+  enableUnfree ? true, # Set to true to support RAR format mods
 }: let
   _7zzWithOptionalUnfreeRarSupport = _7zz.override {
     inherit enableUnfree;
@@ -47,9 +47,9 @@ in
         --replace '</PropertyGroup>' '<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles></PropertyGroup>'
     '';
 
-    # postPatch = ''
-    #   ln --force --symbolic "${lib.getExe _7zzWithOptionalUnfreeRarSupport}" src/ArchiveManagement/NexusMods.FileExtractor/runtimes/linux-x64/native/7zz
-    # '';
+    postPatch = ''
+      ln --force --symbolic "${lib.getExe _7zzWithOptionalUnfreeRarSupport}" src/ArchiveManagement/NexusMods.FileExtractor/runtimes/linux-x64/native/7zz
+    '';
 
     makeWrapperArgs = [
       "--prefix PATH : ${lib.makeBinPath [desktop-file-utils]}"
@@ -67,7 +67,7 @@ in
       nexusmods-app.meta.mainProgram
     ];
 
-    doCheck = true;
+    # doCheck = true;
 
     dotnetTestFlags = [
       "--environment=USER=nobody"

@@ -23,6 +23,8 @@
 
     godot_4
     aseprite
+
+    nexusmods-app
   ];
 
   services.arrpc.enable = true;

@@ -22,7 +22,7 @@ in {
 
           "sleep 1 && hyprlock --immediate"
 
-          "[workspace 5 silent] firefox"
+          "[workspace 1 silent] firefox"
           "[workspace 5 silent] steam"
 
           "nextcloud --background"
@@ -112,7 +112,7 @@ in {
           focus_on_activate = true;
           no_direct_scanout = false;
           # new_window_takes_over_fullscreen = 2;
-          initial_workspace_tracking = 0;
+          initial_workspace_tracking = 2;
         };
 
         cursor = {
