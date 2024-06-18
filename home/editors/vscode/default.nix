@@ -64,11 +64,11 @@
           "*.css" = "tailwindcss";
         };
 
-        "terminal.integrated.fontFamily" = "SpaceMono Nerd Font Mono";
+        "terminal.integrated.fontFamily" = "UbuntuSansMono Nerd Font Mono";
         "terminal.integrated.defaultProfile.linux" = "fish";
         "terminal.integrated.cursorBlinking" = true;
 
-        "editor.fontFamily" = "SpaceMono Nerd Font Mono, Catppuccin Perfect Mocha";
+        "editor.fontFamily" = "UbuntuSansMono Nerd Font Mono";
         "editor.useTabStops" = false;
         "editor.fontLigatures" = true;
         "editor.formatOnPaste" = true;

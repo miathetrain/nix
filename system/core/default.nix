@@ -14,7 +14,7 @@ with lib; {
     ../nix
   ];
 
-  system.stateVersion = mkDefault "23.11";
+  system.stateVersion = mkDefault "24.05";
 
   time.timeZone = mkDefault "America/Detroit";
   location.provider = "geoclue2";
