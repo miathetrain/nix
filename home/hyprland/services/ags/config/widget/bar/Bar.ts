@@ -5,6 +5,7 @@ import Time from "./Time"
 import Media from "./Media"
 import Stats from "./Stats"
 import Bluetooth from "./Bluetooth"
+import Wallpaper from "./Wallpaper"
 import Network from "./Network"
 import Volume from "./Volume"
 import SysTray from "./SysTray"
@@ -27,6 +28,7 @@ const Right = Widget.Box({
     Stats(),
     Bluetooth(),
     Network(),
+    Wallpaper(),
     Volume(),
     SysTray(),
     Profile()]
