@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./apple.nix
+    ./graphics.nix
   ];
 
   boot = {
