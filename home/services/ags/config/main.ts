@@ -13,5 +13,7 @@ App.config({
     Clock(),
     NotificationPopups(),
   ],
+
+  iconTheme: "Flat-Remix-Green-Dark",
 });
 

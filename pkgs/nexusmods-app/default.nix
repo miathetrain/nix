@@ -21,14 +21,14 @@ in
   buildDotnetModule rec {
     pname = "nexusmods-app";
 
-    version = "0.5.1";
+    version = "0.5.5";
 
     src = fetchFromGitHub {
       owner = "miathetrain";
       repo = "NexusMods.App";
-      rev = "cac0e1bfcd2ad640ee58dabc8870f4e82689f161";
+      rev = "73ba9bdd2a03eeebbab4cd25cf5c1f1efb9c7069";
       fetchSubmodules = true;
-      hash = "sha256-LQdFvy1CC7OolKwFifKybTDEPraz1Tl0SO61v5pZGJ4=";
+      hash = "sha256-M1/ZPhbMolT8er713stTPfnlZ6qnJVe/byfkmyhc3sE=";
     };
 
     projectFile = "NexusMods.App.sln";
@@ -47,8 +47,12 @@ in
         --replace '</PropertyGroup>' '<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles></PropertyGroup>'
     '';
 
+    # postPatch = ''
+    #   ln --force --symbolic "${lib.getExe _7zzWithOptionalUnfreeRarSupport}" src/ArchiveManagement/NexusMods.FileExtractor/runtimes/linux-x64/native/7zz
+    # '';
+
     postPatch = ''
-      ln --force --symbolic "${lib.getExe _7zzWithOptionalUnfreeRarSupport}" src/ArchiveManagement/NexusMods.FileExtractor/runtimes/linux-x64/native/7zz
+      cp "${lib.getExe _7zzWithOptionalUnfreeRarSupport}" src/ArchiveManagement/NexusMods.FileExtractor/runtimes/linux-x64/native/7zz
     '';
 
     makeWrapperArgs = [
@@ -67,7 +71,7 @@ in
       nexusmods-app.meta.mainProgram
     ];
 
-    # doCheck = true;
+    # doCheck = false;
 
     dotnetTestFlags = [
       "--environment=USER=nobody"
@@ -85,6 +89,28 @@ in
           ])))
       ])
     ];
+
+    passthru = {
+      tests = {
+        serve = runCommand "${pname}-test-serve" {} ''
+          ${nexusmods-app}/bin/${nexusmods-app.meta.mainProgram}
+          touch $out
+        '';
+        help = runCommand "${pname}-test-help" {} ''
+          ${nexusmods-app}/bin/${nexusmods-app.meta.mainProgram} --help
+          touch $out
+        '';
+        associate-nxm = runCommand "${pname}-test-associate-nxm" {} ''
+          ${nexusmods-app}/bin/${nexusmods-app.meta.mainProgram} associate-nxm
+          touch $out
+        '';
+        list-tools = runCommand "${pname}-test-list-tools" {} ''
+          ${nexusmods-app}/bin/${nexusmods-app.meta.mainProgram} list-tools
+          touch $out
+        '';
+      };
+      updateScript = ./update.bash;
+    };
 
     meta = {
       description = "Game mod installer, creator and manager";

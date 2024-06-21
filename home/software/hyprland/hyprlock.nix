@@ -47,7 +47,7 @@ in {
 
       input-field = [
         {
-          monitor = "DP-1";
+          monitor = "DP-2";
 
           size = "270, 50";
 
@@ -115,7 +115,7 @@ in {
         }
 
         {
-          monitor = "DP-1";
+          monitor = "DP-2";
 
           text = "cmd[update:500] echo \"<span><i>$(music-uptime)</i></span>\"";
           inherit font_family;
@@ -129,7 +129,7 @@ in {
         }
 
         {
-          monitor = "eDP-1";
+          monitor = "eDP-2";
 
           text = "cmd[update:500] echo \"<span><i>$(music-uptime)</i></span>\"";
           inherit font_family;
@@ -145,7 +145,7 @@ in {
 
       image = [
         {
-          monitor = "DP-1";
+          monitor = "DP-2";
 
           path = "${config.home.homeDirectory}/.face";
           size = 180;
@@ -162,7 +162,7 @@ in {
         }
 
         {
-          monitor = "eDP-1";
+          monitor = "eDP-2";
 
           path = "${config.home.homeDirectory}/.face";
           size = 180;

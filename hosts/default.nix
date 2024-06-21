@@ -46,21 +46,5 @@
           }
         ];
     };
-
-    blossom = nixosSystem {
-      inherit specialArgs;
-      modules =
-        [inputs.lix-module.nixosModules.default]
-        ++ desktop
-        ++ [
-          ./blossom
-          {
-            home-manager = {
-              users.wyntor.imports = homeImports."wyntor@blossom";
-              extraSpecialArgs = specialArgs;
-            };
-          }
-        ];
-    };
   };
 }

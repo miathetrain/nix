@@ -19,6 +19,7 @@ in {
 
       window {
       	background-color: rgba(0, 0, 0, .5);
+        backdrop-filter: blur(10px);
       }
 
       button {
@@ -28,7 +29,7 @@ in {
         margin: 1rem;
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 25%;
+        background-size: 10%;
       }
 
       button:focus, button:active, button:hover {

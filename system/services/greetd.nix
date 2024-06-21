@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  # osConfig,
   ...
 }: {
   # greetd display manager

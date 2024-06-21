@@ -25,7 +25,7 @@ with lib; {
 
       kernel.sysctl = {"net.ipv4.tcp_mtu_probing" = 1;}; # TODO: Move to Gaming.
 
-      kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
+      kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
       consoleLogLevel = 3;
       kernelParams = [
@@ -54,10 +54,10 @@ with lib; {
       tmp.cleanOnBoot = true;
     };
 
-    chaotic.scx = {
-      enable = true;
-      scheduler = "scx_rustland";
-    };
+    # chaotic.scx = {
+    #   enable = true;
+    #   scheduler = "scx_lavd";
+    # };
 
     environment.systemPackages = [pkgs.scx];
   };

@@ -60,5 +60,7 @@
     desktop = "";
     publicShare = "";
     templates = "";
+
+    pictures = "/home/mia/Nextcloud/Pictures";
   };
 }

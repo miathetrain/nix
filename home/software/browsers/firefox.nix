@@ -41,12 +41,12 @@ in {
       );
 
       search = {
-        default = "Catboy";
+        # default = "Catboy";
 
         engines = {
-          "Catboy" = {
-            urls = [{template = "https://searx.catboy.cloud/searxng/search?q={searchTerms}";}];
-          };
+          # "Catboy" = {
+          #   urls = [{template = "https://searx.catboy.cloud/searxng/search?q={searchTerms}";}];
+          # };
 
           "Home Manager NixOS" = {
             urls = [

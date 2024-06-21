@@ -6,7 +6,6 @@
   lib,
   ...
 }: let
-  pointer = config.gtk.cursorTheme;
   homeDir = config.home.homeDirectory;
 in {
   wayland.windowManager.hyprland = {
@@ -17,19 +16,15 @@ in {
         exec-once = [
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
           "swayosd-server"
-          "hyprshade auto"
-          "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+          # "hyprshade auto"
+          "hyprctl setcursor 'GoogleDot-Violet' 24"
 
-          "sleep 1 && hyprlock --immediate"
-
-          "[workspace 1 silent] firefox"
-          "[workspace 5 silent] steam"
+          # "[workspace 1 silent] firefox"
+          # "[workspace 5 silent] steam"
 
           "nextcloud --background"
-        ];
-
-        exec = [
           "systemctl --user start swww-random-img.service"
+          # "sleep 3 && hyprlock --immediate"
         ];
 
         general = {
@@ -41,29 +36,29 @@ in {
           layout = "dwindle";
           resize_on_border = true;
           extend_border_grab_area = 30;
-          allow_tearing = true;
+          # allow_tearing = true;
 
-          # "DP-1,2560x1440@144,1920x0,1.25"
+          # "DP-2,2560x1440@144,1920x0,1.25"
           # "HDMI-A-1,1920x1080@75,0x0,1"
           # "DP-2,1920x1080@60,0x1080,1,transform,2"
           monitor = [
-            "DP-1,highrr,auto,1.25,vrr,1"
+            "DP-2,highrr,auto,1.25,vrr,1"
             "HDMI-A-1,highrr,auto-left,auto"
-            "DP-2,highres,auto-down,auto,transform,2"
+            # "DP-2,highres,auto-down,auto,transform,2"
 
-            "eDP-1,highres,auto,auto"
+            # "eDP-2,highres,auto,auto"
 
-            ",highrr,auto,auto"
+            # ",highrr,auto,auto"
           ];
 
           workspace = [
-            "1,monitor:DP-1,default:true"
-            "2,monitor:DP-1"
-            "3,monitor:DP-1"
-            "4,monitor:DP-1"
-            "5,monitor:DP-1"
+            "1,monitor:DP-2,default:true"
+            "2,monitor:DP-2"
+            "3,monitor:DP-2"
+            "4,monitor:DP-2"
+            "5,monitor:DP-2"
             "6,monitor:HDMI-A-1,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
-            "7,monitor:DP-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
+            # "7,monitor:DP-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
         };
 
@@ -104,15 +99,15 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          vrr = 1;
+          vrr = 2;
           key_press_enables_dpms = true;
           disable_autoreload = true;
           enable_swallow = true;
           swallow_regex = "kitty";
           focus_on_activate = true;
           no_direct_scanout = false;
-          # new_window_takes_over_fullscreen = 2;
-          initial_workspace_tracking = 2;
+          new_window_takes_over_fullscreen = 2;
+          # initial_workspace_tracking = 2;
         };
 
         cursor = {
@@ -141,6 +136,9 @@ in {
           default_split_ratio = 0.9;
         };
 
+        "$SC_FULL" = "grimblast save output - > ~/.cache/sc.png && notify-send -a 'screenshot' 'Screenshot' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
+        "$SC_AREA" = "grimblast --freeze save area - > ~/.cache/sc.png && notify-send -a 'screenshot' 'Screenshot Area' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
+
         bind = [
           "${builtins.concatStringsSep "\n" (builtins.genList (x: let
               ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
@@ -161,7 +159,7 @@ in {
           "$MOD, Escape, exec, wlogout -p layer-shell"
           "$MOD, L, exec, loginctl lock-session"
           "$MOD, Space, togglefloating"
-          # "$MOD, R,  overview:toggle, all"
+          "$MOD, R,  overview:toggle, all"
           # "$MODSHIFT, R, hyprexpo:expo, toggle"
           "$MOD, T, exec, tessen -p gopass -d wofi"
           "$MOD, P, pin"
@@ -186,11 +184,11 @@ in {
           "$MOD, S, movetoworkspace, special:magic"
           "$MOD, S, togglespecialworkspace, magic"
 
-          "$MOD, P, exec, screenshot-full && canberra-gtk-play -i screen-capture"
-          "$MODSHIFT, P, exec, screenshot-area && canberra-gtk-play -i screen-capture"
-          ", XF86LaunchA, exec, screenshot-full && canberra-gtk-play -i screen-capture"
-          "$MOD, XF86LaunchA, exec, screenshot-full && canberra-gtk-play -i screen-capture"
-          "$MOD, X, exec, $COLORPICKER"
+          "$MOD, P, exec, $SC_FULL"
+          "$MODSHIFT, P, exec, $SC_AREA"
+          ", XF86LaunchA, exec, $SC_FULL"
+          "$MOD, XF86LaunchA, exec, $SC_FULL"
+          "$MOD, X, exec, hyprpicker"
           "$MOD, Return, exec, kitty"
           "$MODSHIFT, Return, exec, [float] kitty "
           "$MOD, D, exec, pkill wofi || wofi"
@@ -269,7 +267,7 @@ in {
           "bordercolor rgba(aa336a80) rgba(aa336a80),floating:1"
 
           # "immediate, class:^(.*steam_app.*)$"
-          "immediate, class:^(steam_app_252950)$"
+          # "immediate, class:^(steam_app_252950)$"
         ];
 
         plugin = {
@@ -323,8 +321,8 @@ in {
     plugins = [
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      # inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      # inputs.hyprspace.packages.${pkgs.system}.Hyprspace
+      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+      inputs.hyprspace.packages.${pkgs.system}.Hyprspace
     ];
   };
 }

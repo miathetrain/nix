@@ -47,7 +47,10 @@
       mohammadbaqer.better-folding
       catppuccin.catppuccin-vsc-icons
       rust-lang.rust-analyzer
+
+      jasonlhy.hungry-delete
     ];
+
     userSettings = lib.mkMerge [
       {
         "workbench.iconTheme" = "catppuccin-mocha";
@@ -64,11 +67,11 @@
           "*.css" = "tailwindcss";
         };
 
-        "terminal.integrated.fontFamily" = "UbuntuSansMono Nerd Font Mono";
+        # "terminal.integrated.fontFamily" = "UbuntuSansMono Nerd Font Mono";
         "terminal.integrated.defaultProfile.linux" = "fish";
         "terminal.integrated.cursorBlinking" = true;
 
-        "editor.fontFamily" = "UbuntuSansMono Nerd Font Mono";
+        # "editor.fontFamily" = "UbuntuSansMono Nerd Font Mono";
         "editor.useTabStops" = false;
         "editor.fontLigatures" = true;
         "editor.formatOnPaste" = true;

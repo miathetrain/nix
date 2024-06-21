@@ -25,10 +25,11 @@
     aseprite
 
     nexusmods-app
+    jetbrains.idea-community-bin
   ];
 
-  services.arrpc.enable = true;
-  services.arrpc.package = pkgs.arrpc;
+  # services.arrpc.enable = true;
+  # services.arrpc.package = pkgs.arrpc;
 
   services.easyeffects.enable = false;
 }

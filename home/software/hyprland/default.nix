@@ -4,25 +4,61 @@
   ...
 }: {
   imports = [
-    ./hyprland
+    ./hyprland-config.nix
     ./hyprlock.nix
     ./wlogout.nix
   ];
 
-  home.packages = with pkgs; [
-    wl-clipboard
-    hyprpicker
-    wlsunset
-  ];
+    home = {
+    packages = with pkgs; [
+      jaq
+      swayosd
+      xdg-utils
+      gnome.file-roller
+      gnome.nautilus
+      gthumb
+      gnome-text-editor
+      btop
+      tessen # Password manager
 
-  home.file.".config/tessen/config".text = ''
-    pass_backend="gopass"
-    dmenu_backend="wofi"
-    action="autotype"
-    delay="300"
-  '';
+      ##Brightness
+      inputs.dimmer.packages.${pkgs.system}.default
 
-  programs.wofi = {
+      grimblast # Screenshot utility
+      libcanberra-gtk3 # Sound utility
+
+      wl-clipboard
+      hyprpicker
+    ];
+
+    sessionVariables = {
+      QT_QPA_PLATFORM = "wayland";
+      XDG_SESSION_TYPE = "wayland";
+      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+    };
+
+    file.".config/tessen/config".text = ''
+      pass_backend="gopass"
+      dmenu_backend="wofi"
+    '';
+  };
+
+    # enable hyprland
+  wayland.windowManager.hyprland = {
+    enable = true;
+
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    systemd = {
+      variables = ["--all"];
+      extraCommands = [
+        "systemctl --user stop graphical-session.target"
+        "systemctl --user start hyprland-session.target"
+      ];
+    };
+  };
+
+    programs.wofi = {
     enable = true;
     settings = {
       show = "drun";
