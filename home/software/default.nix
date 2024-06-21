@@ -6,7 +6,6 @@
 }: {
   imports = [
     ./browsers/firefox.nix
-    ./gtk.nix
     ./media
   ];
 

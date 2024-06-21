@@ -17,11 +17,6 @@
       ../.
       ./ken
     ];
-
-    "wyntor@blossom" = [
-      ../.
-      ./blossom
-    ];
   };
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
@@ -39,11 +34,6 @@ in {
 
       "mia_ken" = homeManagerConfiguration {
         modules = homeImports."mia@ken";
-        inherit pkgs extraSpecialArgs;
-      };
-
-      "wyntor_blossom" = homeManagerConfiguration {
-        modules = homeImports."wyntor@blossom";
         inherit pkgs extraSpecialArgs;
       };
     };
