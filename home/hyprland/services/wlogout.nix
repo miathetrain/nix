@@ -29,7 +29,7 @@ in {
         margin: 1rem;
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 10%;
+        background-size: 25%;
       }
 
       button:focus, button:active, button:hover {

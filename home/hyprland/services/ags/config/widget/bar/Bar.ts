@@ -27,8 +27,8 @@ const Right = Widget.Box({
   children: [
     Stats(),
     Bluetooth(),
-    Network(),
     Wallpaper(),
+    Network(),
     Volume(),
     SysTray(),
     Profile()]

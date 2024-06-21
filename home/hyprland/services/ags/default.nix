@@ -27,6 +27,9 @@
 
       printf "%s" "$cpu_util"
 
+    elif [ $1 == "wallpaper" ]; then
+      printf "%s" "$mem_util"
+
     elif [ $1 == "memory" ]; then
       mem_total=$(awk '/MemTotal/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
       mem_ava=$(awk '/MemAvailable/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
@@ -61,6 +64,7 @@
     jq
     busybox
     amdgpu_top
+    service-wrapper
   ];
 in {
   imports = [
