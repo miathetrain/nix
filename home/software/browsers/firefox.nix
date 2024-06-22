@@ -124,7 +124,7 @@ in {
       };
 
       settings = {
-        "browser.startup.homepage" = "https://searx.catboy.cloud/";
+        "browser.startup.homepage" = "https://www.google.com/";
         "browser.newtabpage.pinned" = [
           {
             title = "Sharkey";

@@ -5,9 +5,6 @@
   ];
 
   home.packages = with pkgs; [
-    # audio control
-    pavucontrol
-
     # Kodi
     # (kodi.withPackages
     #   (kodiPkgs:
