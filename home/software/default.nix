@@ -25,6 +25,8 @@
 
     nexusmods-app
     jetbrains.idea-community-bin
+    sqlfluff
+    tor-browser-bundle-bin
   ];
 
   # services.arrpc.enable = true;

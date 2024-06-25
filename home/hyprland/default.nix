@@ -14,6 +14,7 @@
 
   home = {
     packages = with pkgs; [
+      libnotify
       jaq
       swayosd
       xdg-utils

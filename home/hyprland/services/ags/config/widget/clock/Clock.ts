@@ -1,4 +1,4 @@
-import { notification_list, hasNotifications, countNotifications, clearNotifications } from "../notification/notification.js"
+import { notification_list, hasNotifications, countNotifications, clearNotifications, doNotDisturb, notification_count } from "../notification/notification.js"
 import { format } from 'date-fns'
 
 const day = Variable('', {
@@ -36,7 +36,6 @@ export default () => Widget.Window({
 
         children: [
 
-
           Widget.CenterBox({
             hexpand: true,
 
@@ -47,12 +46,15 @@ export default () => Widget.Window({
                 Widget.Label({ label: "Do Not Disturb" }),
 
                 Widget.Switch({
-                  onActivate: ({ active }) => print(active),
+                  onActivate: ({ active }) => {
+                    doNotDisturb.setValue(active);
+                  },
                 }),
               ]
             }),
 
             end_widget: Widget.EventBox({
+              hpack: "end",
               "on-primary-click": (event) => {
                 clearNotifications()
               },
@@ -60,7 +62,7 @@ export default () => Widget.Window({
               child: Widget.Label({
                 label: " ",
                 class_name: "notification-clear",
-                tooltip_text: "Clear notifications. (" + countNotifications() + ")"
+                tooltip_text: notification_count.bind().as((count) => `Clear notifications. (${count})`)
               })
             })
           }),

@@ -1,0 +1,66 @@
+<reactive:ReactiveUserControl
+    x:TypeArguments="local:IDiagnosticListViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:reactive="http://reactiveui.net"
+    xmlns:local="clr-namespace:NexusMods.App.UI.Pages.Diagnostics"
+    xmlns:controls="clr-namespace:NexusMods.App.UI.Controls"
+    xmlns:icons="clr-namespace:NexusMods.Icons;assembly=NexusMods.Icons"
+    xmlns:resources="clr-namespace:NexusMods.App.UI.Resources"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    x:Class="NexusMods.App.UI.Pages.Diagnostics.DiagnosticListView">
+
+    <Grid RowDefinitions="Auto, *">
+        <Border Grid.Row="0" Classes="OutlineWeak" BorderThickness="0 0 0 1" Padding="24 10">
+            <Border.Styles>
+                <Style Selector="Button.Selected">
+                    <Setter Property="Background" Value="{DynamicResource NeutralStrongBrush}" />
+                    <Setter Property="Foreground" Value="{DynamicResource NeutralInvertedBrush}" />
+                </Style>
+            </Border.Styles>
+
+            <StackPanel Orientation="Horizontal" Classes="Spacing-2">
+                <Button Classes="Rounded Primary" x:Name="AllDiagnosticsButton">
+                    <TextBlock x:Name="AllDiagnosticsButtonText"/>
+                </Button>
+                <Button Classes="Rounded Primary" x:Name="CriticalDiagnosticsButton">
+                    <TextBlock x:Name="CriticalDiagnosticsButtonText"/>
+                </Button>
+                <Button Classes="Rounded Primary" x:Name="WarningDiagnosticsButton">
+                    <TextBlock x:Name="WarningDiagnosticsButtonText"/>
+                </Button>
+                <Button Classes="Rounded Primary" x:Name="SuggestionDiagnosticsButton">
+                    <TextBlock x:Name="SuggestionDiagnosticsButtonText"/>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <controls:EmptyState x:Name="EmptyState"
+                             Grid.Row="1"
+                             Icon="{x:Static icons:IconValues.CheckCircle}"
+                             Header="{x:Static resources:Language.DiagnosticListView_EmptyState_Header}"
+                             Subtitle="{x:Static resources:Language.DiagnosticListView_EmptyState_Subtitle}">
+
+            <controls:EmptyState.Styles>
+                <Style Selector="icons|UnifiedIcon#Icon">
+                    <Setter Property="Foreground" Value="{StaticResource SuccessStrong}"/>
+                </Style>
+            </controls:EmptyState.Styles>
+
+            <Border Padding="24">
+                <ItemsControl x:Name="ItemsControl">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Spacing="{StaticResource Spacing-1}" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+        </controls:EmptyState>
+
+    </Grid>
+
+</reactive:ReactiveUserControl>
+

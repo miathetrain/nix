@@ -35,9 +35,11 @@
       experimental-features = ["nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
 
+       auto-optimise-store = true;
+
       # for direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
+      # keep-derivations = true;
+      # keep-outputs = true;
 
       trusted-users = ["root" "@wheel" "nixremote"];
     };

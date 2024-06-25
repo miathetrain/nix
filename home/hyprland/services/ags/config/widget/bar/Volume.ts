@@ -1,5 +1,4 @@
 const audio = await Service.import('audio')
-const applications = await Service.import('applications')
 
 export default () => {
   const icons = {

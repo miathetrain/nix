@@ -136,8 +136,8 @@ in {
           default_split_ratio = 0.9;
         };
 
-        "$SC_FULL" = "grimblast save output - > ~/.cache/sc.png && notify-send -a 'screenshot' 'Screenshot' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
-        "$SC_AREA" = "grimblast --freeze save area - > ~/.cache/sc.png && notify-send -a 'screenshot' 'Screenshot Area' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
+        "$SC_FULL" = "grimblast save output - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -a 'screenshot' 'Screenshot' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
+        "$SC_AREA" = "grimblast --freeze save area - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -a 'screenshot' 'Screenshot Area' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
 
         bind = [
           "${builtins.concatStringsSep "\n" (builtins.genList (x: let
@@ -159,7 +159,7 @@ in {
           "$MOD, Escape, exec, wlogout -p layer-shell"
           "$MOD, L, exec, loginctl lock-session"
           "$MOD, Space, togglefloating"
-          "$MOD, R,  overview:toggle, all"
+          # "$MOD, R,  overview:toggle, all"
           # "$MODSHIFT, R, hyprexpo:expo, toggle"
           "$MOD, T, exec, tessen -p gopass -d wofi"
           "$MOD, P, pin"
@@ -322,7 +322,7 @@ in {
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      inputs.hyprspace.packages.${pkgs.system}.Hyprspace
+      # inputs.hyprspace.packages.${pkgs.system}.Hyprspace
     ];
   };
 }

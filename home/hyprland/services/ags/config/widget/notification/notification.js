@@ -5,6 +5,8 @@ const notifications = await Service.import("notifications")
 const hyprland = await Service.import("hyprland")
 
 export const hasNotifications = Variable(false);
+export const notification_count = Variable(0);
+export const doNotDisturb = Variable(false);
 
 export const list = Widget.Box({
     vertical: true,
@@ -31,19 +33,19 @@ export function removeNotification(not) {
     // @ts-ignore
     const notificationList = list.children.find(n => n.attribute.id === not.id)
 
-    // notification_list.children = [];
+    notificationList?.destroy()
 
-    if (notificationList != null) {
-        // @ts-ignore
-        notificationList.transition = "slide_right"
-        // @ts-ignore
-        notificationList.transitionDuration = 1000
-        // @ts-ignore
-        notificationList.revealChild = false
-        Utils.timeout(600, () => {
-            notificationList.destroy()
-        })
-    }
+    // if (notificationList != null) {
+    //     // @ts-ignore
+    //     notificationList.transition = "slide_right"
+    //     // @ts-ignore
+    //     notificationList.transitionDuration = 1000
+    //     // @ts-ignore
+    //     notificationList.revealChild = false
+    //     Utils.timeout(600, () => {
+    //         notificationList.destroy()
+    //     })
+    // }
 
     // Utils.timeout(600, () => {
     //     notifications.clear()
@@ -213,7 +215,7 @@ export function smallNotification(n) {
         use_markup: true,
     })
 
-    const time_string = Variable('', { // 5:30 vs 6:15
+    const time_string = Variable('', {
         poll: [1000, function () {
             const now = GLib.DateTime.new_now_local();
             const then = GLib.DateTime.new_from_unix_local(n.time);
@@ -245,7 +247,6 @@ export function smallNotification(n) {
         "on-primary-click": () => {
             n.close();
         }
-
     })
 
     const body = Widget.Label({
@@ -429,9 +430,11 @@ export function smallNotification(n) {
 
 export function NotificationPopups(monitor = 0) {
     notifications.popupTimeout = 10000;
-    notifications.forceTimeout = true;
+    // notifications.forceTimeout = true;
 
     function onNotified(_, /** @type {number} */ id) {
+        notification_count.setValue(notification_count.value + 1);
+
         const n = notifications.getNotification(id)
         if (n) {
             const hint = n.hints['hint']?.get_string()[0]

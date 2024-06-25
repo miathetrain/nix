@@ -1,0 +1,18 @@
+﻿using System.Reactive;
+using NexusMods.App.UI.Controls.Navigation;
+using ReactiveUI;
+
+namespace NexusMods.App.UI.LeftMenu.Items;
+
+public interface IApplyControlViewModel : IViewModelInterface
+{
+    ReactiveCommand<Unit,Unit> ApplyCommand { get; }
+    
+    ReactiveCommand<NavigationInformation, Unit> ShowApplyDiffCommand { get; }
+    
+    ILaunchButtonViewModel LaunchButtonViewModel { get; }
+    
+    bool IsLaunchButtonEnabled { get; }
+    
+    string ApplyButtonText { get; }
+}
