@@ -27,10 +27,6 @@ with lib; {
 
   home-manager.backupFileExtension = "backup";
 
-  # environment.sessionVariables = {
-  #   DOTNET_ROOT = "${pkgs.dotnet-sdk_8}";
-  # };
-
   # compresses half the ram for use as swap
   zramSwap.enable = true;
 }

@@ -12,7 +12,6 @@ let
 
     # Hardware
     ./hardware/bluetooth.nix
-    ./hardware/graphics.nix
     ./hardware/opentablet.nix
   ];
 in {
