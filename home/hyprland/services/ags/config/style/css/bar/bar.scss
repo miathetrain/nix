@@ -117,20 +117,20 @@
   border-radius: 7px;
 }
 
-.big-small-icon {
+.preview {
   min-width: 100px;
   min-height: 100px;
   margin-right: 1em;
 }
 
-.big-small-icon image {
+.preview image {
   font-size: 58px;
   /* to center the icon */
   margin: 5px;
   color: color.$text;
 }
 
-.big-small-icon box {
+.preview box {
   min-width: 400px;
   min-height: 200px;
   border-radius: 7px;

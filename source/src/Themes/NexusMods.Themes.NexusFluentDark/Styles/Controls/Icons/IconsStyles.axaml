@@ -1,0 +1,444 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:icons="clr-namespace:NexusMods.Icons;assembly=NexusMods.Icons">
+
+    <!-- Preview -->
+    <Design.PreviewWith>
+        <WrapPanel Width="500">
+            <WrapPanel.Styles>
+                <Style Selector="icons|UnifiedIcon">
+                    <Setter Property="Size" Value="20" />
+                    <Setter Property="Margin" Value="2" />
+                </Style>
+            </WrapPanel.Styles>
+
+            <icons:UnifiedIcon Classes="Alert" />
+            <icons:UnifiedIcon Classes="AlertOutline" />
+            <icons:UnifiedIcon Classes="Bell" />
+            <icons:UnifiedIcon Classes="CheckUnderline" />
+            <icons:UnifiedIcon Classes="ClearAll" />
+            <icons:UnifiedIcon Classes="Cog" />
+            <icons:UnifiedIcon Classes="Download" />
+            <icons:UnifiedIcon Classes="HelpCircle" />
+            <icons:UnifiedIcon Classes="Help" />
+            <icons:UnifiedIcon Classes="History" />
+            <icons:UnifiedIcon Classes="Play" />
+            <icons:UnifiedIcon Classes="PlusCircleOutline" />
+            <icons:UnifiedIcon Classes="ProgressDownload" />
+            <icons:UnifiedIcon Classes="PauseCircleOutline" />
+            <icons:UnifiedIcon Classes="PauseCircleFilled" />
+            <icons:UnifiedIcon Classes="RemoveCircleOutline" />
+            <icons:UnifiedIcon Classes="Star" />
+            <icons:UnifiedIcon Classes="TrashCanOutline" />
+            <icons:UnifiedIcon Classes="PlayCircleOutline" />
+            <icons:UnifiedIcon Classes="PlayCircleFilled" />
+            <icons:UnifiedIcon Classes="Image" />
+            <icons:UnifiedIcon Classes="Description" />
+            <icons:UnifiedIcon Classes="Tune" />
+            <icons:UnifiedIcon Classes="ArrowLeft" />
+            <icons:UnifiedIcon Classes="ArrowRight" />
+            <icons:UnifiedIcon Classes="Plus" />
+            <icons:UnifiedIcon Classes="MenuDown" />
+            <icons:UnifiedIcon Classes="MenuUp" />
+            <icons:UnifiedIcon Classes="Close" />
+            <icons:UnifiedIcon Classes="OpenInNew" />
+            <icons:UnifiedIcon Classes="Tab" />
+            <icons:UnifiedIcon Classes="ChevronLeft" />
+            <icons:UnifiedIcon Classes="ChevronRight" />
+            <icons:UnifiedIcon Classes="FolderOutline" />
+            <icons:UnifiedIcon Classes="FolderOpenOutline" />
+            <icons:UnifiedIcon Classes="File" />
+            <icons:UnifiedIcon Classes="Check" />
+            <icons:UnifiedIcon Classes="DeleteOutline" />
+            <icons:UnifiedIcon Classes="DragHorizontal" />
+            <icons:UnifiedIcon Classes="DragVertical" />
+            <icons:UnifiedIcon Classes="Search" />
+            <icons:UnifiedIcon Classes="Home" />
+            <icons:UnifiedIcon Classes="ToggleSwitch" />
+            <icons:UnifiedIcon Classes="ToggleSwitchOff" />
+            <icons:UnifiedIcon Classes="Game" />
+            <icons:UnifiedIcon Classes="Undo" />
+            <icons:UnifiedIcon Classes="Redo" />
+            <icons:UnifiedIcon Classes="Save" />
+            <icons:UnifiedIcon Classes="Copy" />
+            <icons:UnifiedIcon Classes="Paste" />
+            <icons:UnifiedIcon Classes="AddCircle" />
+            <icons:UnifiedIcon Classes="AlertCircle" />
+            <icons:UnifiedIcon Classes="AlertOctagon" />
+            <icons:UnifiedIcon Classes="MonitorDiagnostics" />
+            <icons:UnifiedIcon Classes="DiagnosticPage"/>
+            <icons:UnifiedIcon Classes="FileDocumentOutline" />
+            <icons:UnifiedIcon Classes="MusicNote" />
+            <icons:UnifiedIcon Classes="VideoOutline" />
+            <icons:UnifiedIcon Classes="Refresh" />
+            <icons:UnifiedIcon Classes="Collections" />
+            <icons:UnifiedIcon Classes="Add" />
+            <icons:UnifiedIcon Classes="DeleteForever" />
+            <icons:UnifiedIcon Classes="Mods" />
+            <icons:UnifiedIcon Classes="JoystickGameFilled" />
+            <icons:UnifiedIcon Classes="ModLibrary" />
+            <icons:UnifiedIcon Classes="ListFilled" />
+            <icons:UnifiedIcon Classes="FileEdit"/>
+            <icons:UnifiedIcon Classes="Code"/>
+            <icons:UnifiedIcon Classes="Discord"/>
+            <icons:UnifiedIcon Classes="Forum"/>
+            <icons:UnifiedIcon Classes="Sync"/>
+            <icons:UnifiedIcon Classes="Visibility"/>
+            <icons:UnifiedIcon Classes="PlaylistAdd"/>
+            <icons:UnifiedIcon Classes="HardDrive"/>
+            <icons:UnifiedIcon Classes="Nexus"/>
+            <icons:UnifiedIcon Classes="ColorLens"/>
+        </WrapPanel>
+    </Design.PreviewWith>
+
+    <!-- Style Definitions -->
+    <Style Selector="icons|UnifiedIcon">
+        <Setter Property="Theme" Value="{StaticResource UnifiedIconTheme}" />
+    </Style>
+
+    <!-- Foreground color classes -->
+    <Style Selector="icons|UnifiedIcon.ForegroundStrong">
+        <Setter Property="Foreground" Value="{StaticResource NeutralStrongBrush}" />
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ForegroundModerate">
+        <Setter Property="Foreground" Value="{StaticResource NeutralModerateBrush}" />
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ForegroundSubdued">
+        <Setter Property="Foreground" Value="{StaticResource NeutralSubduedBrush}" />
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ForegroundWeak">
+        <Setter Property="Foreground" Value="{StaticResource NeutralWeakBrush}" />
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ForegroundInverted">
+        <Setter Property="Foreground" Value="{StaticResource NeutralInvertedBrush}" />
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.ForegroundInfoStrong">
+        <Setter Property="Foreground" Value="{StaticResource InfoStrongBrush}" />
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.ForegroundWarningStrong">
+        <Setter Property="Foreground" Value="{StaticResource WarningStrongBrush}" />
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.ForegroundDangerStrong">
+        <Setter Property="Foreground" Value="{StaticResource DangerStrongBrush}" />
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.ForegroundSuccessStrong">
+        <Setter Property="Foreground" Value="{StaticResource SuccessStrongBrush}" />
+    </Style>
+
+    <!-- Icon Selection -->
+
+    <!-- NOTE: Material icon names are not standardized well, use this site to look them up:  -->
+    <!-- https://pictogrammers.com/library/mdi/ -->
+    <Style Selector="icons|UnifiedIcon.Alert">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Warning}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.AlertOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.WarningAmber}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Bell">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.NotificationImportant}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.CheckUnderline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.DownloadDone}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ClearAll">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ClearAll}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Cog">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Settings}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Download">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Download}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.HelpCircle">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Help}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Help">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.HelpOutline}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.History">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.History}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Play">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.PlayArrow}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.PlusCircleOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.AddCircleOutline}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ProgressDownload">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Downloading}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.PauseCircleOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.PauseCircleOutline}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.PauseCircleFilled">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.PauseCircleFilled}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.RemoveCircleOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.RemoveCircleOutline}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Star">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Star}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.TrashCanOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.DeleteOutline}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.PlayCircleOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.PlayCircleOutline}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.PlayCircleFilled">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.PlayCircleFilled}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Image">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Image}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Description">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Description}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Tune">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Tune}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ArrowLeft">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ArrowBack}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ArrowRight">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ArrowForward}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Plus">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Add}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.MenuDown">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ArrowDropDown}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.MenuUp">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ArrowDropUp}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Close">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Close}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.OpenInNew">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.OpenInNew}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Tab">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Tab}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ChevronLeft">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ChevronLeft}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ChevronRight">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ChevronRight}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.FolderOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Folder}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.FolderOpenOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.FolderOpen}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.File">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.InsertDriveFile}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Check">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Done}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.DeleteOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.DeleteOutline}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.DragHorizontal">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.DragHandleHorizontal}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.DragVertical">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.DragHandleVertical}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Search">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Search}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Home">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Home}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ToggleSwitch">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ToggleOn}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.ToggleSwitchOff">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ToggleOff}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Game">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Game}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Save">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Save}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Copy">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Copy}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Paste">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Paste}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Undo">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Undo}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Redo">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Redo}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.AddCircle">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.AddCircle}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.AlertCircle">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Error}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.AlertOctagon">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Alert}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.MonitorDiagnostics">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.MonitorDiagnostics}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.DiagnosticPage">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.DiagnosticPage}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.FileDocumentOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.FileDocumentOutline}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.MusicNote">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.MusicNote}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.VideoOutline">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Video}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.Refresh">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Refresh}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Collections">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Collections}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.Add">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Add}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.DeleteForever">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.DeleteForever}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.Mods">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Mods}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.JoystickGameFilled">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.JoystickGameFilled}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.ModLibrary">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ModLibrary}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.ListFilled">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ListFilled}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.FileEdit">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.FileEdit}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Code">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Code}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Discord">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Discord}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Forum">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Forum}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Sync">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Sync}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.Visibility">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Visibility}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.PlaylistAdd">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.PlaylistAdd}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.HardDrive">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.HardDrive}"/>
+    </Style>
+
+    <Style Selector="icons|UnifiedIcon.Nexus">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.Nexus}"/>
+    </Style>
+    
+    <Style Selector="icons|UnifiedIcon.ColorLens">
+        <Setter Property="Value" Value="{x:Static icons:IconValues.ColorLens}"/>
+    </Style>
+</Styles>

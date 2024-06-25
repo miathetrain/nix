@@ -27,9 +27,6 @@
 
       printf "%s" "$cpu_util"
 
-    elif [ $1 == "wallpaper" ]; then
-      printf "%s" "$mem_util"
-
     elif [ $1 == "memory" ]; then
       mem_total=$(awk '/MemTotal/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
       mem_ava=$(awk '/MemAvailable/ { printf "%.3f \n", $2/1024/1024 }' /proc/meminfo)
@@ -56,15 +53,22 @@
     fi
   '';
 
+  addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
+
+  ags-wrap = pkgs.writeShellScript "ags-wrap" ''
+    export PATH=$PATH:${addBins dependencies}
+    ${config.programs.ags.package}/bin/ags -c ${toString ./config/config.js} $@
+  '';
+
   dependencies = with pkgs; [
     dart-sass
     esbuild
     pinfo
 
     jq
-    busybox
+    toybox
     amdgpu_top
-    service-wrapper
+    pavucontrol
   ];
 in {
   imports = [
@@ -83,8 +87,7 @@ in {
       Install.WantedBy = ["hyprland-session.target"];
 
       Service = {
-        Environment = "PATH=${lib.makeBinPath dependencies}";
-        ExecStart = ''${config.programs.ags.package}/bin/ags -c ${toString ./config/config.js}'';
+        ExecStart = ''${ags-wrap}'';
       };
     };
   };

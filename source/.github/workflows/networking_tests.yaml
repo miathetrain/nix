@@ -1,0 +1,43 @@
+name: Networking Tests
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    
+    name: Test ${{ matrix.project }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    
+    environment: test
+    
+    env:
+      NEXUS_API_KEY: ${{ secrets.NEXUS_API_KEY }}
+    
+    strategy:
+      matrix:
+        #os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup .NET Core SDK 7.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: Tests
+        run: dotnet test --no-build --logger "GitHubActions" --filter "RequiresNetworking!=True" --collect:"XPlat Code Coverage;Format=opencover" --blame-hang-timeout 20m
+
+      - uses: codecov/codecov-action@v3
+        with:
+          flags: network_tests, ${{runner.os}}
+          verbose: true

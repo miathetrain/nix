@@ -5,7 +5,7 @@ export default () => {
     if (mpris.players[0]) {
       const { track_title } = mpris.players[0]
       const title = `${track_title} `
-      return title.length <= 40 ? title : title.substring(0, 40) + "..."
+      return title.length <= 20 ? title : title.substring(0, 20) + "..."
     } else {
       return ''
     }

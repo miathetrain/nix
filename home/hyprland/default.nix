@@ -12,8 +12,9 @@
     ./hyprland-config.nix
   ];
 
-    home = {
+  home = {
     packages = with pkgs; [
+      libnotify
       jaq
       swayosd
       xdg-utils
@@ -23,9 +24,7 @@
       gnome-text-editor
       btop
       tessen # Password manager
-
-      ##Brightness
-      inputs.dimmer.packages.${pkgs.system}.default
+      inputs.dimmer.packages.${pkgs.system}.default #Brightness
 
       grimblast # Screenshot utility
       libcanberra-gtk3 # Sound utility
@@ -47,7 +46,14 @@
     '';
   };
 
-    # enable hyprland
+  services.gammastep = {
+    enable = true;
+    provider = "manual";
+    latitude = 42.2;
+    longitude = -83.3;
+  };
+
+  # enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -61,7 +67,7 @@
     };
   };
 
-    programs.wofi = {
+  programs.wofi = {
     enable = true;
     settings = {
       show = "drun";

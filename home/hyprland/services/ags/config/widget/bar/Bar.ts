@@ -2,6 +2,7 @@ import Launcher from "./Launcher"
 import ClientTitle from "./ClientTitle"
 import Workspaces from "./Workspaces"
 import Time from "./Time"
+import NotificationCount from "./NotificationCount"
 import Media from "./Media"
 import Stats from "./Stats"
 import Bluetooth from "./Bluetooth"
@@ -18,13 +19,14 @@ const Left = Widget.Box({
 
 const Center = Widget.Box({
   spacing: 15,
-  children: [Time(), Media()]
+  children: [Time(), NotificationCount()]
 })
 
 const Right = Widget.Box({
   hpack: "end",
   spacing: 10,
   children: [
+    Media(),
     Stats(),
     Bluetooth(),
     Wallpaper(),

@@ -1,0 +1,26 @@
+<reactive:ReactiveUserControl
+    x:TypeArguments="workspace:IAddPanelButtonViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:reactive="http://reactiveui.net"
+    xmlns:workspace="clr-namespace:NexusMods.App.UI.WorkspaceSystem"
+    xmlns:icons="clr-namespace:NexusMods.Icons;assembly=NexusMods.Icons"
+    mc:Ignorable="d" d:DesignWidth="80" d:DesignHeight="60"
+    x:Class="NexusMods.App.UI.WorkspaceSystem.AddPanelButtonView">
+
+    <Design.DataContext>
+        <workspace:AddPanelButtonDesignViewModel/>
+    </Design.DataContext>
+
+    <Border x:Name="BackgroundBorder">
+        <Button x:Name="AddPanelButton">
+            <StackPanel Orientation="Horizontal">
+                <icons:UnifiedIcon x:Name="ButtonImage"/>
+                <icons:UnifiedIcon x:Name="PlusIcon" Classes="Plus" Size="16"/>
+            </StackPanel>
+        </Button>
+    </Border>
+
+</reactive:ReactiveUserControl>

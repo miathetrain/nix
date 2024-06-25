@@ -68,6 +68,7 @@ export declare class Notification extends Service {
     private _x?;
     private _y?;
     private _hints;
+  attribute: any;
     get action_icons(): boolean | undefined;
     get actions(): Action[];
     get app_entry(): string | undefined;

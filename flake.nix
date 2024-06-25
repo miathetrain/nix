@@ -28,6 +28,7 @@
         };
 
         formatter = pkgs.alejandra;
+        packages.nexusmods-app = pkgs.callPackage ./pkgs/nexusmods-app {};
       };
     };
 

@@ -1,5 +1,17 @@
-import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs"
-import { notification_list, hasNotifications, countNotifications, clearNotifications } from "../notification/notification.js"
+import { notification_list, hasNotifications, countNotifications, clearNotifications, doNotDisturb, notification_count } from "../notification/notification.js"
+import { format } from 'date-fns'
+
+const day = Variable('', {
+  poll: [1000, function () {
+    return format(new Date(), "h 'o''clock'");
+  }],
+});
+
+const daydesc = Variable('', {
+  poll: [1000, function () {
+    return format(new Date(), "BBBB");
+  }],
+});
 
 export default () => Widget.Window({
   name: "clockbar",
@@ -24,43 +36,35 @@ export default () => Widget.Window({
 
         children: [
 
-
-          Widget.Box({
-            hpack: "baseline",
+          Widget.CenterBox({
             hexpand: true,
 
-            children: [
-              Widget.Box({
-                hpack: "start",
-                halign: Align.START,
-                spacing: 20,
-                children: [
+            start_widget: Widget.Box({
+              spacing: 5,
+              children: [
 
-                  Widget.Label({ label: "Do Not Disturb" }),
+                Widget.Label({ label: "Do Not Disturb" }),
 
-                  Widget.Switch({
-                    onActivate: ({ active }) => print(active),
-                  }),
-                ]
-              }),
-
-              Widget.Box({
-                hpack: "end",
-                halign: Align.END,
-                child: Widget.EventBox({
-                  hpack: "end",
-
-                  "on-primary-click": (event) => {
-                    clearNotifications()
+                Widget.Switch({
+                  onActivate: ({ active }) => {
+                    doNotDisturb.setValue(active);
                   },
-                  child: Widget.Label({
-                    label: " ",
-                    class_name: "notification-clear",
-                    tooltip_text: "Clear notifications. (" + countNotifications() + ")"
-                  })
-                })
+                }),
+              ]
+            }),
+
+            end_widget: Widget.EventBox({
+              hpack: "end",
+              "on-primary-click": (event) => {
+                clearNotifications()
+              },
+
+              child: Widget.Label({
+                label: " ",
+                class_name: "notification-clear",
+                tooltip_text: notification_count.bind().as((count) => `Clear notifications. (${count})`)
               })
-            ]
+            })
           }),
 
           Widget.Scrollable({
@@ -105,8 +109,17 @@ export default () => Widget.Window({
         vertical: true,
 
         children: [
-          Widget.Label({
-            label: "To This Day!",
+
+          Widget.Box({
+            vertical: true,
+            children: [
+              Widget.Label({
+                label: day.bind(),
+              }),
+              Widget.Label({
+                label: daydesc.bind(),
+              })
+            ]
           }),
 
           Widget.Calendar({

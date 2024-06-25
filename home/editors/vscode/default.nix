@@ -131,6 +131,27 @@
         "[javascript]" = {
           "editor.defaultFormatter" = "vscode.typescript-language-features";
         };
+
+        "sqlfluff.dialect" = "mysql";
+        "sqlfluff.excludeRules" = ["L009"];
+        "sqlfluff.executablePath" = "sqlfluff";
+        "sqlfluff.ignoreLocalConfig" = false;
+        "sqlfluff.ignoreParsing" = false;
+        "sqlfluff.rules" = [];
+        "sqlfluff.suppressNotifications" = false;
+        "sqlfluff.workingDirectory" = "";
+        /*
+        Linter
+        */
+        "sqlfluff.linter.arguments" = [];
+        "sqlfluff.linter.run" = "onType";
+        "sqlfluff.linter.diagnosticSeverity" = "error";
+        "sqlfluff.linter.lintEntireProject" = true;
+        /*
+        Formatter
+        */
+        "sqlfluff.format.arguments" = ["--FIX-EVEN-UNPARSABLE"];
+        "sqlfluff.format.enabled" = true;
       }
       (lib.mkIf (osConfig.networking.hostName == "dreamhouse") {
         "editor.fontSize" = 14;
