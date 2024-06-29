@@ -14,7 +14,8 @@ in {
         "$MOD" = "SUPER";
 
         exec-once = [
-          "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+          "systemctl --user start swww-random-img.service"
           "swayosd-server"
           # "hyprshade auto"
           "hyprctl setcursor 'GoogleDot-Violet' 24"
@@ -23,7 +24,7 @@ in {
           # "[workspace 5 silent] steam"
 
           "nextcloud --background"
-          "systemctl --user start swww-random-img.service"
+
           # "sleep 3 && hyprlock --immediate"
         ];
 

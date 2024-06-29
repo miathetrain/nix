@@ -27,6 +27,8 @@ with lib; {
 
   home-manager.backupFileExtension = "backup";
 
+  programs.corectrl.enable = true;
+
   # environment.sessionVariables = {
   #   DOTNET_ROOT = "${pkgs.dotnet-sdk_8}";
   # };

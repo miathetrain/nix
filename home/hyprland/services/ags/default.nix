@@ -53,29 +53,26 @@
     fi
   '';
 
+  ags = inputs.ags.packages.${pkgs.system}.default;
+
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
 
   ags-wrap = pkgs.writeShellScript "ags-wrap" ''
     export PATH=$PATH:${addBins dependencies}
-    ${config.programs.ags.package}/bin/ags -c ${toString ./config/config.js} $@
+    ${ags}/bin/ags -c ${toString ./config/config.js} $@
   '';
 
   dependencies = with pkgs; [
     dart-sass
     esbuild
     pinfo
-
     jq
+
     toybox
     amdgpu_top
     pavucontrol
   ];
 in {
-  imports = [
-    inputs.ags.homeManagerModules.default
-  ];
-
-  programs.ags.enable = true;
   services.xembed-sni-proxy.enable = true;
 
   systemd.user.services = {

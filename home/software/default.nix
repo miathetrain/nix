@@ -10,7 +10,8 @@
   ];
 
   home.packages = with pkgs; [
-    (vesktop.override {withSystemVencord = false;})
+    # (vesktop.override {withSystemVencord = false;})
+    vesktop
     mpv
     nextcloud-client
     element-desktop
@@ -25,8 +26,8 @@
 
     nexusmods-app
     jetbrains.idea-community-bin
-    sqlfluff
     tor-browser-bundle-bin
+    blockbench
   ];
 
   # services.arrpc.enable = true;

@@ -43,7 +43,5 @@
       OnUnitActiveSec = "30m";
       Unit = "swww-random-img.service";
     };
-
-    Install.WantedBy = ["hyprland-session.target"];
   };
 }
