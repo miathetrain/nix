@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./storage.nix
     ./backlight.nix
+    ./graphics.nix
   ];
 
   boot = {

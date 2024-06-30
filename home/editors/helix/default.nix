@@ -21,7 +21,6 @@
             emmet-ls
             marksman
             nil
-            nodePackages.volar
             nodePackages.vscode-css-languageserver-bin
             nodePackages.vscode-langservers-extracted
             nodePackages.typescript-language-server

@@ -6,7 +6,8 @@
   inputs,
   ...
 }: let
-  java = pkgs.temurin-bin-20;
+  java = pkgs.jdk21;
+  gradle = pkgs.gradle;
 in {
   home.packages = with pkgs; [alejandra gradle java];
 
@@ -43,6 +44,7 @@ in {
       redhat.java # https://marketplace.visualstudio.com/items?itemName=redhat.java
       vscjava.vscode-gradle # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle
       shengchen.vscode-checkstyle # https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle
+      fwcd.kotlin # https://open-vsx.org/extension/fwcd/kotlin
 
       ## Pretty
       kamadorueda.alejandra # https://marketplace.visualstudio.com/items?itemName=kamadorueda.alejandra
@@ -55,6 +57,7 @@ in {
       mohammadbaqer.better-folding # https://marketplace.visualstudio.com/items?itemName=MohammadBaqer.better-folding
       catppuccin.catppuccin-vsc-icons # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc-icons
       jasonlhy.hungry-delete # https://marketplace.visualstudio.com/items?itemName=jasonlhy.hungry-delete
+      wakatime.vscode-wakatime # https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime
     ];
 
     userSettings = {
@@ -72,12 +75,24 @@ in {
       "window.titleBarStyle" = "custom";
 
       "editor.fontFamily" = "SpaceMono Nerd Font Mono";
+      "editor.formatOnSaveMode" = "modificationsIfAvailable";
+      "editor.formatOnSave" = true;
+      "editor.formatOnPaste" = true;
+      "editor.formatOnType" = true;
+      "editor.fontLigatures" = true;
+      "editor.cursorSmoothCaretAnimation" = "on";
+      "editor.cursorStyle" = "line-thin";
 
       "terminal.integrated.cursorBlinking" = true;
       "terminal.integrated.fontFamily" = "SpaceMono Nerd Font Mono";
 
       "java.jdt.ls.java.home" = java;
-      "ava.gradle.buildServer.enabled" = false;
+      "java.import.gradle.java.home" = java;
+      "java.import.gradle.version" = "8.8";
+      "java.import.gradle.wrapper.enabled" = false;
+      "java.format.settings.url" = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml";
+
+      "redhat.telemetry.enabled" = false;
     };
   };
 }

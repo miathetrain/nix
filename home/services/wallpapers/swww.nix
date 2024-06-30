@@ -25,7 +25,7 @@
 
       Service = {
         ExecStart = ''
-          ${pkgs.bash}/bin/bash -c '${pkgs.findutils}/bin/find "${config.home.homeDirectory}/.config/wallpapers/" -type f | ${pkgs.coreutils}/bin/shuf -n 1 | while read OUTPUT; do ${pkgs.libnotify}/bin/notify-send -a "wallpaper" "Wallpaper" "wallpaper has been updated." -i "$OUTPUT"; ${pkgs.swww}/bin/swww img -t random $OUTPUT; ln -f -s "$OUTPUT" "${config.home.homeDirectory}/.cache/background"; done'
+          ${pkgs.findutils}/bin/find "${config.home.homeDirectory}/.config/wallpapers/" -type f | ${pkgs.coreutils}/bin/shuf -n 1 | while read OUTPUT; do ${pkgs.libnotify}/bin/notify-send -a "wallpaper" "Wallpaper" "wallpaper has been updated." -i "$OUTPUT"; ${pkgs.swww}/bin/swww img -t random $OUTPUT; ln -f -s "$OUTPUT" "${config.home.homeDirectory}/.cache/background"; done
         '';
         Restart = "on-failure";
         RestartSec = 10;
