@@ -1,6 +1,6 @@
 {
-    services.gnome-keyring = {
-        enable = true;
-        components = ["secrets" "ssh"];
-    };
+    # services.gnome-keyring = {
+    #     enable = true;
+    #     components = ["secrets" "ssh"];
+    # };
 }

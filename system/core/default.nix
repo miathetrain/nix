@@ -29,5 +29,5 @@ with lib; {
   programs.corectrl.enable = true;
 
   # compresses half the ram for use as swap
-  zramSwap.enable = true;
+  #zramSwap.enable = false;
 }

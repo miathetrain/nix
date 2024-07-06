@@ -9,6 +9,7 @@
     ./services/hypridle.nix
     ./services/hyprlock.nix
     ./services/wlogout.nix
+    ./services/gnome-keyring.nix
 
     ./hyprland-config.nix
   ];

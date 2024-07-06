@@ -51,7 +51,10 @@ in {
 
       anime-borb-launcher.enable = true;
       honkers-railway-launcher.enable = true;
+      sleepy-launcher.enable = true;
     };
+
+    nix.settings = inputs.aagl.nixConfig;
 
     hardware.steam-hardware.enable = cfg.enable;
 

@@ -15,7 +15,7 @@ in {
     enable = true;
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
-    mutableExtensionsDir = false;
+    mutableExtensionsDir = true;
 
     package = pkgs.vscodium;
     userTasks = {
@@ -50,7 +50,18 @@ in {
       kamadorueda.alejandra # https://marketplace.visualstudio.com/items?itemName=kamadorueda.alejandra
 
       ## Misc
-      catppuccin.catppuccin-vsc # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc
+      # catppuccin.catppuccin-vsc # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc
+      (pkgs.catppuccin-vsc.override {
+      accent = "mauve";
+      boldKeywords = true;
+      italicComments = true;
+      italicKeywords = true;
+      extraBordersEnabled = false;
+      workbenchMode = "default";
+      bracketMode = "rainbow";
+      colorOverrides = {};
+      customUIColors = {};
+    })
       naumovs.color-highlight # https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight
       usernamehw.errorlens # https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
       eamodio.gitlens # https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
@@ -58,6 +69,7 @@ in {
       catppuccin.catppuccin-vsc-icons # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc-icons
       jasonlhy.hungry-delete # https://marketplace.visualstudio.com/items?itemName=jasonlhy.hungry-delete
       wakatime.vscode-wakatime # https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime
+      bmalehorn.vscode-fish # https://open-vsx.org/extension/bmalehorn/vscode-fish
     ];
 
     userSettings = {
@@ -68,7 +80,7 @@ in {
       "workbench.editor.tabActionLocation" = "left";
       "workbench.panel.defaultLocation" = "bottom";
 
-      "files.autoSave" = "afterDelay";
+      "files.autoSave" = "onFocusChange";
       "files.trimTrailingWhitespace" = true;
 
       "window.menuBarVisibility" = "toggle";
@@ -90,9 +102,30 @@ in {
       "java.import.gradle.java.home" = java;
       "java.import.gradle.version" = "8.8";
       "java.import.gradle.wrapper.enabled" = false;
+      "java.completion.chain.enabled" = true;
+      "java.saveActions.organizeImports" = true;
+      "java.inlayHints.parameterNames.enabled" = "all";
       "java.format.settings.url" = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml";
+      "java.completion.favoriteStaticMembers" = [
+        "net.kyori.adventure.text.Component.*"
+        "net.kyori.adventure.text.format.NamedTextColor.*"
+      ];
 
       "redhat.telemetry.enabled" = false;
+
+      "catppuccin.accentColor" = "pink";
+
+      "git.allowForcePush" = true;
+      "git.mergeEditor" = true;
+      "github.gitProtocol" = "ssh";
+
+      "gitlens.currentLine.enabled" = false;
+
+      "kotlin.inlayHints.typeHints" = true;
+      "kotlin.inlayHints.parameterHints" = true;
+      "kotlin.inlayHints.chainedHints" = true;
+
+
     };
   };
 }

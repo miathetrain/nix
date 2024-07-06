@@ -14,16 +14,11 @@ in {
         "$MOD" = "SUPER";
 
         exec-once = [
-          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-          "systemctl --user start swww-random-img.service"
+        #  "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        #  "systemctl --user start swww-random-img.service"
           "swayosd-server"
           "hyprctl setcursor 'GoogleDot-Violet' 24"
-
-          # "[workspace 1 silent] firefox"
-          # "[workspace 5 silent] steam"
-
-          "nextcloud --background"
-
+          "nextcloud"
           # "sleep 3 && hyprlock --immediate"
         ];
 

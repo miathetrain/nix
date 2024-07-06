@@ -1,7 +1,6 @@
 {pkgs, ...}: {
-  services.flatpak.enable = true;
-
-  programs.light.enable = true;
+  # services.flatpak.enable = true;
+  # programs.light.enable = true;
 
   environment.systemPackages = with pkgs; [
     wget
