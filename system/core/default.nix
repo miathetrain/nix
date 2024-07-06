@@ -18,7 +18,6 @@ with lib; {
   system.stateVersion = mkDefault "24.05";
 
   time.timeZone = mkDefault "America/Detroit";
-  location.provider = "geoclue2";
 
   services = {
     # for SSD/NVME
@@ -27,6 +26,8 @@ with lib; {
 
   home-manager.backupFileExtension = "backup";
 
+  programs.corectrl.enable = true;
+
   # compresses half the ram for use as swap
-  zramSwap.enable = true;
+  #zramSwap.enable = false;
 }

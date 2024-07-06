@@ -4,7 +4,6 @@ let
     ./network
     ./misc
 
-    ./services
     ./services/ananicy.nix
     ./services/gnome-services.nix
     ./services/greetd.nix

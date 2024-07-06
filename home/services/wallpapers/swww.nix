@@ -2,7 +2,10 @@
   pkgs,
   config,
   ...
-}: {
+}:
+let
+  swww = pkgs.swww;
+in {
   systemd.user.services = {
     swww = {
       Unit = {
@@ -12,7 +15,7 @@
       Install.WantedBy = ["hyprland-session.target"];
 
       Service = {
-        ExecStart = ''${pkgs.swww}/bin/swww-daemon'';
+        ExecStart = ''${swww}/bin/swww-daemon'';
         Restart = "always";
         RestartSec = 10;
       };
@@ -25,7 +28,7 @@
 
       Service = {
         ExecStart = ''
-          ${pkgs.bash}/bin/bash -c '${pkgs.findutils}/bin/find "${config.home.homeDirectory}/.config/wallpapers/" -type f | ${pkgs.coreutils}/bin/shuf -n 1 | while read OUTPUT; do ${pkgs.libnotify}/bin/notify-send -a "wallpaper" "Wallpaper" "wallpaper has been updated." -i "$OUTPUT"; ${pkgs.swww}/bin/swww img -t random $OUTPUT; ln -f -s "$OUTPUT" "${config.home.homeDirectory}/.cache/background"; done'
+        fish -c 'begin; find "/home/mia/.config/wallpapers/" -type f | shuf -n 1; end | while read -l f; echo Gay: $f; ln -f -s $f /home/mia/.cache/background; ${swww}/bin/swww img $f; notify-send -a wallpaper Wallpaper "wallpaper has been updated." -i $f; end;'
         '';
         Restart = "on-failure";
         RestartSec = 10;
@@ -43,7 +46,5 @@
       OnUnitActiveSec = "30m";
       Unit = "swww-random-img.service";
     };
-
-    Install.WantedBy = ["hyprland-session.target"];
   };
 }

@@ -10,23 +10,19 @@
   ];
 
   home.packages = with pkgs; [
-    (vesktop.override {withSystemVencord = false;})
+    vesktop
     mpv
     nextcloud-client
     element-desktop
-    # sgdboop
-
-    ####
-    dwarfs
-    fuse-overlayfs
+    foliate
 
     godot_4
     aseprite
 
     nexusmods-app
     jetbrains.idea-community-bin
-    sqlfluff
     tor-browser-bundle-bin
+    blockbench
   ];
 
   # services.arrpc.enable = true;

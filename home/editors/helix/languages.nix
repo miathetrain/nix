@@ -204,22 +204,6 @@
         command = "unocss-language-server";
         args = ["--stdio"];
       };
-
-      volar = {
-        command = "vue-language-server";
-        args = ["--stdio"];
-        config.typescript.tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib/";
-      };
-
-      vscode-css-language-server = {
-        command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
-        args = ["--stdio"];
-        config = {
-          provideFormatter = true;
-          css.validate.enable = true;
-          scss.validate.enable = true;
-        };
-      };
     };
   };
 }

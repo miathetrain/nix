@@ -5,14 +5,18 @@
   osConfig,
   inputs,
   ...
-}: {
-  home.packages = with pkgs; [pkgs.alejandra];
+}: let
+  java = pkgs.jdk21;
+  gradle = pkgs.gradle;
+in {
+  home.packages = with pkgs; [alejandra gradle java];
 
   programs.vscode = {
     enable = true;
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
     mutableExtensionsDir = true;
+
     package = pkgs.vscodium;
     userTasks = {
       version = "2.0.0";
@@ -20,7 +24,7 @@
         {
           "label" = "Nix Switch";
           "type" = "shell";
-          "command" = "nh os switch -- --show-trace";
+          "command" = "nh os switch";
           "group" = {
             "kind" = "build";
             "isDefault" = true;
@@ -30,138 +34,98 @@
     };
 
     extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
-      bbenoist.nix
+      ## Language Support
+      bbenoist.nix # https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix
+      christian-kohler.path-intellisense # https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense
+      rust-lang.rust-analyzer # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
+      visualstudioexptteam.vscodeintellicode # https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
+      vscjava.vscode-maven # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven
+      vscjava.vscode-java-debug # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug
+      redhat.java # https://marketplace.visualstudio.com/items?itemName=redhat.java
+      vscjava.vscode-gradle # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle
+      shengchen.vscode-checkstyle # https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle
+      fwcd.kotlin # https://open-vsx.org/extension/fwcd/kotlin
 
-      formulahendry.auto-close-tag
-      christian-kohler.path-intellisense
-      naumovs.color-highlight
-      usernamehw.errorlens
-      eamodio.gitlens
+      ## Pretty
+      kamadorueda.alejandra # https://marketplace.visualstudio.com/items?itemName=kamadorueda.alejandra
 
-      esbenp.prettier-vscode
-      kamadorueda.alejandra
-      bradlc.vscode-tailwindcss
-
-      # catppuccin.catppuccin-vsc
-      canakyuz.csharp-extension-pack
-      mohammadbaqer.better-folding
-      catppuccin.catppuccin-vsc-icons
-      rust-lang.rust-analyzer
-
-      jasonlhy.hungry-delete
+      ## Misc
+      # catppuccin.catppuccin-vsc # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc
+      (pkgs.catppuccin-vsc.override {
+      accent = "mauve";
+      boldKeywords = true;
+      italicComments = true;
+      italicKeywords = true;
+      extraBordersEnabled = false;
+      workbenchMode = "default";
+      bracketMode = "rainbow";
+      colorOverrides = {};
+      customUIColors = {};
+    })
+      naumovs.color-highlight # https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight
+      usernamehw.errorlens # https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+      eamodio.gitlens # https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+      mohammadbaqer.better-folding # https://marketplace.visualstudio.com/items?itemName=MohammadBaqer.better-folding
+      catppuccin.catppuccin-vsc-icons # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc-icons
+      jasonlhy.hungry-delete # https://marketplace.visualstudio.com/items?itemName=jasonlhy.hungry-delete
+      wakatime.vscode-wakatime # https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime
+      bmalehorn.vscode-fish # https://open-vsx.org/extension/bmalehorn/vscode-fish
     ];
 
-    userSettings = lib.mkMerge [
-      {
-        "workbench.iconTheme" = "catppuccin-mocha";
-        "workbench.colorTheme" = "Catppuccin Mocha";
-        "workbench.editor.tabActionLocation" = "left";
-        "workbench.panel.defaultLocation" = "bottom";
-        "workbench.list.smoothScrolling" = true;
-        "workbench.startupEditor" = "newUntitledFile";
-        "workbench.sideBar.location" = "right";
+    userSettings = {
+      "workbench.iconTheme" = "catppuccin-mocha";
+      "workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.list.smoothScrolling" = true;
+      "workbench.sideBar.location" = "right";
+      "workbench.editor.tabActionLocation" = "left";
+      "workbench.panel.defaultLocation" = "bottom";
 
-        "files.autoSave" = "afterDelay";
-        "files.trimTrailingWhitespace" = true;
-        "files.associations" = {
-          "*.css" = "tailwindcss";
-        };
+      "files.autoSave" = "onFocusChange";
+      "files.trimTrailingWhitespace" = true;
 
-        # "terminal.integrated.fontFamily" = "UbuntuSansMono Nerd Font Mono";
-        "terminal.integrated.defaultProfile.linux" = "fish";
-        "terminal.integrated.cursorBlinking" = true;
+      "window.menuBarVisibility" = "toggle";
+      "window.titleBarStyle" = "custom";
 
-        # "editor.fontFamily" = "UbuntuSansMono Nerd Font Mono";
-        "editor.useTabStops" = false;
-        "editor.fontLigatures" = true;
-        "editor.formatOnPaste" = true;
-        "editor.formatOnSave" = true;
-        "editor.formatOnType" = true;
-        "editor.minimap.enabled" = true;
-        "editor.minimap.renderCharacters" = true;
-        "editor.overviewRulerBorder" = false;
-        "editor.renderLineHighlight" = "all";
-        "editor.inlineSuggest.enabled" = true;
-        "editor.smoothScrolling" = true;
-        "editor.suggestSelection" = "first";
-        "editor.guides.indentation" = true;
-        "editor.bracketPairColorization.enabled" = true;
-        "editor.bracketPairColorization.independentColorPoolPerBracketType" = false;
-        "editor.cursorBlinking" = "expand";
-        "editor.tabSize" = 2;
-        "editor.quickSuggestions" = {
-          "strings" = "on";
-        };
+      "editor.fontFamily" = "SpaceMono Nerd Font Mono";
+      "editor.formatOnSaveMode" = "modificationsIfAvailable";
+      "editor.formatOnSave" = true;
+      "editor.formatOnPaste" = true;
+      "editor.formatOnType" = true;
+      "editor.fontLigatures" = true;
+      "editor.cursorSmoothCaretAnimation" = "on";
+      "editor.cursorStyle" = "line-thin";
 
-        "window.restoreWindows" = "all";
-        "window.menuBarVisibility" = "toggle";
-        "window.titleBarStyle" = "custom";
+      "terminal.integrated.cursorBlinking" = true;
+      "terminal.integrated.fontFamily" = "SpaceMono Nerd Font Mono";
 
-        "security.workspace.trust.enabled" = false;
-        "security.workspace.trust.untrustedFiles" = "open";
-        "security.workspace.trust.banner" = "never";
-        "security.workspace.trust.startupPrompt" = "never";
+      "java.jdt.ls.java.home" = java;
+      "java.import.gradle.java.home" = java;
+      "java.import.gradle.version" = "8.8";
+      "java.import.gradle.wrapper.enabled" = false;
+      "java.completion.chain.enabled" = true;
+      "java.saveActions.organizeImports" = true;
+      "java.inlayHints.parameterNames.enabled" = "all";
+      "java.format.settings.url" = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml";
+      "java.completion.favoriteStaticMembers" = [
+        "net.kyori.adventure.text.Component.*"
+        "net.kyori.adventure.text.format.NamedTextColor.*"
+      ];
 
-        "explorer.confirmDelete" = false;
-        "explorer.confirmDragAndDrop" = false;
+      "redhat.telemetry.enabled" = false;
 
-        "breadcrumbs.enabled" = true;
+      "catppuccin.accentColor" = "pink";
 
-        "telemetry.telemetryLevel" = "off";
+      "git.allowForcePush" = true;
+      "git.mergeEditor" = true;
+      "github.gitProtocol" = "ssh";
 
-        "git.autofetch" = true;
+      "gitlens.currentLine.enabled" = false;
 
-        "auto-close-tag.activationOnLanguage" = [
-          "*"
-        ];
+      "kotlin.inlayHints.typeHints" = true;
+      "kotlin.inlayHints.parameterHints" = true;
+      "kotlin.inlayHints.chainedHints" = true;
 
-        "catppuccin.accentColor" = "pink";
 
-        "[nix]" = {
-          "editor.defaultFormatter" = "kamadorueda.alejandra";
-          "editor.formatOnPaste" = true;
-          "editor.formatOnSave" = true;
-          "editor.formatOnType" = false;
-        };
-
-        "[typescript]" = {
-          "editor.defaultFormatter" = "vscode.typescript-language-features";
-        };
-
-        "[javascript]" = {
-          "editor.defaultFormatter" = "vscode.typescript-language-features";
-        };
-
-        "sqlfluff.dialect" = "mysql";
-        "sqlfluff.excludeRules" = ["L009"];
-        "sqlfluff.executablePath" = "sqlfluff";
-        "sqlfluff.ignoreLocalConfig" = false;
-        "sqlfluff.ignoreParsing" = false;
-        "sqlfluff.rules" = [];
-        "sqlfluff.suppressNotifications" = false;
-        "sqlfluff.workingDirectory" = "";
-        /*
-        Linter
-        */
-        "sqlfluff.linter.arguments" = [];
-        "sqlfluff.linter.run" = "onType";
-        "sqlfluff.linter.diagnosticSeverity" = "error";
-        "sqlfluff.linter.lintEntireProject" = true;
-        /*
-        Formatter
-        */
-        "sqlfluff.format.arguments" = ["--FIX-EVEN-UNPARSABLE"];
-        "sqlfluff.format.enabled" = true;
-      }
-      (lib.mkIf (osConfig.networking.hostName == "dreamhouse") {
-        "editor.fontSize" = 14;
-        "window.zoomLevel" = 1;
-      })
-
-      (lib.mkIf (osConfig.networking.hostName == "ken") {
-        "editor.fontSize" = 12;
-        "window.zoomLevel" = 1;
-      })
-    ];
+    };
   };
 }

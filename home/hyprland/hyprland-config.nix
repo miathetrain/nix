@@ -14,16 +14,11 @@ in {
         "$MOD" = "SUPER";
 
         exec-once = [
-          "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        #  "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        #  "systemctl --user start swww-random-img.service"
           "swayosd-server"
-          # "hyprshade auto"
           "hyprctl setcursor 'GoogleDot-Violet' 24"
-
-          # "[workspace 1 silent] firefox"
-          # "[workspace 5 silent] steam"
-
-          "nextcloud --background"
-          "systemctl --user start swww-random-img.service"
+          "nextcloud"
           # "sleep 3 && hyprlock --immediate"
         ];
 
@@ -35,8 +30,7 @@ in {
           "col.inactive_border" = "rgba(1e1e2eff)";
           layout = "dwindle";
           resize_on_border = true;
-          extend_border_grab_area = 30;
-          # allow_tearing = true;
+          allow_tearing = true;
 
           # "DP-2,2560x1440@144,1920x0,1.25"
           # "HDMI-A-1,1920x1080@75,0x0,1"
@@ -99,13 +93,13 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          vrr = 2;
+          vrr = 1;
+          vfr = 0;
           key_press_enables_dpms = true;
           disable_autoreload = true;
           enable_swallow = true;
           swallow_regex = "kitty";
           focus_on_activate = true;
-          no_direct_scanout = false;
           new_window_takes_over_fullscreen = 2;
           # initial_workspace_tracking = 2;
         };
@@ -124,7 +118,6 @@ in {
           blur = {
             size = 2;
             passes = 3;
-            xray = true;
           };
         };
 
