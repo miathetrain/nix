@@ -21,9 +21,7 @@ with lib; {
   #   }))
   # ];
 
-  home.packages = with pkgs; [poweralertd];
-
-  services.power-profiles-daemon.enable = true;
+  environment.systemPackages = with pkgs; [poweralertd];
 
   systemd.services.tiny-dfr.enable = mkForce false;
 
