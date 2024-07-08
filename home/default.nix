@@ -5,8 +5,32 @@
   ...
 }: {
   imports = [
+    # Desktop Environments.
+    ./desktop-environments/plasma.nix
+
+    # Editors
+    ./editors/helix
+    ./editors/vscode
+
+    # Software
+    ./software
+    ./hyprland
+
+    # Services
+    ./services/media/playerctl.nix
+    ./services/system/desktop-entries.nix
+    ./services/system/polkit-agent.nix
+    ./services/system/mimetype.nix
+    ./services/system/direnv.nix
+    ./services/pfp
+    ./services/wallpapers
+
+    # Terminal Emulators
+    ./terminal/emulators/kitty.nix
     ./terminal
-    ./profiles/global.nix
+
+    # GTK
+    ./services/gtk.nix
   ];
 
   home = {

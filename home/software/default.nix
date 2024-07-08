@@ -14,7 +14,6 @@
     mpv
     nextcloud-client
     element-desktop
-    foliate
 
     godot_4
     aseprite
@@ -23,6 +22,7 @@
     jetbrains.idea-community-bin
     tor-browser-bundle-bin
     blockbench
+    mission-center
   ];
 
   # services.arrpc.enable = true;

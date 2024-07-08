@@ -28,7 +28,10 @@ in {
   flake = {
     homeConfiguration = {
       "mia_dreamhouse" = homeManagerConfiguration {
-        modules = homeImports."mia@dreamhouse";
+        modules = [
+          ../.
+          ./dreamhouse
+        ];
         inherit pkgs extraSpecialArgs;
       };
 

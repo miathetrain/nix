@@ -20,12 +20,10 @@
       jaq
       swayosd
       xdg-utils
-      gnome.file-roller
-      gnome.nautilus
-      gthumb
-      gnome-text-editor
-      btop
-      tessen # Password manager
+      # gnome.file-roller
+      # gnome.nautilus
+      # gthumb
+      # gnome-text-editor
       inputs.dimmer.packages.${pkgs.system}.default #Brightness
 
       grimblast # Screenshot utility

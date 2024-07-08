@@ -52,16 +52,16 @@ in {
       ## Misc
       # catppuccin.catppuccin-vsc # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc
       (pkgs.catppuccin-vsc.override {
-      accent = "mauve";
-      boldKeywords = true;
-      italicComments = true;
-      italicKeywords = true;
-      extraBordersEnabled = false;
-      workbenchMode = "default";
-      bracketMode = "rainbow";
-      colorOverrides = {};
-      customUIColors = {};
-    })
+        accent = "mauve";
+        boldKeywords = true;
+        italicComments = true;
+        italicKeywords = true;
+        extraBordersEnabled = false;
+        workbenchMode = "default";
+        bracketMode = "rainbow";
+        colorOverrides = {};
+        customUIColors = {};
+      })
       naumovs.color-highlight # https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight
       usernamehw.errorlens # https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
       eamodio.gitlens # https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
@@ -125,7 +125,20 @@ in {
       "kotlin.inlayHints.parameterHints" = true;
       "kotlin.inlayHints.chainedHints" = true;
 
+      "[nix]" = {
+        "editor.defaultFormatter" = "kamadorueda.alejandra";
+        "editor.formatOnPaste" = true;
+        "editor.formatOnSave" = true;
+        "editor.formatOnType" = false;
+      };
 
+      "[typescript]" = {
+        "editor.defaultFormatter" = "vscode.typescript-language-features";
+      };
+
+      "[javascript]" = {
+        "editor.defaultFormatter" = "vscode.typescript-language-features";
+      };
     };
   };
 }

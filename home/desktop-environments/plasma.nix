@@ -1,7 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [inputs.plasma-manager.homeManagerModules.plasma-manager];
 
-  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
   programs.plasma = {
     enable = true;
 
@@ -21,6 +24,11 @@
       "kdeglobals"."KFileDialog Settings"."Show Preview" = true;
 
       "plasmanotifyrc"."Notifications"."NormalAlwaysOnTop" = true;
+
+      "kcminputrc"."Mouse"."cursorTheme" = "GoogleDot-Blue";
+
+      "kwinrc"."NightColor"."Active" = true;
+      "kwinrc"."Plugins"."shakecursorEnabled" = false;
     };
   };
 }
