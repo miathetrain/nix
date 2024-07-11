@@ -1,5 +1,4 @@
 {
-  pkgs,
   inputs,
   ...
 }: {
@@ -14,8 +13,9 @@
 
     shortcuts = {
       "kwin"."Window Close" = "Meta+Q";
+      "kwin"."Window Fullscreen" = "Meta+F";
       "kwin"."Kill Window" = "Meta+Shift+Q";
-
+      "kwin"."Window Minimize" = "Meta+S";
       "kwin"."Switch to Desktop 1" = "Ctrl+F1";
     };
 

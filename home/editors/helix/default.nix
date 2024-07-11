@@ -61,7 +61,6 @@
     };
 
     settings = {
-      theme = "everblush_transparent";
       editor = {
         color-modes = true;
         cursorline = true;

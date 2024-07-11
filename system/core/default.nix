@@ -1,7 +1,6 @@
 {
   lib,
   inputs,
-  pkgs,
   ...
 }:
 with lib; {
@@ -24,10 +23,6 @@ with lib; {
     fstrim.enable = true;
   };
 
-  home-manager.backupFileExtension = "backup";
-
   programs.corectrl.enable = true;
-
-  # compresses half the ram for use as swap
-  #zramSwap.enable = false;
+  security.polkit.enable = true;
 }

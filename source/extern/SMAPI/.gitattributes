@@ -1,6 +1,0 @@
-# normalize line endings
-* text=auto
-README.txt text eol=crlf
-
-*.command text eol=lf
-*.sh text eol=lf

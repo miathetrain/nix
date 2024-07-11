@@ -32,44 +32,35 @@
       };
     };
 
-    extraConfig = {
-      pipewire."92-low-latency" = {
-        context.properties = {
-          default.clock.rate = 48000;
-          default.clock.quantum = 32;
-          default.clock.min-quantum = 32;
-          default.clock.max-quantum = 32;
-        };
-      };
+    # extraConfig = {
+    #   pipewire."92-low-latency" = {
+    #     context.properties = {
+    #       default.clock.rate = 48000;
+    #       default.clock.quantum = 32;
+    #       default.clock.min-quantum = 32;
+    #       default.clock.max-quantum = 32;
+    #     };
+    #   };
 
-      pipewire-pulse."92-low-latency" = {
-        context.modules = [
-          {
-            name = "libpipewire-module-protocol-pulse";
-            args = {
-              pulse.min.req = "32/48000";
-              pulse.default.req = "32/48000";
-              pulse.max.req = "32/48000";
-              pulse.min.quantum = "32/48000";
-              pulse.max.quantum = "32/48000";
-            };
-          }
-        ];
-        stream.properties = {
-          node.latency = "32/48000";
-          resample.quality = 1;
-        };
-      };
-
-      #     pipewire-pulse."20-switch-on-connect" = {
-      #       context.exec = [
-      #         {
-      #           path = "pactl";
-      #           args = "load-module module-switch-on-connect";
-      #         }
-      #       ];
-      #     };
-    };
+    #   pipewire-pulse."92-low-latency" = {
+    #     context.modules = [
+    #       {
+    #         name = "libpipewire-module-protocol-pulse";
+    #         args = {
+    #           pulse.min.req = "32/48000";
+    #           pulse.default.req = "32/48000";
+    #           pulse.max.req = "32/48000";
+    #           pulse.min.quantum = "32/48000";
+    #           pulse.max.quantum = "32/48000";
+    #         };
+    #       }
+    #     ];
+    #     stream.properties = {
+    #       node.latency = "32/48000";
+    #       resample.quality = 1;
+    #     };
+    #   };
+    # };
   };
 
   hardware.pulseaudio.enable = lib.mkForce false;

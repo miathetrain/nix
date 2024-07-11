@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = [pkgs.eza];
+  home.packages = with pkgs;[eza fzf fd bat];
 
   programs.fish = {
     enable = true;
@@ -14,7 +14,7 @@
     shellAliases = {
       g = "git";
       "..." = "cd ../..";
-      ls = "eza --icons --group-directories-first";
+      ls = "eza --icons --group-directories-first -x";
       icat = "kitty icat";
       ssh = "kitten ssh";
     };
@@ -27,6 +27,16 @@
           repo = "fish-autols";
           rev = "6d704c0e33522335539bf6844ce9f7009b2ee6a2";
           sha256 = "sha256-tqAsc9J8xv0DMt5fTYaBO7tUQAG7Fnct/Rlq/Jx+/yU=";
+        };
+      }
+
+      {
+        name = "fzf.fish";
+        src = pkgs.fetchFromGitHub {
+          owner = "PatrickF1";
+          repo = "fzf.fish";
+          rev = "8920367cf85eee5218cc25a11e209d46e2591e7a";
+          sha256 = "sha256-T8KYLA/r/gOKvAivKRoeqIwE2pINlxFQtZJHpOy9GMM=";
         };
       }
     ];

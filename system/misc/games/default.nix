@@ -7,9 +7,6 @@
 }:
 with lib; let
   cfg = config.services.gaming;
-  amdgpu-kernel-module = pkgs.callPackage ./amdgpu-patch.nix {
-    kernel = config.boot.kernelPackages.kernel;
-  };
 in {
   imports = [
     inputs.aagl.nixosModules.default
@@ -39,8 +36,17 @@ in {
         enable = true;
         remotePlay.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
-        # protontricks.enable = true;
-        gamescopeSession.enable = true;
+
+        # gamescopeSession = {
+        #   enable = true;
+        #   # args = ["-O DP-2"];
+        # };
+      };
+
+      gamescope = {
+        enable = true;
+        package = pkgs.gamescope;
+        capSysNice = true;
       };
 
       alvr = mkIf cfg.vr.enable {
@@ -48,6 +54,8 @@ in {
         enable = true;
         openFirewall = true;
       };
+
+      gamemode.enable = true;
 
       anime-borb-launcher.enable = true;
       honkers-railway-launcher.enable = true;
@@ -58,7 +66,6 @@ in {
 
     hardware.steam-hardware.enable = cfg.enable;
 
-
     environment.systemPackages = with pkgs;
       mkMerge [
         (mkIf (cfg.enable) [
@@ -68,8 +75,9 @@ in {
           prismlauncher
           ryujinx
           xivlauncher
-          wineWowPackages.staging
+          # wineWowPackages.staging
           lunar-client
+          gamescope
         ])
 
         (mkIf (cfg.vr.enable) [

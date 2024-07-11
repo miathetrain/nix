@@ -6,7 +6,7 @@
   lib,
   ...
 }: let
-  homeDir = config.home.homeDirectory;
+  colors = config.lib.stylix.colors;
 in {
   wayland.windowManager.hyprland = {
     settings = lib.mkMerge [
@@ -14,35 +14,22 @@ in {
         "$MOD" = "SUPER";
 
         exec-once = [
-        #  "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        #  "systemctl --user start swww-random-img.service"
           "swayosd-server"
-          "hyprctl setcursor 'GoogleDot-Violet' 24"
           "nextcloud"
-          # "sleep 3 && hyprlock --immediate"
+          "${pkgs.kwallet-pam}/libexec/pam_kwallet_init"
         ];
 
         general = {
           gaps_in = 4;
           gaps_out = 8;
           border_size = 2;
-          "col.active_border" = "rgba(1e1e2eff) rgba(313244ff) 10deg";
-          "col.inactive_border" = "rgba(1e1e2eff)";
+          "col.active_border" = lib.mkForce "rgb(${colors.base03})";
           layout = "dwindle";
           resize_on_border = true;
           allow_tearing = true;
-
-          # "DP-2,2560x1440@144,1920x0,1.25"
-          # "HDMI-A-1,1920x1080@75,0x0,1"
-          # "DP-2,1920x1080@60,0x1080,1,transform,2"
           monitor = [
             "DP-2,highrr,auto,1.25,vrr,1"
-            "HDMI-A-1,highrr,auto-left,auto"
-            # "DP-2,highres,auto-down,auto,transform,2"
-
-            # "eDP-2,highres,auto,auto"
-
-            # ",highrr,auto,auto"
+            "HDMI-A-3,highrr,auto-left,auto"
           ];
 
           workspace = [
@@ -51,8 +38,7 @@ in {
             "3,monitor:DP-2"
             "4,monitor:DP-2"
             "5,monitor:DP-2"
-            "6,monitor:HDMI-A-1,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
-            # "7,monitor:DP-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
+            "6,monitor:HDMI-A-3,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
         };
 
@@ -93,15 +79,15 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          vrr = 1;
-          vfr = 0;
+          # vrr = 1;
+          # vfr = 0;
           key_press_enables_dpms = true;
           disable_autoreload = true;
           enable_swallow = true;
           swallow_regex = "kitty";
           focus_on_activate = true;
           new_window_takes_over_fullscreen = 2;
-          # initial_workspace_tracking = 2;
+          initial_workspace_tracking = 1;
         };
 
         cursor = {
@@ -113,7 +99,6 @@ in {
           rounding = 8;
           shadow_offset = "0 8";
           shadow_range = 50;
-          "col.shadow" = "rgba(00000055)";
 
           blur = {
             size = 2;
@@ -128,6 +113,12 @@ in {
         dwindle = {
           default_split_ratio = 0.9;
         };
+
+        layerrule = [
+          "blur,logout_dialog"
+          "blurpopups,logout_dialog"
+          "dimaround,logout_dialog"
+        ];
 
         "$SC_FULL" = "grimblast save output - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -a 'screenshot' 'Screenshot' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
         "$SC_AREA" = "grimblast --freeze save area - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -a 'screenshot' 'Screenshot Area' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
@@ -259,7 +250,7 @@ in {
 
           "bordercolor rgba(aa336a80) rgba(aa336a80),floating:1"
 
-          # "immediate, class:^(.*steam_app.*)$"
+          "immediate, class:^(.*steam_app.*)$"
           # "immediate, class:^(steam_app_252950)$"
         ];
 
@@ -312,10 +303,10 @@ in {
     ];
 
     plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      # inputs.hyprspace.packages.${pkgs.system}.Hyprspace
+      inputs.hyprspace.packages.${pkgs.system}.Hyprspace
     ];
   };
 }

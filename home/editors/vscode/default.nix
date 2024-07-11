@@ -9,7 +9,7 @@
   java = pkgs.jdk21;
   gradle = pkgs.gradle;
 in {
-  home.packages = with pkgs; [alejandra gradle java];
+  home.packages = with pkgs; [alejandra gradle java nil];
 
   programs.vscode = {
     enable = true;
@@ -35,7 +35,8 @@ in {
 
     extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
       ## Language Support
-      bbenoist.nix # https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix
+      # bbenoist.nix # https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix
+      jnoortheen.nix-ide # https://marketplace.visualstudio.com/items?itemName=jnoortheen.nix-ide
       christian-kohler.path-intellisense # https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense
       rust-lang.rust-analyzer # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
       visualstudioexptteam.vscodeintellicode # https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
@@ -45,6 +46,7 @@ in {
       vscjava.vscode-gradle # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle
       shengchen.vscode-checkstyle # https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle
       fwcd.kotlin # https://open-vsx.org/extension/fwcd/kotlin
+      arrterian.nix-env-selector
 
       ## Pretty
       kamadorueda.alejandra # https://marketplace.visualstudio.com/items?itemName=kamadorueda.alejandra
@@ -74,29 +76,27 @@ in {
 
     userSettings = {
       "workbench.iconTheme" = "catppuccin-mocha";
-      "workbench.colorTheme" = "Catppuccin Mocha";
       "workbench.list.smoothScrolling" = true;
       "workbench.sideBar.location" = "right";
       "workbench.editor.tabActionLocation" = "left";
       "workbench.panel.defaultLocation" = "bottom";
 
-      "files.autoSave" = "onFocusChange";
+      "files.autoSave" = "afterDelay";
       "files.trimTrailingWhitespace" = true;
 
       "window.menuBarVisibility" = "toggle";
       "window.titleBarStyle" = "custom";
 
-      "editor.fontFamily" = "SpaceMono Nerd Font Mono";
-      "editor.formatOnSaveMode" = "modificationsIfAvailable";
       "editor.formatOnSave" = true;
       "editor.formatOnPaste" = true;
       "editor.formatOnType" = true;
       "editor.fontLigatures" = true;
       "editor.cursorSmoothCaretAnimation" = "on";
       "editor.cursorStyle" = "line-thin";
+      "editor.pasteAs.enabled" = false;
+      "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
 
       "terminal.integrated.cursorBlinking" = true;
-      "terminal.integrated.fontFamily" = "SpaceMono Nerd Font Mono";
 
       "java.jdt.ls.java.home" = java;
       "java.import.gradle.java.home" = java;
@@ -118,6 +118,12 @@ in {
       "git.allowForcePush" = true;
       "git.mergeEditor" = true;
       "github.gitProtocol" = "ssh";
+      "git.autoStash" = true;
+      "git.countBadge" = "tracked";
+
+      "hungryDelete.considerIncreaseIndentPattern" = true;
+      "hungryDelete.keepOneSpace" = true; # I hate this.
+      "hungryDelete.followAboveLineIndent" = true;
 
       "gitlens.currentLine.enabled" = false;
 
@@ -125,11 +131,14 @@ in {
       "kotlin.inlayHints.parameterHints" = true;
       "kotlin.inlayHints.chainedHints" = true;
 
+      "nix.enableLanguageServer" = true;
+      "nix.formatterPath" = "alejandra";
+      "nix.serverPath" = "nil";
+
+      "scss.format.spaceAroundSelectorSeparator" = true;
+
       "[nix]" = {
         "editor.defaultFormatter" = "kamadorueda.alejandra";
-        "editor.formatOnPaste" = true;
-        "editor.formatOnSave" = true;
-        "editor.formatOnType" = false;
       };
 
       "[typescript]" = {

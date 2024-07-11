@@ -1,14 +1,15 @@
 {pkgs, ...}: {
-  # services.flatpak.enable = true;
-  # programs.light.enable = true;
-
   environment.systemPackages = with pkgs; [
     wget
   ];
 
-  chaotic.mesa-git = {
-    # TODO: Move to Gaming.
-    enable = true;
-    fallbackSpecialisation = false;
-  };
+  # chaotic.mesa-git = {
+  #   # TODO: Move to Gaming.
+  #   enable = true;
+  #   fallbackSpecialisation = false;
+
+  #   extraPackages = with pkgs; [ mesa_git.opencl rocmPackages.clr.icd libvdpau-va-gl vaapiVdpau ];
+  # };
+
+
 }

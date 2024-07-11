@@ -1,25 +1,31 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
-with lib; {
-  config = {
-    #Graphics Drivers
+{pkgs, ...}: {
     boot.initrd.kernelModules = ["amdgpu"];
+
+    services.xserver.enable = true;
     services.xserver.videoDrivers = ["amdgpu"];
-    systemd.tmpfiles.rules = ["L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
+
+    boot.kernelParams = [
+      "video=DP-2:2560x1440@144"
+      "video=HDMI-A-3:1920x1080@75"
+    ];
 
     # graphics drivers / HW accel
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
+      enable32Bit = true;
 
-      extraPackages = with pkgs; [
-        vaapiVdpau
-        libvdpau-va-gl
-        rocmPackages.clr.icd
-      ];
+      # extraPackages = with pkgs; [
+      #   amdvlk
+      #   # rocmPackages.clr.icd
+      # ];
+
+      # extraPackages32 = with pkgs; [
+      #   driversi686Linux.amdvlk
+      # ];
+
+      # extraPackages = with pkgs; [
+      #   vaapiVdpau
+      #   libvdpau-va-gl
+      # ];
     };
-  };
 }

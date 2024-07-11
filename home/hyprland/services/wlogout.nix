@@ -13,31 +13,31 @@ in {
     enable = true;
 
     style = ''
-      * {
-        background: none;
+          * {
+      	background-image: none;
+      	box-shadow: none;
       }
 
       window {
-      	background-color: rgba(0, 0, 0, .5);
-        backdrop-filter: blur(10px);
+      	background-color: transparent;
       }
 
-      button {
-        background: rgba(0, 0, 0, .05);
-        border-radius: 8px;
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 rgba(0, 0, 0, .5);
-        margin: 1rem;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 25%;
-      }
+            button {
+              background: rgba(30, 30, 46, 0.9);
+              border-radius: 20px;
+              box-shadow: inset 0 0 0 1px rgba(17, 17, 27, .8), 0 0 rgba(30, 30, 46, 0.9);
+              margin: 1rem;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: 25%;
+              }
 
-      button:focus, button:active, button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        outline-style: none;
-      }
+              button:focus, button:active, button:hover {
+                background-color: rgba(49, 50, 68, 0.9);
+                outline-style: none;
+              }
 
-      ${lib.concatMapStringsSep "\n" bgImageSection [
+              ${lib.concatMapStringsSep "\n" bgImageSection [
         "lock"
         "logout"
         "suspend"

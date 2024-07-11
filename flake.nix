@@ -45,6 +45,7 @@
     hyprlock.url = "github:hyprwm/hyprlock";
     sgdboop.url = "github:puffnfresh/nixpkgs/pkgs/sgdboop";
     catppuccin-vsc.url = "https://flakehub.com/f/catppuccin/vscode/*.tar.gz";
+    stylix.url = "github:miathetrain/stylix";
 
     lix = {
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
@@ -69,7 +70,7 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.3.0";
+      url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

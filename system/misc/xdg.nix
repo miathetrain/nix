@@ -3,12 +3,43 @@
     enable = true;
     xdgOpenUsePortal = true;
 
-    # extraPortals = [
-    #   pkgs.xdg-desktop-portal-gtk
-    # ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-kde
+    ];
 
-    # configPackages = [
-    #     pkgs.xdg-desktop-portal-gtk
-    #   ];
+    config = {
+      common = {
+        default = [
+          "kde"
+        ];
+
+        "org.freedesktop.impl.portal.Secret" = [
+          "kwallet"
+        ];
+      };
+
+      kde = {
+        default = [
+          "kde"
+        ];
+
+        "org.freedesktop.impl.portal.Secret" = [
+          "kwallet"
+        ];
+      };
+
+      hyprland = {
+        default = [
+          "hyprland"
+          "kde"
+        ];
+
+        # "org.freedesktop.impl.portal.Secret" = [
+        #   "kwallet"
+        # ];
+      };
+
+
+    };
   };
 }

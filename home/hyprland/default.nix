@@ -1,7 +1,7 @@
 {
   pkgs,
   inputs,
-  system,
+  lib,
   ...
 }: {
   imports = [
@@ -9,7 +9,7 @@
     ./services/hypridle.nix
     ./services/hyprlock.nix
     ./services/wlogout.nix
-    ./services/gnome-keyring.nix
+    # ./services/gnome-keyring.nix
 
     ./hyprland-config.nix
   ];
@@ -31,19 +31,34 @@
 
       wl-clipboard
       hyprpicker
+
+      themechanger
+      kdePackages.qtstyleplugin-kvantum
+      kdePackages.qt6ct
     ];
 
     sessionVariables = {
       QT_QPA_PLATFORM = "wayland";
       XDG_SESSION_TYPE = "wayland";
+      HYPRCURSOR_THEME = "GoogleDot-Violet";
+      HYPRCURSOR_SIZE = 24;
+      # QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
       NIXOS_OZONE_WL = "1";
       MOZ_ENABLE_WAYLAND = "1";
     };
+  };
 
-    file.".config/tessen/config".text = ''
-      pass_backend="gopass"
-      dmenu_backend="wofi"
-    '';
+  # qt = {
+  #   enable = true;
+  # };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      ipc = "on";
+      splash = false;
+      splash_offset = 2.0;
+    };
   };
 
   services.gammastep = {

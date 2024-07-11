@@ -7,7 +7,6 @@
   flake.nixosConfigurations = let
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
-    mod = "${self}/system";
 
     # get the basic config to build on top of
     inherit (import "${self}/system") desktop;

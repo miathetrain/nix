@@ -1,6 +1,6 @@
 export default () => Widget.EventBox({
   "on-primary-click": () => {
-    Utils.exec('systemctl --user start swww-random-img.service')
+    Utils.exec('systemctl --user start wallpaper-refresh.service')
   },
   child: Widget.Label({
     label: '󰸉 ',

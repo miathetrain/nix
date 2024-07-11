@@ -1,4 +1,5 @@
-{
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [cachix];
   nix.settings = {
     substituters = [
       # high priority since it's almost always used

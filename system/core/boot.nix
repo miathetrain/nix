@@ -25,7 +25,7 @@ with lib; {
 
       kernel.sysctl = {"net.ipv4.tcp_mtu_probing" = 1;}; # TODO: Move to Gaming.
 
-      kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
+      # kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
 
       consoleLogLevel = 3;
       kernelParams = [
@@ -47,18 +47,16 @@ with lib; {
       lanzaboote = mkIf config.services.secureboot.enable {
         enable = true;
         pkiBundle = "/etc/secureboot";
-        enrollKeys = false;
-        configurationLimit = null;
+        # enrollKeys = false;
+        # configurationLimit = null;
       };
-
-      tmp.cleanOnBoot = true;
     };
 
-    chaotic.scx = {
-      enable = true;
-      scheduler = "scx_lavd"; # Default: scx_rustland
-    };
+    # chaotic.scx = {
+    #   enable = true;
+    #   scheduler = "scx_rustland"; # Default: scx_rustland
+    # };
 
-    environment.systemPackages = [pkgs.scx];
+    environment.systemPackages = [pkgs.sbctl];
   };
 }

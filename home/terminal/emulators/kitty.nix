@@ -1,11 +1,13 @@
 {pkgs, ...}: {
   programs.kitty = {
     enable = true;
-    font = {
-      name = "SpaceMono Nerd Font Mono";
-      package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
-      size = 11;
-    };
+    # font = {
+    #   name = "SpaceMono Nerd Font Mono";
+    #   package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
+    #   size = 11;
+    # };
+
+    shellIntegration.enableFishIntegration = true;
 
     theme = "Catppuccin-Mocha";
     keybindings = {

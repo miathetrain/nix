@@ -120,6 +120,7 @@ in {
           "Amazon.com".metaData.hidden = true;
           "Wikipedia (en)".metaData.hidden = true;
           "Google".metaData.hidden = true;
+          "Google".metaData.default = true;
         };
       };
 
