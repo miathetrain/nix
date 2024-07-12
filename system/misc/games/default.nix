@@ -37,17 +37,17 @@ in {
         remotePlay.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
 
-        # gamescopeSession = {
-        #   enable = true;
-        #   # args = ["-O DP-2"];
-        # };
+        gamescopeSession = {
+          enable = true;
+          # args = ["-O DP-2"];
+        };
       };
 
-      gamescope = {
-        enable = true;
-        package = pkgs.gamescope;
-        capSysNice = true;
-      };
+      # gamescope = {
+      #   enable = true;
+      #   package = pkgs.gamescope;
+      #   capSysNice = true;
+      # };
 
       alvr = mkIf cfg.vr.enable {
         ## Requires both VR and normal enable.
@@ -77,7 +77,6 @@ in {
           xivlauncher
           # wineWowPackages.staging
           lunar-client
-          gamescope
         ])
 
         (mkIf (cfg.vr.enable) [

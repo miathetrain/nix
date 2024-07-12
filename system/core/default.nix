@@ -19,10 +19,10 @@ with lib; {
   time.timeZone = mkDefault "America/Detroit";
 
   services = {
-    # for SSD/NVME
     fstrim.enable = true;
   };
 
   programs.corectrl.enable = true;
   security.polkit.enable = true;
+  services.flatpak.enable = true;
 }

@@ -14,6 +14,7 @@ in {
         "$MOD" = "SUPER";
 
         exec-once = [
+          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
           "swayosd-server"
           "nextcloud"
           "${pkgs.kwallet-pam}/libexec/pam_kwallet_init"
@@ -26,10 +27,10 @@ in {
           "col.active_border" = lib.mkForce "rgb(${colors.base03})";
           layout = "dwindle";
           resize_on_border = true;
-          allow_tearing = true;
+          allow_tearing = false;
           monitor = [
             "DP-2,highrr,auto,1.25,vrr,1"
-            "HDMI-A-3,highrr,auto-left,auto"
+            "HDMI-A-2,highrr,auto-left,auto"
           ];
 
           workspace = [
@@ -38,7 +39,7 @@ in {
             "3,monitor:DP-2"
             "4,monitor:DP-2"
             "5,monitor:DP-2"
-            "6,monitor:HDMI-A-3,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
+            "6,monitor:HDMI-A-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
         };
 
@@ -177,7 +178,7 @@ in {
           "$MODSHIFT, Return, exec, [float] kitty "
           "$MOD, D, exec, pkill wofi || wofi"
           ", XF86LaunchB, exec,  pkill wofi || wofi"
-          "$MOD, E, exec, nautilus --new-window"
+          "$MOD, E, exec, dolphin --new-window"
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
@@ -250,7 +251,7 @@ in {
 
           "bordercolor rgba(aa336a80) rgba(aa336a80),floating:1"
 
-          "immediate, class:^(.*steam_app.*)$"
+          # "immediate, class:^(.*steam_app.*)$"
           # "immediate, class:^(steam_app_252950)$"
         ];
 
@@ -303,10 +304,10 @@ in {
     ];
 
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      inputs.hyprspace.packages.${pkgs.system}.Hyprspace
+      # inputs.hyprspace.packages.${pkgs.system}.Hyprspace
     ];
   };
 }

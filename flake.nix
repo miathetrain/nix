@@ -40,7 +40,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
     fu.url = "github:numtide/flake-utils";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     hyprlock.url = "github:hyprwm/hyprlock";
     sgdboop.url = "github:puffnfresh/nixpkgs/pkgs/sgdboop";
@@ -108,6 +107,13 @@
 
     hm = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland = {
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland";
+      submodules = true;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

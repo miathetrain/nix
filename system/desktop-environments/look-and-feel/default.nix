@@ -9,7 +9,7 @@
 
   stylix = {
     enable = true;
-    image = ../../home/services/wallpapers/files/witch.png;
+    image = ../../../home/services/wallpapers/files/witch.png;
     polarity = "dark";
 
     base16Scheme = {

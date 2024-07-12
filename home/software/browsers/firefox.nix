@@ -119,7 +119,7 @@ in {
           Bing.metaData.hidden = true;
           "Amazon.com".metaData.hidden = true;
           "Wikipedia (en)".metaData.hidden = true;
-          "Google".metaData.hidden = true;
+          # "Google".metaData.hidden = true;
           "Google".metaData.default = true;
         };
       };

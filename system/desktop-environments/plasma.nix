@@ -3,7 +3,7 @@
 
   services.xserver.desktopManager.plasma6.enable = true;
 
-  security.pam.services."sddm".kwallet.enable = true;
+  security.pam.services."sddm".kwallet.enable = true; # TODO: Autostart KWallet ??
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
@@ -18,5 +18,9 @@
     plasma-systemmonitor
   ];
 
-  environment.systemPackages = with pkgs; [kdePackages.kwallet-pam kdePackages.kwallet];
+  environment.systemPackages = with pkgs; [
+    kdePackages.kwallet-pam
+    kdePackages.kwallet
+    kdePackages.kscreen
+  ];
 }

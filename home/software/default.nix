@@ -1,14 +1,11 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./browsers/firefox.nix
     ./media
+    ./social/vesktop.nix
   ];
 
   home.packages = with pkgs; [
-    vesktop
     mpv
     nextcloud-client
     element-desktop

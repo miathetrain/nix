@@ -15,6 +15,7 @@ let
     ./hardware/opentablet.nix
 
     # Desktop Environments
+    ./desktop-environments/look-and-feel
     ./desktop-environments/plasma.nix
   ];
 in {

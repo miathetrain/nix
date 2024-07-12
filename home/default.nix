@@ -24,9 +24,6 @@
     # Terminal Emulators
     ./terminal/emulators/kitty.nix
     ./terminal
-
-    # GTK
-    ./services/gtk.nix
   ];
 
   home = {
