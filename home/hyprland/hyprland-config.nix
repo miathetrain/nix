@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   config,
   osConfig,
@@ -27,9 +26,9 @@ in {
           "col.active_border" = lib.mkForce "rgb(${colors.base03})";
           layout = "dwindle";
           resize_on_border = true;
-          allow_tearing = false;
+          allow_tearing = true;
           monitor = [
-            "DP-2,highrr,auto,1.25,vrr,1"
+            "DP-2,highrr,auto,1.25"
             "HDMI-A-2,highrr,auto-left,auto"
           ];
 
@@ -41,10 +40,6 @@ in {
             "5,monitor:DP-2"
             "6,monitor:HDMI-A-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
-        };
-
-        animations = {
-          first_launch_animation = false;
         };
 
         animation = {
@@ -80,15 +75,15 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          # vrr = 1;
-          # vfr = 0;
+          vrr = 2;
+          vfr = 1;
           key_press_enables_dpms = true;
           disable_autoreload = true;
           enable_swallow = true;
           swallow_regex = "kitty";
           focus_on_activate = true;
-          new_window_takes_over_fullscreen = 2;
-          initial_workspace_tracking = 1;
+          # new_window_takes_over_fullscreen = 2;
+          # initial_workspace_tracking = 1;
         };
 
         cursor = {
@@ -98,12 +93,13 @@ in {
 
         decoration = {
           rounding = 8;
-          shadow_offset = "0 8";
-          shadow_range = 50;
+          # shadow_offset = "0 8";
+          # shadow_range = 50;
 
           blur = {
-            size = 2;
-            passes = 3;
+            size = 3;
+            passes = 2;
+            #xray = true;
           };
         };
 
@@ -117,8 +113,8 @@ in {
 
         layerrule = [
           "blur,logout_dialog"
-          "blurpopups,logout_dialog"
-          "dimaround,logout_dialog"
+          # "blurpopups,logout_dialog"
+          # "dimaround,logout_dialog"
         ];
 
         "$SC_FULL" = "grimblast save output - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -a 'screenshot' 'Screenshot' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
@@ -144,8 +140,8 @@ in {
           "$MOD, Escape, exec, wlogout -p layer-shell"
           "$MOD, L, exec, loginctl lock-session"
           "$MOD, Space, togglefloating"
-          # "$MOD, R,  overview:toggle, all"
-          # "$MODSHIFT, R, hyprexpo:expo, toggle"
+          "$MOD, R,  overview:toggle, all"
+          "$MODSHIFT, R, hyprexpo:expo, toggle"
           "$MOD, T, exec, tessen -p gopass -d wofi"
           "$MOD, P, pin"
           "$MOD, S, togglesplit"
@@ -199,9 +195,9 @@ in {
           ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
         ];
 
-        bindr = [
-          "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock"
-        ];
+        # bindr = [
+        #   "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock"
+        # ];
 
         bindm = ["$MOD, mouse:272, movewindow" "$MOD, mouse:273, resizewindow"];
 
@@ -246,13 +242,15 @@ in {
 
           "pin, class:^(Kodi)$,floating:1"
 
+          "opacity 1,class:^(kitty)$"
+
           "stayfocused, class:^(com.nextcloud.desktopclient.nextcloud)$"
           "move 100%-w-20 100%-w-20, class:^(com.nextcloud.desktopclient.nextcloud)$"
 
           "bordercolor rgba(aa336a80) rgba(aa336a80),floating:1"
 
           # "immediate, class:^(.*steam_app.*)$"
-          # "immediate, class:^(steam_app_252950)$"
+          "immediate, class:^(steam_app_252950)$"
         ];
 
         plugin = {
@@ -303,11 +301,11 @@ in {
       })
     ];
 
-    plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      # inputs.hyprspace.packages.${pkgs.system}.Hyprspace
+    plugins = with pkgs; [
+      hyprlandPlugins.hyprtrails
+      hyprlandPlugins.hyprexpo
+      hyprlandPlugins.hyprfocus
+      hyprlandPlugins.hyprspace
     ];
   };
 }

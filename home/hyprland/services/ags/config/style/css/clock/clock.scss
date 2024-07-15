@@ -14,6 +14,10 @@ window.clockbar {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.dnd {
+  font-size: 0.9em;
+}
+
 .small-notification {
   min-width: 350px;
   border-radius: 8px;
@@ -110,4 +114,35 @@ calendar.highlight:backdrop {
 calendar:backdrop {
   color: #d5d5d5;
   border-color: #1f2222;
+}
+
+// Clock-Media
+.clock-media {
+  min-width: 100px;
+  background-color: color.$base;
+}
+
+.clock-media-cover {
+  min-width: 50px;
+  min-height: 50px;
+}
+
+.clock-media-cover box {
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 5px;
+  background-color: color.$surface1;
+}
+
+.clock-media-title {
+  font-size: 1em;
+}
+
+.clock-media-artist {
+  font-size: 1em;
+  color: color.$subtext1;
+}
+
+.clock-media-progress {
+  min-height: 2px;
 }

@@ -1,11 +1,6 @@
-{pkgs, ...}: {
+{lib, ...}: {
   programs.kitty = {
     enable = true;
-    # font = {
-    #   name = "SpaceMono Nerd Font Mono";
-    #   package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
-    #   size = 11;
-    # };
 
     shellIntegration.enableFishIntegration = true;
 
@@ -20,15 +15,19 @@
       "ctrl+alt+d" = "next_window";
       "alt+r" = "start_resizing_window";
       "ctrl+u" = "kitten unicode_input";
+      "ctrl+shift+e" = "open_url_with_hints";
     };
 
     settings = {
-      enable_audio_bell = false;
+      enable_audio_bell = true;
       window_padding_width = 20;
       strip_trailing_spaces = "smart";
       confirm_os_window_close = 0;
-      # background_opacity = "0.95";
-      notify_on_cmd_finish = "unfocused";
+      cursor_shape = "underline";
+      # background_opacity = lib.mkForce "0.50";
+      # background_blur = 10;
+      # background_tint = "0.5";
+      notify_on_cmd_finish = "invisible";
 
       "mouse_map left click ungrabbed mouse_handle_click" = "selection link prompt";
     };

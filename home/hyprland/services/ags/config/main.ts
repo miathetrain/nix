@@ -2,7 +2,8 @@ import "style/style"
 
 import Bar from "widget/bar/Bar"
 import Clock from "widget/clock/Clock";
-import { NotificationPopups } from "./widget/notification/notification.js"
+import Profile from "widget/bar/Profile";
+import { NotificationPopups, breadcrumb } from "./widget/notification/Notification"
 
 App.config({
   closeWindowDelay: {
@@ -11,7 +12,10 @@ App.config({
   windows: () => [
     Bar(),
     Clock(),
+    Profile(),
     NotificationPopups(),
+    breadcrumb(),
+
   ],
 
   iconTheme: "Flat-Remix-Green-Dark",

@@ -31,10 +31,6 @@
 
       wl-clipboard
       hyprpicker
-
-      themechanger
-      kdePackages.qtstyleplugin-kvantum
-      kdePackages.qt6ct
     ];
 
     sessionVariables = {
@@ -68,7 +64,6 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     systemd = {
       variables = ["--all"];
       extraCommands = [

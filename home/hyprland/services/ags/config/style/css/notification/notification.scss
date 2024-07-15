@@ -1,6 +1,6 @@
 @use "../color";
 
-window.notification-popups box.notifications {
+window.notification-popups box.breadcrumbs box.notifications {
   padding: 0.5em;
 }
 
@@ -72,4 +72,54 @@ window.notification-popups box.notifications {
 
 .empty-notifications {
   font-size: 1em;
+}
+
+.preview {
+  min-width: 100px;
+  min-height: 100px;
+  margin-right: 1em;
+}
+
+.preview image {
+  font-size: 58px;
+  /* to center the icon */
+  margin: 5px;
+  color: color.$text;
+}
+
+.preview box {
+  min-width: 400px;
+  min-height: 200px;
+  border-radius: 7px;
+  background-color: color.$surface1;
+}
+
+// Breadcrumbs
+.breadcrumb {
+  min-width: 100px;
+  border-radius: 9px;
+  padding: 1em;
+  margin: 0.5em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: color.$base;
+}
+
+.breadcrumb-title {
+  font-size: 1.5em;
+}
+
+.breadcrumb-body {
+  font-size: 1em;
+}
+
+.breadcrumb-icon {
+  min-width: 60px;
+  min-height: 60px;
+}
+
+.breadcrumb-icon box {
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: 7px;
+  background-color: color.$surface1;
 }

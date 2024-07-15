@@ -6,6 +6,7 @@
   ];
 
   home.packages = with pkgs; [
+    btop
     mpv
     nextcloud-client
     element-desktop
@@ -19,9 +20,4 @@
     blockbench
     mission-center
   ];
-
-  # services.arrpc.enable = true;
-  # services.arrpc.package = pkgs.arrpc;
-
-  services.easyeffects.enable = false;
 }

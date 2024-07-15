@@ -1,5 +1,4 @@
 import { format } from 'date-fns'
-import { notification_count } from "../notification/notification.js"
 
 var visible = false;
 
@@ -23,7 +22,6 @@ export default () => Widget.EventBox({
       App.closeWindow("clockbar");
     }
     else {
-      notification_count.setValue(0);
       visible = true;
       App.openWindow("clockbar")
     }

@@ -7,6 +7,11 @@
     inputs.stylix.nixosModules.stylix
   ];
 
+  environment.systemPackages = with pkgs; [
+    kdePackages.qtstyleplugin-kvantum
+    kdePackages.qt6ct
+  ];
+
   stylix = {
     enable = true;
     image = ../../../home/services/wallpapers/files/witch.png;
@@ -35,6 +40,10 @@
       name = "GoogleDot-Blue";
       size = 24;
       package = pkgs.google-cursor;
+    };
+
+    opacity = {
+      terminal = 0.95;
     };
 
     fonts = {

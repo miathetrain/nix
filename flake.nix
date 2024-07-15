@@ -110,27 +110,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    hyprfocus = {
-      url = "github:pyt0xic/hyprfocus";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
+    # hyprland = {
+    #   type = "git";
+    #   url = "https://github.com/hyprwm/Hyprland";
+    #   submodules = true;
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-index-db = {
       url = "github:Mic92/nix-index-database";

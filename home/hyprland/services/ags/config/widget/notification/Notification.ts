@@ -1,23 +1,21 @@
 import { Notification } from "resource:///com/github/Aylur/ags/service/notifications.js";
 import { GLib } from "types/@girs/glib-2.0/glib-2.0";
-import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 import { Align } from "types/@girs/gtk-3.0/gtk-3.0.cjs";
-import Revealer from "types/widgets/revealer";
 
 const notifications = await Service.import("notifications")
 const hyprland = await Service.import("hyprland")
 
 export const hasNotifications = Variable(false);
-export const notification_count = Variable(0);
+export const notifications_count = Variable(0);
 export const doNotDisturb = Variable(false);
 
 export const popups_widget = Widget.Box({
-  vertical: true
+  vertical: true, css: "min-width: 2px; min-height: 2px;", class_name: "notifications", expand: false, halign: Align.START
 })
 
-export const notifications_widget = Widget.Box({
-  vertical: true
-});
+export const notifications_widget = Widget.Box({ vertical: true });
+
+const breadcrumb_widget = Widget.Box({ vertical: true, css: "min-width: 2px; min-height: 2px;", class_name: "breadcrumbs", expand: false, halign: Align.START });
 
 export function totalNotifications(): number {
   return notifications.notifications.length
@@ -25,6 +23,7 @@ export function totalNotifications(): number {
 
 export function clearNotifications() {
   notifications.clear()
+  notifications_count.setValue(0)
 }
 
 export function removeNotification(notification: Notification) {
@@ -398,67 +397,118 @@ function NotificationWidget(notification: Notification, small?: boolean) {
   }
 }
 
+export function breadcrumb() {
+
+  function icon(notificationInstance: Notification) {
+    return Widget.Box({
+      hpack: "start",
+      class_name: "breadcrumb-icon",
+      child: NotificationIcon(notificationInstance),
+    })
+  }
+
+  function add_breadcrumb(_, id: number) {
+    const notificationInstance = notifications.getNotification(id)
+    if (notificationInstance != null) {
+      if (notificationInstance.urgency == "low") {
+        const widget = Widget.EventBox({
+          attribute: { id: notificationInstance.id },
+          child: Widget.Box({
+            class_name: "breadcrumb",
+            halign: Align.CENTER,
+            children: [icon(notificationInstance),
+
+            Widget.Box({
+              vertical: true,
+              children: [
+                Widget.Label({
+                  class_name: "breadcrumb-title",
+                  label: notificationInstance.summary
+                }),
+                Widget.Label({
+                  class_name: "breadcrumb-body",
+                  label: notificationInstance.body
+                })
+              ],
+            })
+
+            ]
+          })
+        })
+
+        breadcrumb_widget.children = [widget, ...breadcrumb_widget.children]
+      }
+    }
+  }
+
+  function remove_breadcrumb(_, id: number) {
+    // @ts-ignore
+    breadcrumb_widget.children.find(n => n.attribute.id === id)?.destroy()
+  }
+
+  breadcrumb_widget.hook(notifications, add_breadcrumb, "notified")
+  breadcrumb_widget.hook(notifications, remove_breadcrumb, "closed")
+  breadcrumb_widget.hook(notifications, remove_breadcrumb, "dismissed")
+
+  return Widget.Window({
+    name: `breadcrumbs`,
+    class_name: "breadcrumbs-window",
+    layer: "overlay",
+    anchor: ["bottom"],
+    child: breadcrumb_widget,
+  })
+}
+
 export function NotificationPopups(monitor = 0) {
   notifications.popupTimeout = 10000;
 
   function onNotified(_, id: number) {
     const notificationInstance = notifications.getNotification(id)
     if (notificationInstance != null) {
-      notification_count.setValue(notification_count.value + 1);
 
-      const hint = notificationInstance.hints['hint']?.get_string()[0]
+      if (notificationInstance.urgency == "low") {
+        // Breadcrumb
+      } else {
+        if (hasNotifications.value == false)
+          hasNotifications.setValue(true)
+        notifications_count.setValue(notifications_count.value + 1);
 
-      if (hint && hint != "") {
-        for (var n of notifications.notifications) {
-          const h = n.hints['hint']?.get_string()[0]
-          if (h && h != "") {
-            n.close()
-          }
-        }
+        if (!doNotDisturb.value)
+          popups_widget.children = [...popups_widget.children, NotificationWidget(notificationInstance, true)]
+        notifications_widget.children = [NotificationWidget(notificationInstance, true), ...notifications_widget.children]
       }
-
-      popups_widget.children = [...popups_widget.children, NotificationWidget(notificationInstance)]
-      notifications_widget.children = [...notifications_widget.children, NotificationWidget(notificationInstance)]
     }
-  }
-
-  type Popup = {
-
   }
 
   function onDismissed(_, id: number) {
     const notificationInstance = notifications.getNotification(id)
-    if (notificationInstance != null) {
-      try {
-        const child = popups_widget.children.find(n => n.attribute.id === id)
 
+    if (notificationInstance?.urgency == "low") {
 
-        Widget.Revealer
-
-        if (child != null) {
-
-          // @ts-ignore
-          child.transition = "slide_right"
-          // @ts-ignore
-          child.transitionDuration = 1000
-          // @ts-ignore
-          child.revealChild = false
-          Utils.timeout(1000, () => {
-            child.destroy()
-          })
-        }
-      } catch (exception) {
-
-      }
+    } else {
+      popups_widget.children.find(n => n.attribute.id === id)?.destroy()
     }
   }
 
-  function onClosed(_, /** @type {number} */ id) {
-    // @ts-ignore
-    notifications_widget.children.find(n => n.attribute.id === id)?.destroy()
+  function onClosed(_, id: number) {
+    const notificationInstance = notifications.getNotification(id)
+    popups_widget.children.find(n => n.attribute.id === id)?.destroy()
+    if (notificationInstance != null) {
+      let index_to_delete = -1
+      let index = 0
+      popups_widget.foreach(function (element) {
+        if (element.attribute.id === id) {
+          index_to_delete = index
+        }
+        index++
+      })
 
-    // @ts-ignore
-    list.children.find(n => n.attribute.id === id)?.destroy()
+      if (index_to_delete > -1) {
+        popups_widget.children.splice(index_to_delete, 1);
+      }
+    }
+
+    notifications_widget.children.find(n => n.attribute.id === id)?.destroy()
     if (notifications_widget.children[0] == null) {
       hasNotifications.setValue(false)
     }
@@ -475,12 +525,7 @@ export function NotificationPopups(monitor = 0) {
     class_name: "notification-popups",
     layer: "overlay",
     anchor: ["top", "right"],
-    child: Widget.Box({
-      css: "min-width: 2px; min-height: 2px;",
-      class_name: "notifications",
-      vertical: true,
-      child: popups_widget,
-    }),
+    child: popups_widget,
   })
 
 

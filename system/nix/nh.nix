@@ -1,11 +1,6 @@
 {
-  inputs,
-  config,
-  ...
-}: {
   programs.nh = {
     enable = true;
-    flake = "/home/mia/Documents/nix";
     # weekly cleanup
     clean = {
       enable = true;

@@ -1,4 +1,4 @@
-import { notification_count, doNotDisturb } from "../notification/notification.js"
+import { notifications_count, doNotDisturb } from "../notification/Notification"
 
 function update_label(count: number, dnd: boolean): string {
   const icons = ["󰂚", "󱅫", "󰂛"];
@@ -18,12 +18,12 @@ export default () => Widget.Label({
   label: update_label(0, false),
 
   setup(self) {
-    notification_count.connect('changed', ({value}) => {
+    notifications_count.connect('changed', ({ value }) => {
       self.label = update_label(value, doNotDisturb.value)
     })
 
-    doNotDisturb.connect('changed', ({value}) => {
-      self.label = update_label(notification_count.value, value)
+    doNotDisturb.connect('changed', ({ value }) => {
+      self.label = update_label(notifications_count.value, value)
     })
   }
 })

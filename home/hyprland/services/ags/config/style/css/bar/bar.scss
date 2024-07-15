@@ -78,19 +78,11 @@
 .profile-pic {
   min-width: 25px;
   min-height: 25px;
-  // margin-right: 1em;
-}
-
-.profile-pic image {
-  font-size: 20px;
-  /* to center the icon */
-  // margin: 5px;
-  color: color.$text;
 }
 
 .profile-pic box {
-  min-width: 20px;
-  min-height: 20px;
+  min-width: 25px;
+  min-height: 25px;
   border-radius: 9px;
 }
 
@@ -115,26 +107,6 @@
   min-width: 48px;
   min-height: 48px;
   border-radius: 7px;
-}
-
-.preview {
-  min-width: 100px;
-  min-height: 100px;
-  margin-right: 1em;
-}
-
-.preview image {
-  font-size: 58px;
-  /* to center the icon */
-  margin: 5px;
-  color: color.$text;
-}
-
-.preview box {
-  min-width: 400px;
-  min-height: 200px;
-  border-radius: 7px;
-  background-color: color.$surface1;
 }
 
 .small-box {

@@ -24,7 +24,7 @@ in {
         {
           "label" = "Nix Switch";
           "type" = "shell";
-          "command" = "nh os switch";
+          "command" = "nh os switch .";
           "group" = {
             "kind" = "build";
             "isDefault" = true;
