@@ -2,9 +2,6 @@ const network = await Service.import('network')
 
 const WifiIndicator = () => Widget.Icon({
   icon: network.wifi.bind('icon_name'),
-  // tooltip_text: network.wifi.bind('ssid').as(ssid => ssid || 'Unknown')
-
-  // tooltip_text: network.bind('wifi').as(p => `ssid: ${p.ssid}\nstrength: ${p.strength}`)
 
   setup: (self) => {
     Utils.interval(60000, () => {
