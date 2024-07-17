@@ -1,3 +1,5 @@
+import InternetButton from "./buttons/InternetButton"
+
 export default () => Widget.Window({
     name: "profile",
     class_name: "transparent",
@@ -54,12 +56,12 @@ export default () => Widget.Window({
             Widget.Box({
                 spacing: 30,
                 hpack: "center",
-                children: [button("󰖩", "Wi-Fi"), button(), button(), button()]
+                vexpand: false,
+                children: [InternetButton(), button(), button(), button()]
             }),
 
             Widget.Box({
                 spacing: 30,
-                hpack: "center",
                 children: [button("󰖩", "Wi-Fi"), button(), button(), button()]
             }),
 
@@ -94,18 +96,18 @@ export default () => Widget.Window({
     })
 })
 
-function button(icon = "󱄅", tooltip = "", small = false) {
+function button(icon = "dialog-information-symbolic", tooltip = "", small = false) {
     if (small) {
         return Widget.Button({
-            class_name: "profile-small-button",
+            class_name: "profile-small-button circular",
             tooltip_text: tooltip,
-            child: Widget.Label({ class_name: "profile-small-button-icon", label: icon })
+            child: Widget.Icon({ class_name: "profile-small-button-icon", icon: icon })
         })
     } else {
         return Widget.ToggleButton({
-            class_name: "profile-normal-button",
+            class_name: "profile-normal-button circular",
             tooltip_text: tooltip,
-            child: Widget.Label({ class_name: "profile-normal-button-icon", label: icon })
+            child: Widget.Icon({ class_name: "profile-normal-button-icon", icon: icon })
         })
     }
 }

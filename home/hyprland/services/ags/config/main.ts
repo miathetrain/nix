@@ -15,7 +15,6 @@ App.config({
     Profile(),
     NotificationPopups(),
     breadcrumb(),
-
   ],
 
   iconTheme: "Flat-Remix-Green-Dark",

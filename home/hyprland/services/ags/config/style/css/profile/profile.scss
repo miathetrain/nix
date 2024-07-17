@@ -42,7 +42,8 @@ window.profile {
 }
 
 .profile-small-button {
-    border-radius: 100%;
+    min-width: 36px;
+    min-height: 36px;
 }
 
 .profile-small-button-icon {
@@ -50,7 +51,8 @@ window.profile {
 }
 
 .profile-normal-button {
-    border-radius: 100%;
+    min-width: 48px;
+    min-height: 48px;
 }
 
 .profile-normal-button-icon {
