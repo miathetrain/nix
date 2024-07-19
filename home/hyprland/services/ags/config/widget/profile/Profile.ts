@@ -28,17 +28,16 @@ export default () => Widget.Window({
                             vexpand: false,
                             vpack: "center",
                             child: Widget.Box({
-                                class_name: "profile-pfp",
+                                class_name: "circular",
                                 css: `background-image: url("/home/mia/.face");`
                                     + "background-size: cover;"
                                     + "background-repeat: no-repeat;"
                                     + "background-position: center;",
                             })
                         }),
-                        Widget.Box({
-                            spacing: 2,
-                            class_name: "battery",
-                            children: [Widget.Label({ class_name: "battery-icon", label: "󰂊" }), Widget.Label({ class_name: "battery-text", label: "56% - 1:54 until full" })]
+                        Widget.Button({
+                            class_name: "battery circular",
+                            child: Widget.Box([Widget.Icon({ class_name: "battery-icon", icon: "󰂊" }), Widget.Label({ class_name: "battery-text", label: "56% - 1:54 until full" })])
                         })]
                 }),
 

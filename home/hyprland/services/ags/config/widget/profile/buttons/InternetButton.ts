@@ -1,18 +1,33 @@
 const network = await Service.import('network')
 
 const WifiIndicator = () => Widget.Icon({
-    icon: network.wifi.bind('icon_name'),
+    icon: Utils.watch(network.wifi.icon_name, network.wifi, function () {
+        return network.wifi.icon_name
+    }),
 
-    setup: (self) => {
-        Utils.interval(60000, () => {
-            const wifi = network.wifi
-            self.tooltip_text = `ssid: ${wifi.ssid}\nstrength: ${wifi.strength}\nstate: ${wifi.state}`;
-        })
-    }
+    setup: self => self.hook(network.wifi, () => {
+        const wifi = network.wifi
+        if (wifi.internet === "disconnected") {
+            self.tooltip_text = "Disconnected"
+        } else {
+            self.tooltip_text = `ssid: ${wifi.ssid}\nstrength: ${wifi.strength}\nstate: ${wifi.state}\ninternet: ${wifi.internet}`;
+        }
+    })
 })
 
 const WiredIndicator = () => Widget.Icon({
-    icon: network.wired.bind('icon_name'),
+    icon: Utils.watch(network.wired.icon_name, network.wired, function () {
+        return network.wired.icon_name
+    }),
+
+    setup: self => self.hook(network.wired, () => {
+        const wired = network.wired
+        if (wired.internet === "disconnected") {
+            self.tooltip_text = "Disconnected"
+        } else {
+            self.tooltip_text = `state: ${wired.state}\ninternet: ${wired.internet}`;
+        }
+    })
 })
 
 const Icon = () => Widget.Stack({

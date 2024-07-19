@@ -28,16 +28,16 @@ in {
           resize_on_border = true;
           allow_tearing = true;
           monitor = [
-            "DP-2,highrr,auto,1.25"
+            "DP-1,highrr,auto,1.25"
             "HDMI-A-2,highrr,auto-left,auto"
           ];
 
           workspace = [
-            "1,monitor:DP-2,default:true"
-            "2,monitor:DP-2"
-            "3,monitor:DP-2"
-            "4,monitor:DP-2"
-            "5,monitor:DP-2"
+            "1,monitor:DP-1,default:true"
+            "2,monitor:DP-1"
+            "3,monitor:DP-1"
+            "4,monitor:DP-1"
+            "5,monitor:DP-1"
             "6,monitor:HDMI-A-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
         };
