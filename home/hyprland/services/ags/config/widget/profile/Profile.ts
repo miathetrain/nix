@@ -4,6 +4,8 @@ import ShutdownButton from "./buttons/ShutdownButton";
 import LockButton from "./buttons/LockButton";
 import RefreshButton from "./buttons/RefreshButton";
 import BluetoothButton from "./buttons/BluetoothButton";
+import DoNotDisturbButton from "./buttons/DoNotDisturbButton";
+import NightLightButton from "./buttons/NightLightButton";
 
 export default () =>
   Widget.Window({
@@ -51,11 +53,7 @@ export default () =>
           end_widget: Widget.Box({
             spacing: 5,
             hpack: "end",
-            children: [
-              RefreshButton(),
-              LockButton(),
-              ShutdownButton()
-            ],
+            children: [RefreshButton(), LockButton(), ShutdownButton()],
           }),
         }),
 
@@ -63,7 +61,7 @@ export default () =>
           spacing: 30,
           hpack: "center",
           vexpand: false,
-          children: [InternetButton(), BluetoothButton(), button(), button()],
+          children: [InternetButton(), BluetoothButton(), DoNotDisturbButton(), NightLightButton()],
         }),
 
         Widget.Box({
@@ -72,7 +70,7 @@ export default () =>
         }),
 
         Widget.Box({
-          class_name: "profile-slider-volume",
+          class_name: "profile-progressbar",
           spacing: 25,
           children: [
             Widget.Label(""),
@@ -85,7 +83,7 @@ export default () =>
         }),
 
         Widget.Box({
-          class_name: "profile-slider-brightness",
+          class_name: "profile-progressbar",
           spacing: 25,
           children: [
             Widget.Label("󰃠"),

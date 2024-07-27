@@ -2,8 +2,8 @@ export default () =>
   Widget.Button({
     class_name: "profile-small-button circular",
     tooltip_text: "Shutdown",
-    child: Widget.Icon({
+    child: Widget.Label({
       class_name: "profile-small-button-icon",
-      icon: "system-shutdown",
+      label: "",
     }),
   });

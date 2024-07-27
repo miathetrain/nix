@@ -52,22 +52,22 @@ window.profile {
   min-width: 48px;
   min-height: 48px;
 
-    &:checked {
-    background-color: rgba(color.$pink, 0.65);
+  &:checked {
+    background-color: rgba(color.$sapphire, 0.5);
   }
 }
 
 .profile-normal-button-icon {
-  padding: 10px;
   font-size: 18pt;
 }
 
-.profile-slider-volume {
-  margin: 4px;
-  min-width: 100px;
+.profile-normal-button-label {
+  font-size: 15pt;
 }
 
-.profile-slider-brightness {
-  margin: 4px;
-  min-width: 100px;
+.profile-progressbar {
+  progressbar > trough > progress {
+    color: pink;
+    background-color: pink;
+  }
 }
