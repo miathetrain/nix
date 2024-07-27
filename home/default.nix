@@ -5,7 +5,7 @@
     ./desktop-environments/plasma.nix
 
     # Editors
-    # ./editors/helix
+    ./editors/helix
     ./editors/vscode
 
     # Software

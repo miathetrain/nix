@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   imports = [
     ./browsers/firefox.nix
     ./media
@@ -8,8 +8,10 @@
   home.packages = with pkgs; [
     btop
     mpv
+    davinci-resolve
     nextcloud-client
     element-desktop
+    adwsteamgtk
 
     godot_4
     aseprite
@@ -19,5 +21,11 @@
     tor-browser-bundle-bin
     blockbench
     mission-center
+
+    tidal-hifi
+    plexamp
+    plex-media-player
+
+    inputs.nix-software-center.packages.${system}.nix-software-center
   ];
 }

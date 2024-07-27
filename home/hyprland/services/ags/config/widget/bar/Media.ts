@@ -57,7 +57,6 @@ export default () => {
     transitionDuration: 1000,
     transition: 'slide_right',
     child: Widget.Box({
-      spacing: 5,
       children: [
         Widget.EventBox({
           class_name: "media-buttons",

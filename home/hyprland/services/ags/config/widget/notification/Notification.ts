@@ -57,14 +57,14 @@ function NotificationIcon(notification: Notification) {
   })
 }
 
-function NotificationWidget(notification: Notification, small?: boolean) {
+function NotificationWidget(notification: Notification, clock_bar?: boolean) {
 
   const icon = Widget.Box({
     vpack: "start",
     child: NotificationIcon(notification),
 
     setup(self) {
-      if (small) {
+      if (clock_bar) {
         self.class_name = "small-icon"
       } else {
         self.class_name = "icon"
@@ -89,7 +89,7 @@ function NotificationWidget(notification: Notification, small?: boolean) {
     use_markup: true,
 
     setup(self) {
-      if (small) {
+      if (clock_bar) {
         self.class_name = "small-title"
       } else {
         self.class_name = "title"
@@ -106,7 +106,7 @@ function NotificationWidget(notification: Notification, small?: boolean) {
     wrap: true,
 
     setup(self) {
-      if (small) {
+      if (clock_bar) {
         self.class_name = "small-body"
       } else {
         self.class_name = "body"
@@ -116,7 +116,7 @@ function NotificationWidget(notification: Notification, small?: boolean) {
 
   const actions = Widget.Box({
     setup(self) {
-      if (small) {
+      if (clock_bar) {
         self.class_name = "small-actions"
         self.children = notification.actions.map(({ id, label }) => Widget.Button({
           class_name: "small-action-button",
@@ -140,7 +140,7 @@ function NotificationWidget(notification: Notification, small?: boolean) {
     },
   })
 
-  if (small) {
+  if (clock_bar) {
 
     const time_string = Variable('', {
       poll: [1000, function () {
@@ -158,7 +158,7 @@ function NotificationWidget(notification: Notification, small?: boolean) {
 
     const time = Widget.Label({
       class_name: "small-time",
-      justification: "left",
+      justification: "right",
       label: time_string.bind(),
     })
 
@@ -474,7 +474,7 @@ export function NotificationPopups(monitor = 0) {
         notifications_count.setValue(notifications_count.value + 1);
 
         if (!doNotDisturb.value)
-          popups_widget.children = [...popups_widget.children, NotificationWidget(notificationInstance, true)]
+          popups_widget.children = [...popups_widget.children, NotificationWidget(notificationInstance, false)]
         notifications_widget.children = [NotificationWidget(notificationInstance, true), ...notifications_widget.children]
       }
     }

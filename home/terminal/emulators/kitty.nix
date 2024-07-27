@@ -16,6 +16,7 @@
       "alt+r" = "start_resizing_window";
       "ctrl+u" = "kitten unicode_input";
       "ctrl+shift+e" = "open_url_with_hints";
+      "f5" = "launch";
     };
 
     settings = {
@@ -28,7 +29,7 @@
       # background_blur = 10;
       # background_tint = "0.5";
       notify_on_cmd_finish = "invisible";
-
+      "enabled_layouts tall:bias=50;full_size=1;mirrored=false" = "";
       "mouse_map left click ungrabbed mouse_handle_click" = "selection link prompt";
     };
   };

@@ -1,21 +1,18 @@
 {
   pkgs,
-  config,
-  lib,
-  osConfig,
   inputs,
   ...
 }: let
   java = pkgs.jdk21;
   gradle = pkgs.gradle;
 in {
-  home.packages = with pkgs; [alejandra gradle java nil];
+  home.packages = with pkgs; [alejandra gradle java nil nodePackages.prettier nodejs];
 
   programs.vscode = {
     enable = true;
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
-    mutableExtensionsDir = true;
+    mutableExtensionsDir = false;
 
     package = pkgs.vscodium;
     userTasks = {
@@ -33,26 +30,34 @@ in {
       ];
     };
 
-    extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux.vscode-marketplace; [
+    extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux; [
       ## Language Support
       # bbenoist.nix # https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix
-      jnoortheen.nix-ide # https://marketplace.visualstudio.com/items?itemName=jnoortheen.nix-ide
-      christian-kohler.path-intellisense # https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense
-      rust-lang.rust-analyzer # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
-      visualstudioexptteam.vscodeintellicode # https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
-      vscjava.vscode-maven # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven
-      vscjava.vscode-java-debug # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug
-      redhat.java # https://marketplace.visualstudio.com/items?itemName=redhat.java
-      vscjava.vscode-gradle # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle
-      shengchen.vscode-checkstyle # https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle
-      fwcd.kotlin # https://open-vsx.org/extension/fwcd/kotlin
-      arrterian.nix-env-selector
+      open-vsx.jnoortheen.nix-ide # https://marketplace.visualstudio.com/items?itemName=jnoortheen.nix-ide
+      open-vsx.christian-kohler.path-intellisense # https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense
+      open-vsx.rust-lang.rust-analyzer # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
+      open-vsx.vscjava.vscode-maven # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven
+      open-vsx.vscjava.vscode-java-debug # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug
+      open-vsx.redhat.java # https://marketplace.visualstudio.com/items?itemName=redhat.java
+      open-vsx.vscjava.vscode-gradle # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle
+      open-vsx.fwcd.kotlin # https://open-vsx.org/extension/fwcd/kotlin
+      open-vsx.arrterian.nix-env-selector
+      vscode-marketplace.visualstudioexptteam.vscodeintellicode # https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
 
       ## Pretty
-      kamadorueda.alejandra # https://marketplace.visualstudio.com/items?itemName=kamadorueda.alejandra
+      open-vsx.kamadorueda.alejandra # https://marketplace.visualstudio.com/items?itemName=kamadorueda.alejandra
+      vscode-marketplace.esbenp.prettier-vscode
 
       ## Misc
-      # catppuccin.catppuccin-vsc # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc
+      open-vsx.naumovs.color-highlight # https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight
+      open-vsx.usernamehw.errorlens # https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+      open-vsx.eamodio.gitlens # https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+      open-vsx.mohammadbaqer.better-folding # https://marketplace.visualstudio.com/items?itemName=MohammadBaqer.better-folding
+      open-vsx.catppuccin.catppuccin-vsc-icons # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc-icons
+      open-vsx.jasonlhy.hungry-delete # https://marketplace.visualstudio.com/items?itemName=jasonlhy.hungry-delete
+      open-vsx.wakatime.vscode-wakatime # https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime
+      open-vsx.bmalehorn.vscode-fish # https://open-vsx.org/extension/bmalehorn/vscode-fish
+
       (pkgs.catppuccin-vsc.override {
         accent = "mauve";
         boldKeywords = true;
@@ -64,14 +69,6 @@ in {
         colorOverrides = {};
         customUIColors = {};
       })
-      naumovs.color-highlight # https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight
-      usernamehw.errorlens # https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
-      eamodio.gitlens # https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
-      mohammadbaqer.better-folding # https://marketplace.visualstudio.com/items?itemName=MohammadBaqer.better-folding
-      catppuccin.catppuccin-vsc-icons # https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc-icons
-      jasonlhy.hungry-delete # https://marketplace.visualstudio.com/items?itemName=jasonlhy.hungry-delete
-      wakatime.vscode-wakatime # https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime
-      bmalehorn.vscode-fish # https://open-vsx.org/extension/bmalehorn/vscode-fish
     ];
 
     userSettings = {
@@ -95,6 +92,7 @@ in {
       "editor.cursorStyle" = "line-thin";
       "editor.pasteAs.enabled" = false;
       "editor.bracketPairColorization.independentColorPoolPerBracketType" = true;
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
 
       "terminal.integrated.cursorBlinking" = true;
 
@@ -137,17 +135,19 @@ in {
 
       "scss.format.spaceAroundSelectorSeparator" = true;
 
+      "accessibility.underlineLinks" = true;
+
       "[nix]" = {
         "editor.defaultFormatter" = "kamadorueda.alejandra";
       };
 
-      "[typescript]" = {
-        "editor.defaultFormatter" = "vscode.typescript-language-features";
-      };
+      # "[typescript]" = {
+      #   "editor.defaultFormatter" = "vscode.typescript-language-features";
+      # };
 
-      "[javascript]" = {
-        "editor.defaultFormatter" = "vscode.typescript-language-features";
-      };
+      # "[javascript]" = {
+      #   "editor.defaultFormatter" = "vscode.typescript-language-features";
+      # };
     };
   };
 }

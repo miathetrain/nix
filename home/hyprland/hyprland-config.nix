@@ -17,6 +17,8 @@ in {
           "swayosd-server"
           "nextcloud"
           "${pkgs.kwallet-pam}/libexec/pam_kwallet_init"
+          # "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          "${pkgs.networkmanagerapplet}/bin/nm-applet"
         ];
 
         general = {
@@ -75,14 +77,14 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          vrr = 2;
-          vfr = 1;
+          vrr = 0;
+          vfr = 0;
           key_press_enables_dpms = true;
           disable_autoreload = true;
           enable_swallow = true;
           swallow_regex = "kitty";
           focus_on_activate = true;
-          # new_window_takes_over_fullscreen = 2;
+          new_window_takes_over_fullscreen = 2;
           # initial_workspace_tracking = 1;
         };
 
@@ -247,7 +249,8 @@ in {
           "stayfocused, class:^(com.nextcloud.desktopclient.nextcloud)$"
           "move 100%-w-20 100%-w-20, class:^(com.nextcloud.desktopclient.nextcloud)$"
 
-          "bordercolor rgba(aa336a80) rgba(aa336a80),floating:1"
+          # "bordercolor rgba(aa336a80) rgba(aa336a80),floating:1" # noborder
+          # "bordersize 0,floating:1"
 
           # "immediate, class:^(.*steam_app.*)$"
           "immediate, class:^(steam_app_252950)$"
