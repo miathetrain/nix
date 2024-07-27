@@ -18,7 +18,7 @@ const Left = Widget.Box({
 });
 
 const Center = Widget.Box({
-  spacing: 15,
+  spacing: 5,
   children: [Time(), NotificationCount()],
 });
 

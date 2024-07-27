@@ -1,5 +1,8 @@
 import InternetButton from "./buttons/InternetButton";
 import BatteryButton from "./buttons/BatteryButton";
+import ShutdownButton from "./buttons/ShutdownButton";
+import LockButton from "./buttons/LockButton";
+import RefreshButton from "./buttons/RefreshButton";
 
 export default () =>
   Widget.Window({
@@ -40,7 +43,7 @@ export default () =>
                 }),
               }),
 
-              BatteryButton()
+              BatteryButton(),
             ],
           }),
 
@@ -48,9 +51,9 @@ export default () =>
             spacing: 5,
             hpack: "end",
             children: [
-              button("󰑓", "Reload Hyprland", true),
-              button("", "Lock", true),
-              button("⏻", "Power", true),
+              RefreshButton(),
+              LockButton(),
+              ShutdownButton()
             ],
           }),
         }),

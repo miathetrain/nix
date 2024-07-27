@@ -64,7 +64,6 @@ export default () =>
           label: time.bind(),
           tooltip_text: tooltip.bind(),
         }),
-
         revealer
       ],
     }),
