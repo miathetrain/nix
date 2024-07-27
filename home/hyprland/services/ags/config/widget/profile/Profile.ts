@@ -3,6 +3,7 @@ import BatteryButton from "./buttons/BatteryButton";
 import ShutdownButton from "./buttons/ShutdownButton";
 import LockButton from "./buttons/LockButton";
 import RefreshButton from "./buttons/RefreshButton";
+import BluetoothButton from "./buttons/BluetoothButton";
 
 export default () =>
   Widget.Window({
@@ -62,7 +63,7 @@ export default () =>
           spacing: 30,
           hpack: "center",
           vexpand: false,
-          children: [InternetButton(), button(), button(), button()],
+          children: [InternetButton(), BluetoothButton(), button(), button()],
         }),
 
         Widget.Box({
