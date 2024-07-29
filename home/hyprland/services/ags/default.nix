@@ -45,6 +45,14 @@
       s=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .gpu_activity | .GFX | .value )')
       echo $s
 
+    elif [ $1 == "screenshare" ]; then
+      boop=$(pw-dump | jq -r 'map(.info?.props?) | map(select(.["media.class"]? == "Stream/Input/Video")) | map(.["stream.is-live"]? == true) | .[]?')
+      echo $boop
+
+      elif [ $1 == "mic" ]; then
+      boop=$(pw-dump | jq -r 'map(.info?.props?) | map(select(.["media.class"]? == "Stream/Input/Audio")) | map(.["stream.is-live"]? == true) | .[]?')
+      echo $boop
+
     elif [ $1 == "gpumemory" ]; then
       total=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .VRAM | ."Total VRAM" | .value)')
       current=$(amdgpu_top -n 1 --json | jq -c -r '(.devices[] | .VRAM | ."Total VRAM Usage" | .value)')
@@ -67,6 +75,7 @@
     esbuild
     pinfo
     jq
+    pipewire
 
     toybox
     amdgpu_top

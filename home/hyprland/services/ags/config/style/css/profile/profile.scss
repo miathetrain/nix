@@ -57,11 +57,22 @@ window.profile {
   }
 }
 
+.indicator {
+  min-width: 48px;
+  min-height: 48px;
+
+  &:checked {
+    background-color: rgba(color.$red, 0.5);
+  }
+}
+
 .profile-normal-button-icon {
+  color: color.$text;
   font-size: 18pt;
 }
 
 .profile-normal-button-label {
+  color: color.$text;
   font-size: 15pt;
 }
 
