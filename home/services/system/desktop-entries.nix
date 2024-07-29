@@ -33,11 +33,6 @@
 
   xdg.userDirs = {
     enable = true;
-
-    desktop = "";
-    publicShare = "";
-    templates = "";
-
     pictures = "/home/mia/Nextcloud/Pictures";
   };
 }

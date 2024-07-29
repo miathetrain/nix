@@ -18,18 +18,19 @@ export default () =>
   Widget.EventBox({
     "on-primary-click": () => {
       Utils.exec(
+        // TODO: Fix this.
         "swayosd-client --input-volume mute-toggle && canberra-gtk-play -i audio-volume-change"
       );
     },
     visible: recording_mic.bind(),
     child: Widget.Label({
-      tooltip_text: recording_mic.bind().as((value) => {
-        if (value) return "Your Mic is currently being recorded.";
-        return "";
-      }),
-      label: is_muted.as((value) => {
-        if (value) return "";
+      label: is_muted.as((v) => {
+        if (v) return "";
         return "";
+      }),
+      class_name: is_muted.as((v) => {
+        if (v) return "microphone-muted";
+        return "microphone-open";
       }),
     }),
   });

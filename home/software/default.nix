@@ -27,6 +27,7 @@
 
     unrar
     joystickwake
+    wineWowPackages.staging
 
     inputs.nix-software-center.packages.${system}.nix-software-center
   ];

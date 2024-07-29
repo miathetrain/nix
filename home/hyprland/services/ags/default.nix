@@ -1,8 +1,6 @@
 {
   inputs,
   pkgs,
-  lib,
-  config,
   ...
 }: let
   pinfo = pkgs.writeShellScriptBin "pinfo" ''
@@ -76,6 +74,7 @@
     pinfo
     jq
     pipewire
+    swayosd
 
     toybox
     amdgpu_top

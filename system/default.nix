@@ -17,6 +17,7 @@ let
     # Desktop Environments
     ./desktop-environments/look-and-feel
     ./desktop-environments/plasma.nix
+    ./desktop-environments/cosmic.nix
   ];
 in {
   inherit desktop;
