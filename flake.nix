@@ -111,13 +111,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hyprland = {
-    #   type = "git";
-    #   url = "https://github.com/hyprwm/Hyprland";
-    #   submodules = true;
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     nix-index-db = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -125,11 +118,6 @@
 
     spicetify-nix = {
       url = "github:MichaelPachec0/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sss = {
-      url = "github:SergioRibera/sss";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

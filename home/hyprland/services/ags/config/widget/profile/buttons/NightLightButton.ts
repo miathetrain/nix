@@ -4,6 +4,6 @@ export default () =>
     tooltip_text: "Toggle Night Light",
     active: true,
     child: Widget.Label({
-      label: "",
+      label: "",
     }),
   });

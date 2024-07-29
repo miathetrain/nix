@@ -6,6 +6,7 @@ import RefreshButton from "./buttons/RefreshButton";
 import BluetoothButton from "./buttons/BluetoothButton";
 import DoNotDisturbButton from "./buttons/DoNotDisturbButton";
 import NightLightButton from "./buttons/NightLightButton";
+import ScreenShare from "./indicator/ScreenShare";
 
 export default () =>
   Widget.Window({
@@ -66,7 +67,7 @@ export default () =>
 
         Widget.Box({
           spacing: 30,
-          children: [button("󰖩", "Wi-Fi"), button(), button(), button()],
+          children: [button(), button(), ScreenShare(), button()],
         }),
 
         Widget.Box({

@@ -1,31 +1,29 @@
 {pkgs, ...}: {
-    boot.initrd.kernelModules = ["amdgpu"];
+  boot.initrd.kernelModules = ["amdgpu"];
 
-    services.xserver.enable = true;
-    services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.enable = true;
+  services.xserver.videoDrivers = ["amdgpu"];
 
-    boot.kernelParams = [
-      "video=DP-2:2560x1440@144"
-      "video=HDMI-A-3:1920x1080@75"
-    ];
+  # boot.kernelParams = [
+  #   "video=DP-2:2560x1440@144"
+  #   "video=HDMI-A-3:1920x1080@75"
+  # ];
 
-    # graphics drivers / HW accel
-    hardware.graphics = {
+  hardware = {
+    opengl.driSupport32Bit = true;
+
+    graphics = {
       enable = true;
       enable32Bit = true;
-
-      # extraPackages = with pkgs; [
-      #   amdvlk
-      #   # rocmPackages.clr.icd
-      # ];
-
-      # extraPackages32 = with pkgs; [
-      #   driversi686Linux.amdvlk
-      # ];
-
-      # extraPackages = with pkgs; [
-      #   vaapiVdpau
-      #   libvdpau-va-gl
-      # ];
     };
+
+    opengl = {
+      extraPackages = with pkgs; [
+        amdvlk
+      ];
+      extraPackages32 = with pkgs; [
+        driversi686Linux.amdvlk
+      ];
+    };
+  };
 }

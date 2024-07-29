@@ -19,6 +19,7 @@ in {
           "${pkgs.kwallet-pam}/libexec/pam_kwallet_init"
           # "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
+          "${pkgs.blueman}/bin/blueman-applet"
         ];
 
         general = {
@@ -119,8 +120,8 @@ in {
           # "dimaround,logout_dialog"
         ];
 
-        "$SC_FULL" = "grimblast save output - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -a 'screenshot' 'Screenshot' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
-        "$SC_AREA" = "grimblast --freeze save area - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -a 'screenshot' 'Screenshot Area' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
+        "$SC_FULL" = "grimblast save output - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -u low -a 'screenshot' 'Screenshot' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
+        "$SC_AREA" = "grimblast --freeze save area - > ~/.cache/sc.png && cat ~/.cache/sc.png | wl-copy && notify-send -u low -a 'screenshot' 'Screenshot Area' 'Copied to clipboard.' -h string:hint:screenshot -i ~/.cache/sc.png && canberra-gtk-play -i screen-capture";
 
         bind = [
           "${builtins.concatStringsSep "\n" (builtins.genList (x: let

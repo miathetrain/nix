@@ -55,7 +55,7 @@ in {
         openFirewall = true;
       };
 
-      gamemode.enable = true;
+      # gamemode.enable = true;
 
       anime-borb-launcher.enable = true;
       honkers-railway-launcher.enable = true;

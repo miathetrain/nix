@@ -36,13 +36,12 @@
     lact
   ];
 
-  systemd.services.lact = {
+  systemd.services.lactd = {
     description = "AMDGPU Control Daemon";
-    after = ["multi-user.target"];
-    wantedBy = ["multi-user.target"];
+    enable = true;
     serviceConfig = {
       ExecStart = "${pkgs.lact}/bin/lact daemon";
     };
-    enable = true;
+    wantedBy = ["multi-user.target"];
   };
 }

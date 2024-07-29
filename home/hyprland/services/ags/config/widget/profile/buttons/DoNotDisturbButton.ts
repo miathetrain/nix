@@ -7,11 +7,11 @@ function update_label(count: number, dnd: boolean): string {
   const icons = ["󰂚", "󱅫", "󰂛"];
 
   if (dnd) {
-    return icons[2] + ` (${count})`;
+    return icons[2];
   } else if (count == 0) {
-    return icons[0] + ` (${count})`;
+    return icons[0];
   } else {
-    return icons[1] + ` (${count})`;
+    return icons[1];
   }
 }
 
@@ -34,6 +34,9 @@ export default () =>
   Widget.ToggleButton({
     class_name: "profile-normal-button circular",
     tooltip_text: "Toggle Do Not Disturb",
+    on_toggled(self) {
+      doNotDisturb.setValue(!self.active);
+    },
     active: true,
     child: label,
   });

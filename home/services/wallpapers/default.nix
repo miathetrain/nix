@@ -8,7 +8,7 @@
     hyprctl hyprpaper preload $wallpaper
     hyprctl hyprpaper wallpaper ,$wallpaper
     ln -f -s $wallpaper /home/mia/.cache/background
-    notify-send -a wallpaper Wallpaper "wallpaper has been updated." -i $wallpaper
+    notify-send -u low -a wallpaper Wallpaper "wallpaper has been updated." -i $wallpaper
   '';
 in {
   systemd.user.services = {
@@ -33,6 +33,8 @@ in {
     Unit = {
       Description = "Random Wallpaper Timer";
     };
+
+     Install.WantedBy = ["hyprland-session.target"];
 
     Timer = {
       OnStartupSec = "5s";

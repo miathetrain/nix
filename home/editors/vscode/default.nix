@@ -6,7 +6,7 @@
   java = pkgs.jdk21;
   gradle = pkgs.gradle;
 in {
-  home.packages = with pkgs; [alejandra gradle java nil nodePackages.prettier nodejs];
+  home.packages = with pkgs; [alejandra gradle java nil nodePackages.prettier nodejs flutter];
 
   programs.vscode = {
     enable = true;
@@ -32,7 +32,6 @@ in {
 
     extensions = with inputs.nix-vscode-extensions.extensions.x86_64-linux; [
       ## Language Support
-      # bbenoist.nix # https://marketplace.visualstudio.com/items?itemName=bbenoist.Nix
       open-vsx.jnoortheen.nix-ide # https://marketplace.visualstudio.com/items?itemName=jnoortheen.nix-ide
       open-vsx.christian-kohler.path-intellisense # https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense
       open-vsx.rust-lang.rust-analyzer # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
@@ -43,6 +42,8 @@ in {
       open-vsx.fwcd.kotlin # https://open-vsx.org/extension/fwcd/kotlin
       open-vsx.arrterian.nix-env-selector
       vscode-marketplace.visualstudioexptteam.vscodeintellicode # https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
+      vscode-marketplace.dart-code.flutter # https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
+      vscode-marketplace.dart-code.dart-code
 
       ## Pretty
       open-vsx.kamadorueda.alejandra # https://marketplace.visualstudio.com/items?itemName=kamadorueda.alejandra
@@ -140,14 +141,6 @@ in {
       "[nix]" = {
         "editor.defaultFormatter" = "kamadorueda.alejandra";
       };
-
-      # "[typescript]" = {
-      #   "editor.defaultFormatter" = "vscode.typescript-language-features";
-      # };
-
-      # "[javascript]" = {
-      #   "editor.defaultFormatter" = "vscode.typescript-language-features";
-      # };
     };
   };
 }
