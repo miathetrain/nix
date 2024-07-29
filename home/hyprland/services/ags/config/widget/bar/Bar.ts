@@ -11,6 +11,7 @@ import Network from "./Network";
 import Volume from "./Volume";
 import SysTray from "./SysTray";
 import Profile from "./Profile";
+import Microphone from "./Microphone";
 
 const Left = Widget.Box({
   spacing: 2,
@@ -32,6 +33,7 @@ const Right = Widget.Box({
     Wallpaper(),
     // Network(),
     SysTray(),
+    Microphone(),
     Volume(),
     Profile(),
   ],

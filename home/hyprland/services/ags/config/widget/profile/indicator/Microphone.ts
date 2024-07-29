@@ -1,4 +1,4 @@
-const audio = await Service.import('audio')
+const audio = await Service.import("audio");
 
 const recording_mic = Variable(false, {
   poll: [
@@ -12,18 +12,21 @@ const recording_mic = Variable(false, {
   ],
 });
 
-const is_muted = audio.microphone.stream?.isMuted
+const is_muted = audio["microphone"].bind("is_muted");
 
 const widget = Widget.ToggleButton({
   class_name: "indicator circular",
   tooltip_text: recording_mic.bind().as((value) => {
-    if (value) return "Your Mic is currently being recorded. Muted?" + is_muted;
+    if (value) return "Your Mic is currently being recorded.";
     return "";
   }),
   active: recording_mic.bind(),
   child: Widget.Label({
     class_name: "profile-normal-button-label",
-    label: "",
+    label: is_muted.as((value) => {
+      if (value) return "";
+      return "";
+    }),
   }),
 });
 

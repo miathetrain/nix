@@ -7,6 +7,7 @@ import BluetoothButton from "./buttons/BluetoothButton";
 import DoNotDisturbButton from "./buttons/DoNotDisturbButton";
 import NightLightButton from "./buttons/NightLightButton";
 import ScreenShare from "./indicator/ScreenShare";
+import Mic from "./indicator/Microphone";
 
 export default () =>
   Widget.Window({
@@ -67,7 +68,7 @@ export default () =>
 
         Widget.Box({
           spacing: 30,
-          children: [button(), button(), ScreenShare(), button()],
+          children: [button(), button(), ScreenShare(), Mic()],
         }),
 
         Widget.Box({

@@ -196,11 +196,12 @@ in {
 
         bindl = [
           ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+          "$MOD, M, exec, swayosd-client --input-volume mute-toggle && canberra-gtk-play -i audio-volume-change"
         ];
 
-        # bindr = [
-        #   "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock"
-        # ];
+        bindr = [
+          "Caps_Lock, Caps_Lock, exec, swayosd-client --caps-lock"
+        ];
 
         bindm = ["$MOD, mouse:272, movewindow" "$MOD, mouse:273, resizewindow"];
 
