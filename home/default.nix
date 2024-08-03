@@ -3,6 +3,7 @@
     # Desktop Environments.
     ./desktop-environments/look-and-feel
     ./desktop-environments/plasma.nix
+    ./desktop-environments/hyprland
 
     # Editors
     ./editors/helix
@@ -10,7 +11,6 @@
 
     # Software
     ./software
-    ./hyprland
 
     # Services
     ./services/media/playerctl.nix
