@@ -4,11 +4,10 @@ let
     ./network
     ./misc
 
-    ./services/ananicy.nix
+    # ./services/ananicy.nix
     # ./services/gnome-services.nix
     # ./services/greetd.nix
     ./services/pipewire.nix
-    ./services/gdm.nix
 
     # Hardware
     ./hardware/bluetooth.nix

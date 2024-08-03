@@ -36,26 +36,19 @@ in {
         enable = true;
         remotePlay.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
-
-        gamescopeSession = {
-          enable = true;
-          # args = ["-O DP-2"];
-        };
       };
 
-      # gamescope = {
-      #   enable = true;
-      #   package = pkgs.gamescope;
-      #   capSysNice = true;
-      # };
+      gamescope = {
+        enable = true;
+        capSysNice = true;
+      };
 
       alvr = mkIf cfg.vr.enable {
-        ## Requires both VR and normal enable.
         enable = true;
         openFirewall = true;
       };
 
-      # gamemode.enable = true;
+      gamemode.enable = true;
 
       anime-borb-launcher.enable = true;
       honkers-railway-launcher.enable = true;

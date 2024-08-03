@@ -32,7 +32,7 @@ in {
           allow_tearing = true;
           monitor = [
             "DP-1,highrr,auto,1.25"
-            "HDMI-A-2,highrr,auto-left,auto"
+            "HDMI-A-1,highrr,auto-left,auto"
           ];
 
           workspace = [
@@ -41,7 +41,7 @@ in {
             "3,monitor:DP-1"
             "4,monitor:DP-1"
             "5,monitor:DP-1"
-            "6,monitor:HDMI-A-2,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
+            "6,monitor:HDMI-A-1,gapsin:0,gapsout:0,rounding:false,border:false,default:true"
           ];
         };
 

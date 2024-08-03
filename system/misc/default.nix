@@ -2,7 +2,6 @@
   imports = [
     ./fonts.nix
     ./home-manager.nix
-    ./hyprland.nix
     ./xdg.nix
 
     ./games

@@ -13,6 +13,7 @@
     btop
     mpv
     davinci-resolve
+    ffmpeg
     nextcloud-client
     adwsteamgtk
 

@@ -1,14 +1,18 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./qt.nix
   ];
 
-  home.activation = {
-    activate = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    run rm -rf $HOME/.config/kdeglobals
-    '';
-
-  };
+  # home.activation = {
+  #   activate = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  #     run rm -rf $HOME/.config/kdeglobals
+  #     run rm -rf $HOME/.gtkrc-2.0
+  #   '';
+  # };
 
   home.file = {
     ".icons/GoogleDot-Violet" = {

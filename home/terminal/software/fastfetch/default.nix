@@ -3,13 +3,13 @@
     enable = true;
     settings = {
       logo = {
-        source = "nixos_small";
+        source = "~/.face"; ## ${toString ../../../services/pfp/face.jpg}
         padding = {
           right = 1;
         };
       };
       display = {
-        binaryPrefix = "si";
+        size.binaryPrefix = "si";
         color = "blue";
         separator = "  ";
       };

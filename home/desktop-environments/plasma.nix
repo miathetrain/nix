@@ -1,34 +1,31 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [inputs.plasma-manager.homeManagerModules.plasma-manager];
 
-  programs.plasma = {
-    enable = true;
+  # programs.plasma = {
+  #   enable = true;
 
-    workspace = {
-      clickItemTo = "open";
-    };
+  #   workspace = {
+  #     clickItemTo = "open";
+  #   };
 
-    shortcuts = {
-      "kwin"."Window Close" = "Meta+Q";
-      "kwin"."Window Fullscreen" = "Meta+F";
-      "kwin"."Kill Window" = "Meta+Shift+Q";
-      "kwin"."Window Minimize" = "Meta+S";
-      "kwin"."Switch to Desktop 1" = "Ctrl+F1";
-    };
+  #   shortcuts = {
+  #     "kwin"."Window Close" = "Meta+Q";
+  #     "kwin"."Window Fullscreen" = "Meta+F";
+  #     "kwin"."Kill Window" = "Meta+Shift+Q";
+  #     "kwin"."Window Minimize" = "Meta+S";
+  #     "kwin"."Switch to Desktop 1" = "Ctrl+F1";
+  #   };
 
-    configFile = {
-      "kdeglobals"."KFileDialog Settings"."Preview Width" = 455;
-      "kdeglobals"."KFileDialog Settings"."Show Preview" = true;
+  #   configFile = {
+  #     "kdeglobals"."KFileDialog Settings"."Preview Width" = 455;
+  #     "kdeglobals"."KFileDialog Settings"."Show Preview" = true;
 
-      "plasmanotifyrc"."Notifications"."NormalAlwaysOnTop" = true;
+  #     "plasmanotifyrc"."Notifications"."NormalAlwaysOnTop" = true;
 
-      "kcminputrc"."Mouse"."cursorTheme" = "GoogleDot-Blue";
+  #     "kcminputrc"."Mouse"."cursorTheme" = "GoogleDot-Blue";
 
-      "kwinrc"."NightColor"."Active" = true;
-      "kwinrc"."Plugins"."shakecursorEnabled" = false;
-    };
-  };
+  #     "kwinrc"."NightColor"."Active" = true;
+  #     "kwinrc"."Plugins"."shakecursorEnabled" = false;
+  #   };
+  # };
 }
