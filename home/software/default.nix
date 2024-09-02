@@ -10,25 +10,27 @@
   ];
 
   home.packages = with pkgs; [
-    btop
-    mpv
-    davinci-resolve
-    ffmpeg
-    nextcloud-client
-    adwsteamgtk
+    # btop
+    # mpv
+    # davinci-resolve
+    # ffmpeg
+    # nextcloud-client
+    # adwsteamgtk
 
-    godot_4
-    aseprite
+    # godot_4
+    # aseprite
 
-    nexusmods-app
-    jetbrains.idea-community-bin
-    tor-browser-bundle-bin
-    blockbench
-    mission-center
+    # jetbrains.idea-community-bin
+    # tor-browser-bundle-bin
+    # blockbench
+    # mission-center
+    # plexamp
 
-    unrar
-    joystickwake
-    wineWowPackages.staging
+    # unrar
+    # joystickwake
+    # wineWowPackages.staging
+    # fuse
+    # fuse-overlayfs
 
     inputs.nix-software-center.packages.${system}.nix-software-center
   ];

@@ -14,8 +14,6 @@ in {
 
     ./services/git.nix
     ./services/gopass.nix
-
-    inputs.nix-index-db.hmModules.nix-index
   ];
 
   home.sessionVariables = {
@@ -27,8 +25,5 @@ in {
 
     EDITOR = "hx";
     DIRENV_LOG_FORMAT = "";
-
-    # auto-run programs using nix-index-database
-    NIX_AUTO_RUN = "1";
   };
 }

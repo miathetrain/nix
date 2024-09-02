@@ -3,9 +3,6 @@
   inputs,
   ...
 }: {
-  imports = [];
-
-  home.packages = with pkgs; [];
 
   home = {
     username = "mia";

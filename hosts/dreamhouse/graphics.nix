@@ -10,19 +10,18 @@
   # ];
 
   hardware = {
-    opengl.driSupport32Bit = true;
+
+    pulseaudio.support32Bit = true;
 
     graphics = {
       enable = true;
       enable32Bit = true;
-    };
 
-    opengl = {
       extraPackages = with pkgs; [
         amdvlk
         rocmPackages.clr.icd
       ];
-      
+
       extraPackages32 = with pkgs; [
         driversi686Linux.amdvlk
       ];

@@ -34,11 +34,11 @@ in {
           ./add.css
         ]);
 
-      userContent = builtins.concatStringsSep "\n" (
-        builtins.map builtins.readFile [
-          "${minimalFox}/userContent.css"
-        ]
-      );
+      # userContent = builtins.concatStringsSep "\n" (
+      #   builtins.map builtins.readFile [
+      #     "${minimalFox}/userContent.css"
+      #   ]
+      # );
 
       search = {
         # default = "Catboy";
@@ -143,7 +143,7 @@ in {
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
         # "browser.fullscreen.autohide" = false;
-        # "layout.css.devPixelsPerPx" = 1.15;
+        #"layout.css.devPixelsPerPx" = 2.15;
         "privacy.donottrackheader.enabled" = true;
         "signon.rememberSignons" = false;
       };

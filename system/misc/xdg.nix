@@ -3,8 +3,9 @@
     enable = true;
     xdgOpenUsePortal = true;
 
-    extraPortals = [
-      pkgs.xdg-desktop-portal-kde
+    extraPortals = with pkgs; [
+      kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-hyprland
     ];
 
     config = {
@@ -31,7 +32,6 @@
       hyprland = {
         default = [
           "hyprland"
-          "kde"
         ];
 
         # "org.freedesktop.impl.portal.Secret" = [

@@ -56,5 +56,7 @@ with lib; {
     };
 
     environment.systemPackages = [pkgs.scx];
+
+    zramSwap.enable = true;
   };
 }

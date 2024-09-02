@@ -10,8 +10,6 @@ with lib; let
 in {
   imports = [
     inputs.aagl.nixosModules.default
-    inputs.nixpkgs-xr.nixosModules.nixpkgs-xr
-    inputs.lemonake.nixosModules.wivrn
   ];
 
   options = {
@@ -88,12 +86,6 @@ in {
       kernelParams = [
         "clearcpuid=514" # Fixes Hogwarts Legacy
       ];
-
-      # extraModulePackages = mkIf cfg.vr.enable [
-      #   (amdgpu-kernel-module.overrideAttrs (prev: {
-      #     patches = (prev.patches or []) ++ [inputs.scrumpkgs.kernelPatches.cap_sys_nice_begone.patch];
-      #   }))
-      # ];
     };
 
     # services.wivrn = {

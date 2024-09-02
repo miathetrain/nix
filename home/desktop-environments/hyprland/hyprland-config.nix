@@ -4,9 +4,7 @@
   osConfig,
   lib,
   ...
-}: let
-  colors = config.lib.stylix.colors;
-in {
+}: {
   wayland.windowManager.hyprland = {
     settings = lib.mkMerge [
       {
@@ -26,13 +24,15 @@ in {
           gaps_in = 4;
           gaps_out = 8;
           border_size = 2;
-          "col.active_border" = lib.mkForce "rgb(${colors.base03})";
+          "col.active_border" = "rgba(1e1e2eff) rgba(313244ff) 10deg";
+          "col.inactive_border" = "rgba(1e1e2eff)";
           layout = "dwindle";
           resize_on_border = true;
-          allow_tearing = true;
+          allow_tearing = false;
           monitor = [
-            "DP-1,highrr,auto,1.25"
-            "HDMI-A-1,highrr,auto-left,auto"
+            "DP-1,highrr,0x0,1.25,vrr,1"
+            "HDMI-A-1,highrr,auto-right,auto,vrr,0"
+            "DP-2,highres,auto,2,vrr,0,transform,2"
           ];
 
           workspace = [
@@ -78,8 +78,8 @@ in {
         misc = {
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
-          vrr = 0;
-          vfr = 0;
+          #vrr = 0;
+          #vfr = 0;
           key_press_enables_dpms = true;
           disable_autoreload = true;
           enable_swallow = true;
@@ -143,7 +143,7 @@ in {
           "$MOD, Escape, exec, wlogout -p layer-shell"
           "$MOD, L, exec, loginctl lock-session"
           "$MOD, Space, togglefloating"
-          "$MOD, R,  overview:toggle, all"
+          # "$MOD, R,  overview:toggle, all"
           "$MODSHIFT, R, hyprexpo:expo, toggle"
           "$MOD, T, exec, tessen -p gopass -d wofi"
           "$MOD, P, pin"
@@ -310,7 +310,7 @@ in {
       hyprlandPlugins.hyprtrails
       hyprlandPlugins.hyprexpo
       hyprlandPlugins.hyprfocus
-      hyprlandPlugins.hyprspace
+      #hyprlandPlugins.hyprspace
     ];
   };
 }

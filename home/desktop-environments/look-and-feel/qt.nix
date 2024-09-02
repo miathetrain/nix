@@ -7,11 +7,11 @@
   kvantum_package = ../../../files/qt/Kora;
   icon_theme = config.gtk.iconTheme.name; # Flat-Remix-Brown-Dark
   dark = true;
-  font_name = osConfig.stylix.fonts.sansSerif.name;
-  font_package = osConfig.stylix.fonts.sansSerif.package;
-  font_size = osConfig.stylix.fonts.sizes.applications;
+  # font_name = osConfig.stylix.fonts.sansSerif.name;
+  # font_package = osConfig.stylix.fonts.sansSerif.package;
+  # font_size = osConfig.stylix.fonts.sizes.applications;
 in {
-  home.packages = [font_package];
+  # home.packages = [font_package];
 
   xdg.configFile = {
     "Kvantum/kvantum.kvconfig".text = ''
@@ -31,10 +31,6 @@ in {
         then "-dark"
         else ""
       }
-
-      [Fonts]
-      fixed="${font_name},${toString font_size},-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
-      general="${font_name},${toString font_size},-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
 
       [Interface]
       activate_item_on_single_click=1

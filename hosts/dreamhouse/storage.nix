@@ -11,8 +11,9 @@
     options = ["defaults" "nofail"];
   };
 
-  #fileSystems."/games/storage/hhd (2tb)" = {
-  #  device = "/dev/disk/by-uuid/677200ef-a0af-47a3-bee6-9ffe5706d227";
-  #  fsType = "ext4";
-  #};
+  fileSystems."/games/storage/hhd (2tb)" = {
+    device = "/dev/disk/by-uuid/d3d87276-0078-42db-ac27-3043d8e7b8c6";
+    fsType = "btrfs";
+    options = ["defaults" "nofail"];
+  };
 }

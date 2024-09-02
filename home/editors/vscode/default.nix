@@ -6,7 +6,7 @@
   java = pkgs.jdk21;
   gradle = pkgs.gradle;
 in {
-  home.packages = with pkgs; [alejandra gradle java nil nodePackages.prettier nodejs flutter];
+  home.packages = with pkgs; [alejandra gradle java nil nodePackages.prettier nodejs flutter rustup];
 
   programs.vscode = {
     enable = true;
@@ -34,7 +34,7 @@ in {
       ## Language Support
       open-vsx.jnoortheen.nix-ide # https://marketplace.visualstudio.com/items?itemName=jnoortheen.nix-ide
       open-vsx.christian-kohler.path-intellisense # https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense
-      open-vsx.rust-lang.rust-analyzer # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
+      #open-vsx.rust-lang.rust-analyzer # https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer
       open-vsx.vscjava.vscode-maven # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven
       open-vsx.vscjava.vscode-java-debug # https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug
       open-vsx.redhat.java # https://marketplace.visualstudio.com/items?itemName=redhat.java
@@ -137,6 +137,8 @@ in {
       "scss.format.spaceAroundSelectorSeparator" = true;
 
       "accessibility.underlineLinks" = true;
+
+      "window.zoomLevel" = 1.25;
 
       "[nix]" = {
         "editor.defaultFormatter" = "kamadorueda.alejandra";

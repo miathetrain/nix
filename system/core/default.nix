@@ -27,14 +27,7 @@ with lib; {
   security.polkit.enable = true;
   services.flatpak.enable = true;
 
-  ## iOS USB Tethering
-  services.usbmuxd = {
-    enable = true;
-    package = pkgs.usbmuxd2;
-  };
+  virtualisation.docker.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    libimobiledevice
-    ifuse # optional, to mount using 'ifuse'
-  ];
+
 }
