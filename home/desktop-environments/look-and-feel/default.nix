@@ -3,9 +3,9 @@
   lib,
   ...
 }: {
-  imports = [
-    ./qt.nix
-  ];
+  # imports = [
+  #   ./qt.nix
+  # ];
 
   # home.activation = {
   #   activate = lib.hm.dag.entryAfter ["writeBoundary"] ''
