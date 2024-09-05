@@ -17,6 +17,7 @@ in {
 
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox-beta-bin;
     profiles.default = {
       id = 0;
       name = "default";
@@ -33,12 +34,6 @@ in {
           "${minimalFox}/userChrome.css"
           ./add.css
         ]);
-
-      # userContent = builtins.concatStringsSep "\n" (
-      #   builtins.map builtins.readFile [
-      #     "${minimalFox}/userContent.css"
-      #   ]
-      # );
 
       search = {
         # default = "Catboy";

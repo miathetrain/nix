@@ -31,8 +31,8 @@
           allow_tearing = false;
           monitor = [
             "DP-1,highrr,0x0,1.25,vrr,1"
-            "HDMI-A-1,highrr,auto-right,auto,vrr,0"
-            "DP-2,highres,auto,2,vrr,0,transform,2"
+            "HDMI-A-1,highrr,2048x0,auto,vrr,0"
+            "DP-2,highres,3968x0,2,vrr,0,transform,2"
           ];
 
           workspace = [
@@ -177,7 +177,7 @@
           "$MODSHIFT, Return, exec, [float] kitty "
           "$MOD, D, exec, pkill wofi || wofi"
           ", XF86LaunchB, exec,  pkill wofi || wofi"
-          "$MOD, E, exec, dolphin --new-window"
+          "$MOD, E, exec, nautilus --new-window"
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"

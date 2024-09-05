@@ -15,7 +15,7 @@
 
   home = {
     packages = with pkgs; [
-      # libnotify
+      libnotify
       # jaq
       swayosd
       # xdg-utils
@@ -25,6 +25,9 @@
 
       grimblast # Screenshot utility
       libcanberra-gtk3 # Sound utility
+      wtype # Auto-typing
+      wlr-randr # Randr Wayland
+      seahorse # Password manager
 
       wl-clipboard
     ];

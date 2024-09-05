@@ -74,6 +74,7 @@
 
 .systray {
   background-color: transparent;
+  border: 1px solid transparent;
   padding: 0px 0px;
   font-size: 1.2em;
 }
@@ -122,9 +123,9 @@
 }
 
 .microphone-muted {
-  color: color.$overlay1
+  color: color.$overlay1;
 }
 
 .microphone-open {
-  color: color.$red
+  color: color.$red;
 }

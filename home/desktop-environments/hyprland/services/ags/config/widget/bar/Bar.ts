@@ -7,6 +7,7 @@ import Media from "./Media";
 import Stats from "./Stats";
 import Bluetooth from "./Bluetooth";
 import Wallpaper from "./Wallpaper";
+import Software from "./Software";
 import Network from "./Network";
 import Volume from "./Volume";
 import SysTray from "./SysTray";
@@ -27,11 +28,11 @@ const Right = Widget.Box({
   hpack: "end",
   spacing: 10,
   children: [
-    // Media(),
+    Media(),
     Stats(),
     Bluetooth(),
+    Software(),
     Wallpaper(),
-    // Network(),
     SysTray(),
     // Microphone(),
     Volume(),
