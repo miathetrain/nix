@@ -76,12 +76,6 @@ in {
         ])
       ];
 
-    chaotic = mkIf cfg.enable {
-      steam.extraCompatPackages = with pkgs; [
-        proton-ge-custom
-      ];
-    };
-
     boot = mkIf cfg.enable {
       kernelParams = [
         "clearcpuid=514" # Fixes Hogwarts Legacy

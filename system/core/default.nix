@@ -29,5 +29,15 @@ with lib; {
 
   virtualisation.docker.enable = true;
 
+  services.dbus.packages = [pkgs.gcr];
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
+    enableSSHSupport = true;
+  };
 
+  environment.systemPackages = with pkgs; [
+    nix-index
+  ];
 }

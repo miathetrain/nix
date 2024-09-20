@@ -17,6 +17,5 @@
     "x-scheme-handler/http" = "firefox-beta.desktop;";
     "x-scheme-handler/https" = "firefox-beta.desktop;";
     "x-scheme-handler/chrome" = "firefox-beta.desktop;";
-
   };
 }

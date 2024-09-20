@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   ...
 }: let
   minimalFox = pkgs.fetchFromGitHub {
@@ -11,22 +10,19 @@
   };
 in {
   programs.browserpass = {
-    enable = true;
+    enable = false;
     browsers = ["firefox"];
   };
 
   programs.firefox = {
-    enable = true;
+    enable = false;
     package = pkgs.firefox-beta-bin;
     profiles.default = {
       id = 0;
       name = "default";
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-        ublock-origin
-        darkreader
-        sidebery
-        browserpass
-      ];
+      # extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      #   sidebery
+      # ];
       search.force = true;
       userChrome =
         builtins.concatStringsSep "\n"

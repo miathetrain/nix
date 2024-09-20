@@ -4,25 +4,22 @@
   ...
 }: {
   imports = [
-    inputs.spicetify-nix.homeManagerModule
+    inputs.spicetify-nix.homeManagerModules.default
   ];
   programs.spicetify = let
-    spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   in {
     enable = true;
-    theme = spicePkgs.themes.Dribbblish;
+    # theme = spicePkgs.themes.Dribbblish;
     colorScheme = "rosepine";
-
-    enabledCustomApps = with spicePkgs.apps; [
-      new-releases
-      lyrics-plus
-    ];
 
     enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplayMod
       groupSession
       shuffle # shuffle+ (special characters are sanitized out of ext names)
       playlistIcons
+      adblock
+      lastfm
     ];
   };
 }

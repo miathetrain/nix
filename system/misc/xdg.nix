@@ -6,6 +6,7 @@
     extraPortals = with pkgs; [
       kdePackages.xdg-desktop-portal-kde
       xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
     ];
 
     config = {
@@ -32,6 +33,7 @@
       hyprland = {
         default = [
           "hyprland"
+          "gtk"
         ];
 
         # "org.freedesktop.impl.portal.Secret" = [

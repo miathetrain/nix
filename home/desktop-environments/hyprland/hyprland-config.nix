@@ -11,21 +11,21 @@
         "$MOD" = "SUPER";
 
         exec-once = [
-          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIXOS_OZONE_WL"
           "swayosd-server"
           "nextcloud"
-          "${pkgs.kwallet-pam}/libexec/pam_kwallet_init"
-          # "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          # "${pkgs.kwallet-pam}/libexec/pam_kwallet_init"
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
           "${pkgs.blueman}/bin/blueman-applet"
         ];
 
         general = {
-          gaps_in = 4;
-          gaps_out = 8;
+          gaps_in = 2;
+          gaps_out = 4;
           border_size = 2;
-          "col.active_border" = "rgba(1e1e2eff) rgba(313244ff) 10deg";
-          "col.inactive_border" = "rgba(1e1e2eff)";
+          "col.active_border" = "rgba(1e1e2eff) rgba(3a3144ff) 10deg";
+          "col.inactive_border" = "rgba(1e1e2eff) rgba(314444ff) 10deg";
           layout = "dwindle";
           resize_on_border = true;
           allow_tearing = false;
@@ -234,6 +234,8 @@
           "float,class:^(org.gnome.NautilusPreviewer)$"
           "float,class:^(pavucontrol)$"
           "float,class:^(steam)$"
+          "float,class:^(nyaa_shows)$"
+          "float,class:^(org.gnome.TextEditor)$"
 
           "tile,class:^(steam)$,title:^(Steam)$"
           "tile,class:^(steam)$,title:^(Steam)$"

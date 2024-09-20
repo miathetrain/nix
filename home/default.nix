@@ -15,7 +15,7 @@
     ./services/media/playerctl.nix
     ./services/system/desktop-entries.nix
     # ./services/system/polkit-agent.nix
-    ./services/system/mimetype.nix
+    # ./services/system/mimetype.nix
     ./services/system/direnv.nix
     ./services/pfp
     ./services/wallpapers

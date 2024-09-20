@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ./browsers/firefox.nix
+    # ./browsers/firefox.nix
     ./media
     ./social/vesktop.nix
   ];

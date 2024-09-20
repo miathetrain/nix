@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ./obs.nix
-    # ./spicetify.nix
+    ./spicetify.nix
   ];
 }

@@ -8,7 +8,7 @@
     #./services/hypridle.nix
     #./services/hyprlock.nix
     #./services/wlogout.nix
-    # ./services/gnome-keyring.nix
+    ./services/gnome-keyring.nix
 
     ./hyprland-config.nix
   ];
@@ -16,6 +16,9 @@
   home = {
     packages = with pkgs; [
       libnotify
+      # pinentry-gnome3
+      pinentry-gnome3
+      # gcr_4
       # jaq
       swayosd
       # xdg-utils

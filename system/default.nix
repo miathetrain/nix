@@ -16,7 +16,7 @@ let
     # Desktop Environments
     # ./desktop-environments/look-and-feel
     ./desktop-environments/hyprland.nix
-    ./desktop-environments/plasma.nix
+    #./desktop-environments/plasma.nix
     #./desktop-environments/cosmic.nix
   ];
 in {
