@@ -120,7 +120,7 @@ in {
 
       "accessibility.underlineLinks" = true;
 
-      "window.zoomLevel" = 1.25;
+      "window.zoomLevel" = 1.15;
 
       "[nix]" = {
         "editor.defaultFormatter" = "kamadorueda.alejandra";
@@ -131,6 +131,11 @@ in {
 
       "dart.devToolsBrowser" = "default";
       "dart.lineLength" = 160;
+
+      "java.jdt.ls.java.home" = "/nix/store/59flqcj6x3dxiwjavxkwrycamg0482yb-openjdk-21.0.3+9";
+      "kotlin.java.home" = "/nix/store/59flqcj6x3dxiwjavxkwrycamg0482yb-openjdk-21.0.3+9";
+
+      "redhat.telemetry.enabled" = true;
     };
   };
 }

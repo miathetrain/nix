@@ -10,15 +10,12 @@
     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   in {
     enable = true;
-    # theme = spicePkgs.themes.Dribbblish;
-    colorScheme = "rosepine";
+   theme = spicePkgs.themes.catppuccin;
+     colorScheme = "mocha";
 
     enabledExtensions = with spicePkgs.extensions; [
-      fullAppDisplayMod
-      groupSession
       shuffle # shuffle+ (special characters are sanitized out of ext names)
       playlistIcons
-      adblock
       lastfm
     ];
   };

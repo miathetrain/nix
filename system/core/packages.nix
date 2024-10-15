@@ -5,6 +5,7 @@
     ffmpeg
     unrar
     wineWowPackages.staging
+    cifs-utils
   ];
 
   chaotic.mesa-git = {

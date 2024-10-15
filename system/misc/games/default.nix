@@ -68,11 +68,12 @@ in {
           xivlauncher
           # wineWowPackages.staging
           lunar-client
+          nexusmods-app
         ])
 
         (mkIf (cfg.vr.enable) [
           xrgears
-          inputs.envision.packages.${pkgs.system}.envision
+          envision
         ])
       ];
 

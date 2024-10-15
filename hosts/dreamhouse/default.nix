@@ -27,7 +27,7 @@
   networking.hostName = "dreamhouse";
 
   services.gaming.enable = true;
-  # services.gaming.vr.enable = true;
+  services.gaming.vr.enable = true;
 
   services.secureboot.enable = true;
   services.gnome.sushi.enable = true;
